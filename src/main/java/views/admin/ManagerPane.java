@@ -71,6 +71,28 @@ public abstract class ManagerPane<T extends Model> extends JPanel {
         return tblData;
     }
 
+    public int[] getSelectedIds() {
+
+        int selectedRows[] = tblData.getSelectedRows();
+        int selectedIds[] = new int[selectedRows.length];
+        for (int i = 0; i < selectedRows.length; i++) {
+            int selectedRow = selectedRows[i];
+            int id = (int) tblData.getValueAt(selectedRow, 0);
+            selectedIds[i] = id;
+        }
+        return selectedIds;
+    }
+
+    public int getSelectedId() {
+
+        int selectedRow = tblData.getSelectedRow();
+        if (selectedRow < 0) {
+            return -1;
+        }
+        int id = (int) tblData.getValueAt(selectedRow, 0);
+        return id;
+    }
+
     public void renderTable() {
         tableModel.setNumRows(0);
         try {

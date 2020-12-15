@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.YES_OPTION;
-import models.Employee;
 import models.Table;
+import utils.TableStatus;
 import views.admin.EmployeeManagerPane;
-import views.admin.popup.EmployeePopup;
+import views.admin.popup.TablePopup;
 
 /**
  * createAt Dec 15, 2020
@@ -22,7 +22,7 @@ public class TableManagerController extends ManageController {
 
     EmployeeDao employeeDao = new EmployeeDao();
     TableDao tableDao = new TableDao();
-    EmployeePopup popupView;
+    TablePopup popupView;
 
     abstract class PopupEvent {
 
@@ -45,11 +45,11 @@ public class TableManagerController extends ManageController {
         super.setView(view);
     }
 
-    public EmployeePopup getPopupView() {
+    public TablePopup getPopupView() {
         return popupView;
     }
 
-    public void setPopupView(EmployeePopup popupView) {
+    public void setPopupView(TablePopup popupView) {
         if (popupView != null) {
             // Hiện popup mới
             popupView.setVisible(true);
@@ -61,7 +61,7 @@ public class TableManagerController extends ManageController {
         this.popupView = popupView;
     }
 
-    public void showPopup(EmployeePopup popupView, PopupEvent event) {
+    public void showPopup(TablePopup popupView, PopupEvent event) {
         if (popupView == null) {
             return;
         }
@@ -78,26 +78,19 @@ public class TableManagerController extends ManageController {
         });
     }
 
-    public void addEmployee() {
+    public void addTable() {
         try {
-            String username = popupView.getTxtUsername().getText(),
-                    password = popupView.getTxtPassword().getText(),
-                    phoneNumber = popupView.getTxtPhoneNumber().getText(),
-                    name = popupView.getTxtName().getText();
-            if (username.isEmpty() || password.isEmpty() || phoneNumber.isEmpty()) {
-                throw new Exception("Vui lòng điền đầy đủ thông tin");
+            String name = popupView.getTxtName().getText();
+            if (name.isEmpty()) {
+                throw new Exception("Vui lòng điền đủ thông tin");
             }
-            if (employeeDao.findByUsername(username) != null) {
-                throw new Exception("Tài khoản đã tồn tại");
+            if (tableDao.findByName(name) != null) {
+                throw new Exception("Tên bàn đã được sử dụng");
             }
-            Employee e = new Employee();
-            e.setUsername(username);
-            e.setPassword(password);
-            e.setName(name);
-            e.setPhoneNumber(phoneNumber);
-            e.setPermissionName(popupView.getCboPermission().getSelectedItem().toString());
-            e.setPermissionId(popupView.getCboPermission().getSelectedIndex() + 1);
-            employeeDao.save(e);
+            Table t = new Table();
+            t.setName(name);
+            t.setStatus(TableStatus.FREE);
+            tableDao.save(t);
             view.showMessage("Thêm thành công");
             updateData();
             setPopupView(null);//Tắt Popup            
@@ -106,20 +99,19 @@ public class TableManagerController extends ManageController {
         }
     }
 
-    public void editEmployee(Employee e) {
+    public void editTable(Table t) {
         try {
-            String username = popupView.getTxtUsername().getText(),
-                    password = popupView.getTxtPassword().getText(),
-                    phoneNumber = popupView.getTxtPhoneNumber().getText(),
-                    name = popupView.getTxtName().getText();
-            e.setUsername(username);
-            e.setPassword(password);
-            e.setName(name);
-            e.setPhoneNumber(phoneNumber);
-            e.setPermissionName(popupView.getCboPermission().getSelectedItem().toString());
-            e.setPermissionId(popupView.getCboPermission().getSelectedIndex() + 1);
-            employeeDao.update(e);
-            view.showMessage("Thêm thành công");
+            String name = popupView.getTxtName().getText();
+            if (name.isEmpty()) {
+                throw new Exception("Điền tên bàn");
+            }
+            Table temp = tableDao.findByName(name);
+            if (temp != null && temp.getId() != t.getId()) {
+                throw new Exception("Tên bàn đã được sử dụng");
+            }
+            t.setName(name);
+            tableDao.update(t);
+            view.showMessage("Cập nhật thành công");
             updateData();
             setPopupView(null);//Tắt Popup      
         } catch (Exception ex) {
@@ -129,26 +121,35 @@ public class TableManagerController extends ManageController {
 
     @Override
     public void actionAdd() {
-        showPopup(new EmployeePopup(), new PopupEvent() {
+        showPopup(new TablePopup(), new PopupEvent() {
             @Override
             public void onBtnOK() {
-                addEmployee();
+                addTable();
             }
         });
     }
 
     @Override
-    public void actionDelete() {
-        int selectedRows[] = view.getTblData().getSelectedRows();
+    public void actionEdit() {
         try {
-            if (JOptionPane.showConfirmDialog(null, "Xác nhận xóa hàng loạt?", "Xóa nhân viên", ERROR_MESSAGE) != YES_OPTION) {
-                return;
-            }
-            for (int i = 0; i < selectedRows.length; i++) {
-                int selectedRow = selectedRows[i];
-                int id = (int) view.getTblData().getValueAt(selectedRow, 0);
-                tableDao.deleteById(id);
-                updateData();
+            int selectedId = view.getSelectedId();
+            if (selectedId < 0) {
+                throw new Exception("Chọn nhân viên cần edit");
+            } else {
+                TablePopup popup = new TablePopup();
+                popup.getLbTitle().setText("Sửa bàn - " + selectedId);
+                Table t = tableDao.get(selectedId);
+                if (t == null) {
+                    throw new Exception("Bàn bạn chọn không hợp lệ");
+                }
+                popup.getTxtName().setText(t.getName());
+                popup.getBtnOK().setText("Cập nhật");
+                showPopup(popup, new PopupEvent() {
+                    @Override
+                    public void onBtnOK() {
+                        editTable(t);
+                    }
+                });
             }
         } catch (Exception e) {
             view.showError(e);
@@ -156,30 +157,15 @@ public class TableManagerController extends ManageController {
     }
 
     @Override
-    public void actionEdit() {
+    public void actionDelete() {
+        int selectedIds[] = view.getSelectedIds();
         try {
-            int selectedRow = view.getTblData().getSelectedRow();
-            if (selectedRow < 0) {
-                throw new Exception("Chọn nhân viên cần edit");
-            } else {
-                int id = (int) view.getTblData().getValueAt(selectedRow, 0);
-                EmployeePopup popup = new EmployeePopup();
-                popup.getLbTitle().setText("Sửa nhân viên - " + id);
-                Employee e = employeeDao.get(id);
-                if (e == null) {
-                    throw new Exception("Nhân viên bạn chọn không hợp lệ");
-                }
-                popup.getTxtUsername().setText(e.getUsername());
-                popup.getTxtPassword().setText(e.getPassword());
-                popup.getTxtName().setText(e.getName());
-                popup.getTxtPhoneNumber().setText(e.getPhoneNumber());
-                popup.getBtnOK().setText("Cập nhật");
-                showPopup(popup, new PopupEvent() {
-                    @Override
-                    public void onBtnOK() {
-                        editEmployee(e);
-                    }
-                });
+            if (JOptionPane.showConfirmDialog(null, "Xác nhận xóa hàng loạt?", "Xóa bàn", ERROR_MESSAGE) != YES_OPTION) {
+                return;
+            }
+            for (int i = 0; i < selectedIds.length; i++) {
+                tableDao.deleteById(selectedIds[i]);
+                updateData();
             }
         } catch (Exception e) {
             view.showError(e);

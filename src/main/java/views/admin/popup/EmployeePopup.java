@@ -183,11 +183,6 @@ public class EmployeePopup extends javax.swing.JFrame {
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
         btnOK.setText("Thêm");
-        btnOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOKActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -195,11 +190,6 @@ public class EmployeePopup extends javax.swing.JFrame {
         jPanel3.add(btnOK, gridBagConstraints);
 
         btnCancel.setText("Hủy");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -210,35 +200,6 @@ public class EmployeePopup extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-//        this.dispose();
-    }//GEN-LAST:event_btnCancelActionPerformed
-
-    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-//        try {
-//            if (txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty() || txtPhoneNumber.getText().isEmpty()) {
-//                throw new Exception("Vui lòng điền đầy đủ thông tin");
-//            }
-//            if (employeeDao.findByUsername(txtUsername.getText()) != null) {
-//                throw new Exception("Tài khoản đã tồn tại");
-//            }
-//            Employee e = new Employee();
-//            e.setUsername(txtUsername.getText());
-//            e.setPassword(txtPassword.getText());
-//            e.setName(txtName.getText());
-//            e.setPhoneNumber(txtPhoneNumber.getText());
-//            e.setPermissionName(cboPermission.getSelectedItem().toString());
-//            e.setPermissionId(cboPermission.getSelectedIndex() + 1);
-//            employeeDao.save(e);
-//            JOptionPane.showMessageDialog(null, "Thêm thành công");
-//            main.renderTable();
-//            this.dispose();
-//
-//        } catch (Exception e) {
-//            ErrorPopup.show(e);
-//        }
-    }//GEN-LAST:event_btnOKActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;

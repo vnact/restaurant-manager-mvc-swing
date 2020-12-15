@@ -136,15 +136,13 @@ public class EmployeeManagerController extends ManageController {
 
     @Override
     public void actionDelete() {
-        int selectedRows[] = view.getTblData().getSelectedRows();
+        int selectedIds[] = view.getSelectedIds();
         try {
             if (JOptionPane.showConfirmDialog(null, "Xác nhận xóa hàng loạt?", "Xóa nhân viên", ERROR_MESSAGE) != YES_OPTION) {
                 return;
             }
-            for (int i = 0; i < selectedRows.length; i++) {
-                int selectedRow = selectedRows[i];
-                int id = (int) view.getTblData().getValueAt(selectedRow, 0);
-                employeeDao.deleteById(id);
+            for (int i = 0; i < selectedIds.length; i++) {
+                employeeDao.deleteById(selectedIds[i]);
                 updateData();
             }
         } catch (Exception e) {
@@ -155,14 +153,13 @@ public class EmployeeManagerController extends ManageController {
     @Override
     public void actionEdit() {
         try {
-            int selectedRow = view.getTblData().getSelectedRow();
-            if (selectedRow < 0) {
+            int selectedId = view.getSelectedId();
+            if (selectedId < 0) {
                 throw new Exception("Chọn nhân viên cần edit");
-            } else {
-                int id = (int) view.getTblData().getValueAt(selectedRow, 0);
+            } else {;
                 EmployeePopup popup = new EmployeePopup();
-                popup.getLbTitle().setText("Sửa nhân viên - " + id);
-                Employee e = employeeDao.get(id);
+                popup.getLbTitle().setText("Sửa nhân viên - " + selectedId);
+                Employee e = employeeDao.get(selectedId);
                 if (e == null) {
                     throw new Exception("Nhân viên bạn chọn không hợp lệ");
                 }
