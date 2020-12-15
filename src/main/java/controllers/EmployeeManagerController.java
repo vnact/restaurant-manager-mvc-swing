@@ -4,6 +4,9 @@ import dao.EmployeeDao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.YES_OPTION;
 import models.Employee;
 import views.admin.EmployeeManagerPane;
 import views.admin.popup.EmployeePopup;
@@ -100,8 +103,25 @@ public class EmployeeManagerController extends ManageController {
         }
     }
 
-    public void editEmployee() {
-
+    public void editEmployee(Employee e) {
+        try {
+            String username = popupView.getTxtUsername().getText(),
+                    password = popupView.getTxtPassword().getText(),
+                    phoneNumber = popupView.getTxtPhoneNumber().getText(),
+                    name = popupView.getTxtName().getText();
+            e.setUsername(username);
+            e.setPassword(password);
+            e.setName(name);
+            e.setPhoneNumber(phoneNumber);
+            e.setPermissionName(popupView.getCboPermission().getSelectedItem().toString());
+            e.setPermissionId(popupView.getCboPermission().getSelectedIndex() + 1);
+            employeeDao.update(e);
+            view.showMessage("Thêm thành công");
+            updateData();
+            setPopupView(null);//Tắt Popup      
+        } catch (Exception ex) {
+            view.showError(ex);
+        }
     }
 
     @Override
@@ -116,18 +136,48 @@ public class EmployeeManagerController extends ManageController {
 
     @Override
     public void actionDelete() {
-        showPopup(new EmployeePopup(), new PopupEvent() {
-            @Override
-            public void onBtnOK() {
-                editEmployee();
+        int selectedRows[] = view.getTblData().getSelectedRows();
+        try {
+            if (JOptionPane.showConfirmDialog(null, "Xác nhận xóa hàng loạt?", "Xóa nhân viên", ERROR_MESSAGE) != YES_OPTION) {
+                return;
             }
-        });
+            for (int i = 0; i < selectedRows.length; i++) {
+                int selectedRow = selectedRows[i];
+                int id = (int) view.getTblData().getValueAt(selectedRow, 0);
+                employeeDao.deleteById(id);
+                updateData();
+            }
+        } catch (Exception e) {
+            view.showError(e);
+        }
     }
 
     @Override
     public void actionEdit() {
         try {
-
+            int selectedRow = view.getTblData().getSelectedRow();
+            if (selectedRow < 0) {
+                throw new Exception("Chọn nhân viên cần edit");
+            } else {
+                int id = (int) view.getTblData().getValueAt(selectedRow, 0);
+                EmployeePopup popup = new EmployeePopup();
+                popup.getLbTitle().setText("Sửa nhân viên - " + id);
+                Employee e = employeeDao.get(id);
+                if (e == null) {
+                    throw new Exception("Nhân viên bạn chọn không hợp lệ");
+                }
+                popup.getTxtUsername().setText(e.getUsername());
+                popup.getTxtPassword().setText(e.getPassword());
+                popup.getTxtName().setText(e.getName());
+                popup.getTxtPhoneNumber().setText(e.getPhoneNumber());
+                popup.getBtnOK().setText("Cập nhật");
+                showPopup(popup, new PopupEvent() {
+                    @Override
+                    public void onBtnOK() {
+                        editEmployee(e);
+                    }
+                });
+            }
         } catch (Exception e) {
             view.showError(e);
         }
