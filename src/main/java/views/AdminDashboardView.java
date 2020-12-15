@@ -1,11 +1,11 @@
 package views;
 
 import controllers.AdminDashboardController;
-import controllers.LoginController;
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import models.Employee;
 import utils.ErrorPopup;
 import views.admin.EmployeeManagerPane;
 import views.admin.HomePane;
@@ -29,12 +29,6 @@ public class AdminDashboardView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    public AdminDashboardView(Employee e) {
-        initComponents();
-        setLocationRelativeTo(null);
-        lbName.setText(e.getName());
-    }
-
     public void showError(String message) {
         ErrorPopup.show(new Exception(message));
     }
@@ -45,6 +39,14 @@ public class AdminDashboardView extends javax.swing.JFrame {
 
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
+    }
+
+    public JButton getBtnLogout() {
+        return btnLogout;
+    }
+
+    public JLabel getLbName() {
+        return lbName;
     }
 
     // Thêm dropdown menu
@@ -78,10 +80,6 @@ public class AdminDashboardView extends javax.swing.JFrame {
         return panelLayout;
     }
 
-    public JPanel[] getCards() {
-        return cards;
-    }
-
     public HomePane getHomePane() {
         return homePane;
     }
@@ -95,7 +93,7 @@ public class AdminDashboardView extends javax.swing.JFrame {
     }
 
     public void setPanel(JPanel panel) {
-        for (JPanel card : getCards()) {
+        for (JPanel card : cards) {
             card.setVisible(false);
         }
         panel.setVisible(true);
@@ -104,6 +102,7 @@ public class AdminDashboardView extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         panelLeft = new javax.swing.JPanel();
         panelHeader = new javax.swing.JPanel();
@@ -125,36 +124,22 @@ public class AdminDashboardView extends javax.swing.JFrame {
         panelHeader.setBackground(new java.awt.Color(255, 255, 255));
         panelHeader.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
         panelHeader.setPreferredSize(new java.awt.Dimension(200, 50));
+        panelHeader.setLayout(new java.awt.GridBagLayout());
 
         lbName.setText("Trần Đức Cường");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 0.1;
+        panelHeader.add(lbName, gridBagConstraints);
 
-        btnLogout.setText("Đăng xuất");
-        btnLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoutActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
-        panelHeader.setLayout(panelHeaderLayout);
-        panelHeaderLayout.setHorizontalGroup(
-            panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelHeaderLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbName)
-                .addGap(18, 18, 18)
-                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        panelHeaderLayout.setVerticalGroup(
-            panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeaderLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbName)
-                    .addComponent(btnLogout))
-                .addGap(11, 11, 11))
-        );
+        btnLogout.setText("Thoát");
+        btnLogout.setRequestFocusEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 0.1;
+        panelHeader.add(btnLogout, gridBagConstraints);
 
         panelLeft.add(panelHeader, java.awt.BorderLayout.PAGE_START);
 
@@ -185,11 +170,6 @@ public class AdminDashboardView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        this.dispose();
-        new LoginController(new LoginView());
-    }//GEN-LAST:event_btnLogoutActionPerformed
 
     public static void main(String[] args) {
         //Set up look and feel

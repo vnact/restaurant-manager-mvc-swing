@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  * @createAt Nov 24, 2020
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
-public class Customer {
+public class Customer extends Model {
 
     protected int id;
     protected String phoneNumber, name, address;
@@ -71,6 +71,13 @@ public class Customer {
         c.setPhoneNumber(rs.getString("phoneNumber"));
         c.setBirthday(rs.getTimestamp("birthday"));
         return c;
+    }
+
+    @Override
+    public Object[] toRowTable() {
+        return new Object[]{
+            this.getId(), this.getName(), this.getPhoneNumber(), this.getAddress(), this.getBirthday()
+        };
     }
 
 }

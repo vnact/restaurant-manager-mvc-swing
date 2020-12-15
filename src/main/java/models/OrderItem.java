@@ -7,7 +7,7 @@ import java.sql.SQLException;
  *
  * @author MSI
  */
-public class OrderItem {
+public class OrderItem extends Model {
 
     private int idOrder, idFoodItem, idTopping, quantity, foodPrice, toppingPrice;
     private String note;
@@ -140,6 +140,11 @@ public class OrderItem {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public Object[] toRowTable() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

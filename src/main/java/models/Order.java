@@ -10,7 +10,7 @@ import utils.OrderType;
  *
  * @author MSI
  */
-public class Order {
+public class Order extends Model {
 
     private int id, idEmployee, idTable;
     private OrderType type;
@@ -144,6 +144,15 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" + "id=" + id + ", idEmployee=" + idEmployee + ", idTable=" + idTable + ", type=" + type + ", status=" + status + ", orderDate=" + orderDate + ", payDate=" + payDate + ", paidAmount=" + paidAmount + ", totalAmount=" + totalAmount + '}';
+    }
+
+    @Override
+    public Object[] toRowTable() {
+        return new Object[]{
+            this.getId(), this.getEmployee().getName(), this.getTable().getName(),
+            this.getType().getName(), this.getStatus().getName(), this.getOrderDate(), this.getPayDate(),
+            String.format("%d/%d", this.getPaidAmount(), this.getTotalAmount())
+        };
     }
 
 }

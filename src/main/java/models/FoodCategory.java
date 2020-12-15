@@ -8,7 +8,7 @@ import utils.StringToSlug;
  * @createAt Dec 1, 2020
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
-public class FoodCategory {
+public class FoodCategory extends Model {
 
     protected int id;
     protected String name;
@@ -46,6 +46,13 @@ public class FoodCategory {
         fc.setId(rs.getInt("id"));
         fc.setName(rs.getNString("name"));
         return fc;
+    }
+
+    @Override
+    public Object[] toRowTable() {
+        return new Object[]{
+            this.getId(), this.getName()
+        };
     }
 
 }

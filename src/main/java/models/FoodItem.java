@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
  * @createAt Dec 8, 2020
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
-public class FoodItem {
+public class FoodItem extends Model {
 
     protected int id;
     protected String name, description, urlImage, unitName;
@@ -107,6 +107,14 @@ public class FoodItem {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public Object[] toRowTable() {
+        return new Object[]{
+            this.getId(), this.getName(), this.getDescription(), this.getUrlImage(),
+            this.getUnitName(), this.getUnitPrice(), this.getIdCategory()
+        };
     }
 
 }

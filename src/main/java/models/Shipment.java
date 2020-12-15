@@ -8,7 +8,7 @@ import utils.ShipmentStatus;
  *
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public class Shipment {
+public class Shipment extends Model {
 
     private int idOrder, idCustomer;
     private String shipperName, shipperPhoneNumber, notice;
@@ -104,6 +104,16 @@ public class Shipment {
         if (customer != null) {
             this.idCustomer = customer.getId();
         }
+    }
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Object[] toRowTable() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

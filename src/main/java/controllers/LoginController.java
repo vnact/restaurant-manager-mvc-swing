@@ -4,6 +4,7 @@ import dao.EmployeeDao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import main.Runner;
 import models.Employee;
 import views.AdminDashboardView;
 import views.LoginView;
@@ -47,11 +48,12 @@ public class LoginController {
                 view.showError("Mật khẩu sai");
                 return;
             }
+            Runner.setSession(employee);
 
             switch (employee.getPermissionName()) {
                 case "Quản lý":
                     //Admin controller
-                    AdminDashboardController controller = new AdminDashboardController(new AdminDashboardView(employee));
+                    AdminDashboardController controller = new AdminDashboardController(new AdminDashboardView());
                     controller.getView().setPanel(new HomePane());
                     break;
                 case "Nhân viên":
