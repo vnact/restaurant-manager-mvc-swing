@@ -8,7 +8,7 @@ import utils.TableStatus;
  * @createAt Nov 28, 2020
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
-public class Table {
+public class Table extends Model {
 
     protected int id;
     protected String name;
@@ -52,6 +52,13 @@ public class Table {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public Object[] toRowTable() {
+        return new Object[]{
+            this.getId(), this.getName(), this.getStatus().getName()
+        };
     }
 
 }

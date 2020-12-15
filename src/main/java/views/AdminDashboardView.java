@@ -11,6 +11,7 @@ import views.admin.EmployeeManagerPane;
 import views.admin.HomePane;
 import views.admin.ManagerPane;
 import views.admin.MenuItem;
+import views.admin.TableManagerPane;
 
 /**
  * @createAt Nov 15, 2020
@@ -19,8 +20,8 @@ import views.admin.MenuItem;
 public class AdminDashboardView extends javax.swing.JFrame {
 
     HomePane homePane = new HomePane();
-    ManagerPane employeeManagerPane = new EmployeeManagerPane();
-    JPanel[] cards = {homePane, employeeManagerPane};
+    ManagerPane employeeManagerPane = new EmployeeManagerPane(), tableManagerPane = new TableManagerPane();
+    JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane};
     ArrayList<MenuItem> menuItems = new ArrayList<>();
 
     public AdminDashboardView() {
@@ -87,6 +88,17 @@ public class AdminDashboardView extends javax.swing.JFrame {
 
     public ManagerPane getEmployeeManagerPane() {
         return employeeManagerPane;
+    }
+
+    public ManagerPane getTableManagerPane() {
+        return tableManagerPane;
+    }
+
+    public void setPanel(JPanel panel) {
+        for (JPanel card : getCards()) {
+            card.setVisible(false);
+        }
+        panel.setVisible(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -189,7 +201,7 @@ public class AdminDashboardView extends javax.swing.JFrame {
         }
         AdminDashboardView v = new AdminDashboardView();
         AdminDashboardController controller = new AdminDashboardController(v);
-        controller.setPanel(v.getHomePane());
+        v.setPanel(v.getHomePane());
     }
     /**
      * @param args the command line arguments

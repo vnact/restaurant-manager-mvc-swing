@@ -52,7 +52,7 @@ public class LoginController {
                 case "Quản lý":
                     //Admin controller
                     AdminDashboardController controller = new AdminDashboardController(new AdminDashboardView(employee));
-                    controller.setPanel(new HomePane());
+                    controller.getView().setPanel(new HomePane());
                     break;
                 case "Nhân viên":
                     //Seller Controller

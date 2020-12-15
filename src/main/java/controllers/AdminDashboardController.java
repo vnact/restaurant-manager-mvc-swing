@@ -3,7 +3,6 @@ package controllers;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JPanel;
 import utils.IconManager;
 import views.AdminDashboardView;
 import views.admin.ManagerPane;
@@ -19,6 +18,7 @@ public class AdminDashboardController {
     private AdminDashboardView view;
     private MenuItem previousItem = null;
     EmployeeManagerController emc = new EmployeeManagerController();
+    TableManagerController tmc = new TableManagerController();
 
     public AdminDashboardController(AdminDashboardView view) {
         this.view = view;
@@ -30,13 +30,6 @@ public class AdminDashboardController {
 
     public AdminDashboardView getView() {
         return view;
-    }
-
-    public void setPanel(JPanel panel) {
-        for (JPanel card : view.getCards()) {
-            card.setVisible(false);
-        }
-        panel.setVisible(true);
     }
 
     public void setView(AdminDashboardView view) {
@@ -85,10 +78,11 @@ public class AdminDashboardController {
         }
         previousItem = item;
         ManagerPane pnl;
+        System.out.println("Chon menu: " + item.getId());
         switch (item.getId()) {
             case "QLNV":
                 pnl = view.getEmployeeManagerPane();
-                setPanel(pnl);
+                view.setPanel(pnl);
                 emc.setView(pnl);
                 //Cập nhật dữ liệu bảng
                 emc.updateData();
@@ -97,7 +91,10 @@ public class AdminDashboardController {
 //                orderManager.setVisible(true);
                 break;
             case "QLB":
-//                tableManager.setVisible(true);
+                pnl = view.getTableManagerPane();
+                view.setPanel(pnl);
+                tmc.setView(pnl);
+                tmc.updateData();
                 break;
             case "QLKH":
 //                customerManager.setVisible(true);
@@ -109,7 +106,7 @@ public class AdminDashboardController {
 //                foodItemManager.setVisible(true);
                 break;
             default:
-                setPanel(view.getHomePane());
+                view.setPanel(view.getHomePane());
                 break;
         }
     }
