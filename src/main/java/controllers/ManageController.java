@@ -12,6 +12,7 @@ import views.admin.ManagerPane;
 public abstract class ManageController {
 
     protected ManagerPane view;
+//    protected Popup popupView;
 
     public ManageController() {
     }
@@ -32,8 +33,22 @@ public abstract class ManageController {
         }
     }
 
+//    public Popup getPopupView() {
+//        return popupView;
+//    }
+//
+//    public void setPopupView(Popup popupView) {
+//        this.popupView = popupView;
+//    }
+//
+//    private void addPopupEvent() {
+//        popupView.getBtnCancel().addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent evt) {
+//                setPopupView(null);
+//            }
+//        });
+//    }
     private void addEvent() {
-        System.out.println("add Event");
         // Thêm
         view.getBtnAdd().addActionListener(new ActionListener() {
             @Override
@@ -59,7 +74,7 @@ public abstract class ManageController {
         view.getBtnSync().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                System.out.println("Sync");
+                System.out.println("Sync Data");
                 updateData();
             }
         });

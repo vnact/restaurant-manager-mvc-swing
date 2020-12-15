@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import models.Model;
 import utils.ErrorPopup;
@@ -64,6 +65,10 @@ public abstract class ManagerPane<T extends Model> extends JPanel {
     public void setTableData(ArrayList<T> tableData) {
         this.tableData = tableData;
         renderTable();
+    }
+
+    public JTable getTblData() {
+        return tblData;
     }
 
     public void renderTable() {

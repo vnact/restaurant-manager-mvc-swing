@@ -18,7 +18,7 @@ public class AdminDashboardController {
 
     private AdminDashboardView view;
     private MenuItem previousItem = null;
-    private final ManageController emController = new EmployeeManagerController();
+    EmployeeManagerController emc = new EmployeeManagerController();
 
     public AdminDashboardController(AdminDashboardView view) {
         this.view = view;
@@ -84,13 +84,14 @@ public class AdminDashboardController {
             item.setBackground(new Color(85, 172, 238));
         }
         previousItem = item;
-        System.out.println(item.getId());
         ManagerPane pnl;
         switch (item.getId()) {
             case "QLNV":
                 pnl = view.getEmployeeManagerPane();
                 setPanel(pnl);
-                emController.setView(pnl);
+                emc.setView(pnl);
+                //Cập nhật dữ liệu bảng
+                emc.updateData();
                 break;
             case "QLDDH":
 //                orderManager.setVisible(true);
