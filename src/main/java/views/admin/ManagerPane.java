@@ -71,6 +71,7 @@ public abstract class ManagerPane<T extends Model> extends JPanel {
         return tblData;
     }
 
+    // Lấy id các hàng đc chọn
     public int[] getSelectedIds() {
 
         int selectedRows[] = tblData.getSelectedRows();
@@ -83,6 +84,7 @@ public abstract class ManagerPane<T extends Model> extends JPanel {
         return selectedIds;
     }
 
+    // Lấy id hàng chọn đầu
     public int getSelectedId() {
 
         int selectedRow = tblData.getSelectedRow();
