@@ -8,7 +8,7 @@ import javax.swing.JTextField;
  * @createAt Nov 28, 2020
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
-public class TablePopup extends javax.swing.JFrame {
+public class TablePopup extends javax.swing.JFrame implements Popup {
 
     public TablePopup() {
         initComponents();

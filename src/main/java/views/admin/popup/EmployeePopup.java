@@ -9,7 +9,7 @@ import javax.swing.JTextField;
  * @createAt Nov 16, 2020
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
-public class EmployeePopup extends javax.swing.JFrame {
+public class EmployeePopup extends javax.swing.JFrame implements Popup {
 
     public EmployeePopup() {
         initComponents();
@@ -219,4 +219,5 @@ public class EmployeePopup extends javax.swing.JFrame {
     private javax.swing.JTextField txtPhoneNumber;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
 }

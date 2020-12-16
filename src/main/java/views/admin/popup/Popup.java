@@ -10,9 +10,13 @@ import javax.swing.JLabel;
  */
 public interface Popup {
 
-    public abstract JButton getBtnAdd();
+    public abstract JButton getBtnOK();
 
     public abstract JButton getBtnCancel();
 
     public abstract JLabel getLbTitle();
+
+    public abstract void dispose();
+
+    public abstract void setVisible(boolean b);
 }

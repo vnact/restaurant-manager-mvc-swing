@@ -14,7 +14,7 @@ import javax.swing.JTextField;
  *
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public class FoodCategoryPopup extends javax.swing.JFrame {
+public class FoodCategoryPopup extends javax.swing.JFrame implements Popup {
 
     public FoodCategoryPopup() {
         initComponents();

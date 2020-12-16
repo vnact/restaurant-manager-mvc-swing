@@ -1,9 +1,6 @@
 package controllers;
 
-import dao.EmployeeDao;
 import dao.TableDao;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -20,18 +17,7 @@ import views.admin.popup.TablePopup;
  */
 public class TableManagerController extends ManageController {
 
-    EmployeeDao employeeDao = new EmployeeDao();
     TableDao tableDao = new TableDao();
-    TablePopup popupView;
-
-    abstract class PopupEvent {
-
-        public void onBtnCancel() {
-            setPopupView(null);
-        }
-
-        public abstract void onBtnOK();
-    }
 
     public TableManagerController() {
         super();
@@ -45,42 +31,9 @@ public class TableManagerController extends ManageController {
         super.setView(view);
     }
 
-    public TablePopup getPopupView() {
-        return popupView;
-    }
-
-    public void setPopupView(TablePopup popupView) {
-        if (popupView != null) {
-            // Hiện popup mới
-            popupView.setVisible(true);
-        }
-        if (this.popupView != null) {
-            // Tắt popup cũ
-            this.popupView.dispose();
-        }
-        this.popupView = popupView;
-    }
-
-    public void showPopup(TablePopup popupView, PopupEvent event) {
-        if (popupView == null) {
-            return;
-        }
-        setPopupView(popupView);
-        this.popupView.getBtnCancel().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                event.onBtnCancel();
-            }
-        });
-        this.popupView.getBtnOK().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                event.onBtnOK();
-            }
-        });
-    }
-
-    public void addTable() {
+    public void addTable(TablePopup popup) {
         try {
-            String name = popupView.getTxtName().getText();
+            String name = popup.getTxtName().getText();
             if (name.isEmpty()) {
                 throw new Exception("Vui lòng điền đủ thông tin");
             }
@@ -99,9 +52,9 @@ public class TableManagerController extends ManageController {
         }
     }
 
-    public void editTable(Table t) {
+    public void editTable(TablePopup popup, Table t) {
         try {
-            String name = popupView.getTxtName().getText();
+            String name = popup.getTxtName().getText();
             if (name.isEmpty()) {
                 throw new Exception("Điền tên bàn");
             }
@@ -121,12 +74,14 @@ public class TableManagerController extends ManageController {
 
     @Override
     public void actionAdd() {
-        showPopup(new TablePopup(), new PopupEvent() {
+        TablePopup popup = new TablePopup();
+        showPopup(popup, new PopupEvent() {
             @Override
             public void onBtnOK() {
-                addTable();
+                addTable(popup);
             }
         });
+
     }
 
     @Override
@@ -147,7 +102,7 @@ public class TableManagerController extends ManageController {
                 showPopup(popup, new PopupEvent() {
                     @Override
                     public void onBtnOK() {
-                        editTable(t);
+                        editTable(popup, t);
                     }
                 });
             }

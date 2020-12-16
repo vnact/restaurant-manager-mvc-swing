@@ -16,7 +16,7 @@ import models.FoodCategory;
  *
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public class FoodItemPopup extends javax.swing.JFrame {
+public class FoodItemPopup extends javax.swing.JFrame implements Popup {
 
     public FoodItemPopup() {
         initComponents();

@@ -16,7 +16,7 @@ import javax.swing.JTextField;
  *
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public class CustomerPopup extends javax.swing.JFrame {
+public class CustomerPopup extends javax.swing.JFrame implements Popup {
 
     public CustomerPopup() {
         initComponents();

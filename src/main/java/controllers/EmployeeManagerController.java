@@ -1,8 +1,6 @@
 package controllers;
 
 import dao.EmployeeDao;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -19,16 +17,6 @@ import views.admin.popup.EmployeePopup;
 public class EmployeeManagerController extends ManageController {
 
     EmployeeDao employeeDao = new EmployeeDao();
-    EmployeePopup popupView;
-
-    abstract class PopupEvent {
-
-        public void onBtnCancel() {
-            setPopupView(null);
-        }
-
-        public abstract void onBtnOK();
-    }
 
     public EmployeeManagerController() {
         super();
@@ -38,44 +26,7 @@ public class EmployeeManagerController extends ManageController {
         super(view);
     }
 
-    public void setView(EmployeeManagerPane view) {
-        super.setView(view);
-    }
-
-    public EmployeePopup getPopupView() {
-        return popupView;
-    }
-
-    public void setPopupView(EmployeePopup popupView) {
-        if (popupView != null) {
-            // Hiện popup mới
-            popupView.setVisible(true);
-        }
-        if (this.popupView != null) {
-            // Tắt popup cũ
-            this.popupView.dispose();
-        }
-        this.popupView = popupView;
-    }
-
-    public void showPopup(EmployeePopup popupView, PopupEvent event) {
-        if (popupView == null) {
-            return;
-        }
-        setPopupView(popupView);
-        this.popupView.getBtnCancel().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                event.onBtnCancel();
-            }
-        });
-        this.popupView.getBtnOK().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                event.onBtnOK();
-            }
-        });
-    }
-
-    public void addEmployee() {
+    public void addEmployee(EmployeePopup popupView) {
         try {
             String username = popupView.getTxtUsername().getText(),
                     password = popupView.getTxtPassword().getText(),
@@ -103,7 +54,7 @@ public class EmployeeManagerController extends ManageController {
         }
     }
 
-    public void editEmployee(Employee e) {
+    public void editEmployee(EmployeePopup popupView, Employee e) {
         try {
             String username = popupView.getTxtUsername().getText(),
                     password = popupView.getTxtPassword().getText(),
@@ -126,10 +77,11 @@ public class EmployeeManagerController extends ManageController {
 
     @Override
     public void actionAdd() {
-        showPopup(new EmployeePopup(), new PopupEvent() {
+        EmployeePopup popup = new EmployeePopup();
+        showPopup(popup, new PopupEvent() {
             @Override
             public void onBtnOK() {
-                addEmployee();
+                addEmployee(popup);
             }
         });
     }
@@ -171,7 +123,7 @@ public class EmployeeManagerController extends ManageController {
                 showPopup(popup, new PopupEvent() {
                     @Override
                     public void onBtnOK() {
-                        editEmployee(e);
+                        editEmployee(popup, e);
                     }
                 });
             }
