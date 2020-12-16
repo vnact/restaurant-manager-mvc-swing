@@ -5,13 +5,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JPanel;
 import main.Runner;
 import models.Employee;
 import utils.IconManager;
 import views.AdminDashboardView;
 import views.LoginView;
+import views.admin.CustomerManagerPane;
+import views.admin.EmployeeManagerPane;
+import views.admin.HomePane;
 import views.admin.ManagerPane;
 import views.admin.MenuItem;
+import views.admin.TableManagerPane;
 
 /**
  * createAt Dec 15, 2020
@@ -22,19 +27,25 @@ public class AdminDashboardController {
 
     private AdminDashboardView view;
     private MenuItem previousItem = null;
-    EmployeeManagerController emc = new EmployeeManagerController();
-    TableManagerController tmc = new TableManagerController();
+    EmployeeManagerController employeeManagerController = new EmployeeManagerController();
+    TableManagerController tableManagerController = new TableManagerController();
+    CustomerManagerController customerManagerController = new CustomerManagerController();
+
+    HomePane homePane = new HomePane();
+    ManagerPane employeeManagerPane = new EmployeeManagerPane(), tableManagerPane = new TableManagerPane(), customerManagerPane = new CustomerManagerPane();
+    JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane, customerManagerPane};
 
     public AdminDashboardController(AdminDashboardView view) {
         this.view = view;
         view.setVisible(true);
-        view.initLayout();
         initMenu();
         addEvent();
         Employee session = Runner.getSession();
         if (session != null) {
             view.getLbName().setText(session.getName());
         }
+        view.setCards(cards);
+        view.setPanel(homePane);
     }
 
     public AdminDashboardView getView() {
@@ -93,27 +104,25 @@ public class AdminDashboardController {
             item.setBackground(new Color(85, 172, 238));
         }
         previousItem = item;
-        ManagerPane pnl;
+        ManagerPane pnl = null; //View Panel
+        ManageController mc = null; //Controller Panel
         System.out.println("Chon menu: " + item.getId());
         switch (item.getId()) {
             case "QLNV":
-                pnl = view.getEmployeeManagerPane();
-                view.setPanel(pnl);
-                emc.setView(pnl);
-                //Cập nhật dữ liệu bảng
-                emc.updateData();
+                pnl = employeeManagerPane;
+                mc = employeeManagerController;
                 break;
             case "QLDDH":
 //                orderManager.setVisible(true);
                 break;
             case "QLB":
-                pnl = view.getTableManagerPane();
-                view.setPanel(pnl);
-                tmc.setView(pnl);
-                tmc.updateData();
+                pnl = tableManagerPane;
+                mc = tableManagerController;
+
                 break;
             case "QLKH":
-//                customerManager.setVisible(true);
+                pnl = customerManagerPane;
+                mc = customerManagerController;
                 break;
             case "QLLM":
 //                foodCategoryManager.setVisible(true);
@@ -122,8 +131,15 @@ public class AdminDashboardController {
 //                foodItemManager.setVisible(true);
                 break;
             default:
-                view.setPanel(view.getHomePane());
+                view.setPanel(homePane);
                 break;
+        }
+        if (pnl != null) {
+            view.setPanel(pnl);
+            if (mc != null) {
+                mc.setView(pnl);
+                mc.updateData();
+            }
         }
     }
 }

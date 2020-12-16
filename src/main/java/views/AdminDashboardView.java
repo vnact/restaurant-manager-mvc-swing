@@ -7,11 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import utils.ErrorPopup;
-import views.admin.EmployeeManagerPane;
-import views.admin.HomePane;
-import views.admin.ManagerPane;
 import views.admin.MenuItem;
-import views.admin.TableManagerPane;
 
 /**
  * @createAt Nov 15, 2020
@@ -19,9 +15,7 @@ import views.admin.TableManagerPane;
  */
 public class AdminDashboardView extends javax.swing.JFrame {
 
-    HomePane homePane = new HomePane();
-    ManagerPane employeeManagerPane = new EmployeeManagerPane(), tableManagerPane = new TableManagerPane();
-    JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane};
+    JPanel[] cards;
     ArrayList<MenuItem> menuItems = new ArrayList<>();
 
     public AdminDashboardView() {
@@ -67,6 +61,11 @@ public class AdminDashboardView extends javax.swing.JFrame {
         return menuItems;
     }
 
+    public void setCards(JPanel[] cards) {
+        this.cards = cards;
+        initLayout();
+    }
+
     // Thêm các pane vào cardlayout
     public void initLayout() {
         panelLayout.removeAll();
@@ -78,18 +77,6 @@ public class AdminDashboardView extends javax.swing.JFrame {
 
     public JPanel getPanelLayout() {
         return panelLayout;
-    }
-
-    public HomePane getHomePane() {
-        return homePane;
-    }
-
-    public ManagerPane getEmployeeManagerPane() {
-        return employeeManagerPane;
-    }
-
-    public ManagerPane getTableManagerPane() {
-        return tableManagerPane;
     }
 
     public void setPanel(JPanel panel) {
@@ -181,7 +168,6 @@ public class AdminDashboardView extends javax.swing.JFrame {
         }
         AdminDashboardView v = new AdminDashboardView();
         AdminDashboardController controller = new AdminDashboardController(v);
-        v.setPanel(v.getHomePane());
     }
     /**
      * @param args the command line arguments

@@ -27,7 +27,6 @@ public class Database {
                     name = cfg.getProperty("database.name");
             Class.forName(cfg.getProperty("database.driver_class"));
             String url = String.format("jdbc:%s://%s:%s/%s?%s", cfg.getProperty("database.jdbc"), host, port, name, connectProperty);
-            System.out.println(url);
             this.conn = DriverManager.getConnection(url, user, password);
             System.out.println("Kết nối cơ sở dữ liệu thành công!");
         } catch (ClassNotFoundException e) {
