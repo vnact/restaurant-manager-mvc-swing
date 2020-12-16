@@ -3,7 +3,6 @@ package controllers;
 import dao.EmployeeDao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 import main.Runner;
 import models.Employee;
 import views.AdminDashboardView;
@@ -37,7 +36,7 @@ public class LoginController {
 
     public void login() {
         String username = view.getTxtUsername().getText();
-        String password = Arrays.toString(view.getTxtPassword().getPassword());
+        String password = new String(view.getTxtPassword().getPassword());
         try {
             Employee employee = employeeDao.findByUsername(username);
             if (employee == null) {
@@ -55,6 +54,7 @@ public class LoginController {
                     //Admin controller
                     AdminDashboardController controller = new AdminDashboardController(new AdminDashboardView());
                     controller.getView().setPanel(new HomePane());
+                    view.dispose();// Tắt form đăng nhập
                     break;
                 case "Nhân viên":
                     //Seller Controller
