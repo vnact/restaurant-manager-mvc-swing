@@ -10,7 +10,7 @@ import java.util.Properties;
  */
 public class LoadConfig {
 
-    private static final String CONFIG_PATH = "/db.properties";
+    private static final String CONFIG_PATH = "/config.properties";
     private static LoadConfig intanse;
     private Properties properties = new Properties();
 
@@ -25,8 +25,12 @@ public class LoadConfig {
         return intanse;
     }
 
-    public String getProperties(String key) {
+    public String getProperty(String key) {
         return properties.getProperty(key);
+    }
+
+    public Properties getProperties() {
+        return properties;
     }
 
     private void readConfig() {

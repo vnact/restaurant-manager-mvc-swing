@@ -13,20 +13,22 @@ import utils.LoadConfig;
  */
 public class Database {
 
-    private static final LoadConfig dbConfig = LoadConfig.getIntanse();
+    private static final LoadConfig cfg = LoadConfig.getIntanse();
     private static Database instance = null;
-    private static final String JDBC_STRING = dbConfig.getProperties("url");
-    private static final String DB_USER = dbConfig.getProperties("username");
-    private static final String DB_PASS = dbConfig.getProperties("password");
-    private static final String DB_NAME = dbConfig.getProperties("database");
-    private static final String URL = JDBC_STRING + "/" + DB_NAME + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-
     private Connection conn = null;
 
     private Database() {
         try {
-            Class.forName(dbConfig.getProperties("driver_class"));
-            this.conn = DriverManager.getConnection(URL, DB_USER, DB_PASS);
+            String connectProperty = "useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            String host = cfg.getProperty("database.host"),
+                    port = cfg.getProperty("database.port"),
+                    user = cfg.getProperty("database.username"),
+                    password = cfg.getProperty("database.password"),
+                    name = cfg.getProperty("database.name");
+            Class.forName(cfg.getProperty("database.driver_class"));
+            String url = String.format("jdbc:%s://%s:%s/%s?%s", cfg.getProperty("database.jdbc"), host, port, name, connectProperty);
+            System.out.println(url);
+            this.conn = DriverManager.getConnection(url, user, password);
             System.out.println("Kết nối cơ sở dữ liệu thành công!");
         } catch (ClassNotFoundException e) {
             System.out.println("Chưa cài driver mysql!");
