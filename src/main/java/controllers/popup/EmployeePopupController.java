@@ -27,7 +27,7 @@ public class EmployeePopupController extends PopupController {
                     if (addSuccess) {
                         view.dispose();
                         parrent.updateData();
-                        parrent.getView().showMessage("Thêm nhân viên thành công!");
+                        view.showMessage("Thêm nhân viên thành công!");
                     }
                 } catch (Exception ex) {
                     parrent.getView().showError(ex);
@@ -54,7 +54,7 @@ public class EmployeePopupController extends PopupController {
                     if (editSuccess) {
                         view.dispose();
                         parrent.updateData();
-                        parrent.getView().showMessage("Sửa nhân viên thành công!");
+                        view.showMessage("Sửa nhân viên thành công!");
                     }
                 } catch (Exception ex) {
                     parrent.getView().showError(ex);

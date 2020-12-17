@@ -2,7 +2,7 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import views.admin.ManagerPane;
+import views.admin.ManagerPaneView;
 
 /**
  * createAt Dec 15, 2020
@@ -12,21 +12,16 @@ import views.admin.ManagerPane;
 //Form chung cho các panel kế thừa
 public abstract class ManagerController {
 
-    protected ManagerPane view;
+    protected ManagerPaneView view;
 
     public ManagerController() {
     }
 
-    public ManagerController(ManagerPane view) {
-        this.view = view;
-        addEvent();
-    }
-
-    public ManagerPane getView() {
+    public ManagerPaneView getView() {
         return view;
     }
 
-    public void setView(ManagerPane view) {
+    public void setView(ManagerPaneView view) {
         if (this.view == null) {
             this.view = view;
             addEvent();

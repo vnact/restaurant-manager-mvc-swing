@@ -19,4 +19,10 @@ public interface Popup {
     public abstract void dispose();
 
     public abstract void setVisible(boolean b);
+
+    public abstract void showError(String message);
+
+    public abstract void showError(Exception e);
+
+    public abstract void showMessage(String message);
 }

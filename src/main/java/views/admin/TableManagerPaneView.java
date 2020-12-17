@@ -7,9 +7,9 @@ import models.Table;
  *
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public class TableManagerPane extends ManagerPane<Table> {
+public class TableManagerPaneView extends ManagerPaneView<Table> {
 
-    public TableManagerPane() {
+    public TableManagerPaneView() {
         super();
         setTableModel();
         renderTable();

@@ -3,7 +3,9 @@ package views.popup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import utils.ErrorPopup;
 
 /**
  * @createAt Nov 16, 2020
@@ -14,6 +16,18 @@ public class EmployeePopup extends javax.swing.JFrame implements Popup {
     public EmployeePopup() {
         initComponents();
         setLocationRelativeTo(null);
+    }
+
+    public void showError(String message) {
+        ErrorPopup.show(new Exception(message));
+    }
+
+    public void showError(Exception e) {
+        ErrorPopup.show(e);
+    }
+
+    public void showMessage(String message) {
+        JOptionPane.showMessageDialog(null, message);
     }
 
     public JButton getBtnOK() {

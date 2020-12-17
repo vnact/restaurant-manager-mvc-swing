@@ -1,8 +1,8 @@
 package controllers;
 
 import controllers.admin.CustomerManagerController;
-import controllers.admin.TableManagerController;
 import controllers.admin.EmployeeManagerController;
+import controllers.admin.TableManagerController;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,12 +14,12 @@ import models.Employee;
 import utils.IconManager;
 import views.AdminDashboardView;
 import views.LoginView;
-import views.admin.CustomerManagerPane;
-import views.admin.EmployeeManagerPane;
-import views.admin.HomePane;
-import views.admin.ManagerPane;
+import views.admin.CustomerManagerPaneView;
+import views.admin.EmployeeManagerPaneView;
+import views.admin.HomePaneView;
+import views.admin.ManagerPaneView;
 import views.admin.MenuItem;
-import views.admin.TableManagerPane;
+import views.admin.TableManagerPaneView;
 
 /**
  * createAt Dec 15, 2020
@@ -34,8 +34,8 @@ public class AdminDashboardController {
     TableManagerController tableManagerController = new TableManagerController();
     CustomerManagerController customerManagerController = new CustomerManagerController();
 
-    HomePane homePane = new HomePane();
-    ManagerPane employeeManagerPane = new EmployeeManagerPane(), tableManagerPane = new TableManagerPane(), customerManagerPane = new CustomerManagerPane();
+    HomePaneView homePane = new HomePaneView();
+    ManagerPaneView employeeManagerPane = new EmployeeManagerPaneView(), tableManagerPane = new TableManagerPaneView(), customerManagerPane = new CustomerManagerPaneView();
     JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane, customerManagerPane};
 
     public AdminDashboardController(AdminDashboardView view) {
@@ -107,7 +107,7 @@ public class AdminDashboardController {
             item.setBackground(new Color(85, 172, 238));
         }
         previousItem = item;
-        ManagerPane pnl = null; //View Panel
+        ManagerPaneView pnl = null; //View Panel
         ManagerController mc = null; //Controller Panel
         System.out.println("Chon menu: " + item.getId());
         switch (item.getId()) {

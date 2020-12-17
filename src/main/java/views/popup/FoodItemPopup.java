@@ -8,8 +8,10 @@ package views.popup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import models.FoodCategory;
+import utils.ErrorPopup;
 
 /**
  * createAt Dec 16, 2020
@@ -51,6 +53,98 @@ public class FoodItemPopup extends javax.swing.JFrame implements Popup {
 //                break;
 //
 //        }
+    }
+
+    public void showError(String message) {
+        ErrorPopup.show(new Exception(message));
+    }
+
+    public void showError(Exception e) {
+        ErrorPopup.show(e);
+    }
+
+    public void showMessage(String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
+
+    public JButton getBtnCancel() {
+        return btnCancel;
+    }
+
+    public void setBtnCancel(JButton btnCancel) {
+        this.btnCancel = btnCancel;
+    }
+
+    public JButton getBtnChooseImage() {
+        return btnChooseImage;
+    }
+
+    public void setBtnChooseImage(JButton btnChooseImage) {
+        this.btnChooseImage = btnChooseImage;
+    }
+
+    public JButton getBtnOK() {
+        return btnOK;
+    }
+
+    public void setBtnOK(JButton btnOK) {
+        this.btnOK = btnOK;
+    }
+
+    public JComboBox<FoodCategory> getCboCategory() {
+        return cboCategory;
+    }
+
+    public void setCboCategory(JComboBox<FoodCategory> cboCategory) {
+        this.cboCategory = cboCategory;
+    }
+
+    public JLabel getLbTitle() {
+        return lbTitle;
+    }
+
+    public void setLbTitle(JLabel lbTitle) {
+        this.lbTitle = lbTitle;
+    }
+
+    public JTextField getTxtDescription() {
+        return txtDescription;
+    }
+
+    public void setTxtDescription(JTextField txtDescription) {
+        this.txtDescription = txtDescription;
+    }
+
+    public JTextField getTxtName() {
+        return txtName;
+    }
+
+    public void setTxtName(JTextField txtName) {
+        this.txtName = txtName;
+    }
+
+    public JTextField getTxtUnitName() {
+        return txtUnitName;
+    }
+
+    public void setTxtUnitName(JTextField txtUnitName) {
+        this.txtUnitName = txtUnitName;
+    }
+
+    public JTextField getTxtUnitPrice() {
+        return txtUnitPrice;
+    }
+
+    public void setTxtUnitPrice(JTextField txtUnitPrice) {
+        this.txtUnitPrice = txtUnitPrice;
+    }
+
+    public JTextField getTxtUrlImage() {
+        return txtUrlImage;
+    }
+
+    public void setTxtUrlImage(JTextField txtUrlImage) {
+        this.txtUrlImage = txtUrlImage;
     }
 
     @SuppressWarnings("unchecked")
@@ -225,86 +319,6 @@ public class FoodItemPopup extends javax.swing.JFrame implements Popup {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public JButton getBtnCancel() {
-        return btnCancel;
-    }
-
-    public void setBtnCancel(JButton btnCancel) {
-        this.btnCancel = btnCancel;
-    }
-
-    public JButton getBtnChooseImage() {
-        return btnChooseImage;
-    }
-
-    public void setBtnChooseImage(JButton btnChooseImage) {
-        this.btnChooseImage = btnChooseImage;
-    }
-
-    public JButton getBtnOK() {
-        return btnOK;
-    }
-
-    public void setBtnOK(JButton btnOK) {
-        this.btnOK = btnOK;
-    }
-
-    public JComboBox<FoodCategory> getCboCategory() {
-        return cboCategory;
-    }
-
-    public void setCboCategory(JComboBox<FoodCategory> cboCategory) {
-        this.cboCategory = cboCategory;
-    }
-
-    public JLabel getLbTitle() {
-        return lbTitle;
-    }
-
-    public void setLbTitle(JLabel lbTitle) {
-        this.lbTitle = lbTitle;
-    }
-
-    public JTextField getTxtDescription() {
-        return txtDescription;
-    }
-
-    public void setTxtDescription(JTextField txtDescription) {
-        this.txtDescription = txtDescription;
-    }
-
-    public JTextField getTxtName() {
-        return txtName;
-    }
-
-    public void setTxtName(JTextField txtName) {
-        this.txtName = txtName;
-    }
-
-    public JTextField getTxtUnitName() {
-        return txtUnitName;
-    }
-
-    public void setTxtUnitName(JTextField txtUnitName) {
-        this.txtUnitName = txtUnitName;
-    }
-
-    public JTextField getTxtUnitPrice() {
-        return txtUnitPrice;
-    }
-
-    public void setTxtUnitPrice(JTextField txtUnitPrice) {
-        this.txtUnitPrice = txtUnitPrice;
-    }
-
-    public JTextField getTxtUrlImage() {
-        return txtUrlImage;
-    }
-
-    public void setTxtUrlImage(JTextField txtUrlImage) {
-        this.txtUrlImage = txtUrlImage;
-    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

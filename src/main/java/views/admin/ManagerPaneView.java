@@ -14,13 +14,13 @@ import utils.IconManager;
  *
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
-public abstract class ManagerPane<T extends Model> extends JPanel {
+public abstract class ManagerPaneView<T extends Model> extends JPanel {
 
     DefaultTableModel tableModel = new DefaultTableModel();
     IconManager im = new IconManager();
     ArrayList<T> tableData = new ArrayList<>();
 
-    public ManagerPane() {
+    public ManagerPaneView() {
         initComponents();
         btnAdd.setIcon(im.getIcon("add_25px.png"));
         btnEdit.setIcon(im.getIcon("edit_25px.png"));
@@ -38,7 +38,7 @@ public abstract class ManagerPane<T extends Model> extends JPanel {
     }
 
     public void showMessage(String message) {
-        JOptionPane.showMessageDialog(this, message);
+        JOptionPane.showMessageDialog(null, message);
     }
 
     //Lấy các nút để set event

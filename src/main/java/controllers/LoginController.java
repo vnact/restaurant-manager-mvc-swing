@@ -7,7 +7,7 @@ import main.Runner;
 import models.Employee;
 import views.AdminDashboardView;
 import views.LoginView;
-import views.admin.HomePane;
+import views.admin.HomePaneView;
 
 /**
  * createAt Dec 15, 2020
@@ -53,7 +53,7 @@ public class LoginController {
                 case "Quản lý":
                     //Admin controller
                     AdminDashboardController controller = new AdminDashboardController(new AdminDashboardView());
-                    controller.getView().setPanel(new HomePane());
+                    controller.getView().setPanel(new HomePaneView());
                     view.dispose();// Tắt form đăng nhập
                     break;
                 case "Nhân viên":

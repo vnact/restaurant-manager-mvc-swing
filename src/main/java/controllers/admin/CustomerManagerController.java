@@ -8,7 +8,6 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.YES_OPTION;
 import models.Customer;
 import models.Employee;
-import views.admin.EmployeeManagerPane;
 
 /**
  * createAt Dec 15, 2020
@@ -21,10 +20,6 @@ public class CustomerManagerController extends ManagerController {
 
     public CustomerManagerController() {
         super();
-    }
-
-    public CustomerManagerController(EmployeeManagerPane view) {
-        super(view);
     }
 
     public void addCustomer() {

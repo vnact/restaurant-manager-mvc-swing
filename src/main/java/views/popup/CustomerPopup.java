@@ -8,8 +8,10 @@ package views.popup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import utils.ErrorPopup;
 
 /**
  * createAt Dec 16, 2020
@@ -21,6 +23,18 @@ public class CustomerPopup extends javax.swing.JFrame implements Popup {
     public CustomerPopup() {
         initComponents();
         setLocationRelativeTo(null);
+    }
+
+    public void showError(String message) {
+        ErrorPopup.show(new Exception(message));
+    }
+
+    public void showError(Exception e) {
+        ErrorPopup.show(e);
+    }
+
+    public void showMessage(String message) {
+        JOptionPane.showMessageDialog(null, message);
     }
 
     public JButton getBtnCancel() {

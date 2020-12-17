@@ -1,15 +1,15 @@
 package views.admin;
 
-import models.Employee;
+import models.Customer;
 
 /**
  * createAt Dec 15, 2020
  *
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public class EmployeeManagerPane extends ManagerPane<Employee> {
+public class CustomerManagerPaneView extends ManagerPaneView<Customer> {
 
-    public EmployeeManagerPane() {
+    public CustomerManagerPaneView() {
         super();
         setTableModel();
         renderTable();
@@ -19,10 +19,8 @@ public class EmployeeManagerPane extends ManagerPane<Employee> {
     public void setTableModel() {
         tableModel.addColumn("ID");
         tableModel.addColumn("Họ và tên");
-        tableModel.addColumn("Tên tài khoản");
-        tableModel.addColumn("Mật khẩu");
         tableModel.addColumn("Số điện thoại");
-        tableModel.addColumn("Ngày vào làm");
-        tableModel.addColumn("Chức vụ");
+        tableModel.addColumn("Địa chỉ");
+        tableModel.addColumn("Ngày sinh");
     }
 }
