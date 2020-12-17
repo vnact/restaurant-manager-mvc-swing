@@ -8,7 +8,7 @@ import javax.swing.JLabel;
  *
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public interface Popup {
+public interface PopupView {
 
     public abstract JButton getBtnOK();
 

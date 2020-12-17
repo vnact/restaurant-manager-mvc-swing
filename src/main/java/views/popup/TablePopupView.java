@@ -10,9 +10,9 @@ import utils.ErrorPopup;
  * @createAt Nov 28, 2020
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
-public class TablePopup extends javax.swing.JFrame implements Popup {
+public class TablePopupView extends javax.swing.JFrame implements PopupView {
 
-    public TablePopup() {
+    public TablePopupView() {
         initComponents();
         setLocationRelativeTo(null);
     }

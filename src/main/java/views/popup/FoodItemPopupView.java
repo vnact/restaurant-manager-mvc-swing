@@ -18,9 +18,9 @@ import utils.ErrorPopup;
  *
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public class FoodItemPopup extends javax.swing.JFrame implements Popup {
+public class FoodItemPopupView extends javax.swing.JFrame implements PopupView {
 
-    public FoodItemPopup() {
+    public FoodItemPopupView() {
         initComponents();
         setLocationRelativeTo(null);
 //        if (filechooser == null) {
@@ -334,20 +334,21 @@ public class FoodItemPopup extends javax.swing.JFrame implements Popup {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FoodItemPopup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FoodItemPopupView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FoodItemPopup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FoodItemPopupView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FoodItemPopup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FoodItemPopupView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FoodItemPopup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FoodItemPopupView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FoodItemPopup().setVisible(true);
+                new FoodItemPopupView().setVisible(true);
             }
         });
     }

@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.YES_OPTION;
 import models.Employee;
-import views.popup.EmployeePopup;
+import views.popup.EmployeePopupView;
 
 /**
  * createAt Dec 15, 2020
@@ -30,7 +30,7 @@ public class EmployeeManagerController extends ManagerController {
 
     @Override
     public void actionAdd() {
-        popupController.add(this, new EmployeePopup());
+        popupController.add(this, new EmployeePopupView());
     }
 
     @Override
@@ -44,7 +44,7 @@ public class EmployeeManagerController extends ManagerController {
                 if (e == null) {
                     throw new Exception("Nhân viên bạn chọn không hợp lệ");
                 }
-                popupController.edit(this, new EmployeePopup(), e);
+                popupController.edit(this, new EmployeePopupView(), e);
             }
         } catch (Exception e) {
             view.showError(e);

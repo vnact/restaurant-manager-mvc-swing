@@ -2,7 +2,7 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import views.popup.Popup;
+import views.popup.PopupView;
 
 /**
  * createAt Dec 16, 2020
@@ -11,16 +11,16 @@ import views.popup.Popup;
  */
 public abstract class PopupController {
 
-    Popup view;
+    PopupView view;
 
     public PopupController() {
     }
 
-    public Popup getView() {
+    public PopupView getView() {
         return view;
     }
 
-    public void setView(Popup view) {
+    public void setView(PopupView view) {
         this.view = view;
         view.setVisible(true);
         view.getBtnCancel().addActionListener(new ActionListener() {

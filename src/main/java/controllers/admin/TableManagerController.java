@@ -9,7 +9,7 @@ import static javax.swing.JOptionPane.YES_OPTION;
 import models.Table;
 import utils.TableStatus;
 import views.admin.EmployeeManagerPaneView;
-import views.popup.TablePopup;
+import views.popup.TablePopupView;
 
 /**
  * createAt Dec 15, 2020
@@ -28,7 +28,7 @@ public class TableManagerController extends ManagerController {
         super.setView(view);
     }
 
-    public void addTable(TablePopup popup) {
+    public void addTable(TablePopupView popup) {
         try {
             String name = popup.getTxtName().getText();
             if (name.isEmpty()) {
@@ -49,7 +49,7 @@ public class TableManagerController extends ManagerController {
         }
     }
 
-    public void editTable(TablePopup popup, Table t) {
+    public void editTable(TablePopupView popup, Table t) {
         try {
             String name = popup.getTxtName().getText();
             if (name.isEmpty()) {
@@ -71,7 +71,7 @@ public class TableManagerController extends ManagerController {
 
     @Override
     public void actionAdd() {
-//        TablePopup popup = new TablePopup();
+//        TablePopupView popup = new TablePopupView();
 //        showPopup(popup, new PopupEvent() {
 //            @Override
 //            public void onBtnOK() {
@@ -88,7 +88,7 @@ public class TableManagerController extends ManagerController {
             if (selectedId < 0) {
                 throw new Exception("Chọn nhân viên cần edit");
             } else {
-                TablePopup popup = new TablePopup();
+                TablePopupView popup = new TablePopupView();
                 popup.getLbTitle().setText("Sửa bàn - " + selectedId);
                 Table t = tableDao.get(selectedId);
                 if (t == null) {

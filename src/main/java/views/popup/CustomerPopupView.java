@@ -18,9 +18,9 @@ import utils.ErrorPopup;
  *
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public class CustomerPopup extends javax.swing.JFrame implements Popup {
+public class CustomerPopupView extends javax.swing.JFrame implements PopupView {
 
-    public CustomerPopup() {
+    public CustomerPopupView() {
         initComponents();
         setLocationRelativeTo(null);
     }

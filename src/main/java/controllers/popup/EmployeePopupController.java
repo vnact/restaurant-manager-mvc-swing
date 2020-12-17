@@ -1,12 +1,12 @@
 package controllers.popup;
 
-import controllers.ManagerController;
 import controllers.PopupController;
+import controllers.admin.EmployeeManagerController;
 import dao.EmployeeDao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import models.Employee;
-import views.popup.EmployeePopup;
+import views.popup.EmployeePopupView;
 
 /**
  * createAt Dec 17, 2020
@@ -17,7 +17,7 @@ public class EmployeePopupController extends PopupController {
 
     EmployeeDao employeeDao = new EmployeeDao();
 
-    public void add(ManagerController parrent, EmployeePopup view) {
+    public void add(EmployeeManagerController parrent, EmployeePopupView view) {
         setView(view);
         view.getBtnOK().addActionListener(new ActionListener() {
             @Override
@@ -37,7 +37,7 @@ public class EmployeePopupController extends PopupController {
 
     }
 
-    public void edit(ManagerController parrent, EmployeePopup view, Employee employee) {
+    public void edit(EmployeeManagerController parrent, EmployeePopupView view, Employee employee) {
         setView(view);
 
         view.getLbTitle().setText("Sửa nhân viên - " + employee.getId());
@@ -65,7 +65,7 @@ public class EmployeePopupController extends PopupController {
     }
 
     public boolean addEmployee() throws Exception {
-        EmployeePopup view = (EmployeePopup) this.getView();
+        EmployeePopupView view = (EmployeePopupView) this.getView();
         String username = view.getTxtUsername().getText(),
                 password = view.getTxtPassword().getText(),
                 phoneNumber = view.getTxtPhoneNumber().getText(),
@@ -88,7 +88,7 @@ public class EmployeePopupController extends PopupController {
     }
 
     public boolean editEmployee(Employee e) throws Exception {
-        EmployeePopup view = (EmployeePopup) this.getView();
+        EmployeePopupView view = (EmployeePopupView) this.getView();
         String username = view.getTxtUsername().getText(),
                 password = view.getTxtPassword().getText(),
                 phoneNumber = view.getTxtPhoneNumber().getText(),

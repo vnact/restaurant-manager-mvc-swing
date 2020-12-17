@@ -16,9 +16,9 @@ import utils.ErrorPopup;
  *
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public class FoodCategoryPopup extends javax.swing.JFrame implements Popup {
+public class FoodCategoryPopupView extends javax.swing.JFrame implements PopupView {
 
-    public FoodCategoryPopup() {
+    public FoodCategoryPopupView() {
         initComponents();
         setLocationRelativeTo(null);
     }

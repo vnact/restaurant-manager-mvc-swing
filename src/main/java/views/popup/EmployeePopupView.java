@@ -11,9 +11,9 @@ import utils.ErrorPopup;
  * @createAt Nov 16, 2020
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
-public class EmployeePopup extends javax.swing.JFrame implements Popup {
+public class EmployeePopupView extends javax.swing.JFrame implements PopupView {
 
-    public EmployeePopup() {
+    public EmployeePopupView() {
         initComponents();
         setLocationRelativeTo(null);
     }
