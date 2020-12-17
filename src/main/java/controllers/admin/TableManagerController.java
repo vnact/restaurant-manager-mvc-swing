@@ -1,5 +1,6 @@
-package controllers;
+package controllers.admin;
 
+import controllers.ManagerController;
 import dao.TableDao;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -8,14 +9,14 @@ import static javax.swing.JOptionPane.YES_OPTION;
 import models.Table;
 import utils.TableStatus;
 import views.admin.EmployeeManagerPane;
-import views.admin.popup.TablePopup;
+import views.popup.TablePopup;
 
 /**
  * createAt Dec 15, 2020
  *
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public class TableManagerController extends ManageController {
+public class TableManagerController extends ManagerController {
 
     TableDao tableDao = new TableDao();
 
@@ -46,7 +47,7 @@ public class TableManagerController extends ManageController {
             tableDao.save(t);
             view.showMessage("Thêm thành công");
             updateData();
-            setPopupView(null);//Tắt Popup            
+//            setPopupView(null);//Tắt Popup            
         } catch (Exception e) {
             view.showError(e);
         }
@@ -66,7 +67,7 @@ public class TableManagerController extends ManageController {
             tableDao.update(t);
             view.showMessage("Cập nhật thành công");
             updateData();
-            setPopupView(null);//Tắt Popup      
+//            setPopupView(null);//Tắt Popup      
         } catch (Exception ex) {
             view.showError(ex);
         }
@@ -74,13 +75,13 @@ public class TableManagerController extends ManageController {
 
     @Override
     public void actionAdd() {
-        TablePopup popup = new TablePopup();
-        showPopup(popup, new PopupEvent() {
-            @Override
-            public void onBtnOK() {
-                addTable(popup);
-            }
-        });
+//        TablePopup popup = new TablePopup();
+//        showPopup(popup, new PopupEvent() {
+//            @Override
+//            public void onBtnOK() {
+//                addTable(popup);
+//            }
+//        });
 
     }
 
@@ -99,12 +100,12 @@ public class TableManagerController extends ManageController {
                 }
                 popup.getTxtName().setText(t.getName());
                 popup.getBtnOK().setText("Cập nhật");
-                showPopup(popup, new PopupEvent() {
-                    @Override
-                    public void onBtnOK() {
-                        editTable(popup, t);
-                    }
-                });
+//                showPopup(popup, new PopupEvent() {
+//                    @Override
+//                    public void onBtnOK() {
+//                        editTable(popup, t);
+//                    }
+//                });
             }
         } catch (Exception e) {
             view.showError(e);

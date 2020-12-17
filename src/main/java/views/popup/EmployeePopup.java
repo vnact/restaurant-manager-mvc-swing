@@ -1,4 +1,4 @@
-package views.admin.popup;
+package views.popup;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;

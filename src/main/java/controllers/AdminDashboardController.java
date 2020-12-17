@@ -1,5 +1,8 @@
 package controllers;
 
+import controllers.admin.CustomerManagerController;
+import controllers.admin.TableManagerController;
+import controllers.admin.EmployeeManagerController;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -105,7 +108,7 @@ public class AdminDashboardController {
         }
         previousItem = item;
         ManagerPane pnl = null; //View Panel
-        ManageController mc = null; //Controller Panel
+        ManagerController mc = null; //Controller Panel
         System.out.println("Chon menu: " + item.getId());
         switch (item.getId()) {
             case "QLNV":
