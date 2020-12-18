@@ -1,6 +1,7 @@
 package controllers.admin;
 
 import controllers.ManagerController;
+import controllers.popup.TablePopupController;
 import dao.TableDao;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -19,6 +20,7 @@ import views.popup.TablePopupView;
 public class TableManagerController extends ManagerController {
 
     TableDao tableDao = new TableDao();
+    TablePopupController popupController = new TablePopupController();
 
     public TableManagerController() {
         super();
@@ -71,14 +73,7 @@ public class TableManagerController extends ManagerController {
 
     @Override
     public void actionAdd() {
-//        TablePopupView popup = new TablePopupView();
-//        showPopup(popup, new PopupEvent() {
-//            @Override
-//            public void onBtnOK() {
-//                addTable(popup);
-//            }
-//        });
-
+        popupController.add(this, new TablePopupView());
     }
 
     @Override
@@ -86,22 +81,13 @@ public class TableManagerController extends ManagerController {
         try {
             int selectedId = view.getSelectedId();
             if (selectedId < 0) {
-                throw new Exception("Chọn nhân viên cần edit");
+                throw new Exception("Chọn bàn cần edit");
             } else {
-                TablePopupView popup = new TablePopupView();
-                popup.getLbTitle().setText("Sửa bàn - " + selectedId);
                 Table t = tableDao.get(selectedId);
                 if (t == null) {
                     throw new Exception("Bàn bạn chọn không hợp lệ");
                 }
-                popup.getTxtName().setText(t.getName());
-                popup.getBtnOK().setText("Cập nhật");
-//                showPopup(popup, new PopupEvent() {
-//                    @Override
-//                    public void onBtnOK() {
-//                        editTable(popup, t);
-//                    }
-//                });
+                popupController.edit(this, new TablePopupView(), t);
             }
         } catch (Exception e) {
             view.showError(e);
