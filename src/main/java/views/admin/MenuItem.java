@@ -2,6 +2,7 @@ package views.admin;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.swing.Icon;
 import utils.IconManager;
 
@@ -14,17 +15,16 @@ public class MenuItem extends javax.swing.JPanel {
     private ArrayList<MenuItem> subMenu = new ArrayList<>();
     private MenuItem parentMenu = null;
     private String id;
-    public boolean isShowSubMenu;
+    public boolean active; // Biến kiểm tra xem có đang chọn không
+    Color inactiveColor = Color.decode("#ffffff"), activeParrentColor = Color.decode("#002f6c"), activeChildColor = Color.decode("#01579b"); // Màu tương ứng
 
     public MenuItem(String id, Icon icon, String menuName, MenuItem... subMenu) {
         initComponents();
         this.id = id;
-        this.isShowSubMenu = false;
-        if (icon != null) {
-            lbIcon.setIcon(icon);
-        } else {
-            lbIcon.setIcon(new IconManager().getIcon("next_page_25px.png")); // Icon mặc định
+        if (icon == null) {
+            icon = new IconManager().getIcon("next_page_25px.png");
         }
+        lbIcon.setIcon(icon);
         lbMenuName.setText(menuName);
         for (int i = 0; i < subMenu.length; i++) {
             subMenu[i].setParentMenu(this);
@@ -53,62 +53,61 @@ public class MenuItem extends javax.swing.JPanel {
         return parentMenu;
     }
 
-    public MenuItem getHighestParentMenu() {
-        MenuItem parent = this;
-        while (parent.getParentMenu() != null) {
-            parent = parent.getParentMenu();
-        }
-        return parent;
-    }
-
     public void setParentMenu(MenuItem parentMenu) {
         this.parentMenu = parentMenu;
     }
 
-    public void collapseSubMenu() {
-        if (isShowSubMenu) {
-            hideSubMenu();
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+        if (!active) {
+            setBackground(inactiveColor);
+        } else if (hasSubMenu()) {
+            setBackground(activeParrentColor);
         } else {
-            showSubMenu();
+            setBackground(activeChildColor);
         }
     }
 
-    public void showSubMenu() {
-        for (MenuItem menuItem : subMenu) {
-            menuItem.setVisible(true);
-        }
-        isShowSubMenu = true;
-    }
-
-    public void hideSubMenu() {
-        this.setBackground(new Color(255, 255, 255));
-        for (MenuItem menuItem : subMenu) {
-            menuItem.setVisible(false);
-            menuItem.hideSubMenu();
-        }
-        isShowSubMenu = false;
-    }
-
-    public void closeParrentMenu() {
-        this.setBackground(new Color(255, 255, 255));
-        MenuItem parent = getHighestParentMenu();
-        if (parent != this) {
-            parent.hideSubMenu();
-        }
+    //Kiểm tra xem có menu con không
+    public boolean hasSubMenu() {
+        return !subMenu.isEmpty();
     }
 
     public boolean equals(MenuItem obj) {
-        return obj != null && obj.getId() == id;
+//        if (this == obj) {
+//            return true;
+//        }
+//        if (obj == null) {
+//            return true;
+//        }
+//        return obj.getId() == this.getId();
+        return this == obj;
     }
 
-    public boolean sameParent(MenuItem other) {
-
-        if (other == null) {
+    public boolean hasChild(MenuItem obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj.equals(this)) {
             return true;
         }
-        MenuItem tParent = this.getHighestParentMenu();
-        MenuItem oParent = other.getHighestParentMenu();
-        return tParent.equals(oParent);
+        return hasChild(obj.getParentMenu());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public String toString() {
+        return "MenuItem{" + "id=" + id + ", active=" + active + '}';
     }
 
     /**

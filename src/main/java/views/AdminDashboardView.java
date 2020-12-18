@@ -48,7 +48,7 @@ public class AdminDashboardView extends javax.swing.JFrame {
         for (int i = 0; i < menu.length; i++) {
             MenuItem item = menu[i];
             menuItems.add(item);
-            panelMenu.add(item);
+            panelSideBar.add(item);
             ArrayList<MenuItem> subMenus = item.getSubMenu();
             for (MenuItem subMenu : subMenus) {
                 addMenu(subMenu);
@@ -79,6 +79,10 @@ public class AdminDashboardView extends javax.swing.JFrame {
         return panelLayout;
     }
 
+    public JPanel getPanelSideBar() {
+        return panelSideBar;
+    }
+
     public void setPanel(JPanel panel) {
         for (JPanel card : cards) {
             card.setVisible(false);
@@ -95,7 +99,7 @@ public class AdminDashboardView extends javax.swing.JFrame {
         panelHeader = new javax.swing.JPanel();
         lbName = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
-        panelMenu = new javax.swing.JPanel();
+        panelSideBar = new javax.swing.JPanel();
         panelLayout = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
 
@@ -129,9 +133,9 @@ public class AdminDashboardView extends javax.swing.JFrame {
 
         panelLeft.add(panelHeader, java.awt.BorderLayout.PAGE_START);
 
-        panelMenu.setBackground(new java.awt.Color(255, 255, 255));
-        panelMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
-        panelLeft.add(panelMenu, java.awt.BorderLayout.CENTER);
+        panelSideBar.setBackground(new java.awt.Color(255, 255, 255));
+        panelSideBar.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
+        panelLeft.add(panelSideBar, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(panelLeft, java.awt.BorderLayout.LINE_START);
 
@@ -178,6 +182,6 @@ public class AdminDashboardView extends javax.swing.JFrame {
     private javax.swing.JPanel panelHeader;
     private javax.swing.JPanel panelLayout;
     private javax.swing.JPanel panelLeft;
-    private javax.swing.JPanel panelMenu;
+    private javax.swing.JPanel panelSideBar;
     // End of variables declaration//GEN-END:variables
 }

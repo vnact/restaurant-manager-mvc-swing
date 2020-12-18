@@ -3,11 +3,8 @@ package controllers;
 import controllers.admin.CustomerManagerController;
 import controllers.admin.EmployeeManagerController;
 import controllers.admin.TableManagerController;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import main.Runner;
 import models.Employee;
@@ -37,9 +34,17 @@ public class AdminDashboardController {
     HomePaneView homePane = new HomePaneView();
     ManagerPaneView employeeManagerPane = new EmployeeManagerPaneView(), tableManagerPane = new TableManagerPaneView(), customerManagerPane = new CustomerManagerPaneView();
     JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane, customerManagerPane};
+    SideBarController sideBarController = new SideBarController();
+    SideBarController.MenuBarEvent menuBarEvent = sideBarController.new MenuBarEvent() {
+        @Override
+        public void onSelectMenuItem(MenuItem item) {
+            onMenuChange(item);
+        }
+    };
 
     public AdminDashboardController(AdminDashboardView view) {
         this.view = view;
+        sideBarController.setPanelSideBar(view.getPanelSideBar());
         view.setVisible(true);
         initMenu();
         addEvent();
@@ -57,6 +62,7 @@ public class AdminDashboardController {
 
     public void setView(AdminDashboardView view) {
         this.view = view;
+        sideBarController.setPanelSideBar(view.getPanelSideBar());
     }
 
     private void initMenu() {
@@ -71,42 +77,33 @@ public class AdminDashboardController {
         menuQLDH.addSubMenu(new MenuItem("QLKH", null, "Quản lý khách hàng"));
         menuQLDH.addSubMenu(new MenuItem("QLDDH", null, "Quản lý đơn đặt hàng"));
         menuQLDH.addSubMenu(new MenuItem("QLS", null, "Quản lý giao hàng"));
-        view.addMenu(menuQLNV, menuQLHH, menuQLDH, menuTK);
+        sideBarController.addMenu(menuQLNV, menuQLHH, menuQLDH, menuTK);
+        sideBarController.addMenuEvent(menuBarEvent);
     }
 
     // Tạo sự kiện
     private void addEvent() {
-        for (MenuItem menuItem : view.getMenuItems()) {
-            menuItem.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    menuItem.collapseSubMenu();
-                    onMenuChange(menuItem);
-                }
-            });
-        }
+//        for (MenuItem menuItem : view.getMenuItems()) {
+//            menuItem.addMouseListener(new MouseAdapter() {
+//                @Override
+//                public void mousePressed(MouseEvent e) {
+//                    menuItem.collapseSubMenu();
+//                    onMenuChange(menuItem);
+//                }
+//            });
+//        }
 
         view.getBtnLogout().addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent evt) {
                 view.dispose();
+                Runner.setSession(null);
                 new LoginController(new LoginView());
             }
         });
     }
 
     private void onMenuChange(MenuItem item) {
-        if (item.equals(previousItem)) {
-            return;
-        }
-        if (!item.sameParent(previousItem)) { // Nếu cùng chung mục cha
-            previousItem.closeParrentMenu(); // Ẩn các mục con
-        } else if (previousItem != null) {
-            previousItem.setBackground(new Color(255, 255, 255)); //Để lại màu mặc định
-        }
-        if (item.getSubMenu().isEmpty()) {
-            item.setBackground(new Color(85, 172, 238));
-        }
-        previousItem = item;
         ManagerPaneView pnl = null; //View Panel
         ManagerController mc = null; //Controller Panel
         System.out.println("Chon menu: " + item.getId());
