@@ -1,13 +1,14 @@
 package controllers.admin;
 
 import controllers.ManagerController;
+import controllers.popup.CustomerPopupController;
 import dao.CustomerDao;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.YES_OPTION;
 import models.Customer;
-import models.Employee;
+import views.popup.CustomerPopupView;
 
 /**
  * createAt Dec 15, 2020
@@ -17,68 +18,15 @@ import models.Employee;
 public class CustomerManagerController extends ManagerController {
 
     CustomerDao customerDao = new CustomerDao();
+    CustomerPopupController popupController = new CustomerPopupController();
 
     public CustomerManagerController() {
         super();
     }
 
-    public void addCustomer() {
-//        try {
-//            String username = popupView.getTxtUsername().getText(),
-//                    password = popupView.getTxtPassword().getText(),
-//                    phoneNumber = popupView.getTxtPhoneNumber().getText(),
-//                    name = popupView.getTxtName().getText();
-//            if (username.isEmpty() || password.isEmpty() || phoneNumber.isEmpty()) {
-//                throw new Exception("Vui lòng điền đầy đủ thông tin");
-//            }
-//            if (employeeDao.findByUsername(username) != null) {
-//                throw new Exception("Tài khoản đã tồn tại");
-//            }
-//            Employee e = new Employee();
-//            e.setUsername(username);
-//            e.setPassword(password);
-//            e.setName(name);
-//            e.setPhoneNumber(phoneNumber);
-//            e.setPermissionName(popupView.getCboPermission().getSelectedItem().toString());
-//            e.setPermissionId(popupView.getCboPermission().getSelectedIndex() + 1);
-//            employeeDao.save(e);
-//            view.showMessage("Thêm thành công");
-//            updateData();
-//            setPopupView(null);//Tắt Popup            
-//        } catch (Exception e) {
-//            view.showError(e);
-//        }
-    }
-
-    public void editEmployee(Employee e) {
-//        try {
-//            String username = popupView.getTxtUsername().getText(),
-//                    password = popupView.getTxtPassword().getText(),
-//                    phoneNumber = popupView.getTxtPhoneNumber().getText(),
-//                    name = popupView.getTxtName().getText();
-//            e.setUsername(username);
-//            e.setPassword(password);
-//            e.setName(name);
-//            e.setPhoneNumber(phoneNumber);
-//            e.setPermissionName(popupView.getCboPermission().getSelectedItem().toString());
-//            e.setPermissionId(popupView.getCboPermission().getSelectedIndex() + 1);
-//            employeeDao.update(e);
-//            view.showMessage("Thêm thành công");
-//            updateData();
-//            setPopupView(null);//Tắt Popup      
-//        } catch (Exception ex) {
-//            view.showError(ex);
-//        }
-    }
-
     @Override
     public void actionAdd() {
-//        showPopup(new CustomerPopup(), new PopupEvent() {
-//            @Override
-//            public void onBtnOK() {
-//                addCustomer();
-//            }
-//        });
+        popupController.add(this, new CustomerPopupView());
     }
 
     @Override
@@ -99,32 +47,20 @@ public class CustomerManagerController extends ManagerController {
 
     @Override
     public void actionEdit() {
-//        try {
-//            int selectedId = view.getSelectedId();
-//            if (selectedId < 0) {
-//                throw new Exception("Chọn nhân viên cần edit");
-//            } else {;
-//                CustomerPopup popup = new CustomerPopup();
-//                popup.getLbTitle().setText("Sửa nhân viên - " + selectedId);
-//                Employee e = employeeDao.get(selectedId);
-//                if (e == null) {
-//                    throw new Exception("Nhân viên bạn chọn không hợp lệ");
-//                }
-//                popup.getTxtUsername().setText(e.getUsername());
-//                popup.getTxtPassword().setText(e.getPassword());
-//                popup.getTxtName().setText(e.getName());
-//                popup.getTxtPhoneNumber().setText(e.getPhoneNumber());
-//                popup.getBtnOK().setText("Cập nhật");
-//                showPopup(popup, new PopupEvent() {
-//                    @Override
-//                    public void onBtnOK() {
-//                        editEmployee(e);
-//                    }
-//                });
-//            }
-//        } catch (Exception e) {
-//            view.showError(e);
-//        }
+        try {
+            int selectedId = view.getSelectedId();
+            if (selectedId < 0) {
+                throw new Exception("Chọn khách hàng cần edit");
+            } else {
+                Customer e = customerDao.get(selectedId);
+                if (e == null) {
+                    throw new Exception("Khách hàng bạn chọn không hợp lệ");
+                }
+                popupController.edit(this, new CustomerPopupView(), e);
+            }
+        } catch (Exception e) {
+            view.showError(e);
+        }
     }
 
     @Override
