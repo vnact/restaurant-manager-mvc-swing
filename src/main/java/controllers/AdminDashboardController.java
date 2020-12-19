@@ -18,7 +18,7 @@ import views.admin.FoodCategoryManagerView;
 import views.admin.HomeView;
 import views.admin.ManagerPaneView;
 import views.admin.MenuItem;
-import views.admin.TableManagerPaneView;
+import views.admin.TableManagerView;
 
 /**
  * createAt Dec 15, 2020
@@ -35,7 +35,7 @@ public class AdminDashboardController {
 
     HomeView homePane = new HomeView();
     ManagerPaneView employeeManagerPane = new EmployeeManagerPaneView(), // View
-            tableManagerPane = new TableManagerPaneView(),
+            tableManagerPane = new TableManagerView(),
             foodCategoryManagerView = new FoodCategoryManagerView(),
             customerManagerPane = new CustomerManagerPaneView();
 
