@@ -111,7 +111,7 @@ public class AdminDashboardView extends javax.swing.JFrame {
         panelLeft.setPreferredSize(new java.awt.Dimension(200, 680));
         panelLeft.setLayout(new java.awt.BorderLayout());
 
-        panelHeader.setBackground(new java.awt.Color(255, 255, 255));
+        panelHeader.setBackground(new java.awt.Color(255, 127, 80));
         panelHeader.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
         panelHeader.setPreferredSize(new java.awt.Dimension(200, 50));
         panelHeader.setLayout(new java.awt.GridBagLayout());
@@ -124,6 +124,8 @@ public class AdminDashboardView extends javax.swing.JFrame {
         panelHeader.add(lbName, gridBagConstraints);
 
         btnLogout.setText("Thoát");
+        btnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogout.setFocusable(false);
         btnLogout.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -133,7 +135,7 @@ public class AdminDashboardView extends javax.swing.JFrame {
 
         panelLeft.add(panelHeader, java.awt.BorderLayout.PAGE_START);
 
-        panelSideBar.setBackground(new java.awt.Color(255, 255, 255));
+        panelSideBar.setBackground(new java.awt.Color(142, 68, 173));
         panelSideBar.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
         panelLeft.add(panelSideBar, java.awt.BorderLayout.CENTER);
 

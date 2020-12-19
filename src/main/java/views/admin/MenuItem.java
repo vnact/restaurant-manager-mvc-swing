@@ -16,7 +16,7 @@ public class MenuItem extends javax.swing.JPanel {
     private MenuItem parentMenu = null;
     private String id;
     public boolean active; // Biến kiểm tra xem có đang chọn không
-    Color inactiveColor = Color.decode("#ffffff"), activeParrentColor = Color.decode("#002f6c"), activeChildColor = Color.decode("#01579b"); // Màu tương ứng
+    Color inactiveColor = Color.decode("#D5DBDB"), activeParrentColor = Color.decode("#002f6c"), activeChildColor = Color.decode("#01579b"); // Màu tương ứng
 
     public MenuItem(String id, Icon icon, String menuName, MenuItem... subMenu) {
         initComponents();
@@ -65,7 +65,7 @@ public class MenuItem extends javax.swing.JPanel {
         this.active = active;
         if (!active) {
             setBackground(inactiveColor);
-        } else if (hasSubMenu()) {
+        } else if (hasSubMenu() || getParentMenu() == null) {
             setBackground(activeParrentColor);
         } else {
             setBackground(activeChildColor);
@@ -126,6 +126,7 @@ public class MenuItem extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setPreferredSize(new java.awt.Dimension(200, 45));
         setLayout(new java.awt.BorderLayout());
 
@@ -139,14 +140,14 @@ public class MenuItem extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
         );

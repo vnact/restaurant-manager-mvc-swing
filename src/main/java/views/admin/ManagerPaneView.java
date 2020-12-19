@@ -1,5 +1,7 @@
 package views.admin;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -22,11 +24,18 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
 
     public ManagerPaneView() {
         initComponents();
+        tblData.getTableHeader().setFont(new Font("Segoe UI",Font.BOLD,12));
+        tblData.getTableHeader().setOpaque(false);
+        tblData.getTableHeader().setBackground(new Color(51, 175, 255));
+        tblData.getTableHeader().setForeground(new Color(255,255,255));
+        tblData.setAutoCreateRowSorter(true);
         btnAdd.setIcon(im.getIcon("add_25px.png"));
         btnEdit.setIcon(im.getIcon("edit_25px.png"));
         btnDelete.setIcon(im.getIcon("delete_25px.png"));
         btnSync.setIcon(im.getIcon("sync_25px.png"));
         tblData.setModel(tableModel);
+        btnAdd.putClientProperty("JButton.buttonType", "roundRect");
+        
     }
 
     public void showError(String message) {
@@ -124,7 +133,7 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
         btnDelete = new javax.swing.JButton();
         btnSync = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 0, 204));
+        setBackground(new java.awt.Color(118, 215, 196));
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,6 +146,11 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblData.setFocusable(false);
+        tblData.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tblData.setRowHeight(25);
+        tblData.setShowVerticalLines(false);
+        tblData.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblData);
 
         btnAdd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
