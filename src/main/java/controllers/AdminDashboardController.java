@@ -2,6 +2,7 @@ package controllers;
 
 import controllers.admin.CustomerManagerController;
 import controllers.admin.EmployeeManagerController;
+import controllers.admin.FoodCategoryManagerController;
 import controllers.admin.TableManagerController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import views.AdminDashboardView;
 import views.LoginView;
 import views.admin.CustomerManagerPaneView;
 import views.admin.EmployeeManagerPaneView;
+import views.admin.FoodCategoryManagerView;
 import views.admin.HomePaneView;
 import views.admin.ManagerPaneView;
 import views.admin.MenuItem;
@@ -26,16 +28,21 @@ import views.admin.TableManagerPaneView;
 public class AdminDashboardController {
 
     private AdminDashboardView view;
-    private MenuItem previousItem = null;
-    EmployeeManagerController employeeManagerController = new EmployeeManagerController();
-    TableManagerController tableManagerController = new TableManagerController();
-    CustomerManagerController customerManagerController = new CustomerManagerController();
+    ManagerController employeeManagerController = new EmployeeManagerController(), // Controller
+            tableManagerController = new TableManagerController(),
+            foodCategoryManagerController = new FoodCategoryManagerController(),
+            customerManagerController = new CustomerManagerController();
 
     HomePaneView homePane = new HomePaneView();
-    ManagerPaneView employeeManagerPane = new EmployeeManagerPaneView(), tableManagerPane = new TableManagerPaneView(), customerManagerPane = new CustomerManagerPaneView();
+    ManagerPaneView employeeManagerPane = new EmployeeManagerPaneView(), // View
+            tableManagerPane = new TableManagerPaneView(),
+            foodCategoryManagerView = new FoodCategoryManagerView(),
+            customerManagerPane = new CustomerManagerPaneView();
+
     JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane, customerManagerPane};
+
     SideBarController sideBarController = new SideBarController();
-    SideBarController.MenuBarEvent menuBarEvent = sideBarController.new MenuBarEvent() {
+    SideBarController.MenuBarEvent menuBarEvent = sideBarController.new MenuBarEvent() { // 
         @Override
         public void onSelectMenuItem(MenuItem item) {
             onMenuChange(item);
@@ -125,7 +132,8 @@ public class AdminDashboardController {
                 mc = customerManagerController;
                 break;
             case "QLLM":
-//                foodCategoryManager.setVisible(true);
+                pnl = foodCategoryManagerView;
+                mc = foodCategoryManagerController;
                 break;
             case "QLMA":
 //                foodItemManager.setVisible(true);

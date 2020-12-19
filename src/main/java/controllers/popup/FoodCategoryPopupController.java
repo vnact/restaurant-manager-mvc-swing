@@ -30,7 +30,7 @@ public class FoodCategoryPopupController extends PopupController {
                         view.showMessage("Thêm loại món thành công!");
                     }
                 } catch (Exception ex) {
-                    parrent.getView().showError(ex);
+                    view.showError(ex);
                 }
             }
         });
@@ -53,7 +53,7 @@ public class FoodCategoryPopupController extends PopupController {
                         view.showMessage("Sửa loại món thành công!");
                     }
                 } catch (Exception ex) {
-                    parrent.getView().showError(ex);
+                    view.showError(ex);
                 }
             }
         });
@@ -62,14 +62,31 @@ public class FoodCategoryPopupController extends PopupController {
 
     public boolean addFoodCategory() throws Exception {
         FoodCategoryPopupView view = (FoodCategoryPopupView) this.getView();
-        FoodCategory e = new FoodCategory();
-        foodCategoryDao.save(e);
+        String foodCategoryName = view.getTxtName().getText();
+        if (foodCategoryName.isEmpty()) {
+            throw new Exception("Vui lòng điền đủ thông tin");
+        }
+        if (foodCategoryDao.findByName(foodCategoryName) != null) {
+            throw new Exception("Tên loại đã tồn tại");
+        }
+        FoodCategory f = new FoodCategory();
+        f.setName(foodCategoryName);
+        foodCategoryDao.save(f);
         return true;
     }
 
-    public boolean editFoodCategory(FoodCategory e) throws Exception {
+    public boolean editFoodCategory(FoodCategory fc) throws Exception {
         FoodCategoryPopupView view = (FoodCategoryPopupView) this.getView();
-        foodCategoryDao.update(e);
+        String foodCategoryName = view.getTxtName().getText();
+        if (foodCategoryName.isEmpty()) {
+            throw new Exception("Điền tên loại món");
+        }
+        FoodCategory temp = foodCategoryDao.findByName(foodCategoryName);
+        if (temp != null && temp.getId() != fc.getId()) {
+            throw new Exception("Tên loại món đã được sử dụng");
+        }
+        fc.setName(foodCategoryName);
+        foodCategoryDao.update(fc);
         return true;
     }
 }

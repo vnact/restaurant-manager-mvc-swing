@@ -31,7 +31,7 @@ public class BasePopupController extends PopupController {
                         view.showMessage("Thêm loại món thành công!");
                     }
                 } catch (Exception ex) {
-                    parrent.getView().showError(ex);
+                    view.showError(ex);
                 }
             }
         });
@@ -54,7 +54,7 @@ public class BasePopupController extends PopupController {
                         view.showMessage("Sửa loại món thành công!");
                     }
                 } catch (Exception ex) {
-                    parrent.getView().showError(ex);
+                    view.showError(ex);
                 }
             }
         });
