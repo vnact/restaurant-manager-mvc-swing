@@ -1,5 +1,7 @@
 package views.admin;
 
+import utils.RandomColor;
+
 /**
  *
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
@@ -9,8 +11,20 @@ public class HomeView extends javax.swing.JPanel {
     /**
      * Creates new form OrderManager
      */
+    public static void setTimeout(Runnable runnable, int delay) {
+        new Thread(() -> {
+            try {
+                Thread.sleep(delay);
+                runnable.run();
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }).start();
+    }
+
     public HomeView() {
         initComponents();
+
     }
 
     /**
@@ -27,6 +41,11 @@ public class HomeView extends javax.swing.JPanel {
         setBackground(new java.awt.Color(153, 255, 255));
         setMaximumSize(new java.awt.Dimension(1000, 680));
         setMinimumSize(new java.awt.Dimension(1000, 680));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Trang chủ");
@@ -50,6 +69,16 @@ public class HomeView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        makeLed();
+    }//GEN-LAST:event_formMousePressed
+
+    private void makeLed() {
+
+        setBackground(RandomColor.getColor());
+        jLabel1.setForeground(RandomColor.getContrastColor(getBackground()));
+        setTimeout(this::makeLed, 200);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

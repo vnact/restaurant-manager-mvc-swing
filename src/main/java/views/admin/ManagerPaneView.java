@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import models.Model;
 import utils.ErrorPopup;
@@ -24,18 +26,23 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
 
     public ManagerPaneView() {
         initComponents();
-        tblData.getTableHeader().setFont(new Font("Segoe UI",Font.BOLD,12));
+        tblData.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         tblData.getTableHeader().setOpaque(false);
         tblData.getTableHeader().setBackground(new Color(51, 175, 255));
-        tblData.getTableHeader().setForeground(new Color(255,255,255));
+        tblData.getTableHeader().setForeground(new Color(255, 255, 255));
+        ((DefaultTableCellRenderer) tblData.getTableHeader().getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.LEFT);
         tblData.setAutoCreateRowSorter(true);
         btnAdd.setIcon(im.getIcon("add_25px.png"));
         btnEdit.setIcon(im.getIcon("edit_25px.png"));
         btnDelete.setIcon(im.getIcon("delete_25px.png"));
         btnSync.setIcon(im.getIcon("sync_25px.png"));
-        tblData.setModel(tableModel);
         btnAdd.putClientProperty("JButton.buttonType", "roundRect");
-        
+        btnEdit.putClientProperty("JButton.buttonType", "roundRect");
+        btnDelete.putClientProperty("JButton.buttonType", "roundRect");
+        btnSync.putClientProperty("JButton.buttonType", "roundRect");
+        tblData.setModel(tableModel);
+
     }
 
     public void showError(String message) {
