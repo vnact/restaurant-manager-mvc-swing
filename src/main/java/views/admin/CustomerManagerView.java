@@ -7,9 +7,9 @@ import models.Customer;
  *
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public class CustomerManagerPaneView extends ManagerPaneView<Customer> {
+public class CustomerManagerView extends ManagerPaneView<Customer> {
 
-    public CustomerManagerPaneView() {
+    public CustomerManagerView() {
         super();
         setTableModel();
         renderTable();

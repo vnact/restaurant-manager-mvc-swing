@@ -12,7 +12,7 @@ import models.Employee;
 import utils.IconManager;
 import views.AdminDashboardView;
 import views.LoginView;
-import views.admin.CustomerManagerPaneView;
+import views.admin.CustomerManagerView;
 import views.admin.EmployeeManagerPaneView;
 import views.admin.FoodCategoryManagerView;
 import views.admin.HomeView;
@@ -37,7 +37,7 @@ public class AdminDashboardController {
     ManagerPaneView employeeManagerPane = new EmployeeManagerPaneView(), // View
             tableManagerPane = new TableManagerView(),
             foodCategoryManagerView = new FoodCategoryManagerView(),
-            customerManagerPane = new CustomerManagerPaneView();
+            customerManagerPane = new CustomerManagerView();
 
     JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane, customerManagerPane};
 
