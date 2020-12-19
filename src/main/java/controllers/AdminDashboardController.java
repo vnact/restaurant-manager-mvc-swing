@@ -15,7 +15,7 @@ import views.LoginView;
 import views.admin.CustomerManagerPaneView;
 import views.admin.EmployeeManagerPaneView;
 import views.admin.FoodCategoryManagerView;
-import views.admin.HomePaneView;
+import views.admin.HomeView;
 import views.admin.ManagerPaneView;
 import views.admin.MenuItem;
 import views.admin.TableManagerPaneView;
@@ -33,7 +33,7 @@ public class AdminDashboardController {
             foodCategoryManagerController = new FoodCategoryManagerController(),
             customerManagerController = new CustomerManagerController();
 
-    HomePaneView homePane = new HomePaneView();
+    HomeView homePane = new HomeView();
     ManagerPaneView employeeManagerPane = new EmployeeManagerPaneView(), // View
             tableManagerPane = new TableManagerPaneView(),
             foodCategoryManagerView = new FoodCategoryManagerView(),

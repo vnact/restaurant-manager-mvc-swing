@@ -4,12 +4,12 @@ package views.admin;
  *
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
-public class HomePaneView extends javax.swing.JPanel {
+public class HomeView extends javax.swing.JPanel {
 
     /**
      * Creates new form OrderManager
      */
-    public HomePaneView() {
+    public HomeView() {
         initComponents();
     }
 
