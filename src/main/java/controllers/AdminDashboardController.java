@@ -3,6 +3,7 @@ package controllers;
 import controllers.admin.CustomerManagerController;
 import controllers.admin.EmployeeManagerController;
 import controllers.admin.FoodCategoryManagerController;
+import controllers.admin.FoodItemManagerController;
 import controllers.admin.TableManagerController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +16,7 @@ import views.LoginView;
 import views.admin.CustomerManagerView;
 import views.admin.EmployeeManagerView;
 import views.admin.FoodCategoryManagerView;
+import views.admin.FoodItemManagerView;
 import views.admin.HomeView;
 import views.admin.ManagerPaneView;
 import views.admin.MenuItem;
@@ -31,15 +33,17 @@ public class AdminDashboardController {
     ManagerController employeeManagerController = new EmployeeManagerController(), // Controller
             tableManagerController = new TableManagerController(),
             foodCategoryManagerController = new FoodCategoryManagerController(),
+            foodItemManagerController = new FoodItemManagerController(),
             customerManagerController = new CustomerManagerController();
 
     HomeView homePane = new HomeView();
     ManagerPaneView employeeManagerPane = new EmployeeManagerView(), // View
             tableManagerPane = new TableManagerView(),
             foodCategoryManagerView = new FoodCategoryManagerView(),
+            foodItemManagerView = new FoodItemManagerView(),
             customerManagerPane = new CustomerManagerView();
 
-    JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane, customerManagerPane, foodCategoryManagerView};
+    JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane, customerManagerPane, foodCategoryManagerView, foodItemManagerView};
 
     SideBarController sideBarController = new SideBarController();
     SideBarController.MenuBarEvent menuBarEvent = sideBarController.new MenuBarEvent() { // 
@@ -135,7 +139,8 @@ public class AdminDashboardController {
                 mc = foodCategoryManagerController;
                 break;
             case "QLMA":
-//                foodItemManager.setVisible(true);
+                pnl = foodItemManagerView;
+                mc = foodItemManagerController;
                 break;
             default:
                 view.setPanel(homePane);

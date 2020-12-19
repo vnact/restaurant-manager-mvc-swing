@@ -186,4 +186,5 @@ public class AdminDashboardView extends javax.swing.JFrame {
     private javax.swing.JPanel panelLeft;
     private javax.swing.JPanel panelSideBar;
     // End of variables declaration//GEN-END:variables
+
 }

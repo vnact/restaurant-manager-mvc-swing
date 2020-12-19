@@ -8,9 +8,8 @@ import utils.RandomColor;
  */
 public class HomeView extends javax.swing.JPanel {
 
-    /**
-     * Creates new form OrderManager
-     */
+    private boolean isShowLed = false;
+
     public static void setTimeout(Runnable runnable, int delay) {
         new Thread(() -> {
             try {
@@ -70,11 +69,14 @@ public class HomeView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        isShowLed = !isShowLed;
         makeLed();
     }//GEN-LAST:event_formMousePressed
 
     private void makeLed() {
-
+        if (!isShowLed) {
+            return;
+        }
         setBackground(RandomColor.getColor());
         jLabel1.setForeground(RandomColor.getContrastColor(getBackground()));
         setTimeout(this::makeLed, 200);
