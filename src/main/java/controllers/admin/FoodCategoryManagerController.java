@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.YES_OPTION;
 import models.FoodCategory;
-import views.admin.FoodCategoryManagerView;
 import views.popup.FoodCategoryPopupView;
 
 /**
@@ -25,10 +24,9 @@ public class FoodCategoryManagerController extends ManagerController {
         super();
     }
 
-    public void setView(FoodCategoryManagerView view) {
-        super.setView(view);
-    }
-
+//    public void setView(FoodCategoryManagerView view) {
+//        super.setView(view);
+//    }
     @Override
     public void actionAdd() {
         popupController.add(this, new FoodCategoryPopupView());
@@ -71,8 +69,8 @@ public class FoodCategoryManagerController extends ManagerController {
     @Override
     public void updateData() {
         try {
-            ArrayList<FoodCategory> tables = foodCategoryDao.getAll();
-            view.setTableData(tables);
+            ArrayList<FoodCategory> foodCategorys = foodCategoryDao.getAll();
+            view.setTableData(foodCategorys);
         } catch (Exception e) {
             view.showError(e);
         }

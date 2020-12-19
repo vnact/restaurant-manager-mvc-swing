@@ -20,10 +20,6 @@ public class EmployeeManagerController extends ManagerController {
     EmployeeDao employeeDao = new EmployeeDao();
     EmployeePopupController popupController = new EmployeePopupController();
 
-    private void initController() {
-
-    }
-
     public EmployeeManagerController() {
         super();
     }

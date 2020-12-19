@@ -12,44 +12,45 @@ import utils.ErrorPopup;
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
 public class LoginView extends javax.swing.JFrame {
-
+    
     public LoginView() {
         initComponents();
         setLocationRelativeTo(null);
+        getRootPane().setDefaultButton(btnLogin);
     }
-
+    
     public void showError(String message) {
         ErrorPopup.show(new Exception(message));
     }
-
+    
     public void showError(Exception e) {
         ErrorPopup.show(e);
     }
-
+    
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
-
+    
     public JPasswordField getTxtPassword() {
         return txtPassword;
     }
-
+    
     public JTextField getTxtUsername() {
         return txtUsername;
     }
-
+    
     public JButton getBtnLogin() {
         return btnLogin;
     }
-
+    
     public JLabel getLblForgotPassword() {
         return lblForgotPassword;
     }
-
+    
     public JLabel getLblRegister() {
         return lblRegister;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

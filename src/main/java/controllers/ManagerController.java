@@ -12,7 +12,7 @@ import views.admin.ManagerPaneView;
 //Form chung cho các panel kế thừa
 public abstract class ManagerController {
 
-    protected ManagerPaneView view;
+    protected ManagerPaneView view = null;
 
     public ManagerController() {
     }
@@ -22,9 +22,11 @@ public abstract class ManagerController {
     }
 
     public void setView(ManagerPaneView view) {
-        if (this.view == null) {
+        if (this.view != view) {
             this.view = view;
             addEvent();
+        } else {
+            this.view = view;
         }
     }
 

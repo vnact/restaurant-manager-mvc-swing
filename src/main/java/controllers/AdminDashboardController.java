@@ -39,7 +39,7 @@ public class AdminDashboardController {
             foodCategoryManagerView = new FoodCategoryManagerView(),
             customerManagerPane = new CustomerManagerView();
 
-    JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane, customerManagerPane};
+    JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane, customerManagerPane, foodCategoryManagerView};
 
     SideBarController sideBarController = new SideBarController();
     SideBarController.MenuBarEvent menuBarEvent = sideBarController.new MenuBarEvent() { // 
@@ -125,7 +125,6 @@ public class AdminDashboardController {
             case "QLB":
                 pnl = tableManagerPane;
                 mc = tableManagerController;
-
                 break;
             case "QLKH":
                 pnl = customerManagerPane;
