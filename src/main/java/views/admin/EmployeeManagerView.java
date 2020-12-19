@@ -7,9 +7,9 @@ import models.Employee;
  *
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public class EmployeeManagerPaneView extends ManagerPaneView<Employee> {
+public class EmployeeManagerView extends ManagerPaneView<Employee> {
 
-    public EmployeeManagerPaneView() {
+    public EmployeeManagerView() {
         super();
         setTableModel();
         renderTable();

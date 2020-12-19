@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.YES_OPTION;
 import models.Base;
-import views.admin.EmployeeManagerPaneView;
+import views.admin.EmployeeManagerView;
 import views.popup.BasePopupView;
 
 /**
@@ -26,7 +26,7 @@ public class BaseManagerController extends ManagerController {
         super();
     }
 
-    public void setView(EmployeeManagerPaneView view) {
+    public void setView(EmployeeManagerView view) {
         super.setView(view);
     }
 
