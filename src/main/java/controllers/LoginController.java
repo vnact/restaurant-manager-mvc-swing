@@ -77,8 +77,9 @@ public class LoginController {
         view.getTxtPassword().addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                     view.getBtnLogin().doClick();
+                }
             }
         });
         view.getBtnLogin().addActionListener(new ActionListener() {

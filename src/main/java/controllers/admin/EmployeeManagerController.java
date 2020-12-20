@@ -4,12 +4,9 @@ import controllers.ManagerController;
 import controllers.popup.EmployeePopupController;
 import dao.EmployeeDao;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.YES_OPTION;
-import models.Customer;
 import models.Employee;
 import views.popup.EmployeePopupView;
 
@@ -79,22 +76,7 @@ public class EmployeeManagerController extends ManagerController {
     @Override
     public void actionSearch() {
         try {
-            view.getTableModel().getDataVector().removeAllElements();
-//            view.getCbx_list().setModel(new DefaultComboBoxModel(list));
-//            ArrayList<Employee> employees =employeeDao.getAll();
-//            String key = ".*"+view.getTxt_search().getText()+".*";
-//            Pattern pattern = Pattern.compile(key);
-//            Matcher matcher;
-//            switch (view.getCbx_list().getSelectedItem().toString()){
-//                case "ID" :{
-//                    for(Employee employee :employees){
-//                        matcher = pattern.matcher(String.valueOf(employee.getId()));
-//                        if(matcher.find())
-//                            view.getTableModel().addRow(employee.toRowTable());
-//                    }
-//                }
-//            }
-            ArrayList<Employee> employees = employeeDao.searchByKey(view.getCbx_list().getSelectedItem().toString(),String.valueOf(view.getTxt_search().getText()));
+            ArrayList<Employee> employees = employeeDao.searchByKey(view.getCboSearchField().getSelectedItem().toString(), String.valueOf(view.getTxtSearch().getText()));
             view.setTableData(employees);
         } catch (Exception e) {
             view.showError(e);

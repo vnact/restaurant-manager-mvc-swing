@@ -27,8 +27,8 @@
               <EmptySpace pref="21" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" alignment="1" min="-2" pref="824" max="-2" attributes="0"/>
-                  <Component id="txt_search" alignment="1" min="-2" pref="147" max="-2" attributes="0"/>
-                  <Component id="jSeparator1" alignment="1" min="-2" pref="147" max="-2" attributes="0"/>
+                  <Component id="jSeparator1" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
+                  <Component id="txtSearch" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -36,7 +36,7 @@
                   <Component id="btnDelete" pref="114" max="32767" attributes="0"/>
                   <Component id="btnAdd" pref="114" max="32767" attributes="0"/>
                   <Component id="btnSync" pref="114" max="32767" attributes="0"/>
-                  <Component id="cbx_list" alignment="0" max="32767" attributes="0"/>
+                  <Component id="cboSearchField" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
           </Group>
@@ -58,8 +58,8 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cbx_list" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_search" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="cboSearchField" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtSearch" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
@@ -129,7 +129,7 @@
         <Property name="text" type="java.lang.String" value="Sync"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txt_search">
+    <Component class="javax.swing.JTextField" name="txtSearch">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="c4" green="d7" red="76" type="rgb"/>
@@ -145,12 +145,12 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_searchFocusGained"/>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_searchFocusLost"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_searchActionPerformed"/>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSearchFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSearchFocusLost"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSearchActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbx_list">
+    <Component class="javax.swing.JComboBox" name="cboSearchField">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>

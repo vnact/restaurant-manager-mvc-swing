@@ -70,14 +70,14 @@ public class SideBarController {
                 public void mousePressed(MouseEvent e) {
 //                    if(parentMenu.equals(activeMenuItem))
 //                        parentMenu.setActive(false);
-                     if (!menuItem.equals(activeMenuItem)) { // Nếu click lại thì bỏ qua
+                    if (!menuItem.equals(activeMenuItem)) { // Nếu click lại thì bỏ qua
                         //activeMenuItem.setActive(false);
-                      //activeMenuItem=menuItem;
-                      mbe.onSelectMenuItem(menuItem);
-                      parentMenu= menuItem;
-                      
+                        //activeMenuItem=menuItem;
+                        mbe.onSelectMenuItem(menuItem);
+                        parentMenu = menuItem;
+
                     }
-                    
+
                     setMenu(menuItem);
 //                    mbe.onSelectMenuItem(menuItem);
 
@@ -114,7 +114,7 @@ public class SideBarController {
 
         if (item.isActive()) {//Nếu item đã được chọn
             // Đóng menu con lại
-            parentMenu=null;
+            parentMenu = null;
             closeSubMenu(item);
             item.setActive(false); // Bỏ chọn
 

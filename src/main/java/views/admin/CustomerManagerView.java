@@ -10,7 +10,8 @@ import models.Customer;
  */
 public class CustomerManagerView extends ManagerPaneView<Customer> {
 
-    String [] list={"ID","phoneNumber", "name", "address"};
+    String[] list = {"ID", "phoneNumber", "name", "address"};
+
     public CustomerManagerView() {
         super();
         setTableModel();
@@ -24,6 +25,6 @@ public class CustomerManagerView extends ManagerPaneView<Customer> {
         tableModel.addColumn("Số điện thoại");
         tableModel.addColumn("Địa chỉ");
         tableModel.addColumn("Ngày sinh");
-        this.getCbx_list().setModel(new DefaultComboBoxModel(list));
+        this.getCboSearchField().setModel(new DefaultComboBoxModel(list));
     }
 }

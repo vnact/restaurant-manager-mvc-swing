@@ -103,11 +103,11 @@ public class EmployeeDao implements Dao<Employee> {
         }
         return null;
     }
-    
-    public ArrayList<Employee> searchByKey(String key,String word) throws SQLException{
+
+    public ArrayList<Employee> searchByKey(String key, String word) throws SQLException {
         ArrayList<Employee> employees = new ArrayList<>();
         Statement statement = conn.createStatement();
-        String query = "SELECT * FROM employee WHERE "+key+ " LIKE '%"+word+"%';";
+        String query = "SELECT * FROM employee WHERE " + key + " LIKE '%" + word + "%';";
         ResultSet rs = statement.executeQuery(query);
         while (rs.next()) {
             Employee employee = Employee.getFromResultSet(rs);
