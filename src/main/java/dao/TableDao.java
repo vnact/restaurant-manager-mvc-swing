@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import models.Order;
 import models.Table;
 
 /**
@@ -91,6 +92,18 @@ public class TableDao implements Dao<Table> {
             return t;
         }
         return null;
+    }
+
+    public ArrayList<Table> searchByKey(String key, String word) throws SQLException {
+        ArrayList<Table> tables = new ArrayList<>();
+        Statement statement = conn.createStatement();
+        String query = "SELECT * FROM Table WHERE " + key + " LIKE '%" + word + "%';";
+        ResultSet rs = statement.executeQuery(query);
+        while (rs.next()) {
+            Table table = Table.getFromResultSet(rs);
+            tables.add(table);
+        }
+        return tables;
     }
 
 }

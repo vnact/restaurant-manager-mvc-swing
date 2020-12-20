@@ -1,6 +1,9 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import models.Shipment;
 
@@ -10,6 +13,9 @@ import models.Shipment;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class ShipmentDao implements Dao<Shipment> {
+
+    Connection conn = Database.getInstance().getConnection();
+    ShipmentDao shipmentDao = new ShipmentDao();
 
     @Override
     public ArrayList<Shipment> getAll() throws SQLException {
@@ -39,6 +45,18 @@ public class ShipmentDao implements Dao<Shipment> {
     @Override
     public void deleteById(int id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public ArrayList<Shipment> searchByKey(String key, String word) throws SQLException {
+        ArrayList<Shipment> shipments = new ArrayList<>();
+        Statement statement = conn.createStatement();
+        String query = "SELECT * FROM Table WHERE " + key + " LIKE '%" + word + "%';";
+        ResultSet rs = statement.executeQuery(query);
+        while (rs.next()) {
+            //  Shipment shipment= Shipment.getFromResultSet(rs);
+            // shipments.add(shipment);
+        }
+        return shipments;
     }
 
 }

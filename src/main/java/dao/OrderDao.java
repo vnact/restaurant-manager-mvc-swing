@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import models.FoodItem;
 import models.Order;
 
 /**
@@ -101,6 +102,18 @@ public class OrderDao implements Dao<Order> {
         PreparedStatement stmt = conn.prepareStatement("DELETE FROM `order` WHERE `order`.`id` = ?");
         stmt.setInt(1, id);
         stmt.executeUpdate();
+    }
+
+    public ArrayList<Order> searchByKey(String key, String word) throws SQLException {
+        ArrayList<Order> orders = new ArrayList<>();
+        Statement statement = conn.createStatement();
+        String query = "SELECT * FROM Order WHERE " + key + " LIKE '%" + word + "%';";
+        ResultSet rs = statement.executeQuery(query);
+        while (rs.next()) {
+            Order order = Order.getFromResultSet(rs);
+            orders.add(order);
+        }
+        return orders;
     }
 
 }
