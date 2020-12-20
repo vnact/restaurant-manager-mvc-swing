@@ -21,6 +21,7 @@ public class AdminDashboardView extends javax.swing.JFrame {
     public AdminDashboardView() {
         initComponents();
         setLocationRelativeTo(null);
+        btnLogout.putClientProperty("JButton.buttonType", "roundRect");
     }
 
     public void showError(String message) {
@@ -111,11 +112,14 @@ public class AdminDashboardView extends javax.swing.JFrame {
         panelLeft.setPreferredSize(new java.awt.Dimension(200, 680));
         panelLeft.setLayout(new java.awt.BorderLayout());
 
-        panelHeader.setBackground(new java.awt.Color(255, 127, 80));
+        panelHeader.setBackground(new java.awt.Color(34, 153, 84));
         panelHeader.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
+        panelHeader.setForeground(new java.awt.Color(255, 255, 255));
         panelHeader.setPreferredSize(new java.awt.Dimension(200, 50));
         panelHeader.setLayout(new java.awt.GridBagLayout());
 
+        lbName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbName.setForeground(new java.awt.Color(255, 255, 255));
         lbName.setText("Trần Đức Cường");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

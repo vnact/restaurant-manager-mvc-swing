@@ -17,6 +17,7 @@ public class SideBarController {
     JPanel panelSideBar;
     private ArrayList<MenuItem> menuItems = new ArrayList<>();
     private MenuItem activeMenuItem = null; // item vừa chọn
+    private MenuItem parentMenu = null;
 
     abstract class MenuBarEvent {
 
@@ -67,9 +68,16 @@ public class SideBarController {
             menuItem.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    if (!menuItem.equals(activeMenuItem)) { // Nếu click lại thì bỏ qua
-                        mbe.onSelectMenuItem(menuItem);
+//                    if(parentMenu.equals(activeMenuItem))
+//                        parentMenu.setActive(false);
+                     if (!menuItem.equals(activeMenuItem)) { // Nếu click lại thì bỏ qua
+                        //activeMenuItem.setActive(false);
+                      //activeMenuItem=menuItem;
+                      mbe.onSelectMenuItem(menuItem);
+                      parentMenu= menuItem;
+                      
                     }
+                    
                     setMenu(menuItem);
 //                    mbe.onSelectMenuItem(menuItem);
 
@@ -106,6 +114,7 @@ public class SideBarController {
 
         if (item.isActive()) {//Nếu item đã được chọn
             // Đóng menu con lại
+            parentMenu=null;
             closeSubMenu(item);
             item.setActive(false); // Bỏ chọn
 

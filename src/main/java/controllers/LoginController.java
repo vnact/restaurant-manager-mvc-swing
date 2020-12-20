@@ -3,6 +3,7 @@ package controllers;
 import dao.EmployeeDao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import main.Runner;
 import models.Employee;
 import views.AdminDashboardView;
@@ -73,6 +74,13 @@ public class LoginController {
     // Tạo sự kiện
     public void addEvent() {
         //Sự kiện login
+        view.getTxtPassword().addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+                    view.getBtnLogin().doClick();
+            }
+        });
         view.getBtnLogin().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

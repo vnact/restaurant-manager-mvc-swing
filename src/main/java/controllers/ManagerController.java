@@ -1,7 +1,9 @@
 package controllers;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import views.admin.ManagerPaneView;
 
 /**
@@ -31,7 +33,9 @@ public abstract class ManagerController {
     }
 
     public abstract void actionAdd();
-
+    
+    public abstract void actionSearch();
+    
     public abstract void actionDelete();
 
     public abstract void actionEdit();
@@ -39,6 +43,28 @@ public abstract class ManagerController {
     public abstract void updateData();
 
     private void addEvent() {
+        //
+        view.getTxt_search().addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if(view.getTxt_search().getText().equals("Search")){
+                    view.getTxt_search().setText("");
+                    view.getTxt_search().setForeground(Color.BLACK);
+                }
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if(view.getTxt_search().getText().equals("")||view.getTxt_search().getText().equals("Search")){
+                    view.getTxt_search().setText("Search");
+                    view.getTxt_search().setForeground(new Color(153,153,153));
+                }
+            }
+        });
+        view.getTxt_search().addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+                    actionSearch();
+            }
+        });
         // Sự kiện bấm nút thêm
         view.getBtnAdd().addActionListener(new ActionListener() {
             @Override

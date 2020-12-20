@@ -1,5 +1,6 @@
 package views.admin;
 
+import javax.swing.DefaultComboBoxModel;
 import models.Employee;
 
 /**
@@ -9,6 +10,7 @@ import models.Employee;
  */
 public class EmployeeManagerView extends ManagerPaneView<Employee> {
 
+    String [] list={"ID","Name","phoneNumber", "Chức vụ"};
     public EmployeeManagerView() {
         super();
         setTableModel();
@@ -24,5 +26,6 @@ public class EmployeeManagerView extends ManagerPaneView<Employee> {
         tableModel.addColumn("Số điện thoại");
         tableModel.addColumn("Ngày vào làm");
         tableModel.addColumn("Chức vụ");
+        this.getCbx_list().setModel(new DefaultComboBoxModel(list));
     }
 }

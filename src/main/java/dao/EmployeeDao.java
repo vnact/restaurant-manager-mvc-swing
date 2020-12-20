@@ -88,7 +88,7 @@ public class EmployeeDao implements Dao<Employee> {
 
     @Override
     public void deleteById(int id) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("DELETE FROM `employee` WHERE `employee`.`id` = ?");
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM `employee`  ` WHERE `employee`.`id` = ?");
         stmt.setInt(1, id);
         stmt.executeUpdate();
     }
@@ -102,6 +102,18 @@ public class EmployeeDao implements Dao<Employee> {
             return employee;
         }
         return null;
+    }
+    
+    public ArrayList<Employee> searchByKey(String key,String word) throws SQLException{
+        ArrayList<Employee> employees = new ArrayList<>();
+        Statement statement = conn.createStatement();
+        String query = "SELECT * FROM employee WHERE "+key+ " LIKE '%"+word+"%';";
+        ResultSet rs = statement.executeQuery(query);
+        while (rs.next()) {
+            Employee employee = Employee.getFromResultSet(rs);
+            employees.add(employee);
+        }
+        return employees;
     }
 
 }

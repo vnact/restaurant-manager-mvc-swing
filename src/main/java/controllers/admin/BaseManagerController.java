@@ -79,4 +79,9 @@ public class BaseManagerController extends ManagerController {
         }
     }
 
+    @Override
+    public void actionSearch() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -4,6 +4,9 @@ import controllers.ManagerController;
 import controllers.popup.CustomerPopupController;
 import dao.CustomerDao;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.YES_OPTION;
@@ -19,6 +22,8 @@ public class CustomerManagerController extends ManagerController {
 
     CustomerDao customerDao = new CustomerDao();
     CustomerPopupController popupController = new CustomerPopupController();
+    
+//    String [] list={"ID","phoneNumber", "name", "address"};
 
     public CustomerManagerController() {
         super();
@@ -70,6 +75,28 @@ public class CustomerManagerController extends ManagerController {
             view.setTableData(customers);
         } catch (Exception e) {
             view.showError(e);
+        }
+    }
+
+    @Override
+    public void actionSearch() {
+//        view.getTableModel().getDataVector().removeAllElements();
+        try {
+//            view.getCbx_list().setModel(new DefaultComboBoxModel(list));
+            ArrayList<Customer> customers = customerDao.getAll();
+            String key = ".*"+view.getTxt_search().getText()+".*";
+            Pattern pattern = Pattern.compile(key);
+            Matcher matcher;
+            switch (view.getCbx_list().getSelectedItem().toString()){
+                case "ID" :{
+                    for(Customer customer :customers){
+                        matcher = pattern.matcher(String.valueOf(customer.getId()));
+                        if(matcher.find())
+                            view.getTableModel().addRow(customer.toRowTable());
+                    }
+                }
+            }
+        } catch (Exception e) {
         }
     }
 

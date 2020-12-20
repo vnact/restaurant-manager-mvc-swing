@@ -4,10 +4,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import models.Model;
@@ -37,14 +39,30 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
         btnEdit.setIcon(im.getIcon("edit_25px.png"));
         btnDelete.setIcon(im.getIcon("delete_25px.png"));
         btnSync.setIcon(im.getIcon("sync_25px.png"));
-        btnAdd.putClientProperty("JButton.buttonType", "roundRect");
-        btnEdit.putClientProperty("JButton.buttonType", "roundRect");
-        btnDelete.putClientProperty("JButton.buttonType", "roundRect");
-        btnSync.putClientProperty("JButton.buttonType", "roundRect");
         tblData.setModel(tableModel);
-
+//        cbx_list.putClientProperty("JButton.buttonType", "roundRect");
+        btnAdd.putClientProperty("JButton.buttonType", "roundRect");
+        btnDelete.putClientProperty("JButton.buttonType", "roundRect");
+        btnEdit.putClientProperty("JButton.buttonType", "roundRect");
+        btnSync.putClientProperty("JButton.buttonType", "roundRect");
     }
 
+    public JComboBox<String> getCbx_list() {
+        return cbx_list;
+    }
+    public void setCbx_list(JComboBox<String> cbx_list) {
+        this.cbx_list = cbx_list;
+    }
+    public JTextField getTxt_search() {
+        return txt_search;
+    }
+    public DefaultTableModel getTableModel(){
+        return this.tableModel;
+    }
+    public void setTxt_search(JTextField txt_search) {
+        this.txt_search = txt_search;
+    }
+    
     public void showError(String message) {
         ErrorPopup.show(new Exception(message));
     }
@@ -139,8 +157,13 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnSync = new javax.swing.JButton();
+        txt_search = new javax.swing.JTextField();
+        cbx_list = new javax.swing.JComboBox<>();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(118, 215, 196));
+        setAlignmentX(0.0F);
+        setAlignmentY(0.0F);
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -172,27 +195,52 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
         btnSync.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSync.setText("Sync");
 
+        txt_search.setBackground(new java.awt.Color(118, 215, 196));
+        txt_search.setForeground(new java.awt.Color(153, 153, 153));
+        txt_search.setText("Search");
+        txt_search.setAlignmentX(0.0F);
+        txt_search.setAlignmentY(0.0F);
+        txt_search.setBorder(null);
+        txt_search.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_searchFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_searchFocusLost(evt);
+            }
+        });
+        txt_search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_searchActionPerformed(evt);
+            }
+        });
+
+        jSeparator1.setBackground(new java.awt.Color(205, 97, 85));
+        jSeparator1.setForeground(new java.awt.Color(205, 97, 85));
+        jSeparator1.setAlignmentX(0.0F);
+        jSeparator1.setAlignmentY(0.0F);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 824, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSync, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 824, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_search, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                    .addComponent(btnSync, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                    .addComponent(cbx_list, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(btnAdd)
@@ -203,15 +251,43 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
                 .addGap(52, 52, 52)
                 .addComponent(btnSync)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbx_list, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdd, cbx_list});
+
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txt_searchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_searchFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_searchFocusGained
+
+    private void txt_searchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_searchFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_searchFocusLost
+
+    private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_searchActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSync;
+    private javax.swing.JComboBox<String> cbx_list;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable tblData;
+    private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
 }
