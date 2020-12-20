@@ -168,6 +168,7 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
         setBackground(new java.awt.Color(118, 215, 196));
         setAlignmentX(0.0F);
         setAlignmentY(0.0F);
+        setPreferredSize(new java.awt.Dimension(1004, 680));
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -261,8 +262,8 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdd, cboSearchField});

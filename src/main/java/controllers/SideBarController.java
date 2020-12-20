@@ -17,7 +17,6 @@ public class SideBarController {
     JPanel panelSideBar;
     private ArrayList<MenuItem> menuItems = new ArrayList<>();
     private MenuItem activeMenuItem = null; // item vừa chọn
-    private MenuItem parentMenu = null;
 
     abstract class MenuBarEvent {
 
@@ -68,65 +67,52 @@ public class SideBarController {
             menuItem.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
-//                    if(parentMenu.equals(activeMenuItem))
-//                        parentMenu.setActive(false);
                     if (!menuItem.equals(activeMenuItem)) { // Nếu click lại thì bỏ qua
-                        //activeMenuItem.setActive(false);
-                        //activeMenuItem=menuItem;
                         mbe.onSelectMenuItem(menuItem);
-                        parentMenu = menuItem;
-
                     }
-
                     setMenu(menuItem);
-//                    mbe.onSelectMenuItem(menuItem);
-
                 }
             });
         }
     }
 
-    public void closeSubMenu(MenuItem parrent) { // Đóng menu con
-        if (!parrent.isActive()) {
-            //Nếu cha chưa chọn thì chắc chắn con chưa chọn
-            return;
-        }
-        for (MenuItem child : parrent.getSubMenu()) {
-            if (child.hasSubMenu()) {
-                closeSubMenu(child);
+    public void renderMenu() {
+        for (MenuItem menuItem : menuItems) {
+            MenuItem parrent = menuItem.getParentMenu();
+            if (parrent == null) { // Nếu là menu cha trên cùng
+                menuItem.setVisible(true);
+            } else if (parrent.isActive()) {//Nếu cha được chọn thì show con ra
+                menuItem.setVisible(true);
+            } else if (menuItem.isActive()) {//Nếu đang chọn thì show ra
+                menuItem.setVisible(true);
+            } else {
+                menuItem.setVisible(false);
             }
-            child.setActive(false); // Nếu đang active thì bỏ đi
-            child.setVisible(false); // Nếu 
         }
     }
 
-    public void setMenu(MenuItem item) {//Chọn menu
-//        if (!item.equals(activeMenuItem) && activeMenuItem != null && !activeMenuItem.hasChild(item)) { // Đóng menu cũ nếu không phải cha menu vừachonj
-//
-//            // Đóng menu con lại
-//            MenuItem root = null;
-//            do {
-//                root = activeMenuItem.getParentMenu();
-//            } while (root != null);
-//            closeSubMenu(activeMenuItem);
-//            activeMenuItem.setActive(false); // Bỏ chọn
-//        }
-
-        if (item.isActive()) {//Nếu item đã được chọn
-            // Đóng menu con lại
-            parentMenu = null;
-            closeSubMenu(item);
-            item.setActive(false); // Bỏ chọn
-
-        } else {// Item chưa được chọn
-            // Hiển thị menu con
-            for (MenuItem subItem : item.getSubMenu()) {
-                subItem.setVisible(true);
-            }
-            item.setActive(true); // Chọn
+    private void closePreviosMenu(MenuItem previousItem) {
+        MenuItem parrent = previousItem.getParentMenu();
+        previousItem.setActive(false);
+        while (parrent != null) {
+            parrent.setActive(false);
+            parrent = parrent.getParentMenu();
         }
-        activeMenuItem = item;
+    }
 
+//    public void 
+    public void setMenu(MenuItem item) {//Chọn menu
+        if (activeMenuItem != null) {
+            closePreviosMenu(activeMenuItem);
+        }
+        MenuItem parrent = item.getParentMenu();
+        while (parrent != null) {
+            parrent.setActive(true);
+            parrent = parrent.getParentMenu();
+        }
+        item.setActive(!item.isActive());
+        activeMenuItem = item;
+        renderMenu();
     }
 
 }

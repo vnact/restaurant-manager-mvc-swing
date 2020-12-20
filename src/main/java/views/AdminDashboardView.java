@@ -139,7 +139,6 @@ public class AdminDashboardView extends javax.swing.JFrame {
 
         panelLeft.add(panelHeader, java.awt.BorderLayout.PAGE_START);
 
-        panelSideBar.setBackground(new java.awt.Color(142, 68, 173));
         panelSideBar.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
         panelLeft.add(panelSideBar, java.awt.BorderLayout.CENTER);
 

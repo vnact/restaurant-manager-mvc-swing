@@ -47,24 +47,20 @@ public class HomeView extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("Trang chủ");
-        jLabel1.setToolTipText("Demo 123213123213213");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cay-thong-noel.png"))); // NOI18N
+        jLabel1.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(447, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(447, 447, 447))
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1001, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(324, 324, 324)
-                .addComponent(jLabel1)
-                .addContainerGap(324, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 674, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
