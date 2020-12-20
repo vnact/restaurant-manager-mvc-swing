@@ -1,6 +1,7 @@
 package controllers.admin;
 
 import controllers.ManagerController;
+import controllers.popup.FoodItemPopupController;
 import dao.FoodItemDao;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -8,6 +9,7 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.YES_OPTION;
 import models.FoodItem;
 import views.admin.FoodItemManagerView;
+import views.popup.FoodItemPopupView;
 
 /**
  * createAt Dec 15, 2020
@@ -18,7 +20,7 @@ import views.admin.FoodItemManagerView;
 public class FoodItemManagerController extends ManagerController {
 
     FoodItemDao foodItemDao = new FoodItemDao();
-//    FoodItemPopupController popupController = new FoodItemPopupController();
+    FoodItemPopupController popupController = new FoodItemPopupController();
 
     public FoodItemManagerController() {
         super();
@@ -30,7 +32,7 @@ public class FoodItemManagerController extends ManagerController {
 
     @Override
     public void actionAdd() {
-//        popupController.add(this, new FoodItemPopupView());
+        popupController.add(this, new FoodItemPopupView());
     }
 
     @Override
@@ -44,7 +46,7 @@ public class FoodItemManagerController extends ManagerController {
                 if (t == null) {
                     throw new Exception("Món bạn chọn không hợp lệ");
                 }
-//                popupController.edit(this, new FoodItemPopupView(), t);
+                popupController.edit(this, new FoodItemPopupView(), t);
             }
         } catch (Exception e) {
             view.showError(e);

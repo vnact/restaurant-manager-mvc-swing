@@ -55,4 +55,22 @@ public class FoodCategory extends Model {
         };
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final FoodCategory other = (FoodCategory) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+
 }

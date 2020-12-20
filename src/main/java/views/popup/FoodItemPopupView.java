@@ -5,6 +5,7 @@
  */
 package views.popup;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -20,39 +21,12 @@ import utils.ErrorPopup;
  */
 public class FoodItemPopupView extends javax.swing.JFrame implements PopupView {
 
+    DefaultComboBoxModel<FoodCategory> foodCategoryComboBoxModel = new DefaultComboBoxModel<>();
+
     public FoodItemPopupView() {
         initComponents();
         setLocationRelativeTo(null);
-//        if (filechooser == null) {
-//            filechooser = new JFileChooser();
-//            filechooser.setDialogTitle("Choose Your File");
-//            filechooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-//            filechooser.setDragEnabled(true);
-//            filechooser.setCurrentDirectory(new File("D:\\"));
-//            filechooser.setDialogType(JFileChooser.OPEN_DIALOG);
-//            FileFilter imageFilter = new FileNameExtensionFilter("Hình ảnh(jpg, png, gif,...)", ImageIO.getReaderFileSuffixes());
-//            filechooser.setFileFilter(imageFilter);
-//        }
-//
-//        int otp = filechooser.showOpenDialog(this);
-//        switch (otp) {
-//            case JFileChooser.APPROVE_OPTION:
-//                File file = filechooser.getSelectedFile();
-//                BufferedImage bi;
-//                try {
-//                    bi = ImageIO.read(file);
-//                    String name = StringToSlug.convert(txtName.getText());
-//                    String pth = im.saveImage(bi, name);
-//                    txtUrlImage.setText(pth);
-//                } catch (Exception e) {
-//                    ErrorPopup.show(e);
-//                }
-//                break;
-//            case JFileChooser.CANCEL_OPTION:
-//                txtUrlImage.setText("");
-//                break;
-//
-//        }
+        cboCategory.setModel(foodCategoryComboBoxModel);
     }
 
     public void showError(String message) {
@@ -145,6 +119,14 @@ public class FoodItemPopupView extends javax.swing.JFrame implements PopupView {
 
     public void setTxtUrlImage(JTextField txtUrlImage) {
         this.txtUrlImage = txtUrlImage;
+    }
+
+    public DefaultComboBoxModel<FoodCategory> getFoodCategoryComboBoxModel() {
+        return foodCategoryComboBoxModel;
+    }
+
+    public void setFoodCategoryComboBoxModel(DefaultComboBoxModel<FoodCategory> foodCategoryComboBoxModel) {
+        this.foodCategoryComboBoxModel = foodCategoryComboBoxModel;
     }
 
     @SuppressWarnings("unchecked")
@@ -319,39 +301,6 @@ public class FoodItemPopupView extends javax.swing.JFrame implements PopupView {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FoodItemPopupView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FoodItemPopupView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FoodItemPopupView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FoodItemPopupView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FoodItemPopupView().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;

@@ -39,7 +39,6 @@ public class FoodCategoryPopupController extends PopupController {
 
     public void edit(FoodCategoryManagerController parrent, FoodCategoryPopupView view, FoodCategory employee) {
         setView(view);
-
         view.getLbTitle().setText("Sửa loại món - " + employee.getId());
         view.getBtnOK().setText("Cập nhật");
         view.getBtnOK().addActionListener(new ActionListener() {

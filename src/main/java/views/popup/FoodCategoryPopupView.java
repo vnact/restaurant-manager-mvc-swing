@@ -126,4 +126,5 @@ public class FoodCategoryPopupView extends javax.swing.JFrame implements PopupVi
     private javax.swing.JLabel lbTitle;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
+
 }
