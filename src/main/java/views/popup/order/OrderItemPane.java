@@ -26,7 +26,6 @@ public class OrderItemPane extends javax.swing.JPanel {
     }
 
     public void render() {
-
         spnQuantity.setValue(orderItem.getQuantity());
         lbFoodName.setText(orderItem.getFoodItem().getName());
         lbToppingName.setText(orderItem.getToppingItem().getName());

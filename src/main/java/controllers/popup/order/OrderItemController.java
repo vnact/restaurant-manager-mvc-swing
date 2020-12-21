@@ -48,7 +48,7 @@ public class OrderItemController {
             pane.getSpnQuantity().addChangeListener(evt -> {
                 orderItem.setQuantity((int) pane.getSpnQuantity().getValue());
                 if (onQuantityChange != null) {
-                    onQuantityChange.onChange();
+                    onQuantityChange.onChange();// Gọi hàm update amount
                 }
             });
             panelOrderItem.add(pane);
