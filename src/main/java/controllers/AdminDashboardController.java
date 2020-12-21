@@ -4,6 +4,7 @@ import controllers.admin.CustomerManagerController;
 import controllers.admin.EmployeeManagerController;
 import controllers.admin.FoodCategoryManagerController;
 import controllers.admin.FoodItemManagerController;
+import controllers.admin.OrderManagerController;
 import controllers.admin.TableManagerController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,7 @@ import views.admin.FoodItemManagerView;
 import views.admin.HomeView;
 import views.admin.ManagerPaneView;
 import views.admin.MenuItem;
+import views.admin.OrderManagerView;
 import views.admin.TableManagerView;
 
 /**
@@ -34,6 +36,7 @@ public class AdminDashboardController {
             tableManagerController = new TableManagerController(),
             foodCategoryManagerController = new FoodCategoryManagerController(),
             foodItemManagerController = new FoodItemManagerController(),
+            orderManagerController = new OrderManagerController(),
             customerManagerController = new CustomerManagerController();
 
     HomeView homePane = new HomeView();
@@ -41,9 +44,10 @@ public class AdminDashboardController {
             tableManagerPane = new TableManagerView(),
             foodCategoryManagerView = new FoodCategoryManagerView(),
             foodItemManagerView = new FoodItemManagerView(),
+            orderManagerView = new OrderManagerView(),
             customerManagerPane = new CustomerManagerView();
 
-    JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane, customerManagerPane, foodCategoryManagerView, foodItemManagerView};
+    JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane, customerManagerPane, foodCategoryManagerView, orderManagerView, foodItemManagerView};
 
     SideBarController sideBarController = new SideBarController();
     SideBarController.MenuBarEvent menuBarEvent = sideBarController.new MenuBarEvent() { // 
@@ -124,7 +128,8 @@ public class AdminDashboardController {
                 mc = employeeManagerController;
                 break;
             case "QLDDH":
-//                orderManager.setVisible(true);
+                pnl = orderManagerView;
+                mc = orderManagerController;
                 break;
             case "QLB":
                 pnl = tableManagerPane;
@@ -141,6 +146,10 @@ public class AdminDashboardController {
             case "QLMA":
                 pnl = foodItemManagerView;
                 mc = foodItemManagerController;
+                break;
+            case "QLHH":
+            case "QLDH":
+            case "TK":
                 break;
             default:
                 view.setPanel(homePane);
