@@ -92,6 +92,11 @@ public class OrderItemPane extends javax.swing.JPanel {
         btnMinus.setText("-");
         btnMinus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMinus.setFocusable(false);
+        btnMinus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMinusActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -101,6 +106,11 @@ public class OrderItemPane extends javax.swing.JPanel {
         btnPlus.setText("+");
         btnPlus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPlus.setFocusable(false);
+        btnPlus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlusActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -164,6 +174,16 @@ public class OrderItemPane extends javax.swing.JPanel {
 
         add(jPanel3, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinusActionPerformed
+        int quantity = (int) spnQuantity.getValue();
+        spnQuantity.setValue(Math.max(0, quantity - 1));
+    }//GEN-LAST:event_btnMinusActionPerformed
+
+    private void btnPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlusActionPerformed
+        int quantity = (int) spnQuantity.getValue();
+        spnQuantity.setValue(quantity + 1);
+    }//GEN-LAST:event_btnPlusActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMinus;

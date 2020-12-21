@@ -2,9 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import utils.LoadConfig;
 
 /**
@@ -50,22 +48,6 @@ public class Database {
             instance = new Database();
         }
         return instance;
-    }
-
-    public static void main(String[] args) {
-        try {
-            Connection connection = getInstance().getConnection();
-            Statement stmt = connection.createStatement();
-            String query = "SELECT CURRENT_TIMESTAMP";
-            ResultSet rs = stmt.executeQuery(query);
-            // show data
-            while (rs.next()) {
-                System.out.println(rs.getDate("CURRENT_TIMESTAMP").toString());
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
     }
 
 }

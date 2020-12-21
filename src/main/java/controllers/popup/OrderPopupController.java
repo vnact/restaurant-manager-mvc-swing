@@ -11,6 +11,7 @@ import dao.TableDao;
 import main.Runner;
 import models.Employee;
 import models.Order;
+import models.OrderItem;
 import models.Table;
 import utils.OrderStatus;
 import utils.OrderType;
@@ -30,6 +31,8 @@ public class OrderPopupController extends PopupController {
     EmployeeDao employeeDao = new EmployeeDao();
     TableDao tableDao = new TableDao();
     OrderItemDao orderItemDao = new OrderItemDao();
+    FoodItemController foodItemController = new FoodItemController();
+    OrderItemController orderItemController = new OrderItemController();
 
     public void add(OrderManagerController parrent, AddOrderPopupView view) {
         setView(view);
@@ -63,11 +66,7 @@ public class OrderPopupController extends PopupController {
     }
 
     public void edit(OrderManagerController parrent, EditOrderPopupView view, Order order) {
-        FoodItemController foodItemController = new FoodItemController();
-        OrderItemController orderItemController = new OrderItemController();
-
         setView(view);
-
         orderItemController.setPanelOrderItem(view.getPnlOrderItem());
         orderItemController.setIdOrder(order.getId());
         foodItemController.setPanelFoodCategory(view.getPnlFoodCategory());
@@ -90,14 +89,13 @@ public class OrderPopupController extends PopupController {
                 view.getCboType().addItem(ot.getName());
             }
             orderItemController.setOrderItems(orderItemDao.getByIdOrder(order.getId()));
-
+            foodItemController.renderCategory(foodItem -> {
+                System.out.println(foodItem);
+            });
             view.getTbComboBoxModel().setSelectedItem(order.getTable());
             view.getSpnDiscount().setValue(order.getDiscount());
             view.getCboType().setSelectedItem(order.getType().getName());
             view.getLbDiscount().setText(order.getDiscount() + "");
-            foodItemController.renderCategory(foodItem -> {
-                System.out.println(foodItem);
-            });
 
         } catch (Exception e) {
             view.dispose();
@@ -161,7 +159,33 @@ public class OrderPopupController extends PopupController {
 
     public boolean editOrder(Order order) throws Exception {
         EditOrderPopupView view = (EditOrderPopupView) this.getView();
+        if (order.getTable() == null) {
+            throw new Exception("Hết bàn");
+        }
+        if (order.getDiscount() < 0 || order.getDiscount() > 100) {
+            throw new Exception("Discount phải nằm trong khoảng 0-100");
+        }
+        if (order.getEmployee() == null) {
+            throw new Exception("Chọn nhân viên");
+        }
+        if (order.getType() == OrderType.LOCAL) {
+            order.getTable().setStatus(TableStatus.SERVING);
+        } else {
+            order.getTable().setStatus(TableStatus.FREE);
+        }
+        if (order.getFinalAmount() == order.getPaidAmount()) {
+            order.setStatus(OrderStatus.PAID);
+        }
+        for (OrderItem orderItem : orderItemController.getOrderItems()) {
+            System.out.println(orderItem);
+            if (orderItem.getQuantity() <= 0) {
+                orderItemDao.delete(orderItem);
+            } else {
+                orderItemDao.save(orderItem);
+            }
+        }
         orderDao.update(order);
+        tableDao.update(order.getTable());
         return true;
     }
 }

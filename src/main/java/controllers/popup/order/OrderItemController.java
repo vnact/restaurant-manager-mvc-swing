@@ -38,11 +38,11 @@ public class OrderItemController {
     public void renderOrderItem() {
         panelOrderItem.removeAll();
         for (OrderItem orderItem : orderItems) {
-            if (orderItem.getQuantity() == 0) {
-                orderItems.remove(orderItem);
-                continue;
-            }
-            panelOrderItem.add(new OrderItemPane(orderItem));
+            OrderItemPane pane = new OrderItemPane(orderItem);
+            pane.getSpnQuantity().addChangeListener(evt -> {
+                orderItem.setQuantity((int) pane.getSpnQuantity().getValue());
+            });
+            panelOrderItem.add(pane);
         }
         panelOrderItem.updateUI();
     }
