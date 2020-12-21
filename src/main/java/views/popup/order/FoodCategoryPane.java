@@ -1,4 +1,4 @@
-package views.popup;
+package views.popup.order;
 
 import java.awt.Color;
 import models.FoodCategory;

@@ -1,4 +1,4 @@
-package controllers.popup;
+package controllers.popup.order;
 
 import dao.FoodCategoryDao;
 import dao.FoodItemDao;
@@ -7,8 +7,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import models.FoodCategory;
 import models.FoodItem;
-import views.popup.FoodCategoryPane;
-import views.popup.FoodItemPane;
+import views.popup.order.FoodCategoryPane;
+import views.popup.order.FoodItemPane;
 
 /**
  * createAt Dec 21, 2020
@@ -20,7 +20,7 @@ public class FoodItemController {
     FoodCategoryDao foodCategoryDao = new FoodCategoryDao();
     FoodItemDao foodItemDao = new FoodItemDao();
 
-    interface Event {
+    public interface Event {
 
         public abstract void onChange(JPanel pnl);
     }

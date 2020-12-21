@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views.popup;
+package views.popup.order;
 
 import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
@@ -56,6 +56,7 @@ public class FoodItemPane extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 204, 204));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setMaximumSize(new java.awt.Dimension(300, 75));
         setMinimumSize(new java.awt.Dimension(300, 75));
         setPreferredSize(new java.awt.Dimension(300, 75));

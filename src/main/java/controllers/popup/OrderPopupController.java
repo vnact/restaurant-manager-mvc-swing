@@ -1,5 +1,6 @@
 package controllers.popup;
 
+import controllers.popup.order.FoodItemController;
 import controllers.PopupController;
 import controllers.admin.OrderManagerController;
 import dao.EmployeeDao;
@@ -16,8 +17,8 @@ import utils.OrderType;
 import utils.TableStatus;
 import views.popup.AddOrderPopupView;
 import views.popup.EditOrderPopupView;
-import views.popup.FoodCategoryPane;
-import views.popup.FoodItemPane;
+import views.popup.order.FoodCategoryPane;
+import views.popup.order.FoodItemPane;
 
 /**
  * createAt Dec 17, 2020
