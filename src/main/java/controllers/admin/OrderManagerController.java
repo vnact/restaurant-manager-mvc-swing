@@ -1,6 +1,7 @@
 package controllers.admin;
 
 import controllers.ManagerController;
+import controllers.popup.OrderPopupController;
 import dao.OrderDao;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -8,6 +9,8 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.YES_OPTION;
 import models.Order;
 import views.admin.EmployeeManagerView;
+import views.popup.AddOrderPopupView;
+import views.popup.EditOrderPopupView;
 
 /**
  * createAt Dec 15, 2020
@@ -17,8 +20,8 @@ import views.admin.EmployeeManagerView;
  */
 public class OrderManagerController extends ManagerController {
 
-    OrderDao foodCategoryDao = new OrderDao();
-//    OrderPopupController popupController = new OrderPopupController();
+    OrderDao orderDao = new OrderDao();
+    OrderPopupController popupController = new OrderPopupController();
 
     public OrderManagerController() {
         super();
@@ -30,7 +33,7 @@ public class OrderManagerController extends ManagerController {
 
     @Override
     public void actionAdd() {
-//        popupController.add(this, new OrderPopupView());
+        popupController.add(this, new AddOrderPopupView());
     }
 
     @Override
@@ -38,14 +41,14 @@ public class OrderManagerController extends ManagerController {
         try {
             int selectedId = view.getSelectedId();
             if (selectedId < 0) {
-                throw new Exception("Chọn bàn cần edit");
-            } else {
-                Order t = foodCategoryDao.get(selectedId);
-                if (t == null) {
-                    throw new Exception("Bàn bạn chọn không hợp lệ");
-                }
-//                popupController.edit(this, new OrderPopupView(), t);
+                throw new Exception("Chọn hóa đơn cần edit");
             }
+            Order order = orderDao.get(selectedId);
+            if (order == null) {
+                throw new Exception("Bàn bạn chọn không hợp lệ");
+            }
+            popupController.edit(this, new EditOrderPopupView(), order);
+
         } catch (Exception e) {
             view.showError(e);
         }
@@ -59,7 +62,7 @@ public class OrderManagerController extends ManagerController {
                 return;
             }
             for (int i = 0; i < selectedIds.length; i++) {
-                foodCategoryDao.deleteById(selectedIds[i]);
+                orderDao.deleteById(selectedIds[i]);
             }
             updateData();
         } catch (Exception e) {
@@ -70,7 +73,7 @@ public class OrderManagerController extends ManagerController {
     @Override
     public void updateData() {
         try {
-            ArrayList<Order> orders = foodCategoryDao.getAll();
+            ArrayList<Order> orders = orderDao.getAll();
             view.setTableData(orders);
         } catch (Exception e) {
             view.showError(e);

@@ -10,26 +10,27 @@ import views.LoginView;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class Runner {
-
+    
     private static Employee session;
-
+    
     public static Employee getSession() {
         if (session == null) {
             createSession();// Tạo phiên đăng nhập ảo(test)
         }
         return session;
     }
-
+    
     public static void createSession() {
         Employee e = new Employee();
         e.setName("Tester");
         e.setId(1);
+        setSession(e);
     }
-
+    
     public static void setSession(Employee session) {
         Runner.session = session;
     }
-
+    
     public static void main(String[] args) {
         //Set up look and feel
         try {
@@ -40,5 +41,5 @@ public class Runner {
         }
         LoginController controller = new LoginController(new LoginView());
     }
-
+    
 }
