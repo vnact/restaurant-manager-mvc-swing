@@ -15,7 +15,6 @@ import models.Shipment;
 public class ShipmentDao implements Dao<Shipment> {
 
     Connection conn = Database.getInstance().getConnection();
-    ShipmentDao shipmentDao = new ShipmentDao();
 
     @Override
     public ArrayList<Shipment> getAll() throws SQLException {

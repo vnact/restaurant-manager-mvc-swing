@@ -3,7 +3,10 @@ package controllers.admin;
 import controllers.ManagerController;
 import controllers.popup.FoodCategoryPopupController;
 import dao.FoodCategoryDao;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.YES_OPTION;
@@ -78,7 +81,12 @@ public class FoodCategoryManagerController extends ManagerController {
 
     @Override
     public void actionSearch() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            ArrayList<FoodCategory> foodCategorys = foodCategoryDao.searchByKey(view.getCboSearchField().getSelectedItem().toString(), String.valueOf(view.getTxtSearch().getText()));
+            view.setTableData(foodCategorys);
+        } catch (SQLException ex) {
+            Logger.getLogger(FoodCategoryManagerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

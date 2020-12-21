@@ -82,7 +82,12 @@ public class OrderManagerController extends ManagerController {
 
     @Override
     public void actionSearch() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            ArrayList<Order> orders = orderDao.searchByKey(view.getCboSearchField().getSelectedItem().toString(), view.getTxtSearch().getText());
+            view.setTableData(orders);
+        } catch (Exception e) {
+            view.showError(e);
+        }
     }
 
 }

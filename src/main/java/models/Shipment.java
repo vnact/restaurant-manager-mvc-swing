@@ -1,5 +1,7 @@
 package models;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import utils.ShipmentStatus;
 
@@ -113,6 +115,17 @@ public class Shipment extends Model {
 
     public void setShipCost(int shipCost) {
         this.shipCost = shipCost;
+    }
+
+    public static Shipment getFromResultSet(ResultSet rs) throws SQLException {
+        Shipment shipment = new Shipment();
+        shipment.setIdOrder(rs.getInt("idOrder"));
+        shipment.setIdCustomer(rs.getInt("idCustomer"));
+        shipment.setShipperName(rs.getNString("shipperName"));
+        shipment.setShipperPhoneNumber(rs.getNString("shipperPhoneNumber"));
+        shipment.setShipCost(rs.getInt("shipCost"));
+//        shipment.setIdOrder(rs.getInt("idOrder"));
+        return shipment;
     }
 
     @Override

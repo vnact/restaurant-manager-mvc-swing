@@ -81,7 +81,12 @@ public class FoodItemManagerController extends ManagerController {
 
     @Override
     public void actionSearch() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            ArrayList<FoodItem> foodItems = foodItemDao.searchByKey(view.getCboSearchField().getSelectedItem().toString(), String.valueOf(view.getTxtSearch().getText()));
+            view.setTableData(foodItems);
+        } catch (Exception e) {
+            view.showError(e);
+        }
     }
 
 }

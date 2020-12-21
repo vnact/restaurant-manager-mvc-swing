@@ -1,5 +1,6 @@
 package views.admin;
 
+import javax.swing.DefaultComboBoxModel;
 import models.FoodItem;
 
 /**
@@ -8,6 +9,8 @@ import models.FoodItem;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class FoodItemManagerView extends ManagerPaneView<FoodItem> {
+
+    String[] list = {"ID", "name", "idCategory"};
 
     public FoodItemManagerView() {
         super();
@@ -24,5 +27,6 @@ public class FoodItemManagerView extends ManagerPaneView<FoodItem> {
         tableModel.addColumn("Tên đv");
         tableModel.addColumn("Giá đv");
         tableModel.addColumn("Mã loại");
+        this.getCboSearchField().setModel(new DefaultComboBoxModel(list));
     }
 }

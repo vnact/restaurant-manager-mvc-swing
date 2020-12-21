@@ -190,4 +190,7 @@ public class AdminDashboardView extends javax.swing.JFrame {
     private javax.swing.JPanel panelSideBar;
     // End of variables declaration//GEN-END:variables
 
+//    public JPanel getPanelSideBar() {
+//        throw new UnsupportedOperationException("Not supported yet.");
+//    }
 }

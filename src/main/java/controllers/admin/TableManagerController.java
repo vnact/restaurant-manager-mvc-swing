@@ -122,7 +122,12 @@ public class TableManagerController extends ManagerController {
 
     @Override
     public void actionSearch() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            ArrayList<Table> tables = tableDao.searchByKey(view.getCboSearchField().getSelectedItem().toString(), String.valueOf(view.getTxtSearch().getText()));
+            view.setTableData(tables);
+        } catch (Exception e) {
+            view.showError(e);
+        }
     }
 
 }

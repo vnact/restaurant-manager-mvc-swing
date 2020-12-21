@@ -110,9 +110,14 @@ public class OrderDao implements Dao<Order> {
         ResultSet rs = statement.executeQuery(query);
         while (rs.next()) {
             Order order = Order.getFromResultSet(rs);
+            order.setEmployee(employeeDao.get(order.getIdEmployee()));
+            order.setTable(tableDao.get(order.getIdTable()));
             orders.add(order);
         }
         return orders;
     }
 
+//    public ArrayList<Order> searchByKey(String toString, String text) {
+//        throw new UnsupportedOperationException("Not supported yet.");
+//    }
 }
