@@ -29,7 +29,7 @@ public class FoodItemPopupController extends PopupController {
     FoodCategoryDao foodCategoryDao = new FoodCategoryDao();
     ChooseImageView chooseImageView = new ChooseImageView();
     ImageManager imageManager = new ImageManager();
-    String resourcesPath = getClass().getResource("/images").getPath();
+    String resourcesPath = getClass().getResource("/images/").getPath();
 
     private ActionListener eventShowChooseFileDialog(FoodItemPopupView view) {
         return evt -> {
@@ -40,7 +40,7 @@ public class FoodItemPopupController extends PopupController {
                     BufferedImage bi;
                     try {
                         bi = ImageIO.read(file);
-                        String name = StringToSlug.convert(view.getTxtUrlImage().getText());
+                        String name = StringToSlug.convert(view.getTxtName().getText());
                         String pth = imageManager.saveImage(bi, name);
                         view.getTxtUrlImage().setText(pth);
                     } catch (IOException e) {
@@ -102,7 +102,6 @@ public class FoodItemPopupController extends PopupController {
             fc.setId(foodItem.getIdCategory());
             view.getCboCategory().setSelectedItem(fc);
             if (!foodItem.getUrlImage().isEmpty()) {
-
                 File f = new File(resourcesPath + foodItem.getUrlImage());
                 if (f.exists() && !f.isDirectory()) {
                     view.getTxtUrlImage().setText(foodItem.getUrlImage());
@@ -111,8 +110,7 @@ public class FoodItemPopupController extends PopupController {
                 }
             }
         } catch (Exception e) {
-
-            view.getTxtUrlImage().setText("");
+            e.printStackTrace();
         }
         view.getBtnChooseImage().addActionListener(eventShowChooseFileDialog(view));
         view.getBtnOK().addActionListener(evt -> {
@@ -142,7 +140,7 @@ public class FoodItemPopupController extends PopupController {
         }
         foodItem.setName(name);
         foodItem.setDescription(unitName);
-        foodItem.setUnitName(unitPrice);
+        foodItem.setUnitName(unitName);
         foodItem.setUnitPrice(Integer.parseInt(unitPrice));
         foodItem.setUrlImage(urlImage);
         foodItem.setDescription(description);
@@ -161,8 +159,8 @@ public class FoodItemPopupController extends PopupController {
             throw new Exception("Vui lòng điền đầy đủ thông tin");
         }
         foodItem.setName(name);
-        foodItem.setDescription(unitName);
-        foodItem.setUnitName(unitPrice);
+        foodItem.setDescription(description);
+        foodItem.setUnitName(unitName);
         foodItem.setUnitPrice(Integer.parseInt(unitPrice));
         foodItem.setUrlImage(urlImage);
         foodItem.setDescription(description);

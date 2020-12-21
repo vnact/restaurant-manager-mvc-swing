@@ -49,7 +49,7 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         cboType = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         lbIdOrder = new javax.swing.JLabel();
-        lbIdOrder1 = new javax.swing.JLabel();
+        lbEmployeeName = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         btnOK = new javax.swing.JButton();
         btnCancelOrder = new javax.swing.JButton();
@@ -185,16 +185,16 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel3.add(lbIdOrder, gridBagConstraints);
 
-        lbIdOrder1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbIdOrder1.setForeground(new java.awt.Color(255, 0, 0));
-        lbIdOrder1.setText("Trần Đức Cường");
-        lbIdOrder1.setToolTipText("");
+        lbEmployeeName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbEmployeeName.setForeground(new java.awt.Color(255, 0, 0));
+        lbEmployeeName.setText("Trần Đức Cường");
+        lbEmployeeName.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        jPanel3.add(lbIdOrder1, gridBagConstraints);
+        jPanel3.add(lbEmployeeName, gridBagConstraints);
 
         pnlLeft.add(jPanel3, java.awt.BorderLayout.PAGE_START);
 
@@ -624,6 +624,10 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         return tbComboBoxModel;
     }
 
+    public JLabel getLbEmployeeName() {
+        return lbEmployeeName;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnCancelOrder;
@@ -661,9 +665,9 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbDiscount;
+    private javax.swing.JLabel lbEmployeeName;
     private javax.swing.JLabel lbFinalAmount;
     private javax.swing.JLabel lbIdOrder;
-    private javax.swing.JLabel lbIdOrder1;
     private javax.swing.JLabel lbPaidAmount;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JLabel lbTotalAmount;

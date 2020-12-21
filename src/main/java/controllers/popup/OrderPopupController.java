@@ -7,6 +7,8 @@ import dao.OrderDao;
 import dao.TableDao;
 import main.Runner;
 import models.Employee;
+import models.FoodCategory;
+import models.FoodItem;
 import models.Order;
 import models.Table;
 import utils.OrderStatus;
@@ -14,6 +16,8 @@ import utils.OrderType;
 import utils.TableStatus;
 import views.popup.AddOrderPopupView;
 import views.popup.EditOrderPopupView;
+import views.popup.FoodCategoryPane;
+import views.popup.FoodItemPane;
 
 /**
  * createAt Dec 17, 2020
@@ -22,11 +26,12 @@ import views.popup.EditOrderPopupView;
  * Popup controller mẫu
  */
 public class OrderPopupController extends PopupController {
-
+    
     OrderDao orderDao = new OrderDao();
     EmployeeDao employeeDao = new EmployeeDao();
     TableDao tableDao = new TableDao();
-
+    FoodItemController foodItemController = new FoodItemController();
+    
     public void add(OrderManagerController parrent, AddOrderPopupView view) {
         setView(view);
         try {
@@ -55,31 +60,52 @@ public class OrderPopupController extends PopupController {
                 view.showError(ex);
             }
         });
-
+        
     }
-
+    
     public void edit(OrderManagerController parrent, EditOrderPopupView view, Order order) {
         setView(view);
+        Employee employee = Runner.getSession();
+        if (employee != null) {
+            view.getLbEmployeeName().setText(employee.getName());
+        }
+        view.getLbIdOrder().setText(order.getId() + "");
         try {
             for (Table table : tableDao.getAll()) {
                 if (table.getStatus() == TableStatus.FREE || table.getId() == order.getIdTable()) {
                     view.getTbComboBoxModel().addElement(table);
                 }
             }
-
+            
             for (OrderType ot : OrderType.values()) {
                 view.getCboType().addItem(ot.getName());
             }
-
+            
             view.getTbComboBoxModel().setSelectedItem(order.getTable());
             view.getSpnDiscount().setValue(order.getDiscount());
             view.getCboType().setSelectedItem(order.getType().getName());
             view.getLbDiscount().setText(order.getDiscount() + "");
+            foodItemController.renderCategory(view.getPnlFoodCategory(), foodCategoryPane -> {
+                try {
+                    FoodCategory foodCategory = ((FoodCategoryPane) foodCategoryPane).getFoodCategory();
+                    foodItemController.renderFoodItem(view.getPnlFoodItem(), foodCategory.getId(), foodItemPane -> {
+                        FoodItem foodItem = ((FoodItemPane) foodItemPane).getFoodItem();
+                        System.out.println("Chon mon: " + foodItem);
+                    });
+                } catch (Exception ex) {
+                    view.showError(ex);
+                }
+            });
+            foodItemController.renderFoodItem(view.getPnlFoodItem(), 2, foodItemPane -> {
+                FoodItem foodItem = ((FoodItemPane) foodItemPane).getFoodItem();
+                System.out.println("Chon mon: " + foodItem);
+            });
         } catch (Exception e) {
             view.dispose();
             view.showError(e);
             return;
         }
+        
         view.getBtnOK().setText("Cập nhật");
         view.getBtnOK().addActionListener(evt -> {
             try {
@@ -97,9 +123,9 @@ public class OrderPopupController extends PopupController {
             order.setDiscount((int) view.getSpnDiscount().getValue());
             view.getLbDiscount().setText(order.getDiscount() + "");
         });
-
+        
     }
-
+    
     public boolean addOrder() throws Exception {
         AddOrderPopupView view = (AddOrderPopupView) this.getView();
         Order e = new Order();
@@ -122,7 +148,7 @@ public class OrderPopupController extends PopupController {
             }
             table.setStatus(TableStatus.SERVING);
         }
-
+        
         Order order = new Order();
         order.setIdEmployee(employee.getId());
         order.setIdTable(table.getId());
@@ -133,7 +159,7 @@ public class OrderPopupController extends PopupController {
         tableDao.update(table);
         return true;
     }
-
+    
     public boolean editOrder(Order order) throws Exception {
         EditOrderPopupView view = (EditOrderPopupView) this.getView();
         orderDao.update(order);

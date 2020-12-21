@@ -63,7 +63,6 @@ public class MenuItem extends javax.swing.JPanel {
 
     public void setActive(boolean active) {
         this.active = active;
-        System.out.println((active ? "Hiện" : "Ẩn") + ": " + id);
         if (!active) {
             setBackground(inactiveColor);
         } else if (hasSubMenu() || getParentMenu() == null) {
