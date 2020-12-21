@@ -8,6 +8,7 @@ import dao.EmployeeDao;
 import dao.OrderDao;
 import dao.OrderItemDao;
 import dao.TableDao;
+import java.text.DecimalFormat;
 import main.Runner;
 import models.Employee;
 import models.Order;
@@ -18,6 +19,7 @@ import utils.OrderType;
 import utils.TableStatus;
 import views.popup.AddOrderPopupView;
 import views.popup.EditOrderPopupView;
+import views.popup.ToppingPopupView;
 
 /**
  * createAt Dec 17, 2020
@@ -26,14 +28,16 @@ import views.popup.EditOrderPopupView;
  * Popup controller mẫu
  */
 public class OrderPopupController extends PopupController {
-
+    
     OrderDao orderDao = new OrderDao();
     EmployeeDao employeeDao = new EmployeeDao();
     TableDao tableDao = new TableDao();
     OrderItemDao orderItemDao = new OrderItemDao();
     FoodItemController foodItemController = new FoodItemController();
     OrderItemController orderItemController = new OrderItemController();
-
+    ToppingPopupController toppingPopupController = new ToppingPopupController();
+    DecimalFormat formatter = new DecimalFormat("###,###,###");
+    
     public void add(OrderManagerController parrent, AddOrderPopupView view) {
         setView(view);
         try {
@@ -62,47 +66,54 @@ public class OrderPopupController extends PopupController {
                 view.showError(ex);
             }
         });
-
+        
     }
-
+    
     public void edit(OrderManagerController parrent, EditOrderPopupView view, Order order) {
         setView(view);
         orderItemController.setPanelOrderItem(view.getPnlOrderItem());
         orderItemController.setIdOrder(order.getId());
+        orderItemController.setOnQuantityChange(() -> {
+            updateAmount(view, order);
+        });
         foodItemController.setPanelFoodCategory(view.getPnlFoodCategory());
         foodItemController.setPanelFoodItem(view.getPnlFoodItem());
-
+        
         Employee employee = Runner.getSession();
-
+        
         if (employee != null) {
             view.getLbEmployeeName().setText(employee.getName());
         }
         view.getLbIdOrder().setText(order.getId() + "");
         try {
-            for (Table table : tableDao.getAll()) {
+            for (Table table : tableDao.getAll()) { // Hiển thị danh sách bàn
                 if (table.getStatus() == TableStatus.FREE || table.getId() == order.getIdTable()) {
                     view.getTbComboBoxModel().addElement(table);
                 }
             }
-
-            for (OrderType ot : OrderType.values()) {
+            
+            for (OrderType ot : OrderType.values()) { // Hiển thị loại hóa đơn
                 view.getCboType().addItem(ot.getName());
             }
             orderItemController.setOrderItems(orderItemDao.getByIdOrder(order.getId()));
-            foodItemController.renderCategory(foodItem -> {
+            foodItemController.renderCategory(foodItem -> {//Hiển thị danh sách món ăn
                 System.out.println(foodItem);
+                toppingPopupController.add(new ToppingPopupView(), foodItem, orderItem -> {
+                    orderItemController.addOrderItem(orderItem);// Thêm vào danh sách order
+                    updateAmount(view, order);
+                });
             });
             view.getTbComboBoxModel().setSelectedItem(order.getTable());
             view.getSpnDiscount().setValue(order.getDiscount());
             view.getCboType().setSelectedItem(order.getType().getName());
             view.getLbDiscount().setText(order.getDiscount() + "");
-
+            
         } catch (Exception e) {
             view.dispose();
             view.showError(e);
             return;
         }
-
+        updateAmount(view, order);
         view.getBtnOK().setText("Cập nhật");
         view.getBtnOK().addActionListener(evt -> {
             try {
@@ -116,13 +127,37 @@ public class OrderPopupController extends PopupController {
                 view.showError(ex);
             }
         });
-        view.getSpnDiscount().addChangeListener(evt -> {
+        view.getSpnDiscount().addChangeListener(evt -> { // Thay giá trị
             order.setDiscount((int) view.getSpnDiscount().getValue());
-            view.getLbDiscount().setText(order.getDiscount() + "");
+            updateAmount(view, order);
         });
-
+        view.getCboTable().addActionListener(evt -> { // Thay bàn
+            try {
+                Table nTable = (Table) view.getTbComboBoxModel().getSelectedItem(),
+                        cTable = order.getTable();
+                if (nTable == null || (cTable != null && nTable.getId() == cTable.getId())) {
+                    return;
+                }
+                cTable.setStatus(TableStatus.FREE);
+                nTable.setStatus(TableStatus.SERVING);
+                order.setTable(nTable);
+                tableDao.update(cTable);
+                tableDao.update(nTable);
+            } catch (Exception ex) {
+                view.showError(ex);
+            }
+        });
+        
     }
-
+    
+    public void updateAmount(EditOrderPopupView view, Order order) {
+        order.setTotalAmount(orderItemController.getTotalAmount());
+        view.getLbDiscount().setText(order.getDiscount() + "");
+        view.getLbPaidAmount().setText(formatter.format(order.getPaidAmount()));
+        view.getLbFinalAmount().setText(formatter.format(order.getFinalAmount()));
+        view.getLbTotalAmount().setText(formatter.format(order.getTotalAmount()));
+    }
+    
     public boolean addOrder() throws Exception {
         AddOrderPopupView view = (AddOrderPopupView) this.getView();
         Order e = new Order();
@@ -145,10 +180,10 @@ public class OrderPopupController extends PopupController {
             }
             table.setStatus(TableStatus.SERVING);
         }
-
+        
         Order order = new Order();
-        order.setIdEmployee(employee.getId());
-        order.setIdTable(table.getId());
+        order.setEmployee(employee);
+        order.setTable(table);
         order.setStatus(OrderStatus.UNPAID);
         order.setType(type);
         order.setDiscount(discount);
@@ -156,7 +191,7 @@ public class OrderPopupController extends PopupController {
         tableDao.update(table);
         return true;
     }
-
+    
     public boolean editOrder(Order order) throws Exception {
         EditOrderPopupView view = (EditOrderPopupView) this.getView();
         if (order.getTable() == null) {
@@ -173,17 +208,17 @@ public class OrderPopupController extends PopupController {
         } else {
             order.getTable().setStatus(TableStatus.FREE);
         }
-        if (order.getFinalAmount() == order.getPaidAmount()) {
+        if (order.getPaidAmount() == order.getFinalAmount()) {
             order.setStatus(OrderStatus.PAID);
         }
         for (OrderItem orderItem : orderItemController.getOrderItems()) {
-            System.out.println(orderItem);
             if (orderItem.getQuantity() <= 0) {
                 orderItemDao.delete(orderItem);
             } else {
                 orderItemDao.save(orderItem);
             }
         }
+        order.setTotalAmount(orderItemController.getTotalAmount());
         orderDao.update(order);
         tableDao.update(order.getTable());
         return true;

@@ -16,6 +16,12 @@ public class OrderItemController {
     private JPanel panelOrderItem;
     private int idOrder;
 
+    public interface Event {
+
+        public abstract void onChange();
+    }
+    Event onQuantityChange;
+
     public OrderItemController() {
     }
 
@@ -41,6 +47,9 @@ public class OrderItemController {
             OrderItemPane pane = new OrderItemPane(orderItem);
             pane.getSpnQuantity().addChangeListener(evt -> {
                 orderItem.setQuantity((int) pane.getSpnQuantity().getValue());
+                if (onQuantityChange != null) {
+                    onQuantityChange.onChange();
+                }
             });
             panelOrderItem.add(pane);
         }
@@ -80,4 +89,9 @@ public class OrderItemController {
         orderItems.add(item);
         renderOrderItem();
     }
+
+    public void setOnQuantityChange(Event onQuantityChange) {
+        this.onQuantityChange = onQuantityChange;
+    }
+
 }

@@ -138,6 +138,11 @@ public class ToppingPopupView extends javax.swing.JFrame {
         jPanel1.add(jLabel5, gridBagConstraints);
 
         btnMinus.setText("-");
+        btnMinus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMinusActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -146,6 +151,11 @@ public class ToppingPopupView extends javax.swing.JFrame {
         jPanel1.add(btnMinus, gridBagConstraints);
 
         btnPlus.setText("+");
+        btnPlus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlusActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
@@ -263,6 +273,16 @@ public class ToppingPopupView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlusActionPerformed
+        int quantity = (int) spnQuantity.getValue();
+        spnQuantity.setValue(quantity + 1);
+    }//GEN-LAST:event_btnPlusActionPerformed
+
+    private void btnMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinusActionPerformed
+        int quantity = (int) spnQuantity.getValue();
+        spnQuantity.setValue(Math.max(0, quantity - 1));
+    }//GEN-LAST:event_btnMinusActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel VND;
