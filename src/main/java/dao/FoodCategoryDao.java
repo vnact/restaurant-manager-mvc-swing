@@ -93,4 +93,16 @@ public class FoodCategoryDao implements Dao<FoodCategory> {
         return null;
     }
 
+    public ArrayList<FoodCategory> searchByKey(String key, String word) throws SQLException {
+        ArrayList<FoodCategory> foodCategorys = new ArrayList<>();
+        Statement statement = conn.createStatement();
+        String query = "SELECT * FROM `employee` WHERE " + key + " LIKE '%" + word + "%';";
+        ResultSet rs = statement.executeQuery(query);
+        while (rs.next()) {
+            FoodCategory foodCategory = FoodCategory.getFromResultSet(rs);
+            foodCategorys.add(foodCategory);
+        }
+        return foodCategorys;
+    }
+
 }

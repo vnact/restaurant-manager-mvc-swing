@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import models.Customer;
 import models.FoodItem;
 
 /**
@@ -105,7 +104,7 @@ public class FoodItemDao implements Dao<FoodItem> {
     public ArrayList<FoodItem> searchByKey(String key, String word) throws SQLException {
         ArrayList<FoodItem> fooditems = new ArrayList<>();
         Statement statement = conn.createStatement();
-        String query = "SELECT * FROM Food_Item WHERE " + key + " LIKE '%" + word + "%';";
+        String query = "SELECT * FROM `food_item` WHERE " + key + " LIKE '%" + word + "%';";
         ResultSet rs = statement.executeQuery(query);
         while (rs.next()) {
             FoodItem fooditem = FoodItem.getFromResultSet(rs);

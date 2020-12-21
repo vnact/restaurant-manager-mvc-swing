@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import models.Customer;
-import models.Employee;
 
 /**
  * @createAt Nov 25, 2020
@@ -92,7 +91,7 @@ public class CustomerDao implements Dao<Customer> {
     public ArrayList<Customer> searchByKey(String key, String word) throws SQLException {
         ArrayList<Customer> customers = new ArrayList<>();
         Statement statement = conn.createStatement();
-        String query = "SELECT * FROM Customer WHERE " + key + " LIKE '%" + word + "%';";
+        String query = "SELECT * FROM `customer` WHERE " + key + " LIKE '%" + word + "%';";
         ResultSet rs = statement.executeQuery(query);
         while (rs.next()) {
             Customer customer = Customer.getFromResultSet(rs);

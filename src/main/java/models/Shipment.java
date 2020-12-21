@@ -12,6 +12,7 @@ public class Shipment extends Model {
 
     private int idOrder, idCustomer;
     private String shipperName, shipperPhoneNumber, notice;
+    private int shipCost;
     private ShipmentStatus status;
     private Timestamp startDate, endDate;
     private Order order;
@@ -104,6 +105,14 @@ public class Shipment extends Model {
         if (customer != null) {
             this.idCustomer = customer.getId();
         }
+    }
+
+    public int getShipCost() {
+        return shipCost;
+    }
+
+    public void setShipCost(int shipCost) {
+        this.shipCost = shipCost;
     }
 
     @Override
