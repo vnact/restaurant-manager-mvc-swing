@@ -5,7 +5,6 @@
  */
 package views;
 
-import controllers.EmployeeDashboardController;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -160,8 +159,8 @@ public class EmployeeDashboardView extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.err.println("Khởi tạo look and feel thất bại!");
         }
-        EmployeeDashboardView view = new views.EmployeeDashboardView();
-        EmployeeDashboardController controller = new EmployeeDashboardController(view);
+//        EmployeeDashboardView view = new views.EmployeeDashboardView();
+//        EmployeeDashboardController controller = new EmployeeDashboardController(view);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -172,4 +171,5 @@ public class EmployeeDashboardView extends javax.swing.JFrame {
     private javax.swing.JPanel panelLeft;
     private javax.swing.JPanel panelSideBar;
     // End of variables declaration//GEN-END:variables
+
 }

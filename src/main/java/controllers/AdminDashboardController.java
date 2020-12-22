@@ -85,13 +85,18 @@ public class AdminDashboardController {
         MenuItem menuQLNV = new MenuItem("QLNV", im.getIcon("user_groups_25px.png"), "Quản lý nhân viên");
         MenuItem menuQLHH = new MenuItem("QLHH", im.getIcon("cardboard_box_25px.png"), "Quản lý hàng hóa");
         MenuItem menuQLDH = new MenuItem("QLDH", im.getIcon("shopping_cart_25px.png"), "Quản lý đặt hàng");
-        MenuItem menuTK = new MenuItem("TK", im.getIcon("futures_25px.png"), "Thống kê");
+        MenuItem menuTK = new MenuItem("TK", im.getIcon("increase_25px.png"), "Thống kê");
         menuQLHH.addSubMenu(new MenuItem("QLLM", null, "Quản lý loại món"));
-        menuQLHH.addSubMenu(new MenuItem("QLMA", null, "Quản lý món ăn"));
-        menuQLDH.addSubMenu(new MenuItem("QLB", null, "Quản lý bàn"));
-        menuQLDH.addSubMenu(new MenuItem("QLKH", null, "Quản lý khách hàng"));
-        menuQLDH.addSubMenu(new MenuItem("QLDDH", null, "Quản lý đơn đặt hàng"));
-        menuQLDH.addSubMenu(new MenuItem("QLS", null, "Quản lý giao hàng"));
+        menuQLHH.addSubMenu(new MenuItem("QLMA", im.getIcon("food_25px.png"), "Quản lý món ăn"));
+        menuQLDH.addSubMenu(new MenuItem("QLB", im.getIcon("table_25px.png"), "Quản lý bàn"));
+        menuQLDH.addSubMenu(new MenuItem("QLKH", im.getIcon("technical_support_25px.png"), "Quản lý khách hàng"));
+        menuQLDH.addSubMenu(new MenuItem("QLDDH", im.getIcon("purchase_order_25px.png"), "Quản lý đơn đặt hàng"));
+        menuQLDH.addSubMenu(new MenuItem("QLS", im.getIcon("truck_25px.png"), "Quản lý giao hàng"));
+        MenuItem menuTKNV = new MenuItem("TKNV", im.getIcon("user_25px.png"), "Thống kê nhân viên");
+        menuTK.addSubMenu(menuTKNV);
+        menuTK.addSubMenu(new MenuItem("TKHH", null, "Thống kê hàng hóa"));
+        menuTK.addSubMenu(new MenuItem("TKDT", null, "Thống kê doanh thu"));
+        menuTKNV.addSubMenu(new MenuItem("TKDN", null, "Thống kê phiên làm việc"));
         sideBarController.addMenu(menuQLNV, menuQLHH, menuQLDH, menuTK);
         sideBarController.addMenuEvent(menuBarEvent);
     }

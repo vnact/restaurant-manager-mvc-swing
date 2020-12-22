@@ -7,7 +7,6 @@ import java.awt.event.KeyEvent;
 import main.Runner;
 import models.Employee;
 import views.AdminDashboardView;
-import views.EmployeeDashboardView;
 import views.LoginView;
 import views.admin.HomeView;
 
@@ -17,25 +16,25 @@ import views.admin.HomeView;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class LoginController {
-
+    
     private LoginView view;
     EmployeeDao employeeDao = new EmployeeDao();
-
+    
     public LoginController(LoginView view) {
         this.view = view;
         view.setVisible(true);
         addEvent();
     }
-
+    
     public LoginView getView() {
         return view;
     }
-
+    
     public void setView(LoginView view) {
         this.view = view;
         view.setVisible(true);
     }
-
+    
     public void login() {
         String username = view.getTxtUsername().getText();
         String password = new String(view.getTxtPassword().getPassword());
@@ -50,7 +49,7 @@ public class LoginController {
                 return;
             }
             Runner.setSession(employee);
-
+            
             switch (employee.getPermissionName()) {
                 case "Quản lý":
                     //Admin controller
@@ -59,8 +58,9 @@ public class LoginController {
                     view.dispose();// Tắt form đăng nhập
                     break;
                 case "Nhân viên":
-                    EmployeeDashboardController controller1 = new EmployeeDashboardController(new EmployeeDashboardView());
-                    controller1.getView().setPanel(new HomeView());
+                    view.showMessage("Bạn là nhân viên!");
+//                    EmployeeDashboardController controller1 = new EmployeeDashboardController(new EmployeeDashboardView());
+//                    controller1.getView().setPanel(new HomeView());
                     view.dispose();// Tắt form đăng nhập
                     break;
                 //Seller Controller
@@ -102,5 +102,5 @@ public class LoginController {
             }
         });
     }
-
+    
 }
