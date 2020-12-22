@@ -554,6 +554,7 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    @Override
     public JButton getBtnCancel() {
         return btnCancel;
     }
@@ -598,6 +599,7 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         return lbPaidAmount;
     }
 
+    @Override
     public JLabel getLbTitle() {
         return lbTitle;
     }

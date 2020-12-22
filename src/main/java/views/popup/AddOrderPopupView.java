@@ -49,7 +49,7 @@ public class AddOrderPopupView extends javax.swing.JFrame implements PopupView {
         cboTable = new javax.swing.JComboBox<>();
         cboType = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 40));
         jPanel1.setLayout(new java.awt.GridBagLayout());
