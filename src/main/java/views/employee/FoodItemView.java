@@ -3,19 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.employee;
+package views.employee;
+
+import java.awt.Dimension;
 
 /**
  *
  * @author Admin
  */
-public class menuView extends javax.swing.JPanel {
+public class FoodItemView extends javax.swing.JPanel {
 
     /**
-     * Creates new form menuView
+     * Creates new form FoodItemView
      */
-    public menuView() {
+    public FoodItemView() {
         initComponents();
+        Dimension size = new Dimension(200, 200);
     }
 
     /**
@@ -27,15 +30,19 @@ public class menuView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setMaximumSize(new java.awt.Dimension(200, 200));
+        setMinimumSize(new java.awt.Dimension(200, 200));
+        setPreferredSize(new java.awt.Dimension(200, 200));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 200, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 204, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
