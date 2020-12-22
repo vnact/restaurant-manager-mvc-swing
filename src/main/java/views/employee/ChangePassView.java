@@ -198,4 +198,5 @@ public class ChangePassView extends javax.swing.JFrame {
     private javax.swing.JTextField txtNewPass;
     private javax.swing.JTextField txtOldPass;
     // End of variables declaration//GEN-END:variables
+
 }
