@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import controller.employee.inforController;
 import controllers.admin.OrderManagerController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ import views.LoginView;
 import views.admin.HomeView;
 import views.admin.MenuItem;
 import views.admin.OrderManagerView;
+import views.employee.inforView;
 
 /**
  *
@@ -26,10 +28,12 @@ public class EmployeeDashboardController {
 
     private EmployeeDashboardView view;
     HomeView homePane = new HomeView();
+    inforController ic = new inforController();
+    inforView iv = new inforView();
     OrderManagerController orderManagerController = new OrderManagerController();
     OrderManagerView orderManagerPaneView = new OrderManagerView();
     SideBarController sideBarController = new SideBarController();
-    JPanel[] cards = {homePane, orderManagerPaneView};
+    JPanel[] cards = {homePane, orderManagerPaneView, iv};
     SideBarController.MenuBarEvent menuBarEvent = sideBarController.new MenuBarEvent() { // 
         @Override
         public void onSelectMenuItem(MenuItem item) {
@@ -90,6 +94,9 @@ public class EmployeeDashboardController {
                 orderManagerController.updateDataByE();
                 break;
             case "IE":
+                view.setPanel(iv);
+                ic.setView(iv);
+                break;
 
             default:
                 view.setPanel(homePane);

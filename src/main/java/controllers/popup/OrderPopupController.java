@@ -37,6 +37,7 @@ public class OrderPopupController extends PopupController {
     OrderItemController orderItemController = new OrderItemController();
     ToppingPopupController toppingPopupController = new ToppingPopupController();
     DecimalFormat formatter = new DecimalFormat("###,###,###");
+    Employee session = Runner.getSession();
 
     public void add(OrderManagerController parrent, AddOrderPopupView view) {
         setView(view);
@@ -59,7 +60,11 @@ public class OrderPopupController extends PopupController {
                 boolean addSuccess = addOrder();
                 if (addSuccess) {
                     view.dispose();
-                    parrent.updateData();
+                    if (session.getPermissionId() == 1) {
+                        parrent.updateData();
+                    } else {
+                        parrent.updateDataByE();
+                    }
                     view.showMessage("Thêm hóa đơn thành công!");
                 }
             } catch (Exception ex) {

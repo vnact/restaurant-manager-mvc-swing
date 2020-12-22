@@ -79,6 +79,19 @@ public class EmployeeDao implements Dao<Employee> {
         stmt.executeUpdate();
     }
 
+    public void updatePass(Employee t) throws SQLException {
+        if (t == null) {
+            throw new SQLException("Employee rong");
+        }
+        String query = "UPDATE `employee` SET "
+                + " `password` = ? "
+                + "WHERE `id` = ?;";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setNString(1, t.getPassword());
+        stmt.setInt(2, t.getId());
+        stmt.executeUpdate();
+    }
+
     @Override
     public void delete(Employee t) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("DELETE FROM `employee` WHERE `employee`.`id` = ?");
