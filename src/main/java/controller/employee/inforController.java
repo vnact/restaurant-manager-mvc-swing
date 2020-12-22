@@ -43,44 +43,41 @@ public class inforController {
         view.getBtnChangePass().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                ChangePassView CPview = new ChangePassView();
-                CPview.setVisible(true);
-                CPview.setLocationRelativeTo(null);
-                CPview.getBtnCancel().addActionListener(new ActionListener() {
+                ChangePassView changePassView = new ChangePassView();
+                changePassView.setVisible(true);
+                changePassView.setLocationRelativeTo(null);
+                changePassView.getBtnCancel().addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        CPview.dispose();
+                        changePassView.dispose();
                     }
                 });
-                CPview.getBtnConfrim().addActionListener(new ActionListener() {
+                changePassView.getBtnConfrim().addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        String oldPass = CPview.getTxtOldPass().getText(),
-                                newPass = CPview.getTxtNewPass().getText(),
-                                confrimPass = CPview.getTxtConfrimPass().getText();
-                        if (oldPass.isEmpty() || newPass.isEmpty() || confrimPass.isEmpty()) {
-                            JOptionPane.showMessageDialog(CPview, "Vui lòng điền đầy đủ thông tin");
-                        }
-                        if (!oldPass.equals(session.getPassword())) {
-                            System.out.println(oldPass);
-                            JOptionPane.showMessageDialog(CPview, "Mật khẩu cũ không đúng ");
-                        } else {
-                            if (!newPass.equals(newPass)) {
-                                JOptionPane.showMessageDialog(CPview, "Xác nhận mật khẩu sai !");
-                            } else {
-                                try {
-                                    EmployeeDao eDao = new EmployeeDao();
-                                    Employee employee = new Employee();
-                                    employee.setId(session.getId());
-                                    employee.setPassword(newPass);
-                                    eDao.updatePass(employee);
-                                    JOptionPane.showMessageDialog(CPview, "Thay đổi thành công !");
-                                } catch (Exception ee) {
-                                    ee.printStackTrace();
-                                }
-
+                        try {
+                            String oldPass = changePassView.getTxtOldPass().getText(),
+                                    newPass = changePassView.getTxtNewPass().getText(),
+                                    confrimPass = changePassView.getTxtConfrimPass().getText();
+                            if (oldPass.isEmpty() || newPass.isEmpty() || confrimPass.isEmpty()) {
+                                throw new Exception("Vui lòng điền đầy đủ thông tin");
                             }
+                            if (!oldPass.equals(session.getPassword())) {
+                                System.out.println(oldPass);
+                                throw new Exception("Mật khẩu cũ không đúng ");
+                            } else if (!newPass.equals(newPass)) {
+                                throw new Exception("Xác nhận mật khẩu sai !");
+                            } else {
+                                EmployeeDao employeeDao = new EmployeeDao();
+                                Employee employee = session;
+                                employee.setPassword(newPass);
+                                employeeDao.update(employee);
+                                JOptionPane.showMessageDialog(changePassView, "Thay đổi thành công !");
+                            }
+                        } catch (Exception ee) {
+                            ee.printStackTrace();
                         }
+
                     }
 
                 });
