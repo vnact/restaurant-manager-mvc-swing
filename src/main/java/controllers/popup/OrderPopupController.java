@@ -28,7 +28,7 @@ import views.popup.ToppingPopupView;
  * Popup controller mẫu
  */
 public class OrderPopupController extends PopupController {
-    
+
     OrderDao orderDao = new OrderDao();
     EmployeeDao employeeDao = new EmployeeDao();
     TableDao tableDao = new TableDao();
@@ -37,7 +37,7 @@ public class OrderPopupController extends PopupController {
     OrderItemController orderItemController = new OrderItemController();
     ToppingPopupController toppingPopupController = new ToppingPopupController();
     DecimalFormat formatter = new DecimalFormat("###,###,###");
-    
+
     public void add(OrderManagerController parrent, AddOrderPopupView view) {
         setView(view);
         try {
@@ -66,9 +66,9 @@ public class OrderPopupController extends PopupController {
                 view.showError(ex);
             }
         });
-        
+
     }
-    
+
     public void edit(OrderManagerController parrent, EditOrderPopupView view, Order order) {
         setView(view);
         orderItemController.setPanelOrderItem(view.getPnlOrderItem());
@@ -78,9 +78,9 @@ public class OrderPopupController extends PopupController {
         });
         foodItemController.setPanelFoodCategory(view.getPnlFoodCategory());
         foodItemController.setPanelFoodItem(view.getPnlFoodItem());
-        
+
         Employee employee = Runner.getSession();
-        
+
         if (employee != null) {
             view.getLbEmployeeName().setText(employee.getName());
         }
@@ -91,7 +91,7 @@ public class OrderPopupController extends PopupController {
                     view.getTbComboBoxModel().addElement(table);
                 }
             }
-            
+
             for (OrderType ot : OrderType.values()) { // Hiển thị loại hóa đơn
                 view.getCboType().addItem(ot.getName());
             }
@@ -107,7 +107,7 @@ public class OrderPopupController extends PopupController {
             view.getSpnDiscount().setValue(order.getDiscount());
             view.getCboType().setSelectedItem(order.getType().getName());
             view.getLbDiscount().setText(order.getDiscount() + "");
-            
+
         } catch (Exception e) {
             view.dispose();
             view.showError(e);
@@ -147,9 +147,9 @@ public class OrderPopupController extends PopupController {
                 view.showError(ex);
             }
         });
-        
+
     }
-    
+
     public void updateAmount(EditOrderPopupView view, Order order) {
         order.setTotalAmount(orderItemController.getTotalAmount());
         view.getLbDiscount().setText(order.getDiscount() + "");
@@ -157,7 +157,7 @@ public class OrderPopupController extends PopupController {
         view.getLbFinalAmount().setText(formatter.format(order.getFinalAmount()));
         view.getLbTotalAmount().setText(formatter.format(order.getTotalAmount()));
     }
-    
+
     public boolean addOrder() throws Exception {
         AddOrderPopupView view = (AddOrderPopupView) this.getView();
         Order e = new Order();
@@ -180,7 +180,7 @@ public class OrderPopupController extends PopupController {
             }
             table.setStatus(TableStatus.SERVING);
         }
-        
+
         Order order = new Order();
         order.setEmployee(employee);
         order.setTable(table);
@@ -191,7 +191,7 @@ public class OrderPopupController extends PopupController {
         tableDao.update(table);
         return true;
     }
-    
+
     public boolean editOrder(Order order) throws Exception {
         EditOrderPopupView view = (EditOrderPopupView) this.getView();
         if (order.getTable() == null) {

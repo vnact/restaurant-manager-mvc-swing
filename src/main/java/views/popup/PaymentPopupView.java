@@ -11,12 +11,12 @@ package views.popup;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class PaymentPopupView extends javax.swing.JFrame {
-    
+
     public PaymentPopupView() {
         initComponents();
         btnOK.putClientProperty(this, this);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

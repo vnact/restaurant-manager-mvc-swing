@@ -16,7 +16,7 @@ import views.popup.CustomerPopupView;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class CustomerManagerController extends ManagerController {
-    
+
     CustomerDao customerDao = new CustomerDao();
     CustomerPopupController popupController = new CustomerPopupController();
 
@@ -24,12 +24,12 @@ public class CustomerManagerController extends ManagerController {
     public CustomerManagerController() {
         super();
     }
-    
+
     @Override
     public void actionAdd() {
         popupController.add(this, new CustomerPopupView());
     }
-    
+
     @Override
     public void actionDelete() {
         int selectedIds[] = view.getSelectedIds();
@@ -45,7 +45,7 @@ public class CustomerManagerController extends ManagerController {
             view.showError(e);
         }
     }
-    
+
     @Override
     public void actionEdit() {
         try {
@@ -63,7 +63,7 @@ public class CustomerManagerController extends ManagerController {
             view.showError(e);
         }
     }
-    
+
     @Override
     public void updateData() {
         try {
@@ -73,7 +73,7 @@ public class CustomerManagerController extends ManagerController {
             view.showError(e);
         }
     }
-    
+
     @Override
     public void actionSearch() {
         try {
@@ -83,5 +83,5 @@ public class CustomerManagerController extends ManagerController {
             view.showError(e);
         }
     }
-    
+
 }

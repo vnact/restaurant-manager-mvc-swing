@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import main.Runner;
 import models.Employee;
 import views.AdminDashboardView;
+import views.EmployeeDashboardView;
 import views.LoginView;
 import views.admin.HomeView;
 
@@ -58,9 +59,11 @@ public class LoginController {
                     view.dispose();// Tắt form đăng nhập
                     break;
                 case "Nhân viên":
-                    //Seller Controller
-                    view.dispose();
+                    EmployeeDashboardController controller1 = new EmployeeDashboardController(new EmployeeDashboardView());
+                    controller1.getView().setPanel(new HomeView());
+                    view.dispose();// Tắt form đăng nhập
                     break;
+                //Seller Controller
                 case "Nghỉ việc":
                     view.showError("Tài khoản của bạn đã bị khóa.\nVui lòng liên hệ admin để biết thêm chi tiết");
                 default:

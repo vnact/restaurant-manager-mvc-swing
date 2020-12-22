@@ -12,15 +12,15 @@ import views.popup.ToppingPopupView;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class ToppingPopupController {
-    
+
     FoodItemDao foodItemDao = new FoodItemDao();
     DecimalFormat formatter = new DecimalFormat("###,###,###");
-    
+
     interface Event {
-        
+
         public abstract void onSelect(OrderItem item);
     }
-    
+
     public void add(ToppingPopupView view, FoodItem foodItem, Event event) {
         view.setVisible(true);
         view.getLbFoodName().setText(foodItem.getName());
@@ -57,7 +57,7 @@ public class ToppingPopupController {
             updateAmount(view);
         });
     }
-    
+
     private void updateAmount(ToppingPopupView view) {
         int amount = (int) view.getSpnFoodPrice().getValue();
         FoodItem topping = (FoodItem) view.getCboTopping().getSelectedItem();
@@ -68,7 +68,7 @@ public class ToppingPopupController {
         amount *= quantity;
         view.getLbAmount().setText(formatter.format(amount));
     }
-    
+
     public OrderItem addItem(FoodItem foodItem, ToppingPopupView view) {
         OrderItem orderItem = new OrderItem();
         try {
