@@ -76,8 +76,8 @@ public class inforController {
                             }
                         } catch (Exception ee) {
                             ee.printStackTrace();
+                            JOptionPane.showMessageDialog(changePassView, ee.getMessage());
                         }
-
                     }
 
                 });
