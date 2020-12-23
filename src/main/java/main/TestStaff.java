@@ -18,7 +18,7 @@ public class TestStaff {
         try {
             javax.swing.UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
             System.out.println("Khởi tạo look and feel thành công!");
-            Employee e = employeeDao.get(1);
+            Employee e = employeeDao.get(2);
             Runner.setSession(e);
             EmployeeDashboardController controller1 = new EmployeeDashboardController(new EmployeeDashboardView());
             controller1.getView().setPanel(new HomeView());

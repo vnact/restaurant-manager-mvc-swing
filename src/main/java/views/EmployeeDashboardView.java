@@ -106,6 +106,7 @@ public class EmployeeDashboardView extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         panelLeft = new javax.swing.JPanel();
         panelHeader = new javax.swing.JPanel();
@@ -125,13 +126,21 @@ public class EmployeeDashboardView extends javax.swing.JFrame {
         panelHeader.setPreferredSize(new java.awt.Dimension(200, 50));
         panelHeader.setLayout(new java.awt.GridBagLayout());
 
-        lbName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbName.setForeground(new java.awt.Color(255, 255, 255));
-        lbName.setText("Trần Đức Cường  ");
-        panelHeader.add(lbName, new java.awt.GridBagConstraints());
+        lbName.setText("Trần Đức Cường");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.BASELINE;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
+        panelHeader.add(lbName, gridBagConstraints);
 
         btnLogout.setText("Thoát");
-        panelHeader.add(btnLogout, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.BASELINE;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
+        panelHeader.add(btnLogout, gridBagConstraints);
 
         panelLeft.add(panelHeader, java.awt.BorderLayout.PAGE_START);
         panelLeft.add(panelSideBar, java.awt.BorderLayout.CENTER);
