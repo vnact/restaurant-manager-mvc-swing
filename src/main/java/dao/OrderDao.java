@@ -117,6 +117,12 @@ public class OrderDao implements Dao<Order> {
         stmt.executeUpdate();
     }
 
+    public void deleteItems(int idOder) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM `order_item` WHERE `idOrder` = ?");
+        stmt.setInt(1, idOder);
+        stmt.executeUpdate();
+    }
+
     public ArrayList<Order> searchByKey(String key, String word) throws SQLException {
         ArrayList<Order> orders = new ArrayList<>();
         Statement statement = conn.createStatement();

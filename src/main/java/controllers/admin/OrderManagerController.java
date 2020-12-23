@@ -3,12 +3,15 @@ package controllers.admin;
 import controllers.ManagerController;
 import controllers.popup.OrderPopupController;
 import dao.OrderDao;
+import dao.TableDao;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.YES_OPTION;
 import main.Runner;
 import models.Order;
+import models.Table;
+import utils.TableStatus;
 import views.admin.EmployeeManagerView;
 import views.popup.AddOrderPopupView;
 import views.popup.EditOrderPopupView;
@@ -22,13 +25,14 @@ import views.popup.EditOrderPopupView;
 public class OrderManagerController extends ManagerController {
 
     OrderDao orderDao = new OrderDao();
+    TableDao tableDao = new TableDao();
     OrderPopupController popupController = new OrderPopupController();
 
     public OrderManagerController() {
         super();
     }
 
-    public void updateDataByE() {
+    public void updateDataByEmployee() {
         try {
             ArrayList<Order> orders = orderDao.getByEmployee(Runner.getSession().getId());
             view.setTableData(orders);
@@ -68,11 +72,18 @@ public class OrderManagerController extends ManagerController {
     public void actionDelete() {
         int selectedIds[] = view.getSelectedIds();
         try {
-            if (JOptionPane.showConfirmDialog(null, "Xác nhận xóa hàng loạt?", "Xóa", ERROR_MESSAGE) != YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(null, "Không thể khổi phục\nXác nhận xóa hàng loạt?", "Xóa", ERROR_MESSAGE) != YES_OPTION) {
                 return;
             }
             for (int i = 0; i < selectedIds.length; i++) {
-                orderDao.deleteById(selectedIds[i]);
+                int id = selectedIds[i];
+                Order o = orderDao.get(id);
+                Table t = o.getTable();
+                t.setStatus(TableStatus.FREE);
+                orderDao.deleteItems(id); // Xóa item trong order 
+                tableDao.update(t); // Trả bàn
+                orderDao.deleteById(id); // Xóa order
+
             }
             updateData();
         } catch (Exception e) {

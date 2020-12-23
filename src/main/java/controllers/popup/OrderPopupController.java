@@ -62,10 +62,10 @@ public class OrderPopupController extends PopupController {
                 boolean addSuccess = addOrder();
                 if (addSuccess) {
                     view.dispose();
-                    if (session.getPermissionId() == 1) {
+                    if (session.getPermissionName().equalsIgnoreCase("Quản lý")) {
                         parrent.updateData();
                     } else {
-                        parrent.updateDataByE();
+                        parrent.updateDataByEmployee();
                     }
                     view.showMessage("Thêm hóa đơn thành công!");
                 }
@@ -162,12 +162,8 @@ public class OrderPopupController extends PopupController {
                 }
                 int paidAmount = Integer.parseInt(rawInput);
                 if (order.getFinalAmount() > paidAmount) {
-                    order.setStatus(OrderStatus.UNPAID);
-                    order.setPayDate(null);
                     JOptionPane.showMessageDialog(null, "Bạn còn phải thanh toán " + formatter.format(order.getFinalAmount() - paidAmount) + " VND");
                 } else {
-                    order.setStatus(OrderStatus.PAID);
-                    order.setPayDate(new Timestamp(System.currentTimeMillis()));
                     JOptionPane.showMessageDialog(null, "Bạn đã thanh toán xong");
                 }
                 order.setPaidAmount(paidAmount);
@@ -246,6 +242,14 @@ public class OrderPopupController extends PopupController {
             } else {
                 orderItemDao.save(orderItem);
             }
+        }
+        if (order.getFinalAmount() > order.getPaidAmount()) {// Chưa thanh toán 
+            order.setStatus(OrderStatus.UNPAID);
+            order.setPayDate(null);
+        } else {// Thanh toán
+            order.setStatus(OrderStatus.PAID);
+            order.setPayDate(new Timestamp(System.currentTimeMillis()));
+            order.getTable().setStatus(TableStatus.FREE); // Trả bàn
         }
         order.setTotalAmount(orderItemController.getTotalAmount());
         orderDao.update(order);

@@ -91,7 +91,7 @@ public class EmployeeDashboardController {
 //                ManagerPaneView pnl = orderManagerPaneView;
                 view.setPanel(orderManagerPaneView);
                 orderManagerController.setView(orderManagerPaneView);
-                orderManagerController.updateDataByE();
+                orderManagerController.updateDataByEmployee();
                 break;
             case "IE":
                 view.setPanel(iv);
