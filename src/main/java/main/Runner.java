@@ -14,17 +14,7 @@ public class Runner {
     private static Employee session;
 
     public static Employee getSession() {
-        if (session == null) {
-            createSession();// Tạo phiên đăng nhập ảo(test)
-        }
         return session;
-    }
-
-    public static void createSession() {
-        Employee e = new Employee();
-        e.setName("Tester");
-        e.setId(1);
-        setSession(e);
     }
 
     public static void setSession(Employee session) {

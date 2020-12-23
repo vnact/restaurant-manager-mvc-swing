@@ -1,6 +1,5 @@
 package views;
 
-import controllers.AdminDashboardController;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -152,17 +151,6 @@ public class AdminDashboardView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public static void main(String[] args) {
-        //Set up look and feel
-        try {
-            javax.swing.UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
-            System.out.println("Khởi tạo look and feel thành công!");
-        } catch (Exception ex) {
-            System.err.println("Khởi tạo look and feel thất bại!");
-        }
-        AdminDashboardView v = new AdminDashboardView();
-        AdminDashboardController controller = new AdminDashboardController(v);
-    }
     /**
      * @param args the command line arguments
      */

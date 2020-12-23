@@ -15,9 +15,9 @@ import views.popup.EmployeePopupView;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class EmployeePopupController extends PopupController {
-
+    
     EmployeeDao employeeDao = new EmployeeDao();
-
+    
     public void add(EmployeeManagerController parrent, EmployeePopupView view) {
         setView(view);
         for (EmployeePermission permission : EmployeePermission.values()) {
@@ -38,9 +38,9 @@ public class EmployeePopupController extends PopupController {
                 }
             }
         });
-
+        
     }
-
+    
     public void edit(EmployeeManagerController parrent, EmployeePopupView view, Employee employee) {
         setView(view);
         for (EmployeePermission permission : EmployeePermission.values()) {
@@ -51,6 +51,7 @@ public class EmployeePopupController extends PopupController {
         view.getTxtPassword().setText(employee.getPassword());
         view.getTxtName().setText(employee.getName());
         view.getTxtPhoneNumber().setText(employee.getPhoneNumber());
+        view.getCboPermission().setSelectedItem(employee.getPermission().getName());
         view.getBtnOK().setText("Cập nhật");
         view.getBtnOK().addActionListener(new ActionListener() {
             @Override
@@ -67,9 +68,9 @@ public class EmployeePopupController extends PopupController {
                 }
             }
         });
-
+        
     }
-
+    
     public boolean addEmployee() throws Exception {
         EmployeePopupView view = (EmployeePopupView) this.getView();
         String username = view.getTxtUsername().getText(),
@@ -91,7 +92,7 @@ public class EmployeePopupController extends PopupController {
         employeeDao.save(e);
         return true;
     }
-
+    
     public boolean editEmployee(Employee e) throws Exception {
         EmployeePopupView view = (EmployeePopupView) this.getView();
         String username = view.getTxtUsername().getText(),

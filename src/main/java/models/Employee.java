@@ -60,22 +60,6 @@ public class Employee extends Model {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getPermissionId() {
-        return permissionId;
-    }
-
-    public void setPermissionId(int permissionId) {
-        this.permissionId = permissionId;
-    }
-
-    public String getPermissionName() {
-        return permissionName;
-    }
-
-    public void setPermissionName(String permissionName) {
-        this.permissionName = permissionName;
-    }
-
     public Date getStartDate() {
         return startDate;
     }
@@ -108,8 +92,6 @@ public class Employee extends Model {
         e.setPassword(rs.getNString("password"));
         e.setName(rs.getNString("name"));
         e.setPhoneNumber(rs.getNString("phoneNumber"));
-//        e.setPermissionName(rs.getNString("permissionName"));
-//        e.setPermissionId(rs.getInt("permissionId"));
         e.setStartDate(rs.getDate("startDate"));
         e.setPermission(EmployeePermission.getById(rs.getNString("permission")));
         return e;
