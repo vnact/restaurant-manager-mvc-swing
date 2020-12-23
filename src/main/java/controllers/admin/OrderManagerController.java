@@ -28,10 +28,6 @@ public class OrderManagerController extends ManagerController {
         super();
     }
 
-    public void setView(EmployeeManagerView view) {
-        super.setView(view);
-    }
-
     public void updateDataByE() {
         try {
             ArrayList<Order> orders = orderDao.getByEmployee(Runner.getSession().getId());
@@ -39,6 +35,10 @@ public class OrderManagerController extends ManagerController {
         } catch (Exception e) {
             view.showError(e);
         }
+    }
+
+    public void setView(EmployeeManagerView view) {
+        super.setView(view);
     }
 
     @Override

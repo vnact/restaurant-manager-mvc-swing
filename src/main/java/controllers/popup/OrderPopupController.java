@@ -8,7 +8,9 @@ import dao.EmployeeDao;
 import dao.OrderDao;
 import dao.OrderItemDao;
 import dao.TableDao;
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
+import javax.swing.JOptionPane;
 import main.Runner;
 import models.Employee;
 import models.Order;
@@ -150,6 +152,28 @@ public class OrderPopupController extends PopupController {
                 tableDao.update(nTable);
             } catch (Exception ex) {
                 view.showError(ex);
+            }
+        });
+        view.getBtnPaid().addActionListener(evt -> {
+            try {
+                String rawInput = JOptionPane.showInputDialog(null, "Nhập số tiền thanh toán!", order.getPaidAmount());
+                if (rawInput == null) {
+                    return;
+                }
+                int paidAmount = Integer.parseInt(rawInput);
+                if (order.getFinalAmount() > paidAmount) {
+                    order.setStatus(OrderStatus.UNPAID);
+                    order.setPayDate(null);
+                    JOptionPane.showMessageDialog(null, "Bạn còn phải thanh toán " + formatter.format(order.getFinalAmount() - paidAmount) + " VND");
+                } else {
+                    order.setStatus(OrderStatus.PAID);
+                    order.setPayDate(new Timestamp(System.currentTimeMillis()));
+                    JOptionPane.showMessageDialog(null, "Bạn đã thanh toán xong");
+                }
+                order.setPaidAmount(paidAmount);
+                updateAmount(view, order);
+            } catch (Exception e) {
+                view.showError(e);
             }
         });
 

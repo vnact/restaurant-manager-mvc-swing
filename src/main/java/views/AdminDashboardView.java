@@ -102,7 +102,6 @@ public class AdminDashboardView extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         panelSideBar = new javax.swing.JPanel();
         panelLayout = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Trang quản lý");
@@ -146,21 +145,8 @@ public class AdminDashboardView extends javax.swing.JFrame {
 
         panelLayout.setMaximumSize(new java.awt.Dimension(1000, 680));
         panelLayout.setMinimumSize(new java.awt.Dimension(1000, 680));
+        panelLayout.setPreferredSize(new java.awt.Dimension(1008, 680));
         panelLayout.setLayout(new java.awt.CardLayout());
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1008, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
-        );
-
-        panelLayout.add(jPanel1, "card2");
-
         getContentPane().add(panelLayout, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -182,7 +168,6 @@ public class AdminDashboardView extends javax.swing.JFrame {
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbName;
     private javax.swing.JPanel panelHeader;
     private javax.swing.JPanel panelLayout;

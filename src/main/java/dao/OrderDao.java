@@ -134,4 +134,7 @@ public class OrderDao implements Dao<Order> {
 //    public ArrayList<Order> searchByKey(String toString, String text) {
 //        throw new UnsupportedOperationException("Not supported yet.");
 //    }
+//    public ArrayList<Order> getByEmployee(int id) {
+//        throw new UnsupportedOperationException("Not supported yet.");
+//    }
 }

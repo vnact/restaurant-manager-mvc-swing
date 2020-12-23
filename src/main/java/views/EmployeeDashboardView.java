@@ -115,8 +115,8 @@ public class EmployeeDashboardView extends javax.swing.JFrame {
         panelLayout = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1207, 680));
-        setPreferredSize(new java.awt.Dimension(1207, 680));
+        setMinimumSize(new java.awt.Dimension(1208, 680));
+        setPreferredSize(new java.awt.Dimension(1208, 680));
 
         panelLeft.setPreferredSize(new java.awt.Dimension(200, 680));
         panelLeft.setLayout(new java.awt.BorderLayout());

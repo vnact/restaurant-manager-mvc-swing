@@ -16,7 +16,7 @@ public class MenuItem extends javax.swing.JPanel {
     private MenuItem parentMenu = null;
     private String id;
     public boolean active; // Biến kiểm tra xem có đang chọn không
-    Color inactiveChildColor = Color.decode("#D5DBDB"), inactiveParrentColor = Color.decode("#679999"), activeParrentColor = Color.decode("#F5CBA7"), activeChildColor = Color.decode("#EAFAF1"); // Màu tương ứng
+    Color inactiveChildColor = Color.decode("#D5DBDB"), inactiveParrentColor = Color.decode("#D5DBDB"), activeParrentColor = Color.decode("#F5CBA7"), activeChildColor = Color.decode("#EAFAF1"); // Màu tương ứng
 
     public MenuItem(String id, Icon icon, String menuName, MenuItem... subMenu) {
         initComponents();
