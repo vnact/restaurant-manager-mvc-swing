@@ -154,21 +154,26 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblData = new javax.swing.JTable();
-        btnAdd = new javax.swing.JButton();
-        btnEdit = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         btnDelete = new javax.swing.JButton();
         btnSync = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         txtSearch = new javax.swing.JTextField();
         cboSearchField = new javax.swing.JComboBox<>();
-        jSeparator1 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(118, 215, 196));
         setAlignmentX(0.0F);
         setAlignmentY(0.0F);
         setPreferredSize(new java.awt.Dimension(1008, 680));
+        setLayout(new java.awt.BorderLayout());
+
+        jScrollPane1.setOpaque(false);
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -186,17 +191,57 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
         tblData.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblData);
 
-        btnAdd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnAdd.setText("Thêm");
+        add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        btnEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnEdit.setText("Sửa");
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDelete.setText("Xóa");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 42;
+        gridBagConstraints.insets = new java.awt.Insets(15, 5, 15, 5);
+        jPanel1.add(btnDelete, gridBagConstraints);
 
         btnSync.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSync.setText("Sync");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 42;
+        gridBagConstraints.insets = new java.awt.Insets(15, 5, 15, 5);
+        jPanel1.add(btnSync, gridBagConstraints);
+
+        btnEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEdit.setText("Sửa");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 42;
+        gridBagConstraints.insets = new java.awt.Insets(15, 5, 15, 5);
+        jPanel1.add(btnEdit, gridBagConstraints);
+
+        btnAdd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAdd.setText("Thêm");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 42;
+        gridBagConstraints.insets = new java.awt.Insets(15, 5, 15, 5);
+        jPanel1.add(btnAdd, gridBagConstraints);
+
+        add(jPanel1, java.awt.BorderLayout.LINE_END);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 10));
+        jPanel2.setOpaque(false);
+        jPanel2.setPreferredSize(new java.awt.Dimension(1008, 40));
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         txtSearch.setBackground(new java.awt.Color(118, 215, 196));
         txtSearch.setForeground(new java.awt.Color(153, 153, 153));
@@ -204,6 +249,7 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
         txtSearch.setAlignmentX(0.0F);
         txtSearch.setAlignmentY(0.0F);
         txtSearch.setBorder(null);
+        txtSearch.setPreferredSize(new java.awt.Dimension(200, 25));
         txtSearch.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtSearchFocusGained(evt);
@@ -217,58 +263,13 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
                 txtSearchActionPerformed(evt);
             }
         });
+        jPanel2.add(txtSearch);
 
-        jSeparator1.setBackground(new java.awt.Color(205, 97, 85));
-        jSeparator1.setForeground(new java.awt.Color(205, 97, 85));
-        jSeparator1.setAlignmentX(0.0F);
-        jSeparator1.setAlignmentY(0.0F);
+        cboSearchField.setMinimumSize(new java.awt.Dimension(100, 25));
+        cboSearchField.setPreferredSize(new java.awt.Dimension(100, 25));
+        jPanel2.add(cboSearchField);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 824, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                    .addComponent(btnSync, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                    .addComponent(cboSearchField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(btnAdd)
-                        .addGap(49, 49, 49)
-                        .addComponent(btnEdit)
-                        .addGap(50, 50, 50)
-                        .addComponent(btnDelete)
-                        .addGap(52, 52, 52)
-                        .addComponent(btnSync))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cboSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdd, cboSearchField});
-
+        add(jPanel2, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSearchFocusGained
@@ -289,8 +290,9 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSync;
     private javax.swing.JComboBox<String> cboSearchField;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable tblData;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
