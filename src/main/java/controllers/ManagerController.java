@@ -1,8 +1,9 @@
 package controllers;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import views.admin.ManagerPaneView;
 
@@ -44,57 +45,36 @@ public abstract class ManagerController {
 
     private void addEvent() {
         // Hiển thị place holder 
-        view.getTxtSearch().addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        view.getTxtSearch().addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
                 if (view.getTxtSearch().getText().equals("Search")) {
                     view.getTxtSearch().setText("");
                     view.getTxtSearch().setForeground(Color.BLACK);
                 }
             }
 
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(FocusEvent evt) {
                 if (view.getTxtSearch().getText().equals("") || view.getTxtSearch().getText().equals("Search")) {
                     view.getTxtSearch().setText("Search");
                     view.getTxtSearch().setForeground(new Color(153, 153, 153));
                 }
             }
         });
-        view.getTxtSearch().addKeyListener(new java.awt.event.KeyAdapter() {
+        view.getTxtSearch().addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+            public void keyPressed(KeyEvent evt) {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
                     actionSearch();
                 }
             }
         });
         // Sự kiện bấm nút thêm
-        view.getBtnAdd().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                actionAdd();
-            }
-        });
+        view.getBtnAdd().addActionListener(evt -> actionAdd());
         // Sự kiện bấm nút sửa
-        view.getBtnEdit().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                actionEdit();
-            }
-        });
+        view.getBtnEdit().addActionListener(evt -> actionEdit());
         // Sự kiện bấm nút xóa
-        view.getBtnDelete().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                actionDelete();
-            }
-        });
+        view.getBtnDelete().addActionListener(evt -> actionDelete());
         // Sự kiện bấm nút cập nhật
-        view.getBtnSync().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                System.out.println("Sync Data");
-                updateData();
-            }
-        });
+        view.getBtnSync().addActionListener(evt -> updateData());
     }
 }

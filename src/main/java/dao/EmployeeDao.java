@@ -79,19 +79,6 @@ public class EmployeeDao implements Dao<Employee> {
         stmt.executeUpdate();
     }
 
-    public void updatePass(Employee t) throws SQLException {
-        if (t == null) {
-            throw new SQLException("Employee rong");
-        }
-        String query = "UPDATE `employee` SET "
-                + " `password` = ? "
-                + "WHERE `id` = ?;";
-        PreparedStatement stmt = conn.prepareStatement(query);
-        stmt.setNString(1, t.getPassword());
-        stmt.setInt(2, t.getId());
-        stmt.executeUpdate();
-    }
-
     @Override
     public void delete(Employee t) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("DELETE FROM `employee` WHERE `employee`.`id` = ?");
@@ -101,7 +88,7 @@ public class EmployeeDao implements Dao<Employee> {
 
     @Override
     public void deleteById(int id) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("DELETE FROM `employee`  ` WHERE `employee`.`id` = ?");
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM `employee` WHERE `employee`.`id` = ?");
         stmt.setInt(1, id);
         stmt.executeUpdate();
     }
