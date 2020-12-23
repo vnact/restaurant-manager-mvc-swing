@@ -51,20 +51,20 @@ public class LoginController {
             }
             Runner.setSession(employee);
 
-            switch (employee.getPermissionName()) {
-                case "Quản lý":
+            switch (employee.getPermission()) {
+                case MANAGER:
                     //Admin controller
                     AdminDashboardController controller = new AdminDashboardController(new AdminDashboardView());
                     controller.getView().setPanel(new HomeView());
                     view.dispose();// Tắt form đăng nhập
                     break;
-                case "Nhân viên":
+                case STAFF:
                     EmployeeDashboardController controller1 = new EmployeeDashboardController(new EmployeeDashboardView());
                     controller1.getView().setPanel(new HomeView());
-                    view.dispose();// Tắt form đăng nhập
+                    view.dispose();// Tắt form đăng nhập                    
                     break;
                 //Seller Controller
-                case "Nghỉ việc":
+                case INACTIVE:
                     view.showError("Tài khoản của bạn đã bị khóa.\nVui lòng liên hệ admin để biết thêm chi tiết");
                 default:
                     view.showError("Vui lòng liên hệ admin để biết thêm chi tiết");

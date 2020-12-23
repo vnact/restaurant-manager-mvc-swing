@@ -16,6 +16,7 @@ import models.Employee;
 import models.Order;
 import models.OrderItem;
 import models.Table;
+import utils.EmployeePermission;
 import utils.OrderStatus;
 import utils.OrderType;
 import utils.TableStatus;
@@ -62,7 +63,7 @@ public class OrderPopupController extends PopupController {
                 boolean addSuccess = addOrder();
                 if (addSuccess) {
                     view.dispose();
-                    if (session.getPermissionName().equalsIgnoreCase("Quản lý")) {
+                    if (session.getPermission() == EmployeePermission.MANAGER) {
                         parrent.updateData();
                     } else {
                         parrent.updateDataByEmployee();

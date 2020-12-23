@@ -6,6 +6,7 @@ import dao.EmployeeDao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import models.Employee;
+import utils.EmployeePermission;
 import views.popup.EmployeePopupView;
 
 /**
@@ -19,6 +20,9 @@ public class EmployeePopupController extends PopupController {
 
     public void add(EmployeeManagerController parrent, EmployeePopupView view) {
         setView(view);
+        for (EmployeePermission permission : EmployeePermission.values()) {
+            view.getCboPermission().addItem(permission.getName());
+        }
         view.getBtnOK().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -39,7 +43,9 @@ public class EmployeePopupController extends PopupController {
 
     public void edit(EmployeeManagerController parrent, EmployeePopupView view, Employee employee) {
         setView(view);
-
+        for (EmployeePermission permission : EmployeePermission.values()) {
+            view.getCboPermission().addItem(permission.getName());
+        }
         view.getLbTitle().setText("Sửa nhân viên - " + employee.getId());
         view.getTxtUsername().setText(employee.getUsername());
         view.getTxtPassword().setText(employee.getPassword());
@@ -81,8 +87,7 @@ public class EmployeePopupController extends PopupController {
         e.setPassword(password);
         e.setName(name);
         e.setPhoneNumber(phoneNumber);
-        e.setPermissionName(view.getCboPermission().getSelectedItem().toString());
-        e.setPermissionId(view.getCboPermission().getSelectedIndex() + 1);
+        e.setPermission(EmployeePermission.getByName(view.getCboPermission().getSelectedItem().toString()));
         employeeDao.save(e);
         return true;
     }
@@ -104,8 +109,7 @@ public class EmployeePopupController extends PopupController {
         e.setPassword(password);
         e.setName(name);
         e.setPhoneNumber(phoneNumber);
-        e.setPermissionName(view.getCboPermission().getSelectedItem().toString());
-        e.setPermissionId(view.getCboPermission().getSelectedIndex() + 1);
+        e.setPermission(EmployeePermission.getByName(view.getCboPermission().getSelectedItem().toString()));
         employeeDao.update(e);
         return true;
     }

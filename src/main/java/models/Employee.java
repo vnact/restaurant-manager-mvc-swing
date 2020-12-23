@@ -3,6 +3,7 @@ package models;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import utils.EmployeePermission;
 
 /**
  * @createAt Nov 24, 2020
@@ -13,6 +14,7 @@ public class Employee extends Model {
     protected int id;
     protected String username, password, name, phoneNumber, permissionName;
     protected int permissionId;
+    protected EmployeePermission permission;
     protected Date startDate;
 
     public Employee() {
@@ -82,6 +84,14 @@ public class Employee extends Model {
         this.startDate = startDate;
     }
 
+    public EmployeePermission getPermission() {
+        return permission;
+    }
+
+    public void setPermission(EmployeePermission permission) {
+        this.permission = permission;
+    }
+
     @Override
     public String toString() {
         return name;
@@ -98,9 +108,10 @@ public class Employee extends Model {
         e.setPassword(rs.getNString("password"));
         e.setName(rs.getNString("name"));
         e.setPhoneNumber(rs.getNString("phoneNumber"));
-        e.setPermissionName(rs.getNString("permissionName"));
-        e.setPermissionId(rs.getInt("permissionId"));
+//        e.setPermissionName(rs.getNString("permissionName"));
+//        e.setPermissionId(rs.getInt("permissionId"));
         e.setStartDate(rs.getDate("startDate"));
+        e.setPermission(EmployeePermission.getById(rs.getNString("permission")));
         return e;
     }
 
@@ -108,7 +119,7 @@ public class Employee extends Model {
     public Object[] toRowTable() {
         return new Object[]{
             id, name, username, password,
-            phoneNumber, startDate, permissionName
+            phoneNumber, startDate, permission.getName()
         };
     }
 
