@@ -1,6 +1,6 @@
 package utils;
 
-import java.io.File;
+import java.io.FileOutputStream;
 import java.io.PrintStream;
 import javax.swing.JOptionPane;
 
@@ -15,7 +15,7 @@ public class ErrorPopup {
     public static void show(Exception e) {
         try {
             if (ps == null) {
-                ps = new PrintStream(new File("log.txt"));
+                ps = new PrintStream(new FileOutputStream("log.txt", true));
             }
             e.printStackTrace(ps);
 

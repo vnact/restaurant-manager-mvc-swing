@@ -40,11 +40,11 @@ public class FoodCategoryManagerController extends ManagerController {
         try {
             int selectedId = view.getSelectedId();
             if (selectedId < 0) {
-                throw new Exception("Chọn bàn cần edit");
+                throw new Exception("Chọn loại món cần edit");
             } else {
                 FoodCategory t = foodCategoryDao.get(selectedId);
                 if (t == null) {
-                    throw new Exception("Bàn bạn chọn không hợp lệ");
+                    throw new Exception("Loại món bạn chọn không hợp lệ");
                 }
                 popupController.edit(this, new FoodCategoryPopupView(), t);
             }

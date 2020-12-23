@@ -55,7 +55,7 @@ public class OrderManagerController extends ManagerController {
             }
             Order order = orderDao.get(selectedId);
             if (order == null) {
-                throw new Exception("Bàn bạn chọn không hợp lệ");
+                throw new Exception("Hóa đơn bạn chọn không hợp lệ");
             }
             popupController.edit(this, new EditOrderPopupView(), order);
 

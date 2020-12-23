@@ -20,7 +20,6 @@ public class CustomerManagerController extends ManagerController {
     CustomerDao customerDao = new CustomerDao();
     CustomerPopupController popupController = new CustomerPopupController();
 
-//    String [] list={"ID","phoneNumber", "name", "address"};
     public CustomerManagerController() {
         super();
     }
