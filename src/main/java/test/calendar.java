@@ -70,8 +70,8 @@ public class calendar extends javax.swing.JFrame {
         panelCalendar = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -220,22 +220,6 @@ public class calendar extends javax.swing.JFrame {
 
         panelCalendar.add(jPanel6);
 
-        jPanel7.setBackground(new java.awt.Color(255, 87, 51));
-        jPanel7.setMinimumSize(new java.awt.Dimension(60, 60));
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
-        );
-
-        panelCalendar.add(jPanel7);
-
         jPanel8.setBackground(new java.awt.Color(255, 87, 51));
         jPanel8.setMinimumSize(new java.awt.Dimension(60, 60));
 
@@ -251,6 +235,22 @@ public class calendar extends javax.swing.JFrame {
         );
 
         panelCalendar.add(jPanel8);
+
+        jPanel7.setBackground(new java.awt.Color(255, 87, 51));
+        jPanel7.setMinimumSize(new java.awt.Dimension(60, 60));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        panelCalendar.add(jPanel7);
 
         jPanel9.setBackground(new java.awt.Color(255, 87, 51));
         jPanel9.setMinimumSize(new java.awt.Dimension(60, 60));

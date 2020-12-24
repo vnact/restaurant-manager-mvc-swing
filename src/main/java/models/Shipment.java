@@ -130,7 +130,7 @@ public class Shipment extends Model {
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "Shipment{" + "idOrder=" + idOrder + ", idCustomer=" + idCustomer + ", shipperName=" + shipperName + ", shipperPhoneNumber=" + shipperPhoneNumber + ", notice=" + notice + ", shipCost=" + shipCost + ", status=" + status + ", startDate=" + startDate + ", endDate=" + endDate + ", order=" + order + ", customer=" + customer + '}';
     }
 
     @Override
