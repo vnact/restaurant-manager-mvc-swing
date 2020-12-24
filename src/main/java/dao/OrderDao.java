@@ -5,7 +5,6 @@
  */
 package dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,9 +16,8 @@ import models.Order;
  *
  * @author MSI
  */
-public class OrderDao implements Dao<Order> {
+public class OrderDao extends DaoClass<Order> {
 
-    Connection conn = Database.getInstance().getConnection();
     EmployeeDao employeeDao = new EmployeeDao();
     TableDao tableDao = new TableDao();
 

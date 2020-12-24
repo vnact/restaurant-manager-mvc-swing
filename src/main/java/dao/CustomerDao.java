@@ -1,6 +1,5 @@
 package dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,9 +11,7 @@ import models.Customer;
  * @createAt Nov 25, 2020
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
-public class CustomerDao implements Dao<Customer> {
-
-    Connection conn = Database.getInstance().getConnection();
+public class CustomerDao extends DaoClass<Customer> {
 
     @Override
     public ArrayList<Customer> getAll() throws SQLException {

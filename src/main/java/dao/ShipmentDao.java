@@ -12,7 +12,7 @@ import models.Shipment;
  *
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public class ShipmentDao implements Dao<Shipment> {
+public class ShipmentDao extends DaoClass<Shipment> {
 
     Connection conn = Database.getInstance().getConnection();
 

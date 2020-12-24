@@ -1,6 +1,5 @@
 package dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,9 +11,7 @@ import models.FoodItem;
  * @createAt Dec 8, 2020
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
-public class FoodItemDao implements Dao<FoodItem> {
-
-    Connection conn = Database.getInstance().getConnection();
+public class FoodItemDao extends DaoClass<FoodItem> {
 
     @Override
     public ArrayList<FoodItem> getAll() throws SQLException {

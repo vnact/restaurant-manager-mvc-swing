@@ -1,6 +1,5 @@
 package dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,9 +11,8 @@ import models.OrderItem;
  *
  * @author MSI
  */
-public class OrderItemDao implements Dao<OrderItem> {
+public class OrderItemDao extends DaoClass<OrderItem> {
 
-    Connection conn = Database.getInstance().getConnection();
     FoodItemDao foodItemDao = new FoodItemDao();
 
     @Override
