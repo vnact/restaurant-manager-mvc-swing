@@ -11,7 +11,7 @@ import models.Employee;
  *
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
-public class EmployeeDao extends DaoClass<Employee> {
+public class EmployeeDao extends Dao<Employee> {
 
     @Override
     public ArrayList<Employee> getAll() throws SQLException {

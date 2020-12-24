@@ -11,7 +11,7 @@ import models.Customer;
  * @createAt Nov 25, 2020
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
-public class CustomerDao extends DaoClass<Customer> {
+public class CustomerDao extends Dao<Customer> {
 
     @Override
     public ArrayList<Customer> getAll() throws SQLException {

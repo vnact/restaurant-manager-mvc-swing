@@ -11,7 +11,7 @@ import models.Table;
  * @createAt Nov 28, 2020
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
-public class TableDao extends DaoClass<Table> {
+public class TableDao extends Dao<Table> {
 
     @Override
     public ArrayList<Table> getAll() throws SQLException {

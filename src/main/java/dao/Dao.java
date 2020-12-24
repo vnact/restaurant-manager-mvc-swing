@@ -1,29 +1,27 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * @param <T>
- * @createAt Nov 11, 2020
- * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
+ * createAt Dec 24, 2020
+ *
+ * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public interface Dao<T> {
+public abstract class Dao<T> {
 
-    /**
-     *
-     * @return {@code 123}
-     * @throws java.sql.SQLException
-     */
-    ArrayList<T> getAll() throws SQLException;
+    Connection conn = Database.getInstance().getConnection();
 
-    T get(int id) throws SQLException;
+    public abstract ArrayList<T> getAll() throws SQLException;
 
-    void save(T t) throws SQLException;
+    public abstract T get(int id) throws SQLException;
 
-    void update(T t) throws SQLException;
+    public abstract void save(T t) throws SQLException;
 
-    void delete(T t) throws SQLException;
+    public abstract void update(T t) throws SQLException;
 
-    void deleteById(int id) throws SQLException;
+    public abstract void delete(T t) throws SQLException;
+
+    public abstract void deleteById(int id) throws SQLException;
 }

@@ -11,7 +11,7 @@ import models.FoodCategory;
  * @createAt Dec 1, 2020
  * @author Tran Duc Cuong<clonebmn2itt@gmail.com>
  */
-public class FoodCategoryDao extends DaoClass<FoodCategory> {
+public class FoodCategoryDao extends Dao<FoodCategory> {
 
     @Override
     public ArrayList<FoodCategory> getAll() throws SQLException {

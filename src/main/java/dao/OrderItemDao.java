@@ -11,7 +11,7 @@ import models.OrderItem;
  *
  * @author MSI
  */
-public class OrderItemDao extends DaoClass<OrderItem> {
+public class OrderItemDao extends Dao<OrderItem> {
 
     FoodItemDao foodItemDao = new FoodItemDao();
 

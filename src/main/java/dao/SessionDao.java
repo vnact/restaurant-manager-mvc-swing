@@ -11,7 +11,7 @@ import models.Session;
  *
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public class SessionDao extends DaoClass<Session> {
+public class SessionDao extends Dao<Session> {
 
     @Override
     public ArrayList<Session> getAll() throws SQLException {

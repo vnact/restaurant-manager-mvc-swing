@@ -16,7 +16,7 @@ import models.Order;
  *
  * @author MSI
  */
-public class OrderDao extends DaoClass<Order> {
+public class OrderDao extends Dao<Order> {
 
     EmployeeDao employeeDao = new EmployeeDao();
     TableDao tableDao = new TableDao();
