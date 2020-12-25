@@ -18,7 +18,7 @@ public class SideBarController {
     private ArrayList<MenuItem> menuItems = new ArrayList<>();
     private MenuItem activeMenuItem = null; // item vừa chọn
 
-    abstract class MenuBarEvent {
+    interface MenuBarEvent {
 
         public abstract void onSelectMenuItem(MenuItem item);
     }
@@ -91,7 +91,7 @@ public class SideBarController {
         }
     }
 
-    private void closePreviosMenu(MenuItem previousItem) {
+    private void closePreviosMenu(MenuItem previousItem) {//Đóng menu cũ
         MenuItem parrent = previousItem.getParentMenu();
         previousItem.setActive(false);
         while (parrent != null) {
@@ -100,7 +100,6 @@ public class SideBarController {
         }
     }
 
-//    public void 
     public void setMenu(MenuItem item) {//Chọn menu
         if (activeMenuItem != null) {
             closePreviosMenu(activeMenuItem);

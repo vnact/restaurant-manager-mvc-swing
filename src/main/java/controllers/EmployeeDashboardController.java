@@ -7,8 +7,6 @@ package controllers;
 
 import controller.employee.inforController;
 import controllers.admin.OrderManagerController;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import main.Runner;
 import models.Employee;
@@ -34,12 +32,6 @@ public class EmployeeDashboardController {
     OrderManagerView orderManagerPaneView = new OrderManagerView();
     SideBarController sideBarController = new SideBarController();
     JPanel[] cards = {homePane, orderManagerPaneView, iv};
-    SideBarController.MenuBarEvent menuBarEvent = sideBarController.new MenuBarEvent() { // 
-        @Override
-        public void onSelectMenuItem(MenuItem item) {
-            onMenuChange(item);
-        }
-    };
 
     public EmployeeDashboardController(EmployeeDashboardView view) {
         this.view = view;
@@ -50,7 +42,6 @@ public class EmployeeDashboardController {
         Employee session = Runner.getSession();
         if (session != null) {
             view.getLbName().setText(session.getName());
-
         }
         view.setCards(cards);
         view.setPanel(homePane);
@@ -70,17 +61,14 @@ public class EmployeeDashboardController {
         MenuItem inforE = new MenuItem("IE", im.getIcon("futures_25px.png"), "Thông tin");
         MenuItem menuBH = new MenuItem("BH", im.getIcon("shopping_cart_25px.png"), "Tạo hóa đơn");
         sideBarController.addMenu(menuBH, inforE);
-        sideBarController.addMenuEvent(menuBarEvent);
+        sideBarController.addMenuEvent(this::onMenuChange);
     }
 
     public void addEvent() {
-        view.getBtnLogout().addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent evt) {
-                view.dispose();
-                Runner.setSession(null);
-                new LoginController(new LoginView());
-            }
+        view.getBtnLogout().addActionListener(evt -> {
+            view.dispose();
+            Runner.setSession(null);
+            new LoginController(new LoginView());
         });
     }
 

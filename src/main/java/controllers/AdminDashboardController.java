@@ -50,12 +50,6 @@ public class AdminDashboardController {
     JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane, customerManagerPane, foodCategoryManagerView, orderManagerView, foodItemManagerView};
 
     SideBarController sideBarController = new SideBarController();
-    SideBarController.MenuBarEvent menuBarEvent = sideBarController.new MenuBarEvent() { // 
-        @Override
-        public void onSelectMenuItem(MenuItem item) {
-            onMenuChange(item);
-        }
-    };
 
     public AdminDashboardController(AdminDashboardView view) {
         this.view = view;
@@ -98,21 +92,11 @@ public class AdminDashboardController {
         menuTK.addSubMenu(new MenuItem("TKDT", null, "Thống kê doanh thu"));
         menuTKNV.addSubMenu(new MenuItem("TKDN", null, "Thống kê phiên làm việc"));
         sideBarController.addMenu(menuQLNV, menuQLHH, menuQLDH, menuTK);
-        sideBarController.addMenuEvent(menuBarEvent);
+        sideBarController.addMenuEvent(this::onMenuChange);
     }
 
     // Tạo sự kiện
     private void addEvent() {
-//        for (MenuItem menuItem : view.getMenuItems()) {
-//            menuItem.addMouseListener(new MouseAdapter() {
-//                @Override
-//                public void mousePressed(MouseEvent e) {
-//                    menuItem.collapseSubMenu();
-//                    onMenuChange(menuItem);
-//                }
-//            });
-//        }
-
         view.getBtnLogout().addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent evt) {

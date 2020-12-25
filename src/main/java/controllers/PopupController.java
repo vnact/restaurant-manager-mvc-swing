@@ -1,7 +1,5 @@
 package controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import views.popup.PopupView;
 
 /**
@@ -23,13 +21,7 @@ public abstract class PopupController {
     public void setView(PopupView view) {
         this.view = view;
         view.setVisible(true);
-        view.getBtnCancel().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                view.dispose();
-            }
-        });
-
+        view.getBtnCancel().addActionListener(evt -> view.dispose());
     }
 
     public void destroy() {
