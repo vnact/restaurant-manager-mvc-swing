@@ -22,6 +22,7 @@ import views.admin.HomeView;
 import views.admin.ManagerPaneView;
 import views.admin.MenuItem;
 import views.admin.OrderManagerView;
+import views.admin.ShipmentManagerView;
 import views.admin.TableManagerView;
 
 /**
@@ -45,9 +46,10 @@ public class AdminDashboardController {
             foodCategoryManagerView = new FoodCategoryManagerView(),
             foodItemManagerView = new FoodItemManagerView(),
             orderManagerView = new OrderManagerView(),
+            shipmentManagerView = new ShipmentManagerView(),
             customerManagerPane = new CustomerManagerView();
 
-    JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane, customerManagerPane, foodCategoryManagerView, orderManagerView, foodItemManagerView};
+    JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane, customerManagerPane, foodCategoryManagerView, orderManagerView, foodItemManagerView, shipmentManagerView};
 
     SideBarController sideBarController = new SideBarController();
 
@@ -85,7 +87,7 @@ public class AdminDashboardController {
         menuQLDH.addSubMenu(new MenuItem("QLB", im.getIcon("table_25px.png"), "Quản lý bàn"));
         menuQLDH.addSubMenu(new MenuItem("QLKH", im.getIcon("technical_support_25px.png"), "Quản lý khách hàng"));
         menuQLDH.addSubMenu(new MenuItem("QLDDH", im.getIcon("purchase_order_25px.png"), "Quản lý đơn đặt hàng"));
-        menuQLDH.addSubMenu(new MenuItem("QLS", im.getIcon("truck_25px.png"), "Quản lý giao hàng"));
+        menuQLDH.addSubMenu(new MenuItem("QLGH", im.getIcon("truck_25px.png"), "Quản lý giao hàng"));
         MenuItem menuTKNV = new MenuItem("TKNV", im.getIcon("user_25px.png"), "Thống kê nhân viên");
         menuTK.addSubMenu(menuTKNV);
         menuTK.addSubMenu(new MenuItem("TKHH", null, "Thống kê hàng hóa"));
@@ -135,6 +137,9 @@ public class AdminDashboardController {
             case "QLMA":
                 pnl = foodItemManagerView;
                 mc = foodItemManagerController;
+                break;
+            case "QLGH":
+                pnl = shipmentManagerView;
                 break;
             case "QLHH":
             case "QLDH":
