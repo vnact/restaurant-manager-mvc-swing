@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import main.SessionManager;
 import models.Employee;
 import views.employee.ChangePassView;
-import views.employee.inforView;
+import views.employee.inforView2;
 
 /**
  *
@@ -21,17 +21,17 @@ import views.employee.inforView;
 public class InforController {
 
     private Employee session;
-    private inforView view;
+    private inforView2 view;
 
     public InforController() {
         session = SessionManager.getSession().getEmployee();
     }
 
-    public inforView getView() {
+    public inforView2 getView() {
         return view;
     }
 
-    public void setView(inforView view) {
+    public void setView(inforView2 view) {
         view.getLabName().setText("Chào mừng " + session.getName());
         this.view = view;
         addEvent();

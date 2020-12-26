@@ -12,12 +12,12 @@ import javax.swing.JLabel;
  *
  * @author Admin
  */
-public class inforView extends javax.swing.JPanel {
+public class inforView2 extends javax.swing.JPanel {
 
     /**
      * Creates new form menuView
      */
-    public inforView() {
+    public inforView2() {
         initComponents();
         btnChangeInfor.putClientProperty("JButton.buttonType", "roundRect");
         btnChangePass.putClientProperty("JButton.buttonType", "roundRect");
@@ -53,27 +53,43 @@ public class inforView extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        labName = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btnChangePass = new javax.swing.JButton();
         btnChangeInfor = new javax.swing.JButton();
         btnNS = new javax.swing.JButton();
         btnHS = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        labName = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 251, 230));
         setMinimumSize(new java.awt.Dimension(1008, 680));
         setPreferredSize(new java.awt.Dimension(1008, 680));
-
-        labName.setFont(new java.awt.Font("Times New Roman", 1, 30)); // NOI18N
-        labName.setText("Xin chào Trần Đức Cường !");
+        setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBackground(new java.awt.Color(251, 133, 95));
         jPanel1.setPreferredSize(new java.awt.Dimension(170, 680));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         btnChangePass.setText("Đổi mật khẩu");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 26;
+        gridBagConstraints.ipady = 11;
+        gridBagConstraints.weighty = 0.1;
+        jPanel1.add(btnChangePass, gridBagConstraints);
 
         btnChangeInfor.setText("Thay đổi thông tin");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 11;
+        gridBagConstraints.weighty = 0.1;
+        jPanel1.add(btnChangeInfor, gridBagConstraints);
 
         btnNS.setText("Năng suất");
         btnNS.addActionListener(new java.awt.event.ActionListener() {
@@ -81,59 +97,48 @@ public class inforView extends javax.swing.JPanel {
                 btnNSActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 43;
+        gridBagConstraints.ipady = 11;
+        gridBagConstraints.weighty = 0.1;
+        jPanel1.add(btnNS, gridBagConstraints);
 
         btnHS.setText("Hiệu suất");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 47;
+        gridBagConstraints.ipady = 11;
+        gridBagConstraints.weighty = 0.1;
+        jPanel1.add(btnHS, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnHS)
-                    .addComponent(btnNS)
-                    .addComponent(btnChangeInfor)
-                    .addComponent(btnChangePass))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
+        add(jPanel1, java.awt.BorderLayout.EAST);
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnChangeInfor, btnChangePass, btnHS, btnNS});
+        jPanel2.setOpaque(false);
 
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(168, 168, 168)
-                .addComponent(btnChangePass, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(btnChangeInfor)
-                .addGap(46, 46, 46)
-                .addComponent(btnNS)
-                .addGap(48, 48, 48)
-                .addComponent(btnHS)
-                .addContainerGap(239, Short.MAX_VALUE))
-        );
+        labName.setFont(new java.awt.Font("Times New Roman", 1, 30)); // NOI18N
+        labName.setText("Xin chào Trần Đức Cường !");
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnChangeInfor, btnChangePass, btnHS, btnNS});
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(85, 85, 85)
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(labName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 398, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 483, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(labName)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 645, Short.MAX_VALUE))
         );
+
+        add(jPanel2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNSActionPerformed
@@ -146,6 +151,7 @@ public class inforView extends javax.swing.JPanel {
     private javax.swing.JButton btnHS;
     private javax.swing.JButton btnNS;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labName;
     // End of variables declaration//GEN-END:variables
 }
