@@ -9,7 +9,7 @@ import dao.EmployeeDao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import main.Runner;
+import main.SessionManager;
 import models.Employee;
 import views.employee.ChangePassView;
 import views.employee.inforView;
@@ -24,8 +24,7 @@ public class inforController {
     private inforView view;
 
     public inforController() {
-        session = Runner.getSession();
-
+        session = SessionManager.getSession().getEmployee();
     }
 
     public inforView getView() {
@@ -103,7 +102,6 @@ public class inforController {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 System.out.println("Sync Data");
-
             }
         });
     }

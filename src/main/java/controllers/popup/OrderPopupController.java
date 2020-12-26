@@ -11,7 +11,7 @@ import dao.TableDao;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
-import main.Runner;
+import main.SessionManager;
 import models.Employee;
 import models.Order;
 import models.OrderItem;
@@ -40,9 +40,9 @@ public class OrderPopupController extends PopupController {
     OrderItemController orderItemController = new OrderItemController();
     ToppingPopupController toppingPopupController = new ToppingPopupController();
     DecimalFormat formatter = new DecimalFormat("###,###,###");
-    Employee session = Runner.getSession();
 
     public void add(OrderManagerController parrent, AddOrderPopupView view) {
+        Employee session = SessionManager.getSession().getEmployee();
         setView(view);
         try {
             for (Table table : tableDao.getAll()) {
@@ -87,7 +87,7 @@ public class OrderPopupController extends PopupController {
         foodItemController.setPanelFoodCategory(view.getPnlFoodCategory());
         foodItemController.setPanelFoodItem(view.getPnlFoodItem());
 
-        Employee employee = Runner.getSession();
+        Employee employee = SessionManager.getSession().getEmployee();
 
         if (employee != null) {
             view.getLbEmployeeName().setText(employee.getName());
@@ -189,7 +189,7 @@ public class OrderPopupController extends PopupController {
         Order e = new Order();
         Table table = (Table) view.getTbComboBoxModel().getSelectedItem();
         OrderType type = OrderType.getByName(view.getCboType().getSelectedItem().toString());
-        Employee employee = Runner.getSession();
+        Employee employee = SessionManager.getSession().getEmployee();
         int discount = (int) view.getSpnDiscount().getValue();
         if (table == null) {
             throw new Exception("Hết bàn");

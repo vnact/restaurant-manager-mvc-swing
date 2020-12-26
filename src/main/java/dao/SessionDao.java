@@ -14,6 +14,8 @@ import models.Session;
  */
 public class SessionDao extends Dao<Session> {
 
+    EmployeeDao employeeDao = new EmployeeDao();
+
     @Override
     public ArrayList<Session> getAll() throws SQLException {
         ArrayList<Session> sessions = new ArrayList<>();
@@ -22,6 +24,7 @@ public class SessionDao extends Dao<Session> {
         ResultSet rs = statement.executeQuery(query);
         while (rs.next()) {
             Session session = Session.getFromResultSet(rs);
+            session.setEmployee(employeeDao.get(session.getIdEmployee()));
             sessions.add(session);
         }
         return sessions;
@@ -34,6 +37,7 @@ public class SessionDao extends Dao<Session> {
         ResultSet rs = statement.executeQuery(query);
         if (rs.next()) {
             Session session = Session.getFromResultSet(rs);
+            session.setEmployee(employeeDao.get(session.getIdEmployee()));
             return session;
         }
         return null;
@@ -82,6 +86,7 @@ public class SessionDao extends Dao<Session> {
         ResultSet rs = statement.executeQuery(query);
         if (rs.next()) {
             Session session = Session.getFromResultSet(rs);
+            session.setEmployee(employeeDao.get(session.getIdEmployee()));
             return session;
         }
         return null;

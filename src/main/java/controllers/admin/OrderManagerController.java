@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.YES_OPTION;
-import main.Runner;
+import main.SessionManager;
+import models.Employee;
 import models.Order;
 import models.Table;
 import utils.TableStatus;
@@ -27,6 +28,7 @@ public class OrderManagerController extends ManagerController {
     OrderDao orderDao = new OrderDao();
     TableDao tableDao = new TableDao();
     OrderPopupController popupController = new OrderPopupController();
+    Employee session = SessionManager.getSession().getEmployee();
 
     public OrderManagerController() {
         super();
@@ -34,7 +36,7 @@ public class OrderManagerController extends ManagerController {
 
     public void updateDataByEmployee() {
         try {
-            ArrayList<Order> orders = orderDao.getByEmployee(Runner.getSession().getId());
+            ArrayList<Order> orders = orderDao.getByEmployee(session.getId());
             view.setTableData(orders);
         } catch (Exception e) {
             view.showError(e);
@@ -83,7 +85,6 @@ public class OrderManagerController extends ManagerController {
                 orderDao.deleteItems(id); // Xóa item trong order 
                 tableDao.update(t); // Trả bàn
                 orderDao.deleteById(id); // Xóa order
-
             }
             updateData();
         } catch (Exception e) {

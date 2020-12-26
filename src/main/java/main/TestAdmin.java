@@ -11,19 +11,19 @@ import views.AdminDashboardView;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class TestAdmin {
-
+    
     public static void main(String[] args) {
         EmployeeDao employeeDao = new EmployeeDao();
         try {
             javax.swing.UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
             System.out.println("Khởi tạo look and feel thành công!");
             Employee e = employeeDao.get(1);
-            Runner.setSession(e);
+            SessionManager.create(e);
             AdminDashboardView v = new AdminDashboardView();
             AdminDashboardController controller = new AdminDashboardController(v);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    
 }

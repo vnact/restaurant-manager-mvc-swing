@@ -4,7 +4,7 @@ import dao.EmployeeDao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import main.Runner;
+import main.SessionManager;
 import models.Employee;
 import views.AdminDashboardView;
 import views.EmployeeDashboardView;
@@ -49,7 +49,7 @@ public class LoginController {
                 view.showError("Mật khẩu sai");
                 return;
             }
-            Runner.setSession(employee);
+            SessionManager.create(employee);//Khởi tạo session
 
             switch (employee.getPermission()) {
                 case MANAGER:
@@ -66,8 +66,14 @@ public class LoginController {
                 //Seller Controller
                 case INACTIVE:
                     view.showError("Tài khoản của bạn đã bị khóa.\nVui lòng liên hệ admin để biết thêm chi tiết");
+                    SessionManager.update();
+                    view.dispose();
+                    break;
                 default:
                     view.showError("Vui lòng liên hệ admin để biết thêm chi tiết");
+                    SessionManager.update();
+                    view.dispose();
+                    break;
             }
         } catch (Exception e) {
             view.showError(e);
