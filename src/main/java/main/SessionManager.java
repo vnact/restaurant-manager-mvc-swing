@@ -1,6 +1,10 @@
 package main;
 
+import dao.EmployeeDao;
+import dao.SessionDao;
+import java.sql.SQLException;
 import models.Employee;
+import models.Session;
 
 /**
  * createAt Dec 23, 2020
@@ -9,5 +13,49 @@ import models.Employee;
  */
 public class SessionManager {
 
-    private Employee employee;
+    public static Session session;
+    static SessionDao sessionDao = new SessionDao();
+
+    public SessionManager() {
+    }
+
+    public static Session getSession() {
+        return session;
+    }
+
+    public static void setSession(Session session) {
+        SessionManager.session = session;
+    }
+
+    public static void create(Employee e) throws SQLException {
+        if (e == null) {
+            throw new SQLException("Nguoi dung khong hop le!");
+        }
+        Session ss = new Session();
+        ss.setEmployee(e);
+        ss.setMessage("login");
+        sessionDao.save(ss);
+        Session sss = sessionDao.getLast(e.getId());
+        setSession(sss);
+    }
+
+    public static void update() throws SQLException {
+        if (session == null) {
+            throw new SQLException("Ban chua dang nhap!");
+        }
+        session.setMessage("logout");
+        sessionDao.update(session);
+    }
+
+    public static void main(String[] args) {
+        try {
+            EmployeeDao employeeDao = new EmployeeDao();
+            Employee e = employeeDao.get(2);
+            SessionManager.create(e);
+            Thread.sleep(3000);
+            SessionManager.update();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

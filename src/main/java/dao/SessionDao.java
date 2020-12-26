@@ -32,7 +32,7 @@ public class SessionDao extends Dao<Session> {
         Statement statement = conn.createStatement();
         String query = "SELECT * FROM `session` WHERE `id` = " + id;
         ResultSet rs = statement.executeQuery(query);
-        while (rs.next()) {
+        if (rs.next()) {
             Session session = Session.getFromResultSet(rs);
             return session;
         }
@@ -61,7 +61,7 @@ public class SessionDao extends Dao<Session> {
 
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setNString(1, t.getMessage());
-        stmt.setInt(2, t.getIdEmployee());
+        stmt.setInt(2, t.getId());
         int row = stmt.executeUpdate();
     }
 
@@ -73,6 +73,18 @@ public class SessionDao extends Dao<Session> {
     @Override
     public void deleteById(int id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Session getLast(int idEmployee) throws SQLException {
+        Statement statement = conn.createStatement();
+        String query = "SELECT * FROM `session` WHERE `idEmployee` = " + idEmployee
+                + " ORDER BY `id` DESC LIMIT 1";
+        ResultSet rs = statement.executeQuery(query);
+        if (rs.next()) {
+            Session session = Session.getFromResultSet(rs);
+            return session;
+        }
+        return null;
     }
 
 }
