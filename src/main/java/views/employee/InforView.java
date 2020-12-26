@@ -12,12 +12,12 @@ import javax.swing.JLabel;
  *
  * @author Admin
  */
-public class inforView2 extends javax.swing.JPanel {
+public class InforView extends javax.swing.JPanel {
 
     /**
      * Creates new form menuView
      */
-    public inforView2() {
+    public InforView() {
         initComponents();
         btnChangeInfor.putClientProperty("JButton.buttonType", "roundRect");
         btnChangePass.putClientProperty("JButton.buttonType", "roundRect");

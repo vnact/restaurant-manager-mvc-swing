@@ -18,7 +18,7 @@ import views.LoginView;
 import views.admin.HomeView;
 import views.admin.MenuItem;
 import views.admin.OrderManagerView;
-import views.employee.inforView2;
+import views.employee.InforView;
 
 /**
  *
@@ -29,7 +29,7 @@ public class EmployeeDashboardController {
     private EmployeeDashboardView view;
     HomeView homePane = new HomeView();
     InforController ic = new InforController();
-    inforView2 iv = new inforView2();
+    InforView iv = new InforView();
     OrderManagerController orderManagerController = new OrderManagerController();
     OrderManagerView orderManagerPaneView = new OrderManagerView();
     SideBarController sideBarController = new SideBarController();
