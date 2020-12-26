@@ -69,6 +69,7 @@ public class InforView extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBackground(new java.awt.Color(251, 133, 95));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 15, 10, 15));
         jPanel1.setPreferredSize(new java.awt.Dimension(170, 680));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
@@ -79,6 +80,7 @@ public class InforView extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 26;
         gridBagConstraints.ipady = 11;
+        gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         jPanel1.add(btnChangePass, gridBagConstraints);
 
@@ -88,6 +90,7 @@ public class InforView extends javax.swing.JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipady = 11;
+        gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         jPanel1.add(btnChangeInfor, gridBagConstraints);
 
@@ -103,6 +106,7 @@ public class InforView extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 43;
         gridBagConstraints.ipady = 11;
+        gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         jPanel1.add(btnNS, gridBagConstraints);
 
@@ -113,6 +117,7 @@ public class InforView extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 47;
         gridBagConstraints.ipady = 11;
+        gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         jPanel1.add(btnHS, gridBagConstraints);
 
