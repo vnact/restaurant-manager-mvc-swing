@@ -30,6 +30,7 @@ public class Runner {
             System.err.println("Khởi tạo look and feel thất bại!");
         }
         LoginController controller = new LoginController(new LoginView());
+        Runtime.getRuntime().addShutdownHook(new ShutdownHook());
     }
 
 }

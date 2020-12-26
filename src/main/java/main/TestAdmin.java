@@ -11,7 +11,7 @@ import views.AdminDashboardView;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class TestAdmin {
-    
+
     public static void main(String[] args) {
         EmployeeDao employeeDao = new EmployeeDao();
         try {
@@ -21,9 +21,10 @@ public class TestAdmin {
             SessionManager.create(e);
             AdminDashboardView v = new AdminDashboardView();
             AdminDashboardController controller = new AdminDashboardController(v);
+            Runtime.getRuntime().addShutdownHook(new ShutdownHook());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
 }
