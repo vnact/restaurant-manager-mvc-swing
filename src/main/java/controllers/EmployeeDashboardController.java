@@ -5,7 +5,7 @@
  */
 package controllers;
 
-import controller.employee.InforControllers;
+import controller.employee.InforController;
 import controllers.admin.OrderManagerController;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -28,7 +28,7 @@ public class EmployeeDashboardController {
 
     private EmployeeDashboardView view;
     HomeView homePane = new HomeView();
-    InforControllers ic = new InforControllers();
+    InforController ic = new InforController();
     inforView iv = new inforView();
     OrderManagerController orderManagerController = new OrderManagerController();
     OrderManagerView orderManagerPaneView = new OrderManagerView();

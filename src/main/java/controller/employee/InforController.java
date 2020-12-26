@@ -18,12 +18,12 @@ import views.employee.inforView;
  *
  * @author Admin
  */
-public class InforControllers {
+public class InforController {
 
     private Employee session;
     private inforView view;
 
-    public InforControllers() {
+    public InforController() {
         session = SessionManager.getSession().getEmployee();
     }
 
