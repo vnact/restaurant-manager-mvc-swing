@@ -3,24 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package test;
-
-import javax.swing.JLabel;
+package views.employee;
 
 /**
  *
  * @author Admin
  */
-public class dayView extends javax.swing.JPanel {
+public class menuView extends javax.swing.JPanel {
 
     /**
-     * Creates new form dayView
+     * Creates new form menuView
      */
-    public JLabel getLabNumber() {
-        return labNumber;
-    }
-
-    public dayView() {
+    public menuView() {
         initComponents();
     }
 
@@ -33,34 +27,19 @@ public class dayView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labNumber = new javax.swing.JLabel();
-
-        setBackground(new java.awt.Color(240, 240, 200));
-        setMaximumSize(new java.awt.Dimension(60, 60));
-        setMinimumSize(new java.awt.Dimension(60, 60));
-        setPreferredSize(new java.awt.Dimension(60, 60));
-
-        labNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(labNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel labNumber;
     // End of variables declaration//GEN-END:variables
 }

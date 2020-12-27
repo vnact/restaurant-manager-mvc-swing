@@ -35,6 +35,14 @@ public class OrderDao extends Dao<Order> {
         return orders;
     }
 
+    public ResultSet getSales(int id, String date) throws SQLException {
+        Statement statement = conn.createStatement();
+        String query = "SELECT COUNT(id) AS amount, SUM(totalAmount) / (1+`discount`/100) as total FROM `order` WHERE `idEmployee`=" + id + " AND DATE(orderDate)=" + date;
+        ResultSet rs = statement.executeQuery(query);
+        rs.next();
+        return rs;
+    }
+
     @Override
     public ArrayList<Order> getAll() throws SQLException {
         ArrayList<Order> orders = new ArrayList<>();

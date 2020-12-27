@@ -7,6 +7,7 @@ package test;
 
 import java.awt.Color;
 import java.time.LocalDate;
+import views.employee.dayView;
 
 /**
  *
@@ -43,7 +44,7 @@ public class calendar extends javax.swing.JFrame {
         }
         for (int i = 1; i <= days; i++) {
             dayView dayview = new dayView();
-            dayview.getLabNumber().setText(String.valueOf(i));
+            dayview.getLabelNumber().setText(String.valueOf(i));
             panelCalendar.add(dayview);
         }
         if (day == 7) {
