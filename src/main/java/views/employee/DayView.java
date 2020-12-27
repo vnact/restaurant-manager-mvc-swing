@@ -11,9 +11,9 @@ import javax.swing.JLabel;
  *
  * @author Admin
  */
-public class DayView1 extends javax.swing.JPanel {
+public class DayView extends javax.swing.JPanel {
 
-    public DayView1() {
+    public DayView() {
         initComponents();
     }
 
