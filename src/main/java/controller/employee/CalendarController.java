@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.time.LocalDate;
 import test.getDayOfMonth;
 import views.employee.CalendarView;
-import views.employee.dayView;
+import views.employee.DayView;
 
 /**
  *
@@ -33,13 +33,13 @@ public class CalendarController {
         if (day < 7) {
             for (int i = 0; i < day; i++) {
                 Color color = Color.decode("#F0F0F0");
-                dayView dayview = new dayView();
+                DayView dayview = new DayView();
                 dayview.getLabelNumber().setBackground(color);
                 view.getPanelCalendar().add(dayview);
             }
         }
         for (int i = 1; i <= days; i++) {
-            dayView dayview = new dayView();
+            DayView dayview = new DayView();
             dayview.getLabelNumber().setText(String.valueOf(i));
             view.getPanelCalendar().add(dayview);
         }
@@ -48,7 +48,7 @@ public class CalendarController {
         }
         for (int i = 1; i <= 42 - days - day; i++) {
             Color color = Color.decode("#F0F0F0");
-            dayView dayview = new dayView();
+            DayView dayview = new DayView();
             dayview.getLabelNumber().setBackground(color);
             view.getPanelCalendar().add(dayview);
         }
