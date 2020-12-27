@@ -11,19 +11,15 @@ import javax.swing.JLabel;
  *
  * @author Admin
  */
-public class dayView extends javax.swing.JPanel {
+public class DayView1 extends javax.swing.JPanel {
 
-    /**
-     * Creates new form dayView
-     */
-    public dayView() {
+    public DayView1() {
         initComponents();
     }
 
     public JLabel getLabelNumber() {
         return labelNumber;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.

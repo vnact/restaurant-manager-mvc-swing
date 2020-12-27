@@ -7,7 +7,7 @@ package test;
 
 import java.awt.Color;
 import java.time.LocalDate;
-import views.employee.DayView;
+import views.employee.DayView1;
 
 /**
  *
@@ -37,13 +37,13 @@ public class calendar extends javax.swing.JFrame {
         if (day < 7) {
             for (int i = 0; i < day; i++) {
                 Color color = Color.decode("#F0F0F0");
-                DayView view = new DayView();
+                DayView1 view = new DayView1();
                 view.setBackground(color);
                 panelCalendar.add(view);
             }
         }
         for (int i = 1; i <= days; i++) {
-            DayView dayview = new DayView();
+            DayView1 dayview = new DayView1();
             dayview.getLabelNumber().setText(String.valueOf(i));
             panelCalendar.add(dayview);
         }
@@ -52,7 +52,7 @@ public class calendar extends javax.swing.JFrame {
         }
         for (int i = 1; i <= 42 - days - day; i++) {
             Color color = Color.decode("#F0F0F0");
-            DayView view = new DayView();
+            DayView1 view = new DayView1();
             view.setBackground(color);
             panelCalendar.add(view);
         }
