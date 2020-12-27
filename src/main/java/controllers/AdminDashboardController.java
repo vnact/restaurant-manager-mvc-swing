@@ -5,6 +5,7 @@ import controllers.admin.EmployeeManagerController;
 import controllers.admin.FoodCategoryManagerController;
 import controllers.admin.FoodItemManagerController;
 import controllers.admin.OrderManagerController;
+import controllers.admin.ShipmentManagerController;
 import controllers.admin.TableManagerController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +26,7 @@ import views.admin.ManagerPaneView;
 import views.admin.MenuItem;
 import views.admin.OrderManagerView;
 import views.admin.ShipmentManagerView;
+import views.admin.StatisticalView;
 import views.admin.TableManagerView;
 
 /**
@@ -40,6 +42,7 @@ public class AdminDashboardController {
             foodCategoryManagerController = new FoodCategoryManagerController(),
             foodItemManagerController = new FoodItemManagerController(),
             orderManagerController = new OrderManagerController(),
+            shipmentManagerController = new ShipmentManagerController(),
             customerManagerController = new CustomerManagerController();
 
     HomeView homePane = new HomeView();
@@ -50,8 +53,13 @@ public class AdminDashboardController {
             orderManagerView = new OrderManagerView(),
             shipmentManagerView = new ShipmentManagerView(),
             customerManagerPane = new CustomerManagerView();
+    StatisticalView statisticalView = new StatisticalView();
 
-    JPanel[] cards = {homePane, employeeManagerPane, tableManagerPane, customerManagerPane, foodCategoryManagerView, orderManagerView, foodItemManagerView, shipmentManagerView};
+    JPanel[] cards = {
+        homePane, employeeManagerPane, tableManagerPane, customerManagerPane,
+        foodCategoryManagerView, orderManagerView, foodItemManagerView, shipmentManagerView,
+        statisticalView
+    };
 
     SideBarController sideBarController = new SideBarController();
 
@@ -124,36 +132,39 @@ public class AdminDashboardController {
         ManagerController mc = null; //Controller Panel
         System.out.println("Chon menu: " + item.getId());
         switch (item.getId()) {
-            case "QLNV":
+            case "QLNV"://Nhân viên
                 pnl = employeeManagerPane;
                 mc = employeeManagerController;
                 break;
-            case "QLDDH":
+            case "QLDDH"://Đơn đặt hàng
                 pnl = orderManagerView;
                 mc = orderManagerController;
                 break;
-            case "QLB":
+            case "QLB"://Quản lý bàn
                 pnl = tableManagerPane;
                 mc = tableManagerController;
                 break;
-            case "QLKH":
+            case "QLKH"://Quản lý khách hàng
                 pnl = customerManagerPane;
                 mc = customerManagerController;
                 break;
-            case "QLLM":
+            case "QLLM"://Quản lý loại món
                 pnl = foodCategoryManagerView;
                 mc = foodCategoryManagerController;
                 break;
-            case "QLMA":
+            case "QLMA"://Quản lý món ăn
                 pnl = foodItemManagerView;
                 mc = foodItemManagerController;
                 break;
-            case "QLGH":
+            case "QLGH"://Quản lý giao hàng
                 pnl = shipmentManagerView;
+                mc = shipmentManagerController;
                 break;
             case "QLHH":
             case "QLDH":
+                break;
             case "TK":
+                view.setPanel(statisticalView);
                 break;
             default:
                 view.setPanel(homePane);

@@ -1,6 +1,5 @@
 package main;
 
-import dao.EmployeeDao;
 import dao.SessionDao;
 import java.sql.SQLException;
 import models.Employee;
@@ -12,21 +11,21 @@ import models.Session;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class SessionManager {
-    
+
     public static Session session;
     static SessionDao sessionDao = new SessionDao();
-    
+
     public SessionManager() {
     }
-    
+
     public static Session getSession() {
         return session;
     }
-    
+
     public static void setSession(Session session) {
         SessionManager.session = session;
     }
-    
+
     public static void create(Employee e) throws SQLException {
         if (e == null) {
             throw new SQLException("Nguoi dung khong hop le!");
@@ -38,7 +37,7 @@ public class SessionManager {
         Session sss = sessionDao.getLast(e.getId());
         setSession(sss);
     }
-    
+
     public static void update() throws SQLException {
         if (session == null) {
             throw new SQLException("Ban chua dang nhap!");
@@ -47,16 +46,5 @@ public class SessionManager {
         sessionDao.update(session);
         setSession(null);
     }
-    
-    public static void main(String[] args) {
-        try {
-            EmployeeDao employeeDao = new EmployeeDao();
-            Employee e = employeeDao.get(2);
-            SessionManager.create(e);
-            Thread.sleep(3000);
-            SessionManager.update();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 }
