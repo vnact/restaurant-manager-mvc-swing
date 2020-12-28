@@ -5,6 +5,7 @@
  */
 package views.admin;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import utils.ErrorPopup;
 
@@ -31,6 +32,22 @@ public class StatisticalView extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, message);
     }
 
+    public JLabel getLbTotalCustomer() {
+        return lbTotalCustomer;
+    }
+
+    public JLabel getLbTotalEmployee() {
+        return lbTotalEmployee;
+    }
+
+    public JLabel getLbTotalIncome() {
+        return lbTotalIncome;
+    }
+
+    public JLabel getLbTotalOrder() {
+        return lbTotalOrder;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -42,25 +59,25 @@ public class StatisticalView extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lbTotalOrder = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lbTotalIncome = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lbTotalEmployee = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        lbTotalCustomer = new javax.swing.JLabel();
         pnlContent = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
@@ -78,10 +95,7 @@ public class StatisticalView extends javax.swing.JPanel {
         jPanel1.setMaximumSize(new java.awt.Dimension(100, 100));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/bill_50px.png"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(50, 50));
-        jLabel1.setMinimumSize(new java.awt.Dimension(50, 50));
         jLabel1.setName(""); // NOI18N
-        jLabel1.setPreferredSize(new java.awt.Dimension(50, 50));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,8 +128,8 @@ public class StatisticalView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
         jPanel3.add(jLabel2, gridBagConstraints);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("14");
+        lbTotalOrder.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbTotalOrder.setText("14");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -123,7 +137,7 @@ public class StatisticalView extends javax.swing.JPanel {
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        jPanel3.add(jLabel3, gridBagConstraints);
+        jPanel3.add(lbTotalOrder, gridBagConstraints);
 
         jPanel2.add(jPanel3, java.awt.BorderLayout.CENTER);
 
@@ -170,8 +184,8 @@ public class StatisticalView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
         jPanel6.add(jLabel5, gridBagConstraints);
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setText("14,000,000");
+        lbTotalIncome.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbTotalIncome.setText("14,000,000");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -179,7 +193,7 @@ public class StatisticalView extends javax.swing.JPanel {
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        jPanel6.add(jLabel6, gridBagConstraints);
+        jPanel6.add(lbTotalIncome, gridBagConstraints);
 
         jPanel4.add(jPanel6, java.awt.BorderLayout.CENTER);
 
@@ -226,8 +240,8 @@ public class StatisticalView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
         jPanel9.add(jLabel8, gridBagConstraints);
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setText("33");
+        lbTotalEmployee.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbTotalEmployee.setText("33");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -235,7 +249,7 @@ public class StatisticalView extends javax.swing.JPanel {
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        jPanel9.add(jLabel9, gridBagConstraints);
+        jPanel9.add(lbTotalEmployee, gridBagConstraints);
 
         jPanel7.add(jPanel9, java.awt.BorderLayout.CENTER);
 
@@ -282,8 +296,8 @@ public class StatisticalView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
         jPanel12.add(jLabel11, gridBagConstraints);
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel12.setText("10+");
+        lbTotalCustomer.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbTotalCustomer.setText("10+");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -291,7 +305,7 @@ public class StatisticalView extends javax.swing.JPanel {
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
-        jPanel12.add(jLabel12, gridBagConstraints);
+        jPanel12.add(lbTotalCustomer, gridBagConstraints);
 
         jPanel10.add(jPanel12, java.awt.BorderLayout.CENTER);
 
@@ -317,15 +331,11 @@ public class StatisticalView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -338,6 +348,10 @@ public class StatisticalView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel lbTotalCustomer;
+    private javax.swing.JLabel lbTotalEmployee;
+    private javax.swing.JLabel lbTotalIncome;
+    private javax.swing.JLabel lbTotalOrder;
     private javax.swing.JPanel pnlContent;
     private javax.swing.JPanel pnlHead;
     // End of variables declaration//GEN-END:variables

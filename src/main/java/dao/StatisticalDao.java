@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import utils.OrderStatus;
 
@@ -13,9 +14,9 @@ import utils.OrderStatus;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class StatisticalDao {
-    
+
     Connection conn = Database.getInstance().getConnection();
-    
+
     public int getTotalOrder(Timestamp start, Timestamp end, int idEmployee) throws SQLException {
         String query = "SELECT COUNT(*) AS totalOrder FROM `order` WHERE status = ? AND orderDate >= ? AND orderDate <= ? AND idEmployee = ?";
         PreparedStatement statement = conn.prepareStatement(query);
@@ -29,7 +30,7 @@ public class StatisticalDao {
         }
         return 0;
     }
-    
+
     public int getTotalOrder(Timestamp start, Timestamp end) throws SQLException {
         String query = "SELECT COUNT(*) AS totalOrder FROM `order` WHERE status = ? AND orderDate >= ? AND orderDate <= ?";
         PreparedStatement statement = conn.prepareStatement(query);
@@ -42,19 +43,19 @@ public class StatisticalDao {
         }
         return 0;
     }
-    
+
     public int getTotalOrder(int idEmployee) throws SQLException {
         Timestamp start = new Timestamp(0);
         Timestamp end = new Timestamp(System.currentTimeMillis());
         return getTotalOrder(start, end, idEmployee);
     }
-    
+
     public int getTotalOrder() throws SQLException {
         Timestamp start = new Timestamp(0);
         Timestamp end = new Timestamp(System.currentTimeMillis());
         return getTotalOrder(start, end);
     }
-    
+
     public int getTotalWorkingMinutes(Timestamp start, Timestamp end) throws SQLException {
         String query = "SELECT FLOOR(SUM(TIME_TO_SEC(TIMEDIFF(endTime, startTime))) / 60) AS totalWorkingMinutes FROM `session` WHERE DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?)";
         PreparedStatement statement = conn.prepareStatement(query);
@@ -66,7 +67,7 @@ public class StatisticalDao {
         }
         return 0;
     }
-    
+
     public int getTotalWorkingMinutes(Timestamp start, Timestamp end, int idEmployee) throws SQLException {
         String query = "SELECT FLOOR(SUM(TIME_TO_SEC(TIMEDIFF(endTime, startTime))) / 60) AS totalWorkingMinutes FROM `session` WHERE DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?) AND idEmployee = ?";
         PreparedStatement statement = conn.prepareStatement(query);
@@ -79,32 +80,32 @@ public class StatisticalDao {
         }
         return 0;
     }
-    
+
     public int getTotalWorkingMinutes() throws SQLException {
-        
+
         Timestamp start = new Timestamp(0);
         Timestamp end = new Timestamp(System.currentTimeMillis());
         return getTotalWorkingMinutes(start, end);
     }
-    
+
     public int getTotalWorkingMinutes(int idEmployee) throws SQLException {
         Timestamp start = new Timestamp(0);
         Timestamp end = new Timestamp(System.currentTimeMillis());
         return getTotalWorkingMinutes(start, end, idEmployee);
     }
-    
+
     public int getTotalIncome() throws SQLException {
         Timestamp start = new Timestamp(0);
         Timestamp end = new Timestamp(System.currentTimeMillis());
         return getTotalIncome(start, end);
     }
-    
+
     public int getTotalIncome(int idEmployee) throws SQLException {
         Timestamp start = new Timestamp(0);
         Timestamp end = new Timestamp(System.currentTimeMillis());
         return getTotalIncome(start, end, idEmployee);
     }
-    
+
     public int getTotalIncome(Timestamp start, Timestamp end) throws SQLException {
         String query = "SELECT SUM(paidAmount) AS totalIncome FROM `order` WHERE status = ? AND DATE(orderDate) >= DATE(?) AND DATE(orderDate) <= DATE(?)";
         PreparedStatement statement = conn.prepareStatement(query);
@@ -117,7 +118,7 @@ public class StatisticalDao {
         }
         return 0;
     }
-    
+
     public int getTotalIncome(Timestamp start, Timestamp end, int idEmployee) throws SQLException {
         String query = "SELECT SUM(paidAmount) AS totalIncome FROM `order` WHERE status = ? AND DATE(orderDate) >= DATE(?) AND DATE(orderDate) <= DATE(?) AND idEmployee = ?";
         PreparedStatement statement = conn.prepareStatement(query);
@@ -131,5 +132,25 @@ public class StatisticalDao {
         }
         return 0;
     }
-    
+
+    public int getTotalEmployee() throws SQLException {
+        Statement statement = conn.createStatement();
+        String query = "SELECT COUNT(*) AS total FROM employee";
+        ResultSet rs = statement.executeQuery(query);
+        if (rs.next()) {
+            return rs.getInt("total");
+        }
+        return 0;
+    }
+
+    public int getTotalCustomer() throws SQLException {
+        Statement statement = conn.createStatement();
+        String query = "SELECT COUNT(*) AS total FROM customer";
+        ResultSet rs = statement.executeQuery(query);
+        if (rs.next()) {
+            return rs.getInt("total");
+        }
+        return 0;
+    }
+
 }

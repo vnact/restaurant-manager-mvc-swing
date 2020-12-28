@@ -6,6 +6,7 @@ import controllers.admin.FoodCategoryManagerController;
 import controllers.admin.FoodItemManagerController;
 import controllers.admin.OrderManagerController;
 import controllers.admin.ShipmentManagerController;
+import controllers.admin.StatisticalController;
 import controllers.admin.TableManagerController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,6 +45,7 @@ public class AdminDashboardController {
             orderManagerController = new OrderManagerController(),
             shipmentManagerController = new ShipmentManagerController(),
             customerManagerController = new CustomerManagerController();
+    StatisticalController statisticalController = new StatisticalController();
 
     HomeView homePane = new HomeView();
     ManagerPaneView employeeManagerPane = new EmployeeManagerView(), // View
@@ -165,6 +167,8 @@ public class AdminDashboardController {
                 break;
             case "TK":
                 view.setPanel(statisticalView);
+                statisticalController.setView(statisticalView);
+                statisticalController.initData();
                 break;
             default:
                 view.setPanel(homePane);
