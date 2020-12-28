@@ -12,7 +12,10 @@ public class ShutdownHook extends Thread {
         //Khi đóng đột ngột
         System.out.println("Chuong trinh dung dot ngot!");
         try {
-            SessionManager.update();// Kết thúc phiên làm việc
+            if (SessionManager.getSession() != null) {
+                System.out.println("Ket thuc phien lam viec!");
+                SessionManager.update();// Kết thúc phiên làm việc
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
