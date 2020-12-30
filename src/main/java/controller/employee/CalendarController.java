@@ -29,15 +29,16 @@ public class CalendarController {
         this.view = view;
         this.view.getCbxMonth().setSelectedIndex(LocalDate.now().getMonthValue() - 1);
         this.view.getTxtYear().setText(String.valueOf(LocalDate.now().getYear()));
-        render(LocalDate.now().getMonthValue(), LocalDate.now().getYear());
+        RenderCalendar(LocalDate.now().getMonthValue(), LocalDate.now().getYear());
+        RenderStatistical(LocalDate.now().getMonthValue(), LocalDate.now().getYear());
         addEvent();
     }
 
-    public void render(int month, int year) {
+    public void RenderCalendar(int month, int year) {
         view.getPanelCalendar().removeAll();
         int day = LocalDate.of(year, month, 1).getDayOfWeek().getValue();
         int days = new GetDayOfMonth(month, year).getDay();
-        System.out.println("ok1");
+        //System.out.println("ok1");
         if (day < 7) {
             for (int i = 0; i < day; i++) {
                 Color color = Color.decode("#F0F0F0");
@@ -46,7 +47,7 @@ public class CalendarController {
                 view.getPanelCalendar().add(dayview);
             }
         }
-        System.out.println("ok2");
+        //System.out.println("ok2");
         try {
             WorkDayDao workDayDao = new WorkDayDao();
             ArrayList<Integer> list = workDayDao.getDay(id, month, year);
@@ -81,39 +82,7 @@ public class CalendarController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        for (int i = 1; i <= days; i++) {
-////            DayView dayview = new DayView();
-////            dayview.getLabelNumber().setText(String.valueOf(i));
-////            view.getPanelCalendar().add(dayview);
-//            try {
-//                WorkDayDao workDayDao = new WorkDayDao();
-//                ArrayList<Integer> list = workDayDao.getDay(SessionManager.getSession().getIdEmployee(), month, year);
-//                System.out.println(list.size());
-////                System.out.println(list.size());
-////                System.out.println(month);
-////                System.out.println(year);
-////                System.out.println(SessionManager.getSession().getId());
-//            int j=0;
-//                
-//            if(list.get(j)==i){
-//                DayView dayView = new DayView();
-//                System.out.println(list.get(j));
-//                String date = "'"+i+"-"+month+"-"+year+"'";
-//                DayController dayController = new DayController(dayView,date,i,true);
-//                view.getPanelCalendar().add(dayView);
-//                j=j+1;
-//            }
-//            else{
-//                String date = "'"+i+"-"+month+"-"+year+"'";
-//                DayView dayView = new DayView();
-//                DayController dayController = new DayController(dayView,date,i,false);
-//                view.getPanelCalendar().add(dayView);
-//            }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-        System.out.println("ok3");
+        //System.out.println("ok3");
         if (day == 7) {
             day = 0;
         }
@@ -123,7 +92,22 @@ public class CalendarController {
             dayview.getLabelNumber().setBackground(color);
             view.getPanelCalendar().add(dayview);
         }
+
         view.updateUI();
+    }
+
+    public void RenderStatistical(int month, int year) {
+        try {
+            int days = new GetDayOfMonth(month, year).getDay();
+            WorkDayDao workDayDao = new WorkDayDao();
+            view.getLbTotalDay().setText(workDayDao.getDay(id, month, year).size() + "/" + days);
+            view.getLbTotalOrder().setText(workDayDao.getTotalOrder(year, month, id) + " đơn");
+            view.getLbTotalTime().setText(workDayDao.getTotalWorkingMinutes(month, year, id) + " phút");
+            view.getLbTotalIncome().setText(workDayDao.getTotalIncome(year, month, id) + "đ");
+            view.getLbTotalBonus().setText(workDayDao.getBonus(id, month, year) + "đ");
+        } catch (Exception e) {
+        }
+
     }
 
     public void addEvent() {
@@ -131,8 +115,9 @@ public class CalendarController {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 month = Integer.valueOf((String) view.getCbxMonth().getSelectedItem());
                 year = Integer.parseInt(view.getTxtYear().getText());
-                render(month, year);
-                System.out.println("ok");
+                RenderCalendar(month, year);
+                RenderStatistical(month, year);
+                //System.out.println("ok");
 
             }
         });

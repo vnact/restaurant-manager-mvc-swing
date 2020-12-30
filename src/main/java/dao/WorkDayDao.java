@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import models.WorkDay;
+import utils.OrderStatus;
 
 /**
  *
@@ -60,10 +61,11 @@ public class WorkDayDao {
     public WorkDay getSales(int id, Timestamp date) throws SQLException {
         System.out.println(id);
         System.out.println(date);
-        String query = "SELECT DATE(orderDate) as day,COUNT(id) AS amount, SUM(totalAmount)as total,(COUNT(id)*2000) as bonus FROM `order` WHERE idEmployee = ? AND DATE(orderDate) = DATE(?)";
+        String query = "SELECT DATE(orderDate) as day,COUNT(id) AS amount, SUM(totalAmount)as total,(COUNT(id)*2000) as bonus FROM `order` WHERE idEmployee = ? AND DATE(orderDate) = DATE(?) AND status = ?";
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setInt(1, id);
         statement.setTimestamp(2, date);
+        statement.setNString(3, OrderStatus.PAID.getId());
         ResultSet rs = statement.executeQuery();
         if (rs.next()) {
             System.out.println(rs.getString("day"));
@@ -72,6 +74,21 @@ public class WorkDayDao {
         }
 
         return null;
+    }
+
+    public int getBonus(int id, int month, int year) throws SQLException {
+        String query = "SELECT (COUNT(id)*2000) as bonus FROM `order` WHERE idEmployee = ? AND YEAR(orderDate) = ? AND MONTH(orderDate)=? AND status = ?";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setInt(1, id);
+        statement.setInt(2, year);
+        statement.setInt(3, month);
+        statement.setNString(4, OrderStatus.PAID.getId());
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            rs.getInt("bonus");
+        }
+
+        return 0;
     }
 
     public int getTotalWorkingMinutes(Timestamp date, int idEmployee) throws SQLException {
@@ -86,4 +103,44 @@ public class WorkDayDao {
         return 0;
     }
 
+    public int getTotalWorkingMinutes(int month, int year, int idEmployee) throws SQLException {
+        String query = "SELECT FLOOR(SUM(TIME_TO_SEC(TIMEDIFF(endTime, startTime))) / 60) AS totalWorkingMinutes FROM `session` WHERE YEAR(startTime) =? AND MONTH(startTime)=? AND idEmployee = ?";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setInt(1, year);
+        statement.setInt(2, month);
+        statement.setInt(3, idEmployee);
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("totalWorkingMinutes");
+        }
+        return 0;
+    }
+
+    public int getTotalIncome(int year, int month, int idEmployee) throws SQLException {
+        String query = "SELECT SUM(paidAmount) AS totalIncome FROM `order` WHERE status = ? AND YEAR(orderDate)=? AND MONTH(orderDate) =? AND idEmployee = ?";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setNString(1, OrderStatus.PAID.getId());
+        statement.setInt(2, year);
+        statement.setInt(3, month);
+        statement.setInt(4, idEmployee);
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("totalIncome");
+        }
+        return 0;
+    }
+
+    public int getTotalOrder(int year, int month, int idEmployee) throws SQLException {
+        String query = "SELECT COUNT(*) AS totalOrder FROM `order` WHERE status = ? AND YEAR(orderDate) = ? AND MONTH(orderDate) = ? AND idEmployee = ?";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setNString(1, OrderStatus.PAID.getId());
+        statement.setInt(2, year);
+        statement.setInt(3, month);
+        statement.setInt(4, idEmployee);
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("totalOrder");
+        }
+        return 0;
+    }
 }
