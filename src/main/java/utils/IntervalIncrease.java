@@ -6,12 +6,12 @@ package utils;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class IntervalIncrease {
-    
+
     public interface Callback {
-        
+
         public abstract void run(int value);
     }
-    
+
     public static void create(int num, int time, int timePerStep, Callback callback) {
         int numStep = time / timePerStep;
         int step = num / numStep;

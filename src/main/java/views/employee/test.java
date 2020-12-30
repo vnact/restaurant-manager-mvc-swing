@@ -22,7 +22,7 @@ public class test extends javax.swing.JFrame {
         CalendarView view = new CalendarView();
         CalendarController ctr = new CalendarController(view);
         this.add(view);
-        
+
     }
 
     /**

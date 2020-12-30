@@ -14,42 +14,35 @@ import java.sql.Timestamp;
  * @author Admin
  */
 public class WorkDay {
-    private int id,day,orderSales,sales,bonus;
-    private Timestamp beginTime,finishTime;
+
+    private int amount, totalAmount, bonus;
+    private String day;
 
     public WorkDay() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getDay() {
+    public String getDay() {
         return day;
     }
 
-    public void setDay(int day) {
+    public void setDay(String day) {
         this.day = day;
     }
 
-    public int getOrderSales() {
-        return orderSales;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setOrderSales(int orderSales) {
-        this.orderSales = orderSales;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
-    public int getSales() {
-        return sales;
+    public int getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setSales(int sales) {
-        this.sales = sales;
+    public void setTotalAmount(int totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
     public int getBonus() {
@@ -60,31 +53,14 @@ public class WorkDay {
         this.bonus = bonus;
     }
 
-    public Timestamp getBeginTime() {
-        return beginTime;
-    }
-
-    public void setBeginTime(Timestamp beginTime) {
-        this.beginTime = beginTime;
-    }
-
-    public Timestamp getFinishTime() {
-        return finishTime;
-    }
-
-    public void setFinishTime(Timestamp finishTime) {
-        this.finishTime = finishTime;
-    }
     public static WorkDay getFromResultSet(ResultSet rs) throws SQLException {
         WorkDay w = new WorkDay();
-        w.setId(rs.getInt("id"));
+        //w.setId(rs.getInt("id"));
         w.setBonus(rs.getInt("bonus"));
-        w.setDay(rs.getInt("day"));
-        w.setFinishTime(rs.getTimestamp("finishTime"));
-        w.setBeginTime(rs.getTimestamp("beginTime"));
-        w.setOrderSales(rs.getInt("orderSales"));
-        w.setSales(rs.getInt("sales"));
+        w.setDay(rs.getString("day"));
+        w.setTotalAmount(rs.getInt("total"));
+        w.setAmount(rs.getInt("amount"));
         return w;
     }
-    
+
 }

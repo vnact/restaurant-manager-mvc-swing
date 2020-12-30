@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import main.SessionManager;
 import models.Employee;
+import views.employee.CalendarView;
 import views.employee.ChangePassView;
 import views.employee.InforView;
 
@@ -33,6 +34,9 @@ public class InforController {
     public void setView(InforView view) {
         view.getLabName().setText("Chào mừng " + session.getName());
         this.view = view;
+        CalendarView calendarView = new CalendarView();
+        CalendarController calendarController = new CalendarController(calendarView);
+        view.getPanelCalendar().add(calendarView);
         addEvent();
 
     }

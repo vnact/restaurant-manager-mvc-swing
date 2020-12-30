@@ -7,6 +7,7 @@ package views.employee;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,10 +20,15 @@ public class InforView extends javax.swing.JPanel {
      */
     public InforView() {
         initComponents();
+
         btnChangeInfor.putClientProperty("JButton.buttonType", "roundRect");
         btnChangePass.putClientProperty("JButton.buttonType", "roundRect");
         btnHS.putClientProperty("JButton.buttonType", "roundRect");
         btnNS.putClientProperty("JButton.buttonType", "roundRect");
+    }
+
+    public JPanel getPanelCalendar() {
+        return panelCalendar;
     }
 
     public JButton getBtnChangeInfor() {
@@ -62,8 +68,9 @@ public class InforView extends javax.swing.JPanel {
         btnHS = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         labName = new javax.swing.JLabel();
+        panelCalendar = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(204, 251, 230));
+        setBackground(new java.awt.Color(225, 203, 138));
         setMinimumSize(new java.awt.Dimension(1008, 680));
         setPreferredSize(new java.awt.Dimension(1008, 680));
         setLayout(new java.awt.BorderLayout());
@@ -128,19 +135,40 @@ public class InforView extends javax.swing.JPanel {
         labName.setFont(new java.awt.Font("Times New Roman", 1, 30)); // NOI18N
         labName.setText("Xin chào Trần Đức Cường !");
 
+        panelCalendar.setPreferredSize(new java.awt.Dimension(480, 578));
+
+        javax.swing.GroupLayout panelCalendarLayout = new javax.swing.GroupLayout(panelCalendar);
+        panelCalendar.setLayout(panelCalendarLayout);
+        panelCalendarLayout.setHorizontalGroup(
+            panelCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 463, Short.MAX_VALUE)
+        );
+        panelCalendarLayout.setVerticalGroup(
+            panelCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 578, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
                 .addComponent(labName)
-                .addGap(0, 483, Short.MAX_VALUE))
+                .addContainerGap(447, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(186, 186, 186))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addComponent(labName)
-                .addGap(0, 645, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 37, Short.MAX_VALUE))
         );
 
         add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -158,5 +186,6 @@ public class InforView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labName;
+    private javax.swing.JPanel panelCalendar;
     // End of variables declaration//GEN-END:variables
 }
