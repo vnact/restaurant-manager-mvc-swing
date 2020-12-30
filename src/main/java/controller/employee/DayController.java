@@ -7,6 +7,8 @@ package controller.employee;
 
 import dao.WorkDayDao;
 import java.awt.Color;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -14,7 +16,6 @@ import java.sql.Timestamp;
 import models.WorkDay;
 import views.employee.DayView;
 import views.employee.PopupInfor;
-import views.employee.PopupInfor1;
 
 /**
  *
@@ -65,6 +66,21 @@ public class DayController {
                     popupInfor.getTxtBonus().setText(String.valueOf(workDay.getBonus()));
                     popupInfor.getTxtTotalTime().setText(String.valueOf(totalTime));
                     System.out.println(workDay.getDay());
+//                    popupInfor.addFocusListener(new FocusListener() {
+//                        private boolean gained = false;
+//
+//                        @Override
+//                        public void focusGained(FocusEvent e) {
+//                            gained = true;
+//                        }
+//
+//                        @Override
+//                        public void focusLost(FocusEvent e) {
+//                            if (gained) {
+//                                PopupInfor.dispose();
+//                            }
+//                        }
+//                    });
                     popupInfor.setVisible(true);
                 } catch (SQLException ee) {
                     ee.printStackTrace();

@@ -27,6 +27,7 @@ public class EmployeeDashboardView extends javax.swing.JFrame {
 
     public EmployeeDashboardView() {
         initComponents();
+        setSize(1208, 680);
         setLocationRelativeTo(null);
         btnLogout.putClientProperty("JButton.buttonType", "roundRect");
     }
@@ -119,6 +120,7 @@ public class EmployeeDashboardView extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1208, 680));
         setPreferredSize(new java.awt.Dimension(1208, 680));
 
+        panelLeft.setMinimumSize(new java.awt.Dimension(200, 680));
         panelLeft.setPreferredSize(new java.awt.Dimension(200, 680));
         panelLeft.setLayout(new java.awt.BorderLayout());
 
@@ -143,10 +145,15 @@ public class EmployeeDashboardView extends javax.swing.JFrame {
         panelHeader.add(btnLogout, gridBagConstraints);
 
         panelLeft.add(panelHeader, java.awt.BorderLayout.PAGE_START);
+
+        panelSideBar.setBackground(new java.awt.Color(251, 133, 95));
         panelLeft.add(panelSideBar, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(panelLeft, java.awt.BorderLayout.LINE_START);
 
+        panelLayout.setMaximumSize(new java.awt.Dimension(1008, 680));
+        panelLayout.setMinimumSize(new java.awt.Dimension(1008, 680));
+        panelLayout.setPreferredSize(new java.awt.Dimension(1008, 680));
         panelLayout.setLayout(new java.awt.CardLayout());
         getContentPane().add(panelLayout, java.awt.BorderLayout.CENTER);
 
