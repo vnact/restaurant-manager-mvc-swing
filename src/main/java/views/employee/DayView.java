@@ -37,7 +37,7 @@ public class DayView extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(60, 60));
 
         labelNumber.setBackground(new java.awt.Color(240, 240, 200));
-        labelNumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         labelNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelNumber.setOpaque(true);
 

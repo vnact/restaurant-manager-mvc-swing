@@ -10,7 +10,6 @@ import java.awt.Color;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import main.SessionManager;
-import test.getDayOfMonth;
 import views.employee.CalendarView;
 import views.employee.DayView;
 
@@ -37,7 +36,7 @@ public class CalendarController {
     public void render(int month, int year) {
         view.getPanelCalendar().removeAll();
         int day = LocalDate.of(year, month, 1).getDayOfWeek().getValue();
-        int days = new getDayOfMonth(month, year).getDay();
+        int days = new GetDayOfMonth(month, year).getDay();
         System.out.println("ok1");
         if (day < 7) {
             for (int i = 0; i < day; i++) {

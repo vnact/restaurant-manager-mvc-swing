@@ -80,6 +80,7 @@ public class InforView extends javax.swing.JPanel {
         jPanel1.setPreferredSize(new java.awt.Dimension(170, 680));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
+        btnChangePass.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnChangePass.setText("Đổi mật khẩu");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -91,6 +92,7 @@ public class InforView extends javax.swing.JPanel {
         gridBagConstraints.weighty = 0.1;
         jPanel1.add(btnChangePass, gridBagConstraints);
 
+        btnChangeInfor.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnChangeInfor.setText("Thay đổi thông tin");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -101,6 +103,7 @@ public class InforView extends javax.swing.JPanel {
         gridBagConstraints.weighty = 0.1;
         jPanel1.add(btnChangeInfor, gridBagConstraints);
 
+        btnNS.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnNS.setText("Năng suất");
         btnNS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +120,7 @@ public class InforView extends javax.swing.JPanel {
         gridBagConstraints.weighty = 0.1;
         jPanel1.add(btnNS, gridBagConstraints);
 
+        btnHS.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnHS.setText("Hiệu suất");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -132,7 +136,7 @@ public class InforView extends javax.swing.JPanel {
 
         jPanel2.setOpaque(false);
 
-        labName.setFont(new java.awt.Font("Times New Roman", 1, 30)); // NOI18N
+        labName.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         labName.setText("Xin chào Trần Đức Cường !");
 
         panelCalendar.setPreferredSize(new java.awt.Dimension(480, 578));
@@ -141,11 +145,11 @@ public class InforView extends javax.swing.JPanel {
         panelCalendar.setLayout(panelCalendarLayout);
         panelCalendarLayout.setHorizontalGroup(
             panelCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+            .addGap(0, 761, Short.MAX_VALUE)
         );
         panelCalendarLayout.setVerticalGroup(
             panelCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGap(0, 598, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -154,12 +158,10 @@ public class InforView extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(labName)
-                .addContainerGap(447, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(186, 186, 186))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labName)
+                    .addComponent(panelCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 761, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,8 +169,8 @@ public class InforView extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addComponent(labName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 25, Short.MAX_VALUE))
+                .addComponent(panelCalendar, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         add(jPanel2, java.awt.BorderLayout.CENTER);

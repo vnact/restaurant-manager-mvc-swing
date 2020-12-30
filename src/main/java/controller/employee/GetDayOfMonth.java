@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package test;
+package controller.employee;
+
+import test.*;
 
 /**
  *
  * @author Admin
  */
-public class getDayOfMonth {
+public class GetDayOfMonth {
 
     int month, year, day;
 
-    public getDayOfMonth(int month, int year) {
+    public GetDayOfMonth(int month, int year) {
         this.month = month;
         this.year = year;
         getDays();

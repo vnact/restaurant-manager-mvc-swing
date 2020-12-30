@@ -89,18 +89,33 @@ public class PopupInfor extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(188, 228, 153));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel1.setText("Ngày làm việc :");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel3.setText("Thời gian làm việc :");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel4.setText("Số hóa đơn :");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel5.setText("Tổng tiền :");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel6.setText("Bonus :");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Thông tin ");
+
+        txtDate.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        txtTotalTime.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        txtAmount.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        txtTotalAmount.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        txtBonus.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
         jLabel7.setBackground(new java.awt.Color(188, 228, 153));
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
