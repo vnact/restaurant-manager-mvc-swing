@@ -60,7 +60,7 @@ public class Customer extends Model {
 
     @Override
     public String toString() {
-        return "Customer{" + "id=" + id + ", phoneNumber=" + phoneNumber + ", name=" + name + ", address=" + address + ", birthday=" + birthday + '}';
+        return name + "\nSDT: " + phoneNumber + "\nĐC: " + address;
     }
 
     public static Customer getFromResultSet(ResultSet rs) throws SQLException {
