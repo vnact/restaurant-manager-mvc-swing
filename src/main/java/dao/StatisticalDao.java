@@ -1,11 +1,13 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import utils.OrderStatus;
 
 /**
@@ -153,4 +155,57 @@ public class StatisticalDao {
         return 0;
     }
 
+    public ArrayList<Date> getWorkingDays() throws SQLException {
+        Timestamp current = new Timestamp(System.currentTimeMillis());
+//        return getWorkingDays(new Timestamp(current.getTime() - 31 * 24 * 60 * 60 * 1000), current);
+        return getWorkingDays(new Timestamp(0), current);
+    }
+
+    public ArrayList<Date> getWorkingDays(int idEmployee) throws SQLException {
+        Timestamp current = new Timestamp(System.currentTimeMillis());
+        return getWorkingDays(new Timestamp(0), current, idEmployee);
+    }
+
+    public ArrayList<Date> getWorkingDays(Timestamp start, Timestamp end) throws SQLException {
+        ArrayList<Date> workingDays = new ArrayList<>();
+        String query = "SELECT DATE(startTime) AS startTime, DATE(endTime) AS endTime FROM `session` WHERE DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?) ORDER BY `startTime` ASC";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setTimestamp(1, start);
+        statement.setTimestamp(2, end);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            Date startTime = rs.getDate("startTime");
+            Date endTime = rs.getDate("endTime");
+            Date i = startTime;
+            while (!i.after(endTime)) {
+                if (!workingDays.contains(i)) {
+                    workingDays.add(i);
+                }
+                i = new Date(i.getTime() + 24 * 60 * 60 * 1000);//Check ngày sau
+            }
+        }
+        return workingDays;
+    }
+
+    public ArrayList<Date> getWorkingDays(Timestamp start, Timestamp end, int idEmployee) throws SQLException {
+        ArrayList<Date> workingDays = new ArrayList<>();
+        String query = "SELECT DATE(startTime) AS startTime, DATE(endTime) AS endTime FROM `session` WHERE DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?) AND `idEmployee` = ? ORDER BY `session`.`startTime` ASC";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setTimestamp(1, start);
+        statement.setTimestamp(2, end);
+        statement.setInt(3, idEmployee);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            Date startTime = rs.getDate("startTime");
+            Date endTime = rs.getDate("endTime");
+            Date i = startTime;
+            while (!i.after(endTime)) {
+                if (!workingDays.contains(i)) {
+                    workingDays.add(i);
+                }
+                i = new Date(i.getTime() + 24 * 60 * 60 * 1000);//Check ngày sau
+            }
+        }
+        return workingDays;
+    }
 }
