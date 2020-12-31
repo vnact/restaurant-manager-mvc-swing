@@ -1,7 +1,5 @@
 package controllers.popup;
 
-import controllers.PopupController;
-import controllers.admin.FoodItemManagerController;
 import dao.FoodCategoryDao;
 import dao.FoodItemDao;
 import java.awt.event.ActionListener;
@@ -23,7 +21,7 @@ import views.popup.FoodItemPopupView;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  * Popup controller mẫu
  */
-public class FoodItemPopupController extends PopupController {
+public class FoodItemPopupController {
 
     FoodItemDao foodItemDao = new FoodItemDao();
     FoodCategoryDao foodCategoryDao = new FoodCategoryDao();
@@ -64,27 +62,39 @@ public class FoodItemPopupController extends PopupController {
         }
     }
 
-    public void add(FoodItemManagerController parrent, FoodItemPopupView view) {
-        setView(view);
+    public void add(FoodItemPopupView view, SuccessCallback sc, ErrorCallback ec) {
+        view.setVisible(true);
+        view.getBtnCancel().addActionListener(evt -> view.dispose());
         initComboBox(view);
         view.getBtnChooseImage().addActionListener(eventShowChooseFileDialog(view));
         view.getBtnOK().addActionListener(evt -> {
             try {
-                boolean addSuccess = addFoodItem();
-                if (addSuccess) {
-                    view.dispose();
-                    parrent.updateData();
-                    view.showMessage("Thêm món ăn thành công!");
-                }
+                addFoodItem(view);
+                view.dispose();
+                view.showMessage("Thêm món ăn thành công!");
+                sc.onSuccess();
             } catch (Exception ex) {
-                view.showError(ex);
+                ec.onError(ex);
             }
         });
 
     }
 
-    public void edit(FoodItemManagerController parrent, FoodItemPopupView view, FoodItem foodItem) {
-        setView(view);
+    public boolean isExistsImage(String imagePath) {
+        try {
+            if (imagePath.isEmpty()) {
+                return false;
+            }
+            File f = new File(resourcesPath + imagePath);
+            return f.exists() && !f.isDirectory();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void edit(FoodItemPopupView view, FoodItem foodItem, SuccessCallback sc, ErrorCallback ec) {
+        view.setVisible(true);
+        view.getBtnCancel().addActionListener(evt -> view.dispose());
         initComboBox(view);
         view.getLbTitle().setText("Sửa món ăn - " + foodItem.getId());
         view.getBtnOK().setText("Cập nhật");
@@ -92,44 +102,43 @@ public class FoodItemPopupController extends PopupController {
         if (foodItem == null) {
             view.showError("Món không tồn tại");
         }
-        try {
-            view.getTxtName().setText(foodItem.getName());
-            view.getTxtDescription().setText(foodItem.getDescription());
+        view.getTxtName().setText(foodItem.getName());
+        view.getTxtDescription().setText(foodItem.getDescription());
+        view.getTxtUrlImage().setText(foodItem.getUrlImage());
+        view.getTxtUnitName().setText(foodItem.getUnitName());
+        view.getTxtUnitPrice().setText(foodItem.getUnitPrice() + "");
+
+        FoodCategory fc = new FoodCategory();
+        fc.setId(foodItem.getIdCategory());
+        view.getCboCategory().setSelectedItem(fc);
+        if (isExistsImage(foodItem.getUrlImage())) {
             view.getTxtUrlImage().setText(foodItem.getUrlImage());
-            view.getTxtUnitName().setText(foodItem.getUnitName());
-            view.getTxtUnitPrice().setText(foodItem.getUnitPrice() + "");
-            FoodCategory fc = new FoodCategory();
-            fc.setId(foodItem.getIdCategory());
-            view.getCboCategory().setSelectedItem(fc);
-            if (!foodItem.getUrlImage().isEmpty()) {
-                File f = new File(resourcesPath + foodItem.getUrlImage());
-                if (f.exists() && !f.isDirectory()) {
-                    view.getTxtUrlImage().setText(foodItem.getUrlImage());
-                } else {
-                    view.getTxtUrlImage().setText("");
-                }
+        } else {
+            view.getTxtUrlImage().setText("");
+        }
+        if (!foodItem.getUrlImage().isEmpty()) {
+            File f = new File(resourcesPath + foodItem.getUrlImage());
+            if (f.exists() && !f.isDirectory()) {
+                view.getTxtUrlImage().setText(foodItem.getUrlImage());
+            } else {
+                view.getTxtUrlImage().setText("");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         view.getBtnChooseImage().addActionListener(eventShowChooseFileDialog(view));
         view.getBtnOK().addActionListener(evt -> {
             try {
-                boolean editSuccess = editFoodItem(foodItem);
-                if (editSuccess) {
-                    view.dispose();
-                    parrent.updateData();
-                    view.showMessage("Sửa món ăn thành công!");
-                }
+                editFoodItem(view, foodItem);
+                view.dispose();
+                view.showMessage("Sửa món ăn thành công!");
+                sc.onSuccess();
             } catch (Exception ex) {
-                view.showError(ex);
+                ec.onError(ex);
             }
         });
 
     }
 
-    public boolean addFoodItem() throws Exception {
-        FoodItemPopupView view = (FoodItemPopupView) this.getView();
+    public boolean addFoodItem(FoodItemPopupView view) throws Exception {
         FoodItem foodItem = new FoodItem();
         FoodCategory selectCategory = (FoodCategory) view.getCboCategory().getSelectedItem();
         String name = view.getTxtName().getText(), unitName = view.getTxtUnitName().getText(),
@@ -149,8 +158,7 @@ public class FoodItemPopupController extends PopupController {
         return true;
     }
 
-    public boolean editFoodItem(FoodItem foodItem) throws Exception {
-        FoodItemPopupView view = (FoodItemPopupView) this.getView();
+    public boolean editFoodItem(FoodItemPopupView view, FoodItem foodItem) throws Exception {
         FoodCategory selectCategory = (FoodCategory) view.getCboCategory().getSelectedItem();
         String name = view.getTxtName().getText(), unitName = view.getTxtUnitName().getText(),
                 unitPrice = view.getTxtUnitPrice().getText(), urlImage = view.getTxtUrlImage().getText(),
@@ -168,4 +176,109 @@ public class FoodItemPopupController extends PopupController {
         foodItemDao.update(foodItem);
         return true;
     }
+
+//    public void add(FoodItemManagerController parrent, FoodItemPopupView view) {
+//        setView(view);
+//        initComboBox(view);
+//        view.getBtnChooseImage().addActionListener(eventShowChooseFileDialog(view));
+//        view.getBtnOK().addActionListener(evt -> {
+//            try {
+//                boolean addSuccess = addFoodItem();
+//                if (addSuccess) {
+//                    view.dispose();
+//                    parrent.updateData();
+//                    view.showMessage("Thêm món ăn thành công!");
+//                }
+//            } catch (Exception ex) {
+//                view.showError(ex);
+//            }
+//        });
+//
+//    }
+//
+//    public void edit(FoodItemManagerController parrent, FoodItemPopupView view, FoodItem foodItem) {
+//        setView(view);
+//        initComboBox(view);
+//        view.getLbTitle().setText("Sửa món ăn - " + foodItem.getId());
+//        view.getBtnOK().setText("Cập nhật");
+//
+//        if (foodItem == null) {
+//            view.showError("Món không tồn tại");
+//        }
+//        try {
+//            view.getTxtName().setText(foodItem.getName());
+//            view.getTxtDescription().setText(foodItem.getDescription());
+//            view.getTxtUrlImage().setText(foodItem.getUrlImage());
+//            view.getTxtUnitName().setText(foodItem.getUnitName());
+//            view.getTxtUnitPrice().setText(foodItem.getUnitPrice() + "");
+//            FoodCategory fc = new FoodCategory();
+//            fc.setId(foodItem.getIdCategory());
+//            view.getCboCategory().setSelectedItem(fc);
+//            if (!foodItem.getUrlImage().isEmpty()) {
+//                File f = new File(resourcesPath + foodItem.getUrlImage());
+//                if (f.exists() && !f.isDirectory()) {
+//                    view.getTxtUrlImage().setText(foodItem.getUrlImage());
+//                } else {
+//                    view.getTxtUrlImage().setText("");
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        view.getBtnChooseImage().addActionListener(eventShowChooseFileDialog(view));
+//        view.getBtnOK().addActionListener(evt -> {
+//            try {
+//                boolean editSuccess = editFoodItem(foodItem);
+//                if (editSuccess) {
+//                    view.dispose();
+//                    parrent.updateData();
+//                    view.showMessage("Sửa món ăn thành công!");
+//                }
+//            } catch (Exception ex) {
+//                view.showError(ex);
+//            }
+//        });
+//
+//    }
+//
+//    public boolean addFoodItem() throws Exception {
+//        FoodItemPopupView view = (FoodItemPopupView) this.getView();
+//        FoodItem foodItem = new FoodItem();
+//        FoodCategory selectCategory = (FoodCategory) view.getCboCategory().getSelectedItem();
+//        String name = view.getTxtName().getText(), unitName = view.getTxtUnitName().getText(),
+//                unitPrice = view.getTxtUnitPrice().getText(), urlImage = view.getTxtUrlImage().getText(),
+//                description = view.getTxtDescription().getText();
+//        if (name.isEmpty() || unitName.isEmpty() || unitPrice.isEmpty() || selectCategory == null) {
+//            throw new Exception("Vui lòng điền đầy đủ thông tin");
+//        }
+//        foodItem.setName(name);
+//        foodItem.setDescription(unitName);
+//        foodItem.setUnitName(unitName);
+//        foodItem.setUnitPrice(Integer.parseInt(unitPrice));
+//        foodItem.setUrlImage(urlImage);
+//        foodItem.setDescription(description);
+//        foodItem.setIdCategory(selectCategory.getId());
+//        foodItemDao.save(foodItem);
+//        return true;
+//    }
+//
+//    public boolean editFoodItem(FoodItem foodItem) throws Exception {
+//        FoodItemPopupView view = (FoodItemPopupView) this.getView();
+//        FoodCategory selectCategory = (FoodCategory) view.getCboCategory().getSelectedItem();
+//        String name = view.getTxtName().getText(), unitName = view.getTxtUnitName().getText(),
+//                unitPrice = view.getTxtUnitPrice().getText(), urlImage = view.getTxtUrlImage().getText(),
+//                description = view.getTxtDescription().getText();
+//        if (name.isEmpty() || unitName.isEmpty() || unitPrice.isEmpty() || selectCategory == null) {
+//            throw new Exception("Vui lòng điền đầy đủ thông tin");
+//        }
+//        foodItem.setName(name);
+//        foodItem.setDescription(description);
+//        foodItem.setUnitName(unitName);
+//        foodItem.setUnitPrice(Integer.parseInt(unitPrice));
+//        foodItem.setUrlImage(urlImage);
+//        foodItem.setDescription(description);
+//        foodItem.setIdCategory(selectCategory.getId());
+//        foodItemDao.update(foodItem);
+//        return true;
+//    }
 }
