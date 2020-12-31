@@ -1,12 +1,14 @@
 package controllers.admin;
 
 import controllers.ManagerController;
+import controllers.popup.ShipmentPopupController;
 import dao.ShipmentDao;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.YES_OPTION;
 import models.Shipment;
+import views.popup.ShipmentPopupView;
 
 /**
  * createAt Dec 15, 2020
@@ -53,7 +55,10 @@ public class ShipmentManagerController extends ManagerController {
                 if (e == null) {
                     throw new Exception("Đơn ship bạn chọn không hợp lệ");
                 }
-//                popupController.edit(this, new ShipmentPopupView(), e);
+                new ShipmentPopupController().add(new ShipmentPopupView(), e.getIdOrder(), () -> {
+                    view.showMessage("Tạo / sửa đơn ship thành công!");
+                    updateData();
+                }, view::showError);
             }
         } catch (Exception e) {
             view.showError(e);

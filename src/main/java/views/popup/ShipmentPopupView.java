@@ -7,6 +7,7 @@ package views.popup;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
@@ -16,11 +17,12 @@ import javax.swing.JTextField;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class ShipmentPopupView extends javax.swing.JFrame {
-
+    
     public ShipmentPopupView() {
         initComponents();
+        setLocationRelativeTo(null);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -37,7 +39,7 @@ public class ShipmentPopupView extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lbCustomerName = new javax.swing.JLabel();
         txtShipperName = new javax.swing.JTextField();
         txtShipperPhoneNumber = new javax.swing.JTextField();
         spnShipCost = new javax.swing.JSpinner();
@@ -116,16 +118,16 @@ public class ShipmentPopupView extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel3.add(jLabel6, gridBagConstraints);
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel7.setText("Trần Đức Cường");
+        lbCustomerName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lbCustomerName.setForeground(new java.awt.Color(255, 51, 51));
+        lbCustomerName.setText("Chưa rõ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        jPanel3.add(jLabel7, gridBagConstraints);
+        jPanel3.add(lbCustomerName, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -180,29 +182,33 @@ public class ShipmentPopupView extends javax.swing.JFrame {
     public JButton getBtnCancel() {
         return btnCancel;
     }
-
+    
     public JButton getBtnOK() {
         return btnOK;
     }
-
+    
     public JButton getBtnSelectCustomer() {
         return btnSelectCustomer;
     }
-
+    
     public JComboBox<String> getCboStatus() {
         return cboStatus;
     }
-
+    
     public JSpinner getSpnShipCost() {
         return spnShipCost;
     }
-
+    
     public JTextField getTxtShipperName() {
         return txtShipperName;
     }
-
+    
     public JTextField getTxtShipperPhoneNumber() {
         return txtShipperPhoneNumber;
+    }
+    
+    public JLabel getLbCustomerName() {
+        return lbCustomerName;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -216,10 +222,10 @@ public class ShipmentPopupView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lbCustomerName;
     private javax.swing.JSpinner spnShipCost;
     private javax.swing.JTextField txtShipperName;
     private javax.swing.JTextField txtShipperPhoneNumber;

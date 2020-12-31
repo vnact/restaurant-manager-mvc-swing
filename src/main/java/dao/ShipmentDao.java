@@ -69,7 +69,7 @@ public class ShipmentDao extends Dao<Shipment> {
         if (t == null) {
             throw new SQLException("Shipment rỗng");
         }
-        String query = "UPDATE `shipment` SET `idCustomer` = '2', `shipperName` = '?, `shipperPhoneNumber` = ?, `shipCost` = ?, `status` = ?, `notice` = ?, `startDate` = ?, `endDate` = ? WHERE `shipment`.`idOrder` = ?";
+        String query = "UPDATE `shipment` SET `idCustomer` = ?, `shipperName` = ?, `shipperPhoneNumber` = ?, `shipCost` = ?, `status` = ?, `notice` = ?, `startDate` = ?, `endDate` = ? WHERE `shipment`.`idOrder` = ?";
 
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setInt(1, t.getIdCustomer());

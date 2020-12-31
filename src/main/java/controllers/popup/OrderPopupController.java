@@ -7,6 +7,7 @@ import controllers.popup.order.OrderItemController;
 import dao.EmployeeDao;
 import dao.OrderDao;
 import dao.OrderItemDao;
+import dao.ShipmentDao;
 import dao.TableDao;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
@@ -22,6 +23,7 @@ import utils.OrderType;
 import utils.TableStatus;
 import views.popup.AddOrderPopupView;
 import views.popup.EditOrderPopupView;
+import views.popup.ShipmentPopupView;
 import views.popup.ToppingPopupView;
 
 /**
@@ -31,16 +33,17 @@ import views.popup.ToppingPopupView;
  * Popup controller mẫu
  */
 public class OrderPopupController extends PopupController {
-
+    
     OrderDao orderDao = new OrderDao();
     EmployeeDao employeeDao = new EmployeeDao();
+    ShipmentDao shipmentDao = new ShipmentDao();
     TableDao tableDao = new TableDao();
     OrderItemDao orderItemDao = new OrderItemDao();
     FoodItemController foodItemController = new FoodItemController();
     OrderItemController orderItemController = new OrderItemController();
     ToppingPopupController toppingPopupController = new ToppingPopupController();
     DecimalFormat formatter = new DecimalFormat("###,###,###");
-
+    
     public void add(OrderManagerController parrent, AddOrderPopupView view) {
         Employee session = SessionManager.getSession().getEmployee();
         setView(view);
@@ -74,9 +77,9 @@ public class OrderPopupController extends PopupController {
                 view.showError(ex);
             }
         });
-
+        
     }
-
+    
     public void edit(OrderManagerController parrent, EditOrderPopupView view, Order order) {
         setView(view);
         orderItemController.setPanelOrderItem(view.getPnlOrderItem());
@@ -86,9 +89,9 @@ public class OrderPopupController extends PopupController {
         });
         foodItemController.setPanelFoodCategory(view.getPnlFoodCategory());
         foodItemController.setPanelFoodItem(view.getPnlFoodItem());
-
+        
         Employee employee = SessionManager.getSession().getEmployee();
-
+        
         if (employee != null) {
             view.getLbEmployeeName().setText(employee.getName());
         }
@@ -99,7 +102,7 @@ public class OrderPopupController extends PopupController {
                     view.getTbComboBoxModel().addElement(table);
                 }
             }
-
+            
             for (OrderType ot : OrderType.values()) { // Hiển thị loại hóa đơn
                 view.getCboType().addItem(ot.getName());
             }
@@ -115,7 +118,7 @@ public class OrderPopupController extends PopupController {
             view.getSpnDiscount().setValue(order.getDiscount());
             view.getCboType().setSelectedItem(order.getType().getName());
             view.getLbDiscount().setText(order.getDiscount() + "");
-
+            
         } catch (Exception e) {
             view.dispose();
             view.showError(e);
@@ -134,6 +137,10 @@ public class OrderPopupController extends PopupController {
             } catch (Exception ex) {
                 view.showError(ex);
             }
+        });
+        
+        view.getCboType().addActionListener(evt -> {
+            order.setType(OrderType.getByName(view.getCboType().getSelectedItem().toString()));
         });
         view.getSpnDiscount().addChangeListener(evt -> { // Thay giá trị
             order.setDiscount((int) view.getSpnDiscount().getValue());
@@ -173,9 +180,16 @@ public class OrderPopupController extends PopupController {
                 view.showError(e);
             }
         });
-
+        view.getBtnShipManager().addActionListener(evt -> {
+            if (order.getType() != OrderType.ONLINE) {
+                view.showError("Bạn chỉ có thể ship đơn online");
+                return;
+            }
+            new ShipmentPopupController().add(new ShipmentPopupView(), order.getId(), () -> view.showMessage("Tạo / sửa đơn ship thành công!"), view::showError);
+        });
+        
     }
-
+    
     public void updateAmount(EditOrderPopupView view, Order order) {
         order.setTotalAmount(orderItemController.getTotalAmount());
         view.getLbDiscount().setText(order.getDiscount() + "");
@@ -183,7 +197,7 @@ public class OrderPopupController extends PopupController {
         view.getLbFinalAmount().setText(formatter.format(order.getFinalAmount()));
         view.getLbTotalAmount().setText(formatter.format(order.getTotalAmount()));
     }
-
+    
     public boolean addOrder() throws Exception {
         AddOrderPopupView view = (AddOrderPopupView) this.getView();
         Order e = new Order();
@@ -206,7 +220,7 @@ public class OrderPopupController extends PopupController {
             }
             table.setStatus(TableStatus.SERVING);
         }
-
+        
         Order order = new Order();
         order.setEmployee(employee);
         order.setTable(table);
@@ -217,7 +231,7 @@ public class OrderPopupController extends PopupController {
         tableDao.update(table);
         return true;
     }
-
+    
     public boolean editOrder(Order order) throws Exception {
         EditOrderPopupView view = (EditOrderPopupView) this.getView();
         if (order.getTable() == null) {
@@ -255,6 +269,9 @@ public class OrderPopupController extends PopupController {
         order.setTotalAmount(orderItemController.getTotalAmount());
         orderDao.update(order);
         tableDao.update(order.getTable());
+        if (order.getType() != OrderType.ONLINE) {
+            shipmentDao.deleteById(order.getId());//Xóa đơn ship
+        }
         return true;
     }
 }
