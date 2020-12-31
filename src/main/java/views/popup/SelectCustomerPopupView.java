@@ -7,8 +7,13 @@ package views.popup;
 
 import dao.CustomerDao;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JTextField;
 import models.Customer;
+import utils.ErrorPopup;
 import views.CustomerRenderJList;
 
 /**
@@ -25,7 +30,51 @@ public class SelectCustomerPopupView extends javax.swing.JFrame {
         listCustomer.setModel(customerListModel);
         listCustomer.setCellRenderer(new CustomerRenderJList());
         setPreferredSize(new Dimension(400, 500));
+        getRootPane().setDefaultButton(btnSearch);
         setLocationRelativeTo(null);
+    }
+
+    public DefaultListModel<Customer> getCustomerListModel() {
+        return customerListModel;
+    }
+
+    public JButton getBtnCancel() {
+        return btnCancel;
+    }
+
+    public JButton getBtnOK() {
+        return btnOK;
+    }
+
+    public JButton getBtnSearch() {
+        return btnSearch;
+    }
+
+    public JTextField getTxtCustomerName() {
+        return txtCustomerName;
+    }
+
+    public JList<Customer> getListCustomer() {
+        return listCustomer;
+    }
+
+    public void setListCustomer(JList<Customer> listCustomer) {
+        this.listCustomer = listCustomer;
+    }
+
+    public void renderCustomer(ArrayList<Customer> customers) {
+        customerListModel.removeAllElements();
+        for (Customer customer : customers) {
+            customerListModel.addElement(customer);
+        }
+    }
+
+    public void showError(String message) {
+        ErrorPopup.show(new Exception(message));
+    }
+
+    public void showError(Exception message) {
+        ErrorPopup.show(message);
     }
 
     @SuppressWarnings("unchecked")
@@ -118,10 +167,8 @@ public class SelectCustomerPopupView extends javax.swing.JFrame {
                 view.setVisible(true);
                 try {
                     CustomerDao customerDao = new CustomerDao();
-                    view.customerListModel.setSize(0);
-                    for (Customer customer : customerDao.getAll()) {
-                        view.customerListModel.addElement(customer);
-                    }
+                    view.renderCustomer(customerDao.getAll());
+                    view.renderCustomer(customerDao.getAll());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
