@@ -90,7 +90,6 @@ public class ToppingPopupView extends javax.swing.JFrame {
         btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setUndecorated(true);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 

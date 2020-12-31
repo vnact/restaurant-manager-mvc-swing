@@ -87,7 +87,6 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         jPanel13 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1555, 640));
 
         pnlTop.setPreferredSize(new java.awt.Dimension(1500, 40));

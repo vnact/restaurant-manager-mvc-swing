@@ -90,7 +90,6 @@ public class EmployeePopupView extends javax.swing.JFrame implements PopupView {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(350, 400));
-        setUndecorated(true);
         setResizable(false);
 
         jPanel2.setPreferredSize(new java.awt.Dimension(350, 50));

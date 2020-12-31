@@ -91,7 +91,6 @@ public class CustomerPopupView extends javax.swing.JFrame implements PopupView {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setUndecorated(true);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 50));
         jPanel1.setLayout(new java.awt.GridBagLayout());

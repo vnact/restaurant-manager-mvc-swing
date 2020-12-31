@@ -17,9 +17,9 @@ import views.CustomerRenderJList;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class SelectCustomerPopupView extends javax.swing.JFrame {
-    
+
     DefaultListModel<Customer> customerListModel = new DefaultListModel<>();
-    
+
     public SelectCustomerPopupView() {
         initComponents();
         listCustomer.setModel(customerListModel);
@@ -27,7 +27,7 @@ public class SelectCustomerPopupView extends javax.swing.JFrame {
         setPreferredSize(new Dimension(400, 500));
         setLocationRelativeTo(null);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -51,7 +51,7 @@ public class SelectCustomerPopupView extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Chọn nhân viên");
+        jLabel1.setText("Chọn khách hàng");
         jPanel1.add(jLabel1, new java.awt.GridBagConstraints());
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -105,7 +105,7 @@ public class SelectCustomerPopupView extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+
         try {
             javax.swing.UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
         } catch (Exception ex) {

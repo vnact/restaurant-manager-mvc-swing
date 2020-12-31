@@ -50,7 +50,6 @@ public class FoodCategoryPopupView extends javax.swing.JFrame implements PopupVi
         txtName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setUndecorated(true);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(300, 50));
         jPanel1.setLayout(new java.awt.GridBagLayout());

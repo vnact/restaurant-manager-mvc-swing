@@ -155,7 +155,6 @@ public class FoodItemPopupView extends javax.swing.JFrame implements PopupView {
         cboCategory = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setUndecorated(true);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 50));
         jPanel1.setLayout(new java.awt.GridBagLayout());
