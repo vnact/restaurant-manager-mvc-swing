@@ -1,10 +1,7 @@
 package controllers.popup;
 
 import controllers.PopupController;
-import controllers.admin.EmployeeManagerController;
 import dao.EmployeeDao;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import models.Employee;
 import utils.EmployeePermission;
 import views.popup.EmployeePopupView;
@@ -18,31 +15,27 @@ public class EmployeePopupController extends PopupController {
 
     EmployeeDao employeeDao = new EmployeeDao();
 
-    public void add(EmployeeManagerController parrent, EmployeePopupView view) {
-        setView(view);
+    public void add(EmployeePopupView view, SuccessCallback sc, ErrorCallback ec) {
+        view.setVisible(true);
+        view.getBtnCancel().addActionListener(evt -> view.dispose());
         for (EmployeePermission permission : EmployeePermission.values()) {
             view.getCboPermission().addItem(permission.getName());
         }
-        view.getBtnOK().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                try {
-                    boolean addSuccess = addEmployee();
-                    if (addSuccess) {
-                        view.dispose();
-                        parrent.updateData();
-                        view.showMessage("Thêm nhân viên thành công!");
-                    }
-                } catch (Exception ex) {
-                    parrent.getView().showError(ex);
-                }
+        view.getBtnOK().addActionListener(evt -> {
+            try {
+                addEmployee(view);
+                view.dispose();
+                sc.onSuccess();
+            } catch (Exception ex) {
+                ec.onError(ex);
             }
         });
 
     }
 
-    public void edit(EmployeeManagerController parrent, EmployeePopupView view, Employee employee) {
-        setView(view);
+    public void edit(EmployeePopupView view, Employee employee, SuccessCallback sc, ErrorCallback ec) {
+        view.setVisible(true);
+        view.getBtnCancel().addActionListener(evt -> view.dispose());
         for (EmployeePermission permission : EmployeePermission.values()) {
             view.getCboPermission().addItem(permission.getName());
         }
@@ -53,26 +46,19 @@ public class EmployeePopupController extends PopupController {
         view.getTxtPhoneNumber().setText(employee.getPhoneNumber());
         view.getCboPermission().setSelectedItem(employee.getPermission().getName());
         view.getBtnOK().setText("Cập nhật");
-        view.getBtnOK().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                try {
-                    boolean editSuccess = editEmployee(employee);
-                    if (editSuccess) {
-                        view.dispose();
-                        parrent.updateData();
-                        view.showMessage("Sửa nhân viên thành công!");
-                    }
-                } catch (Exception ex) {
-                    parrent.getView().showError(ex);
-                }
+        view.getBtnOK().addActionListener(evt -> {
+            try {
+                editEmployee(view, employee);
+                view.dispose();
+                sc.onSuccess();
+            } catch (Exception ex) {
+                ec.onError(ex);
             }
         });
 
     }
 
-    public boolean addEmployee() throws Exception {
-        EmployeePopupView view = (EmployeePopupView) this.getView();
+    public void addEmployee(EmployeePopupView view) throws Exception {
         String username = view.getTxtUsername().getText(),
                 password = view.getTxtPassword().getText(),
                 phoneNumber = view.getTxtPhoneNumber().getText(),
@@ -90,11 +76,10 @@ public class EmployeePopupController extends PopupController {
         e.setPhoneNumber(phoneNumber);
         e.setPermission(EmployeePermission.getByName(view.getCboPermission().getSelectedItem().toString()));
         employeeDao.save(e);
-        return true;
+        return;
     }
 
-    public boolean editEmployee(Employee e) throws Exception {
-        EmployeePopupView view = (EmployeePopupView) this.getView();
+    public boolean editEmployee(EmployeePopupView view, Employee e) throws Exception {
         String username = view.getTxtUsername().getText(),
                 password = view.getTxtPassword().getText(),
                 phoneNumber = view.getTxtPhoneNumber().getText(),
@@ -114,4 +99,99 @@ public class EmployeePopupController extends PopupController {
         employeeDao.update(e);
         return true;
     }
+//    public void add(EmployeeManagerController parrent, EmployeePopupView view) {
+//        setView(view);
+//        for (EmployeePermission permission : EmployeePermission.values()) {
+//            view.getCboPermission().addItem(permission.getName());
+//        }
+//        view.getBtnOK().addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent evt) {
+//                try {
+//                    boolean addSuccess = addEmployee();
+//                    if (addSuccess) {
+//                        view.dispose();
+//                        parrent.updateData();
+//                        view.showMessage("Thêm nhân viên thành công!");
+//                    }
+//                } catch (Exception ex) {
+//                    parrent.getView().showError(ex);
+//                }
+//            }
+//        });
+//
+//    }
+//    public boolean addEmployee() throws Exception {
+//        EmployeePopupView view = (EmployeePopupView) this.getView();
+//        String username = view.getTxtUsername().getText(),
+//                password = view.getTxtPassword().getText(),
+//                phoneNumber = view.getTxtPhoneNumber().getText(),
+//                name = view.getTxtName().getText();
+//        if (username.isEmpty() || password.isEmpty() || phoneNumber.isEmpty()) {
+//            throw new Exception("Vui lòng điền đầy đủ thông tin");
+//        }
+//        if (employeeDao.findByUsername(username) != null) {
+//            throw new Exception("Tài khoản đã tồn tại");
+//        }
+//        Employee e = new Employee();
+//        e.setUsername(username);
+//        e.setPassword(password);
+//        e.setName(name);
+//        e.setPhoneNumber(phoneNumber);
+//        e.setPermission(EmployeePermission.getByName(view.getCboPermission().getSelectedItem().toString()));
+//        employeeDao.save(e);
+//        return true;
+//    }
+
+//    public void edit(EmployeeManagerController parrent, EmployeePopupView view, Employee employee) {
+//        setView(view);
+//        for (EmployeePermission permission : EmployeePermission.values()) {
+//            view.getCboPermission().addItem(permission.getName());
+//        }
+//        view.getLbTitle().setText("Sửa nhân viên - " + employee.getId());
+//        view.getTxtUsername().setText(employee.getUsername());
+//        view.getTxtPassword().setText(employee.getPassword());
+//        view.getTxtName().setText(employee.getName());
+//        view.getTxtPhoneNumber().setText(employee.getPhoneNumber());
+//        view.getCboPermission().setSelectedItem(employee.getPermission().getName());
+//        view.getBtnOK().setText("Cập nhật");
+//        view.getBtnOK().addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent evt) {
+//                try {
+//                    boolean editSuccess = editEmployee(employee);
+//                    if (editSuccess) {
+//                        view.dispose();
+//                        parrent.updateData();
+//                        view.showMessage("Sửa nhân viên thành công!");
+//                    }
+//                } catch (Exception ex) {
+//                    parrent.getView().showError(ex);
+//                }
+//            }
+//        });
+//
+//    }
+//
+//    public boolean editEmployee(Employee e) throws Exception {
+//        EmployeePopupView view = (EmployeePopupView) this.getView();
+//        String username = view.getTxtUsername().getText(),
+//                password = view.getTxtPassword().getText(),
+//                phoneNumber = view.getTxtPhoneNumber().getText(),
+//                name = view.getTxtName().getText();
+//        if (username.isEmpty() || password.isEmpty() || phoneNumber.isEmpty()) {
+//            throw new Exception("Vui lòng điền đầy đủ thông tin");
+//        }
+//        Employee temp = employeeDao.findByUsername(username);
+//        if (temp != null && temp.getId() != e.getId()) {
+//            throw new Exception("Tên tài khoản đã tồn tại");
+//        }
+//        e.setUsername(username);
+//        e.setPassword(password);
+//        e.setName(name);
+//        e.setPhoneNumber(phoneNumber);
+//        e.setPermission(EmployeePermission.getByName(view.getCboPermission().getSelectedItem().toString()));
+//        employeeDao.update(e);
+//        return true;
+//    }
 }
