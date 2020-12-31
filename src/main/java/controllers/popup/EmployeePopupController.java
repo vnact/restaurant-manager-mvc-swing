@@ -1,6 +1,5 @@
 package controllers.popup;
 
-import controllers.PopupController;
 import dao.EmployeeDao;
 import models.Employee;
 import utils.EmployeePermission;
@@ -11,7 +10,7 @@ import views.popup.EmployeePopupView;
  *
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
-public class EmployeePopupController extends PopupController {
+public class EmployeePopupController {
 
     EmployeeDao employeeDao = new EmployeeDao();
 
@@ -25,6 +24,7 @@ public class EmployeePopupController extends PopupController {
             try {
                 addEmployee(view);
                 view.dispose();
+                view.showMessage("Thêm nhân viên thành công!");
                 sc.onSuccess();
             } catch (Exception ex) {
                 ec.onError(ex);
@@ -50,6 +50,7 @@ public class EmployeePopupController extends PopupController {
             try {
                 editEmployee(view, employee);
                 view.dispose();
+                view.showMessage("Sửa nhân viên thành công!");
                 sc.onSuccess();
             } catch (Exception ex) {
                 ec.onError(ex);

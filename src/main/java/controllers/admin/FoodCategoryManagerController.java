@@ -32,7 +32,8 @@ public class FoodCategoryManagerController extends ManagerController {
 //    }
     @Override
     public void actionAdd() {
-        popupController.add(this, new FoodCategoryPopupView());
+//        popupController.add(this, new FoodCategoryPopupView());
+        popupController.add(new FoodCategoryPopupView(), this::updateData, view::showError);
     }
 
     @Override
@@ -42,11 +43,12 @@ public class FoodCategoryManagerController extends ManagerController {
             if (selectedId < 0) {
                 throw new Exception("Chọn loại món cần edit");
             } else {
-                FoodCategory t = foodCategoryDao.get(selectedId);
-                if (t == null) {
+                FoodCategory foodCategory = foodCategoryDao.get(selectedId);
+                if (foodCategory == null) {
                     throw new Exception("Loại món bạn chọn không hợp lệ");
                 }
-                popupController.edit(this, new FoodCategoryPopupView(), t);
+//                popupController.edit(this, new FoodCategoryPopupView(), foodCategory);
+                popupController.edit(new FoodCategoryPopupView(), foodCategory, this::updateData, view::showError);
             }
         } catch (Exception e) {
             view.showError(e);

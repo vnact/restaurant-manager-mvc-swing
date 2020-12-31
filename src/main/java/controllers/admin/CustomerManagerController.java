@@ -28,10 +28,7 @@ public class CustomerManagerController extends ManagerController {
     @Override
     public void actionAdd() {
 //        popupController.add(this, new CustomerPopupView());
-        customerPopupController.add(new CustomerPopupView(), () -> {
-            updateData();
-            view.showMessage("Thêm khách hàng thành công");
-        }, view::showError);
+        customerPopupController.add(new CustomerPopupView(), this::updateData, view::showError);
     }
 
     @Override
@@ -62,10 +59,7 @@ public class CustomerManagerController extends ManagerController {
                     throw new Exception("Khách hàng bạn chọn không hợp lệ");
                 }
 //                popupController.edit(this, new CustomerPopupView(), c);
-                popupController.edit(new CustomerPopupView(), c, () -> {
-                    view.showMessage("Sửa thông tin khách hàng thành công");
-                    updateData();
-                }, view::showError);
+                popupController.edit(new CustomerPopupView(), c, this::updateData, view::showError);
             }
         } catch (Exception e) {
             view.showError(e);

@@ -27,10 +27,7 @@ public class EmployeeManagerController extends ManagerController {
     @Override
     public void actionAdd() {
 //        popupController.add(this, new EmployeePopupView());
-        popupController.add(new EmployeePopupView(), () -> {
-            updateData();
-            view.showMessage("Thêm nhân viên thành công!");
-        }, view::showError);
+        popupController.add(new EmployeePopupView(), this::updateData, view::showError);
     }
 
     @Override
@@ -45,10 +42,7 @@ public class EmployeeManagerController extends ManagerController {
                     throw new Exception("Nhân viên bạn chọn không hợp lệ");
                 }
 //                popupController.edit(this, new EmployeePopupView(), e);
-                popupController.edit(new EmployeePopupView(), e, () -> {
-                    updateData();
-                    view.showMessage("Sửa nhân viên thành công!");
-                }, view::showError);
+                popupController.edit(new EmployeePopupView(), e, this::updateData, view::showError);
             }
         } catch (Exception e) {
             view.showError(e);

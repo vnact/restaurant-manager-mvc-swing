@@ -12,9 +12,9 @@ import views.popup.CustomerPopupView;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class CustomerPopupController {
-    
+
     CustomerDao customerDao = new CustomerDao();
-    
+
     public void add(CustomerPopupView view, SuccessCallback sc, ErrorCallback ec) {
         view.setVisible(true);
         view.getBtnCancel().addActionListener(evt -> view.dispose());
@@ -22,13 +22,14 @@ public class CustomerPopupController {
             try {
                 addCustomer(view);
                 view.dispose();
+                view.showMessage("Thêm khách hàng thành công");
                 sc.onSuccess();
             } catch (Exception ex) {
                 ec.onError(ex);
             }
         });
     }
-    
+
     public void edit(CustomerPopupView view, Customer customer, SuccessCallback sc, ErrorCallback ec) {
         view.setVisible(true);
         view.getBtnCancel().addActionListener(evt -> view.dispose());
@@ -47,14 +48,15 @@ public class CustomerPopupController {
             try {
                 editCustomer(view, customer);
                 view.dispose();
+                view.showMessage("Sửa thông tin khách hàng thành công");
                 sc.onSuccess();
             } catch (Exception ex) {
                 ec.onError(ex);
             }
         });
-        
+
     }
-    
+
     public void addCustomer(CustomerPopupView view) throws Exception {
         String name = view.getTxtName().getText(), address = view.getTxtAddress().getText(), phoneNumber = view.getTxtPhoneNumber().getText();
         if (phoneNumber.isEmpty()) {
@@ -71,7 +73,7 @@ public class CustomerPopupController {
         customerDao.save(c);
         return;
     }
-    
+
     public boolean editCustomer(CustomerPopupView view, Customer c) throws Exception {
         String name = view.getTxtName().getText(), address = view.getTxtAddress().getText(), phoneNumber = view.getTxtPhoneNumber().getText();
         if (phoneNumber.isEmpty()) {
