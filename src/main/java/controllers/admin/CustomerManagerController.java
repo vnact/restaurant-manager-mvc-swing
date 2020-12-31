@@ -19,6 +19,7 @@ public class CustomerManagerController extends ManagerController {
 
     CustomerDao customerDao = new CustomerDao();
     CustomerPopupController popupController = new CustomerPopupController();
+    CustomerPopupController customerPopupController = new CustomerPopupController();
 
     public CustomerManagerController() {
         super();
@@ -26,7 +27,11 @@ public class CustomerManagerController extends ManagerController {
 
     @Override
     public void actionAdd() {
-        popupController.add(this, new CustomerPopupView());
+//        popupController.add(this, new CustomerPopupView());
+        customerPopupController.add(new CustomerPopupView(), () -> {
+            updateData();
+            view.showMessage("Thêm khách hàng thành công");
+        }, view::showError);
     }
 
     @Override
@@ -52,11 +57,15 @@ public class CustomerManagerController extends ManagerController {
             if (selectedId < 0) {
                 throw new Exception("Chọn khách hàng cần edit");
             } else {
-                Customer e = customerDao.get(selectedId);
-                if (e == null) {
+                Customer c = customerDao.get(selectedId);
+                if (c == null) {
                     throw new Exception("Khách hàng bạn chọn không hợp lệ");
                 }
-                popupController.edit(this, new CustomerPopupView(), e);
+//                popupController.edit(this, new CustomerPopupView(), c);
+                popupController.edit(new CustomerPopupView(), c, () -> {
+                    view.showMessage("Sửa thông tin khách hàng thành công");
+                    updateData();
+                }, view::showError);
             }
         } catch (Exception e) {
             view.showError(e);
