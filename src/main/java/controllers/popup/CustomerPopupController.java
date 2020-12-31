@@ -12,9 +12,9 @@ import views.popup.CustomerPopupView;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class CustomerPopupController {
-
+    
     CustomerDao customerDao = new CustomerDao();
-
+    
     public void add(CustomerPopupView view, SuccessCallback sc, ErrorCallback ec) {
         view.setVisible(true);
         view.getBtnCancel().addActionListener(evt -> view.dispose());
@@ -22,18 +22,20 @@ public class CustomerPopupController {
             try {
                 addCustomer(view);
                 view.dispose();
+                sc.onSuccess();
             } catch (Exception ex) {
                 ec.onError(ex);
             }
         });
     }
-
+    
     public void edit(CustomerPopupView view, Customer customer, SuccessCallback sc, ErrorCallback ec) {
         view.setVisible(true);
         view.getBtnCancel().addActionListener(evt -> view.dispose());
         view.getLbTitle().setText("Sửa khách hàng - " + customer.getId());
         view.getTxtName().setText(customer.getName());
         view.getTxtPhoneNumber().setText(customer.getPhoneNumber());
+        view.getTxtAddress().setText(customer.getAddress());
         if (customer.getBirthday() != null) {
             view.getCbUnknownBirthday().setSelected(false);
             view.getSpnBirthday().setValue(new Date(customer.getBirthday().getTime()));
@@ -50,9 +52,9 @@ public class CustomerPopupController {
                 ec.onError(ex);
             }
         });
-
+        
     }
-
+    
     public void addCustomer(CustomerPopupView view) throws Exception {
         String name = view.getTxtName().getText(), address = view.getTxtAddress().getText(), phoneNumber = view.getTxtPhoneNumber().getText();
         if (phoneNumber.isEmpty()) {
@@ -69,7 +71,7 @@ public class CustomerPopupController {
         customerDao.save(c);
         return;
     }
-
+    
     public boolean editCustomer(CustomerPopupView view, Customer c) throws Exception {
         String name = view.getTxtName().getText(), address = view.getTxtAddress().getText(), phoneNumber = view.getTxtPhoneNumber().getText();
         if (phoneNumber.isEmpty()) {
