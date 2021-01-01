@@ -53,6 +53,8 @@ public class StatisticalView extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel13 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
         pnlHead = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -81,6 +83,24 @@ public class StatisticalView extends javax.swing.JPanel {
         pnlContent = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
+
+        jPanel13.setPreferredSize(new java.awt.Dimension(1008, 150));
+        jPanel13.setLayout(new java.awt.BorderLayout());
+
+        jPanel14.setPreferredSize(new java.awt.Dimension(1008, 40));
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel13.add(jPanel14, java.awt.BorderLayout.PAGE_START);
 
         pnlHead.setPreferredSize(new java.awt.Dimension(1008, 110));
         java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
@@ -311,7 +331,9 @@ public class StatisticalView extends javax.swing.JPanel {
 
         pnlHead.add(jPanel10);
 
-        add(pnlHead, java.awt.BorderLayout.PAGE_START);
+        jPanel13.add(pnlHead, java.awt.BorderLayout.CENTER);
+
+        add(jPanel13, java.awt.BorderLayout.PAGE_START);
 
         javax.swing.GroupLayout pnlContentLayout = new javax.swing.GroupLayout(pnlContent);
         pnlContent.setLayout(pnlContentLayout);
@@ -321,7 +343,7 @@ public class StatisticalView extends javax.swing.JPanel {
         );
         pnlContentLayout.setVerticalGroup(
             pnlContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 570, Short.MAX_VALUE)
+            .addGap(0, 530, Short.MAX_VALUE)
         );
 
         add(pnlContent, java.awt.BorderLayout.CENTER);
@@ -340,6 +362,8 @@ public class StatisticalView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
