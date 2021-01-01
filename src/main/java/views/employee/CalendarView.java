@@ -129,7 +129,7 @@ public class CalendarView extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(738, 578));
-        setPreferredSize(new java.awt.Dimension(738, 578));
+        setPreferredSize(new java.awt.Dimension(725, 578));
         setLayout(new java.awt.BorderLayout());
 
         jPanel2.setBackground(new java.awt.Color(209, 242, 235));
@@ -143,7 +143,7 @@ public class CalendarView extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -460,7 +460,7 @@ public class CalendarView extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(262, Short.MAX_VALUE)
+                .addContainerGap(271, Short.MAX_VALUE)
                 .addComponent(cbxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -485,6 +485,8 @@ public class CalendarView extends javax.swing.JPanel {
         jPanel15.setAlignmentX(0.0F);
         jPanel15.setAlignmentY(0.0F);
         jPanel15.setMinimumSize(new java.awt.Dimension(60, 60));
+        jPanel15.setRequestFocusEnabled(false);
+        jPanel15.setVerifyInputWhenFocusTarget(false);
 
         jPanel17.setAlignmentY(0.0F);
         jPanel17.setPreferredSize(new java.awt.Dimension(60, 30));

@@ -17,24 +17,24 @@ import views.popup.TablePopupView;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class TableManagerController extends ManagerController {
-    
+
     TableDao tableDao = new TableDao();
     TablePopupController popupController = new TablePopupController();
-    
+
     public TableManagerController() {
         super();
     }
-    
+
     public void setView(TableManagerView view) {
         super.setView(view);
     }
-    
+
     @Override
     public void actionAdd() {
 //        popupController.add(this, new TablePopupView());
         popupController.add(new TablePopupView(), this::updateData, view::showError);
     }
-    
+
     @Override
     public void actionEdit() {
         try {
@@ -53,7 +53,7 @@ public class TableManagerController extends ManagerController {
             view.showError(e);
         }
     }
-    
+
     @Override
     public void actionDelete() {
         int selectedIds[] = view.getSelectedIds();
@@ -69,7 +69,7 @@ public class TableManagerController extends ManagerController {
             view.showError(e);
         }
     }
-    
+
     @Override
     public void updateData() {
         try {
@@ -79,7 +79,7 @@ public class TableManagerController extends ManagerController {
             view.showError(e);
         }
     }
-    
+
     @Override
     public void actionSearch() {
         try {
@@ -89,5 +89,5 @@ public class TableManagerController extends ManagerController {
             view.showError(e);
         }
     }
-    
+
 }

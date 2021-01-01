@@ -118,7 +118,6 @@ public class EmployeeDashboardView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1208, 680));
-        setPreferredSize(new java.awt.Dimension(1208, 680));
 
         panelLeft.setMinimumSize(new java.awt.Dimension(200, 680));
         panelLeft.setPreferredSize(new java.awt.Dimension(200, 680));
@@ -147,6 +146,7 @@ public class EmployeeDashboardView extends javax.swing.JFrame {
         panelLeft.add(panelHeader, java.awt.BorderLayout.PAGE_START);
 
         panelSideBar.setBackground(new java.awt.Color(251, 133, 95));
+        panelSideBar.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
         panelLeft.add(panelSideBar, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(panelLeft, java.awt.BorderLayout.LINE_START);
