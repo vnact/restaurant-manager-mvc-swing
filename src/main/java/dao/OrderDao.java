@@ -21,20 +21,6 @@ public class OrderDao extends Dao<Order> {
     EmployeeDao employeeDao = new EmployeeDao();
     TableDao tableDao = new TableDao();
 
-    public ArrayList<Order> getByEmployee(int idEmployee) throws SQLException {
-        ArrayList<Order> orders = new ArrayList<>();
-        Statement statement = conn.createStatement();
-        String query = "SELECT * FROM `order` WHERE `idEmployee`= " + idEmployee + " and (`orderDate` BETWEEN CURDATE() and ADDDATE(CURDATE(),1)) ORDER BY `order`.`orderDate` ASC";
-        ResultSet rs = statement.executeQuery(query);
-        while (rs.next()) {
-            Order order = Order.getFromResultSet(rs);
-            order.setEmployee(employeeDao.get(order.getIdEmployee()));
-            order.setTable(tableDao.get(order.getIdTable()));
-            orders.add(order);
-        }
-        return orders;
-    }
-
     @Override
     public ArrayList<Order> getAll() throws SQLException {
         ArrayList<Order> orders = new ArrayList<>();
