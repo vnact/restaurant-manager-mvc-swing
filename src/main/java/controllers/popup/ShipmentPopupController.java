@@ -20,7 +20,6 @@ public class ShipmentPopupController {
     CustomerDao customerDao = new CustomerDao();
 
     public void add(ShipmentPopupView view, int idOrder, SuccessCallback sc, ErrorCallback ec) {
-        view.setVisible(true);
         try {
             Shipment shipment = shipmentDao.get(idOrder);
             if (shipment != null) {
@@ -43,6 +42,7 @@ public class ShipmentPopupController {
 
     public void edit(ShipmentPopupView view, int idOrder, SuccessCallback sc, ErrorCallback ec) {
         view.setVisible(true);
+        view.getBtnCancel().addActionListener(evt -> view.dispose());
         for (ShipmentStatus value : ShipmentStatus.values()) {
             view.getCboStatus().addItem(value.getName());
         }
@@ -65,22 +65,11 @@ public class ShipmentPopupController {
                     view.getLbCustomerName().setText(customer.getName());
                 });
             });
-            view.getBtnCancel().addActionListener(evt -> {
-                view.dispose();
-            });
             view.getBtnOK().addActionListener(evt -> {
                 try {
-                    shipment.setShipperName(view.getTxtShipperName().getText());
-                    shipment.setShipperPhoneNumber(view.getTxtShipperPhoneNumber().getText());
-                    shipment.setStatus(ShipmentStatus.getByName(view.getCboStatus().getSelectedItem().toString()));
-                    shipment.setShipCost((int) view.getSpnShipCost().getValue());
-                    if (shipment.getStatus() == ShipmentStatus.COMPLETED || shipment.getStatus() == ShipmentStatus.CANCELLED) {
-                        shipment.setEndDate(new Timestamp(System.currentTimeMillis()));
-                    } else {
-                        shipment.setEndDate(null);
-                    }
-                    shipmentDao.update(shipment);
+                    editShipment(view, shipment);
                     view.dispose();
+                    view.showMessage("Tạo / sửa đơn ship thành công!");
                     sc.onSuccess();
                 } catch (SQLException e) {
                     ec.onError(e);
@@ -91,5 +80,18 @@ public class ShipmentPopupController {
             view.dispose();
         }
 
+    }
+
+    public void editShipment(ShipmentPopupView view, Shipment shipment) throws SQLException {
+        shipment.setShipperName(view.getTxtShipperName().getText());
+        shipment.setShipperPhoneNumber(view.getTxtShipperPhoneNumber().getText());
+        shipment.setStatus(ShipmentStatus.getByName(view.getCboStatus().getSelectedItem().toString()));
+        shipment.setShipCost((int) view.getSpnShipCost().getValue());
+        if (shipment.getStatus() == ShipmentStatus.COMPLETED || shipment.getStatus() == ShipmentStatus.CANCELLED) {
+            shipment.setEndDate(new Timestamp(System.currentTimeMillis()));
+        } else {
+            shipment.setEndDate(null);
+        }
+        shipmentDao.update(shipment);
     }
 }

@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.YES_OPTION;
 import models.Table;
-import utils.TableStatus;
 import views.admin.TableManagerView;
 import views.popup.TablePopupView;
 
@@ -18,64 +17,24 @@ import views.popup.TablePopupView;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class TableManagerController extends ManagerController {
-
+    
     TableDao tableDao = new TableDao();
     TablePopupController popupController = new TablePopupController();
-
+    
     public TableManagerController() {
         super();
     }
-
+    
     public void setView(TableManagerView view) {
         super.setView(view);
     }
-
-    public void addTable(TablePopupView popup) {
-        try {
-            String name = popup.getTxtName().getText();
-            if (name.isEmpty()) {
-                throw new Exception("Vui lòng điền đủ thông tin");
-            }
-            if (tableDao.findByName(name) != null) {
-                throw new Exception("Tên bàn đã được sử dụng");
-            }
-            Table t = new Table();
-            t.setName(name);
-            t.setStatus(TableStatus.FREE);
-            tableDao.save(t);
-            view.showMessage("Thêm thành công");
-            updateData();
-//            setPopupView(null);//Tắt Popup            
-        } catch (Exception e) {
-            view.showError(e);
-        }
-    }
-
-    public void editTable(TablePopupView popup, Table t) {
-        try {
-            String name = popup.getTxtName().getText();
-            if (name.isEmpty()) {
-                throw new Exception("Điền tên bàn");
-            }
-            Table temp = tableDao.findByName(name);
-            if (temp != null && temp.getId() != t.getId()) {
-                throw new Exception("Tên bàn đã được sử dụng");
-            }
-            t.setName(name);
-            tableDao.update(t);
-            view.showMessage("Cập nhật thành công");
-            updateData();
-//            setPopupView(null);//Tắt Popup      
-        } catch (Exception ex) {
-            view.showError(ex);
-        }
-    }
-
+    
     @Override
     public void actionAdd() {
-        popupController.add(this, new TablePopupView());
+//        popupController.add(this, new TablePopupView());
+        popupController.add(new TablePopupView(), this::updateData, view::showError);
     }
-
+    
     @Override
     public void actionEdit() {
         try {
@@ -87,13 +46,14 @@ public class TableManagerController extends ManagerController {
                 if (t == null) {
                     throw new Exception("Bàn bạn chọn không hợp lệ");
                 }
-                popupController.edit(this, new TablePopupView(), t);
+//                popupController.edit(this, new TablePopupView(), t);
+                popupController.edit(new TablePopupView(), t, this::updateData, view::showError);
             }
         } catch (Exception e) {
             view.showError(e);
         }
     }
-
+    
     @Override
     public void actionDelete() {
         int selectedIds[] = view.getSelectedIds();
@@ -109,7 +69,7 @@ public class TableManagerController extends ManagerController {
             view.showError(e);
         }
     }
-
+    
     @Override
     public void updateData() {
         try {
@@ -119,7 +79,7 @@ public class TableManagerController extends ManagerController {
             view.showError(e);
         }
     }
-
+    
     @Override
     public void actionSearch() {
         try {
@@ -129,5 +89,5 @@ public class TableManagerController extends ManagerController {
             view.showError(e);
         }
     }
-
+    
 }

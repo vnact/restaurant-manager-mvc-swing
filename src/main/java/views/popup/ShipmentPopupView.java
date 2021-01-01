@@ -8,8 +8,10 @@ package views.popup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import utils.ErrorPopup;
 
 /**
  * createAt Dec 27, 2020
@@ -17,12 +19,12 @@ import javax.swing.JTextField;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class ShipmentPopupView extends javax.swing.JFrame {
-    
+
     public ShipmentPopupView() {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -178,35 +180,46 @@ public class ShipmentPopupView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void showError(String message) {
+        ErrorPopup.show(new Exception(message));
+    }
+
+    public void showError(Exception e) {
+        ErrorPopup.show(e);
+    }
+
+    public void showMessage(String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
 
     public JButton getBtnCancel() {
         return btnCancel;
     }
-    
+
     public JButton getBtnOK() {
         return btnOK;
     }
-    
+
     public JButton getBtnSelectCustomer() {
         return btnSelectCustomer;
     }
-    
+
     public JComboBox<String> getCboStatus() {
         return cboStatus;
     }
-    
+
     public JSpinner getSpnShipCost() {
         return spnShipCost;
     }
-    
+
     public JTextField getTxtShipperName() {
         return txtShipperName;
     }
-    
+
     public JTextField getTxtShipperPhoneNumber() {
         return txtShipperPhoneNumber;
     }
-    
+
     public JLabel getLbCustomerName() {
         return lbCustomerName;
     }

@@ -18,6 +18,7 @@ import views.popup.ShipmentPopupView;
 public class ShipmentManagerController extends ManagerController {
 
     ShipmentDao shipmentDao = new ShipmentDao();
+    ShipmentPopupController popupController = new ShipmentPopupController();
 
     public ShipmentManagerController() {
         super();
@@ -55,10 +56,11 @@ public class ShipmentManagerController extends ManagerController {
                 if (e == null) {
                     throw new Exception("Đơn ship bạn chọn không hợp lệ");
                 }
-                new ShipmentPopupController().add(new ShipmentPopupView(), e.getIdOrder(), () -> {
-                    view.showMessage("Tạo / sửa đơn ship thành công!");
-                    updateData();
-                }, view::showError);
+                popupController.edit(new ShipmentPopupView(), e.getIdOrder(), this::updateData, view::showError);
+//                new ShipmentPopupController().add(new ShipmentPopupView(), e.getIdOrder(), () -> {
+//                    view.showMessage("Tạo / sửa đơn ship thành công!");
+//                    updateData();
+//                }, view::showError);
             }
         } catch (Exception e) {
             view.showError(e);
