@@ -5,6 +5,7 @@
  */
 package views.admin;
 
+import com.toedter.calendar.JDateChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import utils.ErrorPopup;
@@ -48,6 +49,14 @@ public class StatisticalView extends javax.swing.JPanel {
         return lbTotalOrder;
     }
 
+    public JDateChooser getDateChooserEnd() {
+        return dateChooserEnd;
+    }
+
+    public JDateChooser getDateChooserStart() {
+        return dateChooserStart;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -55,6 +64,10 @@ public class StatisticalView extends javax.swing.JPanel {
 
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        dateChooserStart = new com.toedter.calendar.JDateChooser();
+        jLabel3 = new javax.swing.JLabel();
+        dateChooserEnd = new com.toedter.calendar.JDateChooser();
         pnlHead = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -88,17 +101,27 @@ public class StatisticalView extends javax.swing.JPanel {
         jPanel13.setLayout(new java.awt.BorderLayout());
 
         jPanel14.setPreferredSize(new java.awt.Dimension(1008, 40));
+        java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT);
+        flowLayout2.setAlignOnBaseline(true);
+        jPanel14.setLayout(flowLayout2);
 
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setText("Ngày bắt đầu:");
+        jPanel14.add(jLabel6);
+
+        dateChooserStart.setDateFormatString("dd/MM/yyyy");
+        dateChooserStart.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        dateChooserStart.setPreferredSize(new java.awt.Dimension(150, 25));
+        jPanel14.add(dateChooserStart);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Ngày kết thúc:");
+        jPanel14.add(jLabel3);
+
+        dateChooserEnd.setDateFormatString("dd/MM/yyyy");
+        dateChooserEnd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        dateChooserEnd.setPreferredSize(new java.awt.Dimension(150, 25));
+        jPanel14.add(dateChooserEnd);
 
         jPanel13.add(jPanel14, java.awt.BorderLayout.PAGE_START);
 
@@ -350,12 +373,16 @@ public class StatisticalView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser dateChooserEnd;
+    private com.toedter.calendar.JDateChooser dateChooserStart;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;

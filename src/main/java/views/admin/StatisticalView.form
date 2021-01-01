@@ -41,19 +41,164 @@
               <BorderConstraints direction="First"/>
             </Constraint>
           </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel6">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Ng&#xe0;y b&#x1eaf;t &#x111;&#x1ea7;u:"/>
+              </Properties>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="dateChooserStart">
+              <Properties>
+                <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[150, 25]"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Ng&#xe0;y k&#x1ebf;t th&#xfa;c:"/>
+              </Properties>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="dateChooserEnd">
+              <Properties>
+                <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[150, 25]"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+          <LayoutCode>
+            <CodeStatement>
+              <CodeExpression id="1_flowLayout2">
+                <CodeVariable name="flowLayout2" type="4096" declaredType="java.awt.FlowLayout"/>
+                <ExpressionOrigin>
+                  <ExpressionProvider type="CodeConstructor">
+                    <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
+                  </ExpressionProvider>
+                  <Parameters>
+                    <CodeExpression id="2">
+                      <ExpressionOrigin>
+                        <Value type="int" value="2"/>
+                      </ExpressionOrigin>
+                    </CodeExpression>
+                  </Parameters>
+                </ExpressionOrigin>
+              </CodeExpression>
+              <StatementProvider type="CodeExpression">
+                <CodeExpression id="1_flowLayout2"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="2"/>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="1_flowLayout2"/>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="3">
+                  <ExpressionOrigin>
+                    <Value type="boolean" value="true"/>
+                  </ExpressionOrigin>
+                </CodeExpression>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="4_jPanel14">
+                <CodeVariable name="jPanel14" type="8194" declaredType="javax.swing.JPanel"/>
+                <ExpressionOrigin>
+                  <ExpressionProvider type="ComponentRef">
+                    <ComponentRef name="jPanel14"/>
+                  </ExpressionProvider>
+                </ExpressionOrigin>
+              </CodeExpression>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="1_flowLayout2"/>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="4_jPanel14"/>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="5_jLabel6">
+                  <CodeVariable name="jLabel6" type="8194" declaredType="javax.swing.JLabel"/>
+                  <ExpressionOrigin>
+                    <ExpressionProvider type="ComponentRef">
+                      <ComponentRef name="jLabel6"/>
+                    </ExpressionProvider>
+                  </ExpressionOrigin>
+                </CodeExpression>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="4_jPanel14"/>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="6_dateChooserStart">
+                  <CodeVariable name="dateChooserStart" type="8194" declaredType="com.toedter.calendar.JDateChooser"/>
+                  <ExpressionOrigin>
+                    <ExpressionProvider type="ComponentRef">
+                      <ComponentRef name="dateChooserStart"/>
+                    </ExpressionProvider>
+                  </ExpressionOrigin>
+                </CodeExpression>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="4_jPanel14"/>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="7_jLabel3">
+                  <CodeVariable name="jLabel3" type="8194" declaredType="javax.swing.JLabel"/>
+                  <ExpressionOrigin>
+                    <ExpressionProvider type="ComponentRef">
+                      <ComponentRef name="jLabel3"/>
+                    </ExpressionProvider>
+                  </ExpressionOrigin>
+                </CodeExpression>
+              </Parameters>
+            </CodeStatement>
+            <CodeStatement>
+              <CodeExpression id="4_jPanel14"/>
+              <StatementProvider type="CodeMethod">
+                <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+              </StatementProvider>
+              <Parameters>
+                <CodeExpression id="8_dateChooserEnd">
+                  <CodeVariable name="dateChooserEnd" type="8194" declaredType="com.toedter.calendar.JDateChooser"/>
+                  <ExpressionOrigin>
+                    <ExpressionProvider type="ComponentRef">
+                      <ComponentRef name="dateChooserEnd"/>
+                    </ExpressionProvider>
+                  </ExpressionOrigin>
+                </CodeExpression>
+              </Parameters>
+            </CodeStatement>
+          </LayoutCode>
         </Container>
         <Container class="javax.swing.JPanel" name="pnlHead">
           <Properties>
@@ -470,14 +615,14 @@
           </SubComponents>
           <LayoutCode>
             <CodeStatement>
-              <CodeExpression id="1_flowLayout1">
+              <CodeExpression id="9_flowLayout1">
                 <CodeVariable name="flowLayout1" type="4096" declaredType="java.awt.FlowLayout"/>
                 <ExpressionOrigin>
                   <ExpressionProvider type="CodeConstructor">
                     <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int"/>
                   </ExpressionProvider>
                   <Parameters>
-                    <CodeExpression id="2">
+                    <CodeExpression id="10">
                       <ExpressionOrigin>
                         <Value type="int" value="0"/>
                       </ExpressionOrigin>
@@ -486,19 +631,19 @@
                 </ExpressionOrigin>
               </CodeExpression>
               <StatementProvider type="CodeExpression">
-                <CodeExpression id="1_flowLayout1"/>
+                <CodeExpression id="9_flowLayout1"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="2"/>
+                <CodeExpression id="10"/>
               </Parameters>
             </CodeStatement>
             <CodeStatement>
-              <CodeExpression id="1_flowLayout1"/>
+              <CodeExpression id="9_flowLayout1"/>
               <StatementProvider type="CodeMethod">
                 <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="3">
+                <CodeExpression id="11">
                   <ExpressionOrigin>
                     <Value type="boolean" value="true"/>
                   </ExpressionOrigin>
@@ -506,7 +651,7 @@
               </Parameters>
             </CodeStatement>
             <CodeStatement>
-              <CodeExpression id="4_pnlHead">
+              <CodeExpression id="12_pnlHead">
                 <CodeVariable name="pnlHead" type="8194" declaredType="javax.swing.JPanel"/>
                 <ExpressionOrigin>
                   <ExpressionProvider type="ComponentRef">
@@ -518,16 +663,16 @@
                 <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="1_flowLayout1"/>
+                <CodeExpression id="9_flowLayout1"/>
               </Parameters>
             </CodeStatement>
             <CodeStatement>
-              <CodeExpression id="4_pnlHead"/>
+              <CodeExpression id="12_pnlHead"/>
               <StatementProvider type="CodeMethod">
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="5_jPanel2">
+                <CodeExpression id="13_jPanel2">
                   <CodeVariable name="jPanel2" type="8194" declaredType="javax.swing.JPanel"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
@@ -538,12 +683,12 @@
               </Parameters>
             </CodeStatement>
             <CodeStatement>
-              <CodeExpression id="4_pnlHead"/>
+              <CodeExpression id="12_pnlHead"/>
               <StatementProvider type="CodeMethod">
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="6_jPanel4">
+                <CodeExpression id="14_jPanel4">
                   <CodeVariable name="jPanel4" type="8194" declaredType="javax.swing.JPanel"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
@@ -554,12 +699,12 @@
               </Parameters>
             </CodeStatement>
             <CodeStatement>
-              <CodeExpression id="4_pnlHead"/>
+              <CodeExpression id="12_pnlHead"/>
               <StatementProvider type="CodeMethod">
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="7_jPanel7">
+                <CodeExpression id="15_jPanel7">
                   <CodeVariable name="jPanel7" type="8194" declaredType="javax.swing.JPanel"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">
@@ -570,12 +715,12 @@
               </Parameters>
             </CodeStatement>
             <CodeStatement>
-              <CodeExpression id="4_pnlHead"/>
+              <CodeExpression id="12_pnlHead"/>
               <StatementProvider type="CodeMethod">
                 <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
               </StatementProvider>
               <Parameters>
-                <CodeExpression id="8_jPanel10">
+                <CodeExpression id="16_jPanel10">
                   <CodeVariable name="jPanel10" type="8194" declaredType="javax.swing.JPanel"/>
                   <ExpressionOrigin>
                     <ExpressionProvider type="ComponentRef">

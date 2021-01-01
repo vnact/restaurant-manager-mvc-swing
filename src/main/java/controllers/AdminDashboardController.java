@@ -168,6 +168,7 @@ public class AdminDashboardController {
             case "TK":
                 view.setPanel(statisticalView);
                 statisticalController.setView(statisticalView);
+                statisticalController.addEvent();
                 statisticalController.initData();
                 break;
             default:
