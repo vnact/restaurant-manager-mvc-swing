@@ -35,18 +35,25 @@ public class OrderDao extends Dao<Order> {
         return orders;
     }
 
-//    public ResultSet getSales(int id, String date) throws SQLException {
-//        Statement statement = conn.createStatement();
-//        String query = "SELECT COUNT(id) AS amount, SUM(totalAmount) / (1+`discount`/100) as total FROM `order` WHERE `idEmployee`=  AND DATE(orderDate)=" + date;
-//        ResultSet rs = statement.executeQuery(query);
-//        rs.next();
-//        return rs;
-//    }
     @Override
     public ArrayList<Order> getAll() throws SQLException {
         ArrayList<Order> orders = new ArrayList<>();
         Statement statement = conn.createStatement();
-        String query = "SELECT * FROM `order` ORDER BY `order`.`orderDate` ASC";
+        String query = "SELECT * FROM `order` ORDER BY `order`.`orderDate` DESC";
+        ResultSet rs = statement.executeQuery(query);
+        while (rs.next()) {
+            Order order = Order.getFromResultSet(rs);
+            order.setEmployee(employeeDao.get(order.getIdEmployee()));
+            order.setTable(tableDao.get(order.getIdTable()));
+            orders.add(order);
+        }
+        return orders;
+    }
+
+    public ArrayList<Order> getAll(int idEmployee) throws SQLException {
+        ArrayList<Order> orders = new ArrayList<>();
+        Statement statement = conn.createStatement();
+        String query = "SELECT * FROM `order`  WHERE `idEmployee`= '" + idEmployee + "' ORDER BY `order`.`orderDate` DESC";
         ResultSet rs = statement.executeQuery(query);
         while (rs.next()) {
             Order order = Order.getFromResultSet(rs);
@@ -142,10 +149,19 @@ public class OrderDao extends Dao<Order> {
         return orders;
     }
 
-//    public ArrayList<Order> searchByKey(String toString, String text) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
-//    public ArrayList<Order> getByEmployee(int id) {
-//        throw new UnsupportedOperationException("Not supported yet.");
-//    }
+    public ArrayList<Order> searchByKey(int idEmployee, String key, String word) throws SQLException {
+        ArrayList<Order> orders = new ArrayList<>();
+        String query = "SELECT * FROM `order` WHERE " + key + " LIKE ? AND idEmployee = ?";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setNString(1, String.format("%s%s%s", "%", word, "%"));
+        statement.setInt(2, idEmployee);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            Order order = Order.getFromResultSet(rs);
+            order.setEmployee(employeeDao.get(order.getIdEmployee()));
+            order.setTable(tableDao.get(order.getIdTable()));
+            orders.add(order);
+        }
+        return orders;
+    }
 }

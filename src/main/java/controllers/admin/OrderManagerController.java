@@ -12,6 +12,7 @@ import main.SessionManager;
 import models.Employee;
 import models.Order;
 import models.Table;
+import utils.EmployeePermission;
 import utils.TableStatus;
 import views.admin.EmployeeManagerView;
 import views.popup.AddOrderPopupView;
@@ -24,35 +25,26 @@ import views.popup.EditOrderPopupView;
  * Manager Controller mẫu
  */
 public class OrderManagerController extends ManagerController {
-    
+
     OrderDao orderDao = new OrderDao();
     TableDao tableDao = new TableDao();
     OrderPopupController popupController = new OrderPopupController();
     Employee session = SessionManager.getSession().getEmployee();
-    
+
     public OrderManagerController() {
         super();
     }
-    
-    public void updateDataByEmployee() {
-        try {
-            ArrayList<Order> orders = orderDao.getByEmployee(session.getId());
-            view.setTableData(orders);
-        } catch (Exception e) {
-            view.showError(e);
-        }
-    }
-    
+
     public void setView(EmployeeManagerView view) {
         super.setView(view);
     }
-    
+
     @Override
     public void actionAdd() {
 //        popupController.add(this, new AddOrderPopupView());
         popupController.add(new AddOrderPopupView(), this::updateData, view::showError);
     }
-    
+
     @Override
     public void actionEdit() {
         try {
@@ -66,12 +58,12 @@ public class OrderManagerController extends ManagerController {
             }
 //            popupController.edit(this, new EditOrderPopupView(), order);
             popupController.edit(new EditOrderPopupView(), order, this::updateData, view::showError);
-            
+
         } catch (Exception e) {
             view.showError(e);
         }
     }
-    
+
     @Override
     public void actionDelete() {
         int selectedIds[] = view.getSelectedIds();
@@ -93,25 +85,38 @@ public class OrderManagerController extends ManagerController {
             view.showError(e);
         }
     }
-    
+
     @Override
     public void updateData() {
         try {
-            ArrayList<Order> orders = orderDao.getAll();
+            Employee employee = SessionManager.getSession().getEmployee();
+            ArrayList<Order> orders;
+            if (employee.getPermission() == EmployeePermission.MANAGER) {
+                orders = orderDao.getAll();
+            } else {
+                orders = orderDao.getAll(employee.getId());
+            }
             view.setTableData(orders);
         } catch (Exception e) {
             view.showError(e);
         }
     }
-    
+
     @Override
     public void actionSearch() {
         try {
-            ArrayList<Order> orders = orderDao.searchByKey(view.getCboSearchField().getSelectedItem().toString(), view.getTxtSearch().getText());
+            Employee employee = SessionManager.getSession().getEmployee();
+            ArrayList<Order> orders;
+            String searchField = view.getCboSearchField().getSelectedItem().toString(), txtSearch = view.getTxtSearch().getText();
+            if (employee.getPermission() == EmployeePermission.MANAGER) {
+                orders = orderDao.searchByKey(searchField, txtSearch);
+            } else {
+                orders = orderDao.searchByKey(employee.getId(), searchField, txtSearch);
+            }
             view.setTableData(orders);
         } catch (Exception e) {
             view.showError(e);
         }
     }
-    
+
 }
