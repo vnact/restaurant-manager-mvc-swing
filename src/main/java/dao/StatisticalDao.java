@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import models.Employee;
+import models.Statistical;
 import utils.OrderStatus;
 
 /**
@@ -18,6 +20,8 @@ import utils.OrderStatus;
 public class StatisticalDao {
 
     Connection conn = Database.getInstance().getConnection();
+    EmployeeDao employeeDao = new EmployeeDao();
+    Statistical statistical = new Statistical();
 
     public int getTotalOrder(Timestamp start, Timestamp end, int idEmployee) throws SQLException {
         String query = "SELECT COUNT(*) AS totalOrder FROM `order` WHERE status = ? AND orderDate >= ? AND orderDate <= ? AND idEmployee = ?";
@@ -133,6 +137,61 @@ public class StatisticalDao {
             return rs.getInt("totalIncome");
         }
         return 0;
+    }
+
+    public ArrayList<Statistical.TotalIncome> getListTotalIncomeByEmployee(Timestamp start, Timestamp end) throws SQLException {
+        ArrayList<Statistical.TotalIncome> incomes = new ArrayList<>();
+        String query = "SELECT `idEmployee`, SUM(paidAmount) AS totalIncome FROM `order` WHERE status = ? AND DATE(orderDate) >= DATE(?) AND DATE(orderDate) <= DATE(?) GROUP BY `idEmployee`  ORDER BY `totalIncome` DESC";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setNString(1, OrderStatus.PAID.getId());
+        statement.setTimestamp(2, start);
+        statement.setTimestamp(3, end);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            Statistical.TotalIncome income = statistical.new TotalIncome();
+            income.employee = employeeDao.get(rs.getInt("idEmployee"));
+            income.totalIncome = rs.getInt("totalIncome");
+            incomes.add(income);
+        }
+        return incomes;
+    }
+
+    public ArrayList<Statistical.TotalIncome> getListTotalIncomeByDate(Timestamp start, Timestamp end) throws SQLException {
+        ArrayList<Statistical.TotalIncome> incomes = new ArrayList<>();
+        String query = "SELECT DATE(orderDate) AS orderDate, SUM(paidAmount) AS totalIncome FROM `order` WHERE status = ? AND DATE(orderDate) >= DATE(?) AND DATE(orderDate) <= DATE(?) GROUP BY orderDate ORDER BY `orderDate` ASC";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setNString(1, OrderStatus.PAID.getId());
+        statement.setTimestamp(2, start);
+        statement.setTimestamp(3, end);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            Statistical.TotalIncome income = statistical.new TotalIncome();
+            income.date = rs.getDate("orderDate");
+            income.totalIncome = rs.getInt("totalIncome");
+            incomes.add(income);
+        }
+        return incomes;
+    }
+
+    public ArrayList<Statistical.TotalIncome> getListTotalIncomeByDate(Timestamp start, Timestamp end, int idEmployee) throws SQLException {
+        ArrayList<Statistical.TotalIncome> incomes = new ArrayList<>();
+        String query = "SELECT DATE(orderDate) AS orderDate, SUM(paidAmount) AS totalIncome "
+                + "FROM `order` WHERE status = ? AND DATE(orderDate) >= DATE(?) AND DATE(orderDate) <= DATE(?) AND idEmployee = ? "
+                + "GROUP BY orderDate ORDER BY `orderDate` ASC";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setNString(1, OrderStatus.PAID.getId());
+        statement.setTimestamp(2, start);
+        statement.setTimestamp(3, end);
+        statement.setInt(4, idEmployee);
+        ResultSet rs = statement.executeQuery();
+        Employee e = employeeDao.get(idEmployee);
+        while (rs.next()) {
+            Statistical.TotalIncome income = statistical.new TotalIncome();
+            income.date = rs.getDate("orderDate");
+            income.totalIncome = rs.getInt("totalIncome");
+            income.employee = e;
+        }
+        return incomes;
     }
 
     public int getTotalEmployee() throws SQLException {
