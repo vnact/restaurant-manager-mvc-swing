@@ -24,16 +24,16 @@ import views.popup.EditOrderPopupView;
  * Manager Controller mẫu
  */
 public class OrderManagerController extends ManagerController {
-
+    
     OrderDao orderDao = new OrderDao();
     TableDao tableDao = new TableDao();
     OrderPopupController popupController = new OrderPopupController();
     Employee session = SessionManager.getSession().getEmployee();
-
+    
     public OrderManagerController() {
         super();
     }
-
+    
     public void updateDataByEmployee() {
         try {
             ArrayList<Order> orders = orderDao.getByEmployee(session.getId());
@@ -42,16 +42,17 @@ public class OrderManagerController extends ManagerController {
             view.showError(e);
         }
     }
-
+    
     public void setView(EmployeeManagerView view) {
         super.setView(view);
     }
-
+    
     @Override
     public void actionAdd() {
-        popupController.add(this, new AddOrderPopupView());
+//        popupController.add(this, new AddOrderPopupView());
+        popupController.add(new AddOrderPopupView(), this::updateData, view::showError);
     }
-
+    
     @Override
     public void actionEdit() {
         try {
@@ -63,13 +64,14 @@ public class OrderManagerController extends ManagerController {
             if (order == null) {
                 throw new Exception("Hóa đơn bạn chọn không hợp lệ");
             }
-            popupController.edit(this, new EditOrderPopupView(), order);
-
+//            popupController.edit(this, new EditOrderPopupView(), order);
+            popupController.edit(new EditOrderPopupView(), order, this::updateData, view::showError);
+            
         } catch (Exception e) {
             view.showError(e);
         }
     }
-
+    
     @Override
     public void actionDelete() {
         int selectedIds[] = view.getSelectedIds();
@@ -91,7 +93,7 @@ public class OrderManagerController extends ManagerController {
             view.showError(e);
         }
     }
-
+    
     @Override
     public void updateData() {
         try {
@@ -101,7 +103,7 @@ public class OrderManagerController extends ManagerController {
             view.showError(e);
         }
     }
-
+    
     @Override
     public void actionSearch() {
         try {
@@ -111,5 +113,5 @@ public class OrderManagerController extends ManagerController {
             view.showError(e);
         }
     }
-
+    
 }
