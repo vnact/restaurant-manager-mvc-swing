@@ -40,39 +40,14 @@ public class InforController {
         addEvent();
     }
 
-    public void changePass(ChangePassView changePassView) {
-        changePassView.setVisible(true);
-        changePassView.setLocationRelativeTo(null);
-        changePassView.getBtnCancel().addActionListener(evt -> changePassView.dispose());
-        changePassView.getBtnConfirm().addActionListener(evt -> {
-            try {
-                String oldPass = changePassView.getTxtOldPass().getText(),
-                        newPass = changePassView.getTxtNewPass().getText(),
-                        confirmPass = changePassView.getTxtConfirmPass().getText();
-                if (oldPass.isEmpty() || newPass.isEmpty() || confirmPass.isEmpty()) {
-                    throw new Exception("Vui lòng điền đầy đủ thông tin");
-                }
-                if (!oldPass.equals(session.getPassword())) {
-                    System.out.println(oldPass);
-                    throw new Exception("Mật khẩu cũ không đúng ");
-                } else if (!newPass.equals(newPass)) {
-                    throw new Exception("Xác nhận mật khẩu sai !");
-                } else {
-                    EmployeeDao employeeDao = new EmployeeDao();
-                    Employee employee = session;
-                    employee.setPassword(newPass);
-                    employeeDao.update(employee);
-                    changePassView.showMessage("Thay đổi thành công !");
-                    changePassView.dispose();
-                }
-            } catch (Exception ee) {
-                changePassView.showError(ee);
-            }
-        });
-    }
-
     public void addEvent() {
-        view.getBtnChangePass().addActionListener(evt -> changePass(new ChangePassView()));
+        view.getBtnChangePass().addActionListener(evt -> {
+            ChangePassView changePassView = new ChangePassView();
+            ChangePassController changePassController = new ChangePassController();
+            changePassController.setView(changePassView);
+            changePassController.setSession(session);
+            changePassController.addEvent();
+        });
         // Sự kiện bấm nút sửa
         view.getBtnChangeInfor().addActionListener(evt -> {
         });
