@@ -3,6 +3,7 @@ package views.popup.order;
 import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JSpinner;
+import models.FoodItem;
 import models.OrderItem;
 import utils.ImageManager;
 
@@ -12,11 +13,11 @@ import utils.ImageManager;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class OrderItemPane extends javax.swing.JPanel {
-
+    
     OrderItem orderItem;
     ImageManager im = new ImageManager();
     DecimalFormat formatter = new DecimalFormat("###,###,###");
-
+    
     public OrderItemPane(OrderItem o) {
         initComponents();
         btnMinus.putClientProperty("JButton.buttonType", "roundRect");
@@ -24,11 +25,16 @@ public class OrderItemPane extends javax.swing.JPanel {
         this.orderItem = o;
         render();
     }
-
+    
     public void render() {
+        FoodItem food = orderItem.getFoodItem(), topping = orderItem.getToppingItem();
         spnQuantity.setValue(orderItem.getQuantity());
-        lbFoodName.setText(orderItem.getFoodItem().getName());
-        lbToppingName.setText(orderItem.getToppingItem().getName());
+        lbFoodName.setText(food.getName());
+        if (topping != null) {
+            lbToppingName.setText(topping.getName());
+        } else {
+            lbToppingName.setText("");
+        }
         lbPrice.setText(orderItem.getFoodPrice() + orderItem.getToppingPrice() + "");
         String urlImage = orderItem.getFoodItem().getUrlImage();
         if (urlImage != null && !urlImage.isEmpty()) {
@@ -36,7 +42,7 @@ public class OrderItemPane extends javax.swing.JPanel {
             lbIcon.setIcon(im.resizeIcon(ic, 75, 75));
         }
     }
-
+    
     public JSpinner getSpnQuantity() {
         return spnQuantity;
     }
@@ -178,7 +184,7 @@ public class OrderItemPane extends javax.swing.JPanel {
         int quantity = (int) spnQuantity.getValue();
         spnQuantity.setValue(Math.max(0, quantity - 1));
     }//GEN-LAST:event_btnMinusActionPerformed
-
+    
     private void btnPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlusActionPerformed
         int quantity = (int) spnQuantity.getValue();
         spnQuantity.setValue(quantity + 1);

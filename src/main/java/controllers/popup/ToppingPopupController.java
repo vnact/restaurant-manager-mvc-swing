@@ -26,13 +26,12 @@ public class ToppingPopupController {
         view.getLbFoodName().setText(foodItem.getName());
         view.getSpnFoodPrice().setValue(foodItem.getUnitPrice());
         try {
-            //Lấy danh sách topping
-            if (foodItem.getIdCategory() == 2) {
-                //Nếu là trà sữa thì hiện topping
-                for (FoodItem topping : foodItemDao.getByIdCategory(4)) {
-                    view.getCboTopping().addItem(topping);
-                }
-            } else {
+            //Hiện danh sách topping
+            for (FoodItem topping : foodItemDao.getByIdCategory(4)) {
+                view.getCboTopping().addItem(topping);
+            }
+            //Ẩn topping nếu k phải trà sữa
+            if (foodItem.getIdCategory() != 2) {
                 view.getLbTopping().setVisible(false);
                 view.getCboTopping().setVisible(false);
             }
@@ -74,9 +73,15 @@ public class ToppingPopupController {
         try {
             orderItem.setFoodItem(foodItem);
             orderItem.setFoodPrice((int) view.getSpnFoodPrice().getValue());
-            orderItem.setToppingItem((FoodItem) view.getCboTopping().getSelectedItem());
-            orderItem.setToppingPrice(orderItem.getToppingItem().getUnitPrice());
+            if (foodItem.getIdCategory() == 2) {
+                orderItem.setToppingItem((FoodItem) view.getCboTopping().getSelectedItem());
+                orderItem.setToppingPrice(orderItem.getToppingItem().getUnitPrice());
+            } else {
+                orderItem.setToppingItem(foodItemDao.get(1));
+                orderItem.setToppingPrice(0);
+            }
             orderItem.setQuantity((int) view.getSpnQuantity().getValue());
+
             return orderItem;
         } catch (Exception e) {
             return orderItem;
