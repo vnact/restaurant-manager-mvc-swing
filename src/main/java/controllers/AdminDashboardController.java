@@ -20,6 +20,7 @@ import models.Employee;
 import utils.IconManager;
 import views.AdminDashboardView;
 import views.LoginView;
+import views.admin.AboutView;
 import views.admin.CustomerManagerView;
 import views.admin.EmployeeManagerView;
 import views.admin.FoodCategoryManagerView;
@@ -40,7 +41,7 @@ import views.admin.TableManagerView;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class AdminDashboardController {
-    
+
     private AdminDashboardView view;
     ManagerController employeeManagerController = new EmployeeManagerController(), // Controller
             tableManagerController = new TableManagerController(),
@@ -52,7 +53,7 @@ public class AdminDashboardController {
     StatisticalController statisticalController = new StatisticalController();
     StatisticalFoodController statisticalFoodController = new StatisticalFoodController();
     StatisticalIncomeController statisticalIncomeController = new StatisticalIncomeController();
-    
+
     HomeView homePane = new HomeView();
     ManagerPaneView employeeManagerPane = new EmployeeManagerView(), // View
             tableManagerPane = new TableManagerView(),
@@ -64,14 +65,15 @@ public class AdminDashboardController {
     StatisticalView statisticalView = new StatisticalView();
     StatisticalFoodView statisticalFoodView = new StatisticalFoodView();
     StatisticalIncomeView statisticalIncomeView = new StatisticalIncomeView();
+    AboutView aboutView = new AboutView();
     JPanel[] cards = {
         homePane, employeeManagerPane, tableManagerPane, customerManagerPane,
         foodCategoryManagerView, orderManagerView, foodItemManagerView, shipmentManagerView,
-        statisticalView, statisticalFoodView, statisticalIncomeView
+        statisticalView, statisticalFoodView, statisticalIncomeView, aboutView
     };
-    
+
     SideBarController sideBarController = new SideBarController();
-    
+
     public AdminDashboardController(AdminDashboardView view) {
         this.view = view;
         sideBarController.setPanelSideBar(view.getPanelSideBar());
@@ -85,16 +87,16 @@ public class AdminDashboardController {
         view.setCards(cards);
         view.setPanel(homePane);
     }
-    
+
     public AdminDashboardView getView() {
         return view;
     }
-    
+
     public void setView(AdminDashboardView view) {
         this.view = view;
         sideBarController.setPanelSideBar(view.getPanelSideBar());
     }
-    
+
     private void initMenu() {
         IconManager im = new IconManager();
         MenuItem menuQLNV = new MenuItem("QLNV", im.getIcon("user_groups_25px.png"), "Quản lý nhân viên");
@@ -115,7 +117,7 @@ public class AdminDashboardController {
         menuTKNV.addSubMenu(new MenuItem("TKDN", null, "Thống kê phiên làm việc"));
         menuTL.addSubMenu(new MenuItem("DMK", im.getIcon("password_25px.png"), "Đổi mật khẩu"));
         menuTL.addSubMenu(new MenuItem("TLGD", im.getIcon("contrast_25px.png"), "Giao diện"));
-        menuTL.addSubMenu(new MenuItem("TT", im.getIcon("info_25px.png"), "Thông tin"));
+        menuTL.addSubMenu(new MenuItem("TT", im.getIcon("info_25px.png"), "About us"));
         sideBarController.addMenu(menuQLNV, menuQLHH, menuQLDH, menuTK, menuTL);
         sideBarController.addMenuEvent(this::onMenuChange);
     }
@@ -123,7 +125,7 @@ public class AdminDashboardController {
     // Tạo sự kiện
     private void addEvent() {
         view.getBtnLogout().addActionListener(new ActionListener() {
-            
+
             public void actionPerformed(ActionEvent evt) {
                 int confirm = JOptionPane.showConfirmDialog(view, "Bạn thực sự muốn đăng xuất?");
                 if (confirm != JOptionPane.YES_OPTION) {
@@ -139,7 +141,7 @@ public class AdminDashboardController {
             }
         });
     }
-    
+
     private void onMenuChange(MenuItem item) {
         ManagerPaneView pnl = null; //View Panel
         ManagerController mc = null; //Controller Panel
@@ -174,6 +176,7 @@ public class AdminDashboardController {
                 break;
             case "QLHH":
             case "QLDH":
+            case "TL":
                 break;
             case "TK"://Thống kê chung
                 view.setPanel(statisticalView);
@@ -189,6 +192,9 @@ public class AdminDashboardController {
                 view.setPanel(statisticalIncomeView);
                 statisticalIncomeController.setView(statisticalIncomeView);
                 statisticalIncomeController.initData();
+                break;
+            case "TT":
+                view.setPanel(aboutView);
                 break;
             default:
                 view.setPanel(homePane);
