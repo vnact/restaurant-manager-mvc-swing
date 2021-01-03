@@ -70,7 +70,6 @@ public class CalendarController {
                         if (j < list.size() - 1) {
                             j++;
                         }
-                        System.out.println(j);
                     } else {
                         String date = year + "-" + month + "-" + i;
                         DayView dayView = new DayView();

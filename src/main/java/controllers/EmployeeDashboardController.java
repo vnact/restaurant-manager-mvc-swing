@@ -96,7 +96,6 @@ public class EmployeeDashboardController {
     public void onMenuChange(MenuItem item) {
         ManagerPaneView pnl = null; //View Panel
         ManagerController mc = null; //Controller Panel
-        System.out.println("Chon menu: " + item.getId());
         switch (item.getId()) {
             case "BH":
                 mc = orderManagerController;

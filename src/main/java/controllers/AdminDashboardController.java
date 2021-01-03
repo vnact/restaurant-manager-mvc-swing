@@ -40,7 +40,7 @@ import views.admin.TableManagerView;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class AdminDashboardController {
-
+    
     private AdminDashboardView view;
     ManagerController employeeManagerController = new EmployeeManagerController(), // Controller
             tableManagerController = new TableManagerController(),
@@ -52,7 +52,7 @@ public class AdminDashboardController {
     StatisticalController statisticalController = new StatisticalController();
     StatisticalFoodController statisticalFoodController = new StatisticalFoodController();
     StatisticalIncomeController statisticalIncomeController = new StatisticalIncomeController();
-
+    
     HomeView homePane = new HomeView();
     ManagerPaneView employeeManagerPane = new EmployeeManagerView(), // View
             tableManagerPane = new TableManagerView(),
@@ -69,9 +69,9 @@ public class AdminDashboardController {
         foodCategoryManagerView, orderManagerView, foodItemManagerView, shipmentManagerView,
         statisticalView, statisticalFoodView, statisticalIncomeView
     };
-
+    
     SideBarController sideBarController = new SideBarController();
-
+    
     public AdminDashboardController(AdminDashboardView view) {
         this.view = view;
         sideBarController.setPanelSideBar(view.getPanelSideBar());
@@ -85,22 +85,23 @@ public class AdminDashboardController {
         view.setCards(cards);
         view.setPanel(homePane);
     }
-
+    
     public AdminDashboardView getView() {
         return view;
     }
-
+    
     public void setView(AdminDashboardView view) {
         this.view = view;
         sideBarController.setPanelSideBar(view.getPanelSideBar());
     }
-
+    
     private void initMenu() {
         IconManager im = new IconManager();
         MenuItem menuQLNV = new MenuItem("QLNV", im.getIcon("user_groups_25px.png"), "Quản lý nhân viên");
         MenuItem menuQLHH = new MenuItem("QLHH", im.getIcon("cardboard_box_25px.png"), "Quản lý hàng hóa");
         MenuItem menuQLDH = new MenuItem("QLDH", im.getIcon("shopping_cart_25px.png"), "Quản lý đặt hàng");
         MenuItem menuTK = new MenuItem("TK", im.getIcon("increase_25px.png"), "Thống kê");
+        MenuItem menuTL = new MenuItem("TL", im.getIcon("settings_25px.png"), "Thiết lập");
         menuQLHH.addSubMenu(new MenuItem("QLLM", null, "Quản lý loại món"));
         menuQLHH.addSubMenu(new MenuItem("QLMA", im.getIcon("food_25px.png"), "Quản lý món ăn"));
         menuQLDH.addSubMenu(new MenuItem("QLB", im.getIcon("table_25px.png"), "Quản lý bàn"));
@@ -112,14 +113,17 @@ public class AdminDashboardController {
         menuTK.addSubMenu(new MenuItem("TKHH", null, "Thống kê hàng hóa"));
         menuTK.addSubMenu(new MenuItem("TKDT", null, "Thống kê doanh thu"));
         menuTKNV.addSubMenu(new MenuItem("TKDN", null, "Thống kê phiên làm việc"));
-        sideBarController.addMenu(menuQLNV, menuQLHH, menuQLDH, menuTK);
+        menuTL.addSubMenu(new MenuItem("DMK", im.getIcon("password_25px.png"), "Đổi mật khẩu"));
+        menuTL.addSubMenu(new MenuItem("TLGD", im.getIcon("contrast_25px.png"), "Giao diện"));
+        menuTL.addSubMenu(new MenuItem("TT", im.getIcon("info_25px.png"), "Thông tin"));
+        sideBarController.addMenu(menuQLNV, menuQLHH, menuQLDH, menuTK, menuTL);
         sideBarController.addMenuEvent(this::onMenuChange);
     }
 
     // Tạo sự kiện
     private void addEvent() {
         view.getBtnLogout().addActionListener(new ActionListener() {
-
+            
             public void actionPerformed(ActionEvent evt) {
                 int confirm = JOptionPane.showConfirmDialog(view, "Bạn thực sự muốn đăng xuất?");
                 if (confirm != JOptionPane.YES_OPTION) {
@@ -135,11 +139,10 @@ public class AdminDashboardController {
             }
         });
     }
-
+    
     private void onMenuChange(MenuItem item) {
         ManagerPaneView pnl = null; //View Panel
         ManagerController mc = null; //Controller Panel
-        System.out.println("Chon menu: " + item.getId());
         switch (item.getId()) {
             case "QLNV"://Nhân viên
                 pnl = employeeManagerPane;
@@ -172,7 +175,7 @@ public class AdminDashboardController {
             case "QLHH":
             case "QLDH":
                 break;
-            case "TK":
+            case "TK"://Thống kê chung
                 view.setPanel(statisticalView);
                 statisticalController.setView(statisticalView);
                 statisticalController.initData();
@@ -182,7 +185,7 @@ public class AdminDashboardController {
                 statisticalFoodController.setView(statisticalFoodView);
                 statisticalFoodController.init();
                 break;
-            case "TKDT":
+            case "TKDT"://Thống kê doanh thu
                 view.setPanel(statisticalIncomeView);
                 statisticalIncomeController.setView(statisticalIncomeView);
                 statisticalIncomeController.initData();

@@ -37,9 +37,7 @@ public class InforController {
         CalendarView calendarView = new CalendarView();
         CalendarController calendarController = new CalendarController(calendarView);
         view.getPanelCalendar().add(calendarView);
-        System.out.println("");
         addEvent();
-
     }
 
     public void changePass(ChangePassView changePassView) {
