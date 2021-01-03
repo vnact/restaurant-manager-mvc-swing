@@ -22,11 +22,30 @@ import utils.ErrorPopup;
  */
 public class StatisticalIncomeView extends javax.swing.JPanel {
 
-    DefaultTableModel employeeModel = new DefaultTableModel(),
-            productModel = new DefaultTableModel();
+    DefaultTableModel employeeModel, productModel;
 
     public StatisticalIncomeView() {
         initComponents();
+        employeeModel = new DefaultTableModel() {
+            Class[] types = new Class[]{
+                Integer.class, String.class, Integer.class, Integer.class
+            };
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+        };
+        productModel = new DefaultTableModel() {
+            Class[] types = new Class[]{
+                Integer.class, String.class, Integer.class, Integer.class
+            };
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+        };
         tblEmployee.setModel(employeeModel);
         tblProduct.setModel(productModel);
         employeeModel.addColumn("ID");

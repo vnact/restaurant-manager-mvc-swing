@@ -60,6 +60,7 @@ public class StatisticalIncomeController {
     private void renderData(Timestamp start, Timestamp end) throws SQLException {
 //        throw new UnsupportedOperationException("Not supported yet.");
         renderEmployee(start, end);
+        renderProduct(start, end);
     }
 
     private void renderEmployee(Timestamp start, Timestamp end) throws SQLException {
@@ -69,6 +70,9 @@ public class StatisticalIncomeController {
                 income.employee.getId(), income.employee.getName(), income.totalOrder, income.totalIncome
             });
         }
+    }
+
+    private void renderProduct(Timestamp start, Timestamp end) throws SQLException {
         view.getProductModel().setNumRows(0);
         for (Statistical.ItemProduct product : statisticalDao.getQuantityItem(start, end)) {
             view.getProductModel().addRow(new Object[]{
