@@ -50,18 +50,6 @@ public class StatisticalDao {
         return 0;
     }
 
-    public int getTotalOrder(int idEmployee) throws SQLException {
-        Timestamp start = new Timestamp(0);
-        Timestamp end = new Timestamp(System.currentTimeMillis());
-        return getTotalOrder(start, end, idEmployee);
-    }
-
-    public int getTotalOrder() throws SQLException {
-        Timestamp start = new Timestamp(0);
-        Timestamp end = new Timestamp(System.currentTimeMillis());
-        return getTotalOrder(start, end);
-    }
-
     public int getTotalWorkingMinutes(Timestamp start, Timestamp end) throws SQLException {
         String query = "SELECT FLOOR(SUM(TIME_TO_SEC(TIMEDIFF(endTime, startTime))) / 60) AS totalWorkingMinutes FROM `session` WHERE DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?)";
         PreparedStatement statement = conn.prepareStatement(query);
@@ -85,31 +73,6 @@ public class StatisticalDao {
             return rs.getInt("totalWorkingMinutes");
         }
         return 0;
-    }
-
-    public int getTotalWorkingMinutes() throws SQLException {
-
-        Timestamp start = new Timestamp(0);
-        Timestamp end = new Timestamp(System.currentTimeMillis());
-        return getTotalWorkingMinutes(start, end);
-    }
-
-    public int getTotalWorkingMinutes(int idEmployee) throws SQLException {
-        Timestamp start = new Timestamp(0);
-        Timestamp end = new Timestamp(System.currentTimeMillis());
-        return getTotalWorkingMinutes(start, end, idEmployee);
-    }
-
-    public int getTotalIncome() throws SQLException {
-        Timestamp start = new Timestamp(0);
-        Timestamp end = new Timestamp(System.currentTimeMillis());
-        return getTotalIncome(start, end);
-    }
-
-    public int getTotalIncome(int idEmployee) throws SQLException {
-        Timestamp start = new Timestamp(0);
-        Timestamp end = new Timestamp(System.currentTimeMillis());
-        return getTotalIncome(start, end, idEmployee);
     }
 
     public int getTotalIncome(Timestamp start, Timestamp end) throws SQLException {
@@ -159,7 +122,7 @@ public class StatisticalDao {
 
     public ArrayList<Statistical.EmployeeIncome> getListTotalIncomeByDate(Timestamp start, Timestamp end) throws SQLException {
         ArrayList<Statistical.EmployeeIncome> incomes = new ArrayList<>();
-        String query = "SELECT DATE(orderDate) AS orderDate, SUM(paidAmount) AS totalIncome FROM `order` WHERE status = ? AND DATE(orderDate) >= DATE(?) AND DATE(orderDate) <= DATE(?) GROUP BY orderDate ORDER BY `orderDate` ASC";
+        String query = "SELECT DATE(orderDate) AS orderDate, COUNT(id) AS totalOrder , SUM(paidAmount) AS totalIncome FROM `order` WHERE status = ? AND DATE(orderDate) >= DATE(?) AND DATE(orderDate) <= DATE(?) GROUP BY orderDate ORDER BY `orderDate` ASC";
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setNString(1, OrderStatus.PAID.getId());
         statement.setTimestamp(2, start);
@@ -169,6 +132,7 @@ public class StatisticalDao {
             Statistical.EmployeeIncome income = statistical.new EmployeeIncome();
             income.date = rs.getDate("orderDate");
             income.totalIncome = rs.getInt("totalIncome");
+            income.totalOrder = rs.getInt("totalOrder");
             incomes.add(income);
         }
         return incomes;
@@ -215,17 +179,6 @@ public class StatisticalDao {
         return 0;
     }
 
-    public ArrayList<Date> getWorkingDays() throws SQLException {
-        Timestamp current = new Timestamp(System.currentTimeMillis());
-//        return getWorkingDays(new Timestamp(current.getTime() - 31 * 24 * 60 * 60 * 1000), current);
-        return getWorkingDays(new Timestamp(0), current);
-    }
-
-    public ArrayList<Date> getWorkingDays(int idEmployee) throws SQLException {
-        Timestamp current = new Timestamp(System.currentTimeMillis());
-        return getWorkingDays(new Timestamp(0), current, idEmployee);
-    }
-
     public ArrayList<Date> getWorkingDays(Timestamp start, Timestamp end) throws SQLException {
         ArrayList<Date> workingDays = new ArrayList<>();
         String query = "SELECT DATE(startTime) AS startTime, DATE(endTime) AS endTime FROM `session` WHERE DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?) ORDER BY `startTime` ASC";
@@ -269,8 +222,8 @@ public class StatisticalDao {
         return workingDays;
     }
 
-    public ArrayList<Statistical.ItemProduct> getQuantityItemByCategory(Timestamp start, Timestamp end, int Catetory) throws SQLException {
-        ArrayList<Statistical.ItemProduct> itemProducts = new ArrayList<>();
+    public ArrayList<Statistical.ProductIncome> getQuantityItemByCategory(Timestamp start, Timestamp end, int Catetory) throws SQLException {
+        ArrayList<Statistical.ProductIncome> itemProducts = new ArrayList<>();
         String query = "SELECT `name`,SUM(quantity) as sum FROM `order_item`,`food_item`,`order` "
                 + "WHERE `idFoodItem`=food_item.id AND idCategory= ? AND `idOrder`= order.id AND DATE(orderDate)>= DATE(?) AND DATE(orderDate)<= DATE(?) "
                 + "GROUP BY idFoodItem ORDER by sum DESC";
@@ -281,7 +234,7 @@ public class StatisticalDao {
         statement.setTimestamp(3, end);
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            Statistical.ItemProduct itemProduct = statistical.new ItemProduct();
+            Statistical.ProductIncome itemProduct = statistical.new ProductIncome();
             itemProduct.name = rs.getString("name");
             itemProduct.quantity = rs.getInt("sum");
             itemProducts.add(itemProduct);
@@ -289,9 +242,9 @@ public class StatisticalDao {
         return itemProducts;
     }
 
-    public ArrayList<Statistical.ItemProduct> getQuantityItem(Timestamp start, Timestamp end) throws SQLException {
-        ArrayList<Statistical.ItemProduct> itemProducts = new ArrayList<>();
-        String query = "SELECT `idFoodItem`,`idFoodItem`,`name`,SUM(quantity) as sum ,(foodPrice*SUM(quantity)) as amount FROM `order_item`,`food_item`,`order` "
+    public ArrayList<Statistical.ProductIncome> getQuantityItem(Timestamp start, Timestamp end) throws SQLException {
+        ArrayList<Statistical.ProductIncome> itemProducts = new ArrayList<>();
+        String query = "SELECT `idFoodItem`, `name`, SUM(quantity) as sum, (foodPrice*SUM(quantity)) as amount FROM `order_item`,`food_item`,`order` "
                 + "WHERE `idFoodItem`=food_item.id AND `idOrder`= order.id AND DATE(orderDate)>= DATE(?) AND DATE(orderDate)<= DATE(?) "
                 + "GROUP BY idFoodItem ORDER by sum DESC";
 
@@ -300,7 +253,7 @@ public class StatisticalDao {
         statement.setTimestamp(2, end);
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            Statistical.ItemProduct itemProduct = statistical.new ItemProduct();
+            Statistical.ProductIncome itemProduct = statistical.new ProductIncome();
             itemProduct.name = rs.getString("name");
             itemProduct.quantity = rs.getInt("sum");
             itemProduct.id = rs.getInt("idFoodItem");

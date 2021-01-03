@@ -74,7 +74,7 @@ public class StatisticalIncomeController {
 
     private void renderProduct(Timestamp start, Timestamp end) throws SQLException {
         view.getProductModel().setNumRows(0);
-        for (Statistical.ItemProduct product : statisticalDao.getQuantityItem(start, end)) {
+        for (Statistical.ProductIncome product : statisticalDao.getQuantityItem(start, end)) {
             view.getProductModel().addRow(new Object[]{
                 product.id, product.name, product.quantity, product.amount
             });

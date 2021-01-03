@@ -110,11 +110,9 @@ public class AdminDashboardController {
         menuQLDH.addSubMenu(new MenuItem("QLKH", im.getIcon("technical_support_25px.png"), "Quản lý khách hàng"));
         menuQLDH.addSubMenu(new MenuItem("QLDDH", im.getIcon("purchase_order_25px.png"), "Quản lý đơn đặt hàng"));
         menuQLDH.addSubMenu(new MenuItem("QLGH", im.getIcon("truck_25px.png"), "Quản lý giao hàng"));
-        MenuItem menuTKNV = new MenuItem("TKNV", im.getIcon("user_25px.png"), "Thống kê nhân viên");
-        menuTK.addSubMenu(menuTKNV);
+        menuTK.addSubMenu(new MenuItem("TKNV", im.getIcon("user_25px.png"), "Thống kê nhân viên"));
         menuTK.addSubMenu(new MenuItem("TKHH", null, "Thống kê hàng hóa"));
         menuTK.addSubMenu(new MenuItem("TKDT", null, "Thống kê doanh thu"));
-        menuTKNV.addSubMenu(new MenuItem("TKDN", null, "Thống kê phiên làm việc"));
         menuTL.addSubMenu(new MenuItem("DMK", im.getIcon("password_25px.png"), "Đổi mật khẩu"));
         menuTL.addSubMenu(new MenuItem("TLGD", im.getIcon("contrast_25px.png"), "Giao diện"));
         menuTL.addSubMenu(new MenuItem("TT", im.getIcon("info_25px.png"), "About us"));

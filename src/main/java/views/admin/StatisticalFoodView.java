@@ -26,7 +26,7 @@ public class StatisticalFoodView extends javax.swing.JPanel {
 
     String[] header = {"Tên Món", "Số lượng đã bán"};
     DefaultTableModel tableModel = new DefaultTableModel(header, 0);
-    ArrayList<Statistical.ItemProduct> tableData = new ArrayList<>();
+    ArrayList<Statistical.ProductIncome> tableData = new ArrayList<>();
 
     /**
      * Creates new form StatisticalFoodView
@@ -47,7 +47,7 @@ public class StatisticalFoodView extends javax.swing.JPanel {
         return tableModel;
     }
 
-    public ArrayList<Statistical.ItemProduct> getTableData() {
+    public ArrayList<Statistical.ProductIncome> getTableData() {
         return tableData;
     }
 
@@ -80,7 +80,7 @@ public class StatisticalFoodView extends javax.swing.JPanel {
 
     }
 
-    public void setTableData(ArrayList<Statistical.ItemProduct> tableData) {
+    public void setTableData(ArrayList<Statistical.ProductIncome> tableData) {
         this.tableData = tableData;
         renderData();
     }
@@ -88,8 +88,11 @@ public class StatisticalFoodView extends javax.swing.JPanel {
     public void renderData() {
         tableModel.setNumRows(0);
         try {
-            for (Statistical.ItemProduct item : tableData) {
-                tableModel.addRow(item.toRowTable());
+            for (Statistical.ProductIncome item : tableData) {
+                tableModel.addRow(new Object[]{
+                    item.id,
+                    item.quantity
+                });
             }
         } catch (Exception e) {
             e.printStackTrace();

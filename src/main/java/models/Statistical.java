@@ -27,26 +27,11 @@ public class Statistical {
 
     }
 
-    public class ItemProduct {
+    public class ProductIncome {
 
         public FoodItem item;
         public int quantity, amount, id;
         public String name;
-
-        public ItemProduct() {
-
-        }
-
-        public Object[] toRowTable() {
-            return new Object[]{
-                name, quantity
-            };
-        }
-
-    }
-
-    public class OrderProduct {
-
     }
 
     public class EmployeeIncome {

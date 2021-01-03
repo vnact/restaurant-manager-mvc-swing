@@ -70,7 +70,7 @@ public class StatisticalFoodController {
         int idCategoryFood = view.getCbxCategory().getSelectedIndex() + 1;
         try {
             StatisticalDao statisticalDao = new StatisticalDao();
-            ArrayList<Statistical.ItemProduct> list = statisticalDao.getQuantityItemByCategory(new Timestamp(startDate.getTime()), new Timestamp(endDate.getTime()), idCategoryFood);
+            ArrayList<Statistical.ProductIncome> list = statisticalDao.getQuantityItemByCategory(new Timestamp(startDate.getTime()), new Timestamp(endDate.getTime()), idCategoryFood);
             view.setTableData(list);
         } catch (Exception e) {
             //System.out.println("lõi cmnr");
