@@ -39,7 +39,8 @@ public class Statistical {
 
         public Object[] toRowTable() {
             return new Object[]{
-                name, quantity};
+                name, quantity
+            };
         }
 
     }
@@ -48,7 +49,7 @@ public class Statistical {
 
     }
 
-    public class TotalIncome {
+    public class EmployeeIncome {
 
         public Employee employee;
         public int totalIncome, totalOrder;

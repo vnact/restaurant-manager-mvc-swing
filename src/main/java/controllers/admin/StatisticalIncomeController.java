@@ -64,7 +64,7 @@ public class StatisticalIncomeController {
 
     private void renderEmployee(Timestamp start, Timestamp end) throws SQLException {
         view.getEmployeeModel().setNumRows(0);
-        for (Statistical.TotalIncome income : statisticalDao.getListTotalIncomeByEmployee(start, end)) {
+        for (Statistical.EmployeeIncome income : statisticalDao.getListTotalIncomeByEmployee(start, end)) {
             view.getEmployeeModel().addRow(new Object[]{
                 income.employee.getId(), income.employee.getName(), income.totalOrder, income.totalIncome
             });
