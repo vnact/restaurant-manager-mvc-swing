@@ -31,7 +31,10 @@ public class StatisticalController {
     }
 
     public void setView(StatisticalView view) {
-        this.view = view;
+        if (view != this.view) {
+            this.view = view;
+            addEvent();
+        }
     }
 
     public void addEvent() {

@@ -6,7 +6,14 @@
 package views.admin;
 
 import com.toedter.calendar.JDateChooser;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import utils.ErrorPopup;
 
 /**
  * createAt Jan 3, 2021
@@ -30,6 +37,29 @@ public class StatisticalIncomeView extends javax.swing.JPanel {
         productModel.addColumn("Tên món");
         productModel.addColumn("Số lượng");
         productModel.addColumn("Thu nhập");
+        setupHeader(tblEmployee);
+        setupHeader(tblProduct);
+    }
+
+    private void setupHeader(JTable t) {
+        t.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        t.getTableHeader().setBackground(new Color(51, 175, 255));
+        t.getTableHeader().setForeground(new Color(255, 255, 255));
+        ((DefaultTableCellRenderer) t.getTableHeader().getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.LEFT);
+        t.setAutoCreateRowSorter(true);
+    }
+
+    public void showError(String message) {
+        ErrorPopup.show(new Exception(message));
+    }
+
+    public void showError(Exception e) {
+        ErrorPopup.show(e);
+    }
+
+    public void showMessage(String message) {
+        JOptionPane.showMessageDialog(this, message);
     }
 
     public DefaultTableModel getEmployeeModel() {
