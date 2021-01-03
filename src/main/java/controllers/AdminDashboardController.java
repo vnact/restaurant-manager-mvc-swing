@@ -29,6 +29,7 @@ import views.admin.MenuItem;
 import views.admin.OrderManagerView;
 import views.admin.ShipmentManagerView;
 import views.admin.StatisticalFoodView;
+import views.admin.StatisticalIncomeView;
 import views.admin.StatisticalView;
 import views.admin.TableManagerView;
 
@@ -60,11 +61,11 @@ public class AdminDashboardController {
             customerManagerPane = new CustomerManagerView();
     StatisticalView statisticalView = new StatisticalView();
     StatisticalFoodView statisticalFoodView = new StatisticalFoodView();
-
+    StatisticalIncomeView statisticalIncomeView = new StatisticalIncomeView();
     JPanel[] cards = {
         homePane, employeeManagerPane, tableManagerPane, customerManagerPane,
         foodCategoryManagerView, orderManagerView, foodItemManagerView, shipmentManagerView,
-        statisticalView, statisticalFoodView
+        statisticalView, statisticalFoodView, statisticalIncomeView
     };
 
     SideBarController sideBarController = new SideBarController();
@@ -167,7 +168,6 @@ public class AdminDashboardController {
                 mc = shipmentManagerController;
                 break;
             case "QLHH":
-
             case "QLDH":
                 break;
             case "TK":
@@ -180,6 +180,9 @@ public class AdminDashboardController {
                 view.setPanel(statisticalFoodView);
                 statisticalFoodController.setView(statisticalFoodView);
                 statisticalFoodController.init();
+                break;
+            case "TKDT":
+                view.setPanel(statisticalIncomeView);
                 break;
             default:
                 view.setPanel(homePane);

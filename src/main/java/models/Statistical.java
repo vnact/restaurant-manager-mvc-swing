@@ -51,13 +51,14 @@ public class Statistical {
     public class TotalIncome {
 
         public Employee employee;
-        public int totalIncome;
+        public int totalIncome, totalOrder;
         public Date date;
 
         @Override
         public String toString() {
-            return "TotalIncome{" + "employee=" + employee + ", totalIncome=" + totalIncome + ", date=" + date + '}';
+            return "TotalIncome{" + "employee=" + employee + ", totalIncome=" + totalIncome + ", totalOrder=" + totalOrder + ", date=" + date + '}';
         }
+
     }
 
 }
