@@ -101,6 +101,7 @@ public class SideBarController {
     }
 
     public void setMenu(MenuItem item) {//Chọn menu
+        boolean isActive = item.isActive();
         if (activeMenuItem != null) {
             closePreviosMenu(activeMenuItem);
         }
@@ -109,7 +110,7 @@ public class SideBarController {
             parrent.setActive(true);
             parrent = parrent.getParentMenu();
         }
-        item.setActive(!item.isActive());
+        item.setActive(!isActive);
         activeMenuItem = item;
         renderMenu();
     }
