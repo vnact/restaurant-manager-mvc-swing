@@ -30,7 +30,7 @@ public class Statistical {
     public class ItemProduct {
 
         public FoodItem item;
-        public int quantity, amount;
+        public int quantity, amount, id;
         public String name;
 
         public ItemProduct() {

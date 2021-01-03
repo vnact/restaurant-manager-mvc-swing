@@ -34,10 +34,10 @@ public class StatisticalFoodController {
         c.add(Calendar.DATE, -30);
         view.getStartDate().setCalendar(c);
         try {
+            view.getCbxCategory().removeAllItems();
             FoodCategoryDao foodDao = new FoodCategoryDao();
             ArrayList<FoodCategory> List = foodDao.getAll();
             for (FoodCategory f : List) {
-                System.out.println("ok");
                 view.getCbxCategory().addItem(f.getName());
             }
         } catch (Exception e) {
@@ -70,7 +70,7 @@ public class StatisticalFoodController {
         int idCategoryFood = view.getCbxCategory().getSelectedIndex() + 1;
         try {
             StatisticalDao statisticalDao = new StatisticalDao();
-            ArrayList<Statistical.ItemProduct> list = statisticalDao.getQuantityItem(new Timestamp(startDate.getTime()), new Timestamp(endDate.getTime()), idCategoryFood);
+            ArrayList<Statistical.ItemProduct> list = statisticalDao.getQuantityItemByCategory(new Timestamp(startDate.getTime()), new Timestamp(endDate.getTime()), idCategoryFood);
             view.setTableData(list);
         } catch (Exception e) {
             //System.out.println("lõi cmnr");

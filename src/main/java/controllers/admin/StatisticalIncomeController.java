@@ -69,6 +69,12 @@ public class StatisticalIncomeController {
                 income.employee.getId(), income.employee.getName(), income.totalOrder, income.totalIncome
             });
         }
+        view.getProductModel().setNumRows(0);
+        for (Statistical.ItemProduct product : statisticalDao.getQuantityItem(start, end)) {
+            view.getProductModel().addRow(new Object[]{
+                product.id, product.name, product.quantity, product.amount
+            });
+        }
     }
 
 }
