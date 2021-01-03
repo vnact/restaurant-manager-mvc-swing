@@ -49,7 +49,7 @@ public class StatisticalController {
             }
 
         };
-        PropertyChangeListener eventListener = evt -> debouncer.debounce("date_change", onDateChange, 3000);//Chờ 3s không thay đổi mới hiển thị data
+        PropertyChangeListener eventListener = evt -> debouncer.debounce("date_change", onDateChange, 1000);//Chờ 3s không thay đổi mới hiển thị data
 
         view.getDateChooserStart().addPropertyChangeListener(eventListener);
         view.getDateChooserEnd().addPropertyChangeListener(eventListener);

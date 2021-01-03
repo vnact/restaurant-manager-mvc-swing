@@ -7,6 +7,7 @@ import controllers.admin.FoodItemManagerController;
 import controllers.admin.OrderManagerController;
 import controllers.admin.ShipmentManagerController;
 import controllers.admin.StatisticalController;
+import controllers.admin.StatisticalFoodController;
 import controllers.admin.TableManagerController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +28,7 @@ import views.admin.ManagerPaneView;
 import views.admin.MenuItem;
 import views.admin.OrderManagerView;
 import views.admin.ShipmentManagerView;
+import views.admin.StatisticalFoodView;
 import views.admin.StatisticalView;
 import views.admin.TableManagerView;
 
@@ -46,6 +48,7 @@ public class AdminDashboardController {
             shipmentManagerController = new ShipmentManagerController(),
             customerManagerController = new CustomerManagerController();
     StatisticalController statisticalController = new StatisticalController();
+    StatisticalFoodController statisticalFoodController = new StatisticalFoodController();
 
     HomeView homePane = new HomeView();
     ManagerPaneView employeeManagerPane = new EmployeeManagerView(), // View
@@ -56,11 +59,12 @@ public class AdminDashboardController {
             shipmentManagerView = new ShipmentManagerView(),
             customerManagerPane = new CustomerManagerView();
     StatisticalView statisticalView = new StatisticalView();
+    StatisticalFoodView statisticalFoodView = new StatisticalFoodView();
 
     JPanel[] cards = {
         homePane, employeeManagerPane, tableManagerPane, customerManagerPane,
         foodCategoryManagerView, orderManagerView, foodItemManagerView, shipmentManagerView,
-        statisticalView
+        statisticalView, statisticalFoodView
     };
 
     SideBarController sideBarController = new SideBarController();
@@ -163,6 +167,7 @@ public class AdminDashboardController {
                 mc = shipmentManagerController;
                 break;
             case "QLHH":
+
             case "QLDH":
                 break;
             case "TK":
@@ -170,6 +175,11 @@ public class AdminDashboardController {
                 statisticalController.setView(statisticalView);
                 statisticalController.addEvent();
                 statisticalController.initData();
+                break;
+            case "TKHH":
+                view.setPanel(statisticalFoodView);
+                statisticalFoodController.setView(statisticalFoodView);
+                statisticalFoodController.init();
                 break;
             default:
                 view.setPanel(homePane);

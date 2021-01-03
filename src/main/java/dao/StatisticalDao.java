@@ -267,4 +267,29 @@ public class StatisticalDao {
         }
         return workingDays;
     }
+
+    public ArrayList<Statistical.ItemProduct> getQuantityItem(Timestamp start, Timestamp end, int Catetory) throws SQLException {
+        ArrayList<Statistical.ItemProduct> itemProducts = new ArrayList<>();
+        System.out.println(start);
+        System.out.println(end);
+        System.out.println(Catetory);
+        String query = "SELECT `name`,SUM(quantity) as sum FROM `order_item`,`food_item`,`order` "
+                + "WHERE `idFoodItem`=food_item.id AND idCategory= ? AND `idOrder`= order.id AND DATE(orderDate)>= DATE(?) AND DATE(orderDate)<= DATE(?) "
+                + "GROUP BY idFoodItem ORDER by sum DESC";
+
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setInt(1, Catetory);
+        statement.setTimestamp(2, start);
+        statement.setTimestamp(3, end);
+        // System.out.println("okay");
+        ResultSet rs = statement.executeQuery();
+
+        while (rs.next()) {
+            Statistical.ItemProduct itemProduct = statistical.new ItemProduct();
+            itemProduct.name = rs.getString("name");
+            itemProduct.quantity = rs.getInt("sum");
+            itemProducts.add(itemProduct);
+        }
+        return itemProducts;
+    }
 }

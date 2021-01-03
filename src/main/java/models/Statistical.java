@@ -31,11 +31,15 @@ public class Statistical {
 
         public FoodItem item;
         public int quantity, amount;
+        public String name;
 
-        public ItemProduct(FoodItem item, int quantity, int amount) {
-            this.item = item;
-            this.quantity = quantity;
-            this.amount = amount;
+        public ItemProduct() {
+
+        }
+
+        public Object[] toRowTable() {
+            return new Object[]{
+                name, quantity};
         }
 
     }
