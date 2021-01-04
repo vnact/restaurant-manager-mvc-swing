@@ -110,7 +110,7 @@ public class OrderPopupController {
         if (order.getFinalAmount() <= 0 || order.getFinalAmount() > order.getPaidAmount()) {// Chưa thanh toán 
             order.setStatus(OrderStatus.UNPAID);
             order.setPayDate(null);
-        } else if (order.getStatus() == OrderStatus.UNPAID) {
+        } else if (order.getStatus() == OrderStatus.UNPAID || order.getPayDate() == null) {
             // Thanh toán
             order.setStatus(OrderStatus.PAID);
             order.setPayDate(new Timestamp(System.currentTimeMillis()));

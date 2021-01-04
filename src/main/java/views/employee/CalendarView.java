@@ -133,29 +133,24 @@ public class CalendarView extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
 
         jPanel2.setBackground(new java.awt.Color(209, 242, 235));
+        jPanel2.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Lịch công");
         jLabel1.setAlignmentY(0.0F);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel2.add(jLabel1, gridBagConstraints);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
         jPanel4.setAlignmentX(0.0F);
         jPanel4.setAlignmentY(0.0F);
-        jPanel4.setPreferredSize(new java.awt.Dimension(250, 110));
-        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 0, 5));
+        jPanel4.setMinimumSize(new java.awt.Dimension(255, 500));
+        jPanel4.setPreferredSize(new java.awt.Dimension(255, 500));
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         jPanel5.setPreferredSize(new java.awt.Dimension(245, 100));
         jPanel5.setLayout(new java.awt.BorderLayout());
@@ -435,7 +430,7 @@ public class CalendarView extends javax.swing.JPanel {
 
         jPanel4.add(jPanel25);
 
-        add(jPanel4, java.awt.BorderLayout.EAST);
+        add(jPanel4, java.awt.BorderLayout.CENTER);
 
         jPanel28.setPreferredSize(new java.awt.Dimension(470, 512));
         jPanel28.setLayout(new java.awt.BorderLayout());
@@ -460,7 +455,7 @@ public class CalendarView extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(271, Short.MAX_VALUE)
+                .addContainerGap(244, Short.MAX_VALUE)
                 .addComponent(cbxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -625,7 +620,7 @@ public class CalendarView extends javax.swing.JPanel {
 
         jPanel28.add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
-        add(jPanel28, java.awt.BorderLayout.CENTER);
+        add(jPanel28, java.awt.BorderLayout.WEST);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

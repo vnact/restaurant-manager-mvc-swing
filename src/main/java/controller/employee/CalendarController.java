@@ -9,6 +9,7 @@ import dao.WorkDayDao;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import main.SessionManager;
 import views.employee.CalendarView;
 import views.employee.DayView;
@@ -18,13 +19,13 @@ import views.employee.DayView;
  * @author Admin
  */
 public class CalendarController {
-
+    
     CalendarView view;
     //ArrayList<Integer> list;
     int month;//= LocalDate.now().getMonthValue();
     int year;// = LocalDate.now().getYear();
     int id = SessionManager.getSession().getIdEmployee();
-
+    
     public CalendarController(CalendarView view) {
         this.view = view;
         this.view.getCbxMonth().setSelectedIndex(LocalDate.now().getMonthValue() - 1);
@@ -33,7 +34,13 @@ public class CalendarController {
         RenderStatistical(LocalDate.now().getMonthValue(), LocalDate.now().getYear());
         addEvent();
     }
-
+    
+    public void RenderCalendar(Calendar cal) {
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        int month = cal.get(Calendar.MONTH);
+        int maxDay = cal.getActualMaximum(Calendar.MONTH);
+    }
+    
     public void RenderCalendar(int month, int year) {
         view.getPanelCalendar().removeAll();
         int day = LocalDate.of(year, month, 1).getDayOfWeek().getValue();
@@ -91,10 +98,10 @@ public class CalendarController {
             dayview.getLabelNumber().setBackground(color);
             view.getPanelCalendar().add(dayview);
         }
-
+        
         view.updateUI();
     }
-
+    
     public void RenderStatistical(int month, int year) {
         try {
             int days = new GetDayOfMonth(month, year).getDay();
@@ -106,9 +113,9 @@ public class CalendarController {
             view.getLbTotalBonus().setText(workDayDao.getBonus(id, month, year) + "đ");
         } catch (Exception e) {
         }
-
+        
     }
-
+    
     public void addEvent() {
         view.getBtnEnter().addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,5 +128,5 @@ public class CalendarController {
             }
         });
     }
-
+    
 }
