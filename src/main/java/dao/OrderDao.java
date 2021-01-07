@@ -135,6 +135,24 @@ public class OrderDao extends Dao<Order> {
         return orders;
     }
 
+    public void create(Order t) throws SQLException {
+        if (t == null) {
+            throw new SQLException("Order rỗng");
+        }
+        String query = "INSERT INTO `order` (`idEmployee`, `idTable`, `type`, `status`, `orderDate`, `payDate`, `paidAmount`, `totalAmount`, `discount`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setInt(1, t.getIdEmployee());
+        stmt.setInt(2, t.getIdTable());
+        stmt.setNString(3, t.getType().getId());
+        stmt.setNString(4, t.getStatus().getId());
+        stmt.setTimestamp(5, t.getOrderDate());
+        stmt.setTimestamp(6, t.getPayDate());
+        stmt.setInt(7, t.getPaidAmount());
+        stmt.setInt(8, t.getTotalAmount());
+        stmt.setInt(9, t.getDiscount());
+        int row = stmt.executeUpdate();
+    }
+
     public ArrayList<Order> searchByKey(int idEmployee, String key, String word) throws SQLException {
         ArrayList<Order> orders = new ArrayList<>();
         String query = "SELECT * FROM `order` WHERE " + key + " LIKE ? AND idEmployee = ?";

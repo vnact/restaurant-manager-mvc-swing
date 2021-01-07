@@ -109,4 +109,14 @@ public class EmployeeDao extends Dao<Employee> {
         return employees;
     }
 
+    public Employee getRandom() throws SQLException {
+        Statement statement = conn.createStatement();
+        String query = "SELECT * FROM employee ORDER BY RAND() LIMIT 1";
+        ResultSet rs = statement.executeQuery(query);
+        if (rs.next()) {
+            Employee employee = Employee.getFromResultSet(rs);
+            return employee;
+        }
+        return null;
+    }
 }

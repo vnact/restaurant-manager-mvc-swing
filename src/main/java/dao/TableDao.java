@@ -102,4 +102,14 @@ public class TableDao extends Dao<Table> {
         return tables;
     }
 
+    public Table getRandom() throws SQLException {
+        Statement statement = conn.createStatement();
+        String query = "SELECT * FROM `table` ORDER BY RAND() LIMIT 1";
+        ResultSet rs = statement.executeQuery(query);
+        if (rs.next()) {
+            Table table = Table.getFromResultSet(rs);
+            return table;
+        }
+        return null;
+    }
 }
