@@ -109,4 +109,27 @@ public class FoodItemDao extends Dao<FoodItem> {
         }
         return fooditems;
     }
+
+    public FoodItem getRandom() throws SQLException {
+        Statement statement = conn.createStatement();
+        String query = "SELECT * FROM `food_item` WHERE idCategory != 4 ORDER BY RAND() LIMIT 1";
+        ResultSet rs = statement.executeQuery(query);
+        if (rs.next()) {
+            FoodItem foodItem = FoodItem.getFromResultSet(rs);
+            return foodItem;
+        }
+        return null;
+    }
+
+    public FoodItem getRandom(int id) throws SQLException {
+        Statement statement = conn.createStatement();
+        String query = "SELECT * FROM `food_item` WHERE `idCategory` = " + id + " ORDER BY RAND() LIMIT 1";
+        ResultSet rs = statement.executeQuery(query);
+        if (rs.next()) {
+            FoodItem foodItem = FoodItem.getFromResultSet(rs);
+            return foodItem;
+        }
+        return null;
+    }
+
 }

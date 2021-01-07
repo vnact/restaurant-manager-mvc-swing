@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import models.Order;
+import utils.OrderStatus;
 
 /**
  *
@@ -168,4 +169,19 @@ public class OrderDao extends Dao<Order> {
         }
         return orders;
     }
+
+    public Order getRandom() throws SQLException {
+        String query = "SELECT * FROM `order` WHERE status = ? ORDER BY RAND() LIMIT 1";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setNString(1, OrderStatus.UNPAID.getId());
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            Order order = Order.getFromResultSet(rs);
+            order.setEmployee(employeeDao.get(order.getIdEmployee()));
+            order.setTable(tableDao.get(order.getIdTable()));
+            return order;
+        }
+        return null;
+    }
+
 }
