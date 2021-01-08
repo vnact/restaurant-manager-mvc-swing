@@ -65,27 +65,10 @@ public class StatisticalDao {
     }
 
     public int getTotalWorkingMinutes(Timestamp start, Timestamp end, int idEmployee) throws SQLException {
-        System.out.println(dateFormat.format(start) + "-" + dateFormat.format(end));
-        System.out.println(start.getTime() + "-" + end.getTime());
         String query = "SELECT CEIL(SUM(TIME_TO_SEC(TIMEDIFF(endTime, startTime))) / 60) AS totalWorkingMinutes FROM `session` WHERE message = 'logout' AND DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?) AND idEmployee = ?";
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setTimestamp(1, start);
         statement.setTimestamp(2, end);
-        statement.setInt(3, idEmployee);
-        ResultSet rs = statement.executeQuery();
-        if (rs.next()) {
-            return rs.getInt("totalWorkingMinutes");
-        }
-        return 0;
-    }
-
-    public int getTotalWorkingMinutes(Date start, Date end, int idEmployee) throws SQLException {
-        System.out.println(dateFormat.format(start) + "-" + dateFormat.format(end));
-        System.out.println(start.getTime() + "-" + end.getTime());
-        String query = "SELECT CEIL(SUM(TIME_TO_SEC(TIMEDIFF(endTime, startTime))) / 60) AS totalWorkingMinutes FROM `session` WHERE message = 'logout' AND DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?) AND idEmployee = ?";
-        PreparedStatement statement = conn.prepareStatement(query);
-        statement.setDate(1, start);
-        statement.setDate(2, end);
         statement.setInt(3, idEmployee);
         ResultSet rs = statement.executeQuery();
         if (rs.next()) {
