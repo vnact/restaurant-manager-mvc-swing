@@ -9,6 +9,7 @@ import dao.ShipmentDao;
 import dao.TableDao;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import main.SessionManager;
 import models.Employee;
@@ -40,6 +41,7 @@ public class OrderPopupController {
     OrderItemController orderItemController = new OrderItemController();
     ToppingPopupController toppingPopupController = new ToppingPopupController();
     DecimalFormat formatter = new DecimalFormat("###,###,###");
+    JFrame previousView;
 
     public void updateAmount(EditOrderPopupView view, Order order) {
         order.setTotalAmount(orderItemController.getTotalAmount());
@@ -126,6 +128,11 @@ public class OrderPopupController {
     }
 
     public void add(AddOrderPopupView view, SuccessCallback sc, ErrorCallback ec) {
+        if (previousView != null && previousView.isDisplayable()) {
+            previousView.requestFocus();
+            return;
+        }
+        previousView = view;
         view.setVisible(true);
         view.getBtnCancel().addActionListener(evt -> view.dispose());
         try {
@@ -156,6 +163,11 @@ public class OrderPopupController {
     }
 
     public void edit(EditOrderPopupView view, Order order, SuccessCallback sc, ErrorCallback ec) {
+        if (previousView != null && previousView.isDisplayable()) {
+            previousView.requestFocus();
+            return;
+        }
+        previousView = view;
         Employee currentLogin = SessionManager.getSession().getEmployee();
         if (order.getEmployee() == null) {
             order.setEmployee(currentLogin);

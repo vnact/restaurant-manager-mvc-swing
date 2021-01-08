@@ -3,6 +3,7 @@ package controllers.popup;
 import dao.FoodCategoryDao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 import models.FoodCategory;
 import views.popup.FoodCategoryPopupView;
 
@@ -14,8 +15,14 @@ import views.popup.FoodCategoryPopupView;
 public class FoodCategoryPopupController {
 
     FoodCategoryDao foodCategoryDao = new FoodCategoryDao();
+    JFrame previousView;
 
     public void add(FoodCategoryPopupView view, SuccessCallback sc, ErrorCallback ec) {
+        if (previousView != null && previousView.isDisplayable()) {
+            previousView.requestFocus();
+            return;
+        }
+        previousView = view;
         view.setVisible(true);
         view.getBtnCancel().addActionListener(evt -> view.dispose());
         view.getBtnOK().addActionListener(evt -> {
@@ -32,6 +39,11 @@ public class FoodCategoryPopupController {
     }
 
     public void edit(FoodCategoryPopupView view, FoodCategory employee, SuccessCallback sc, ErrorCallback ec) {
+        if (previousView != null && previousView.isDisplayable()) {
+            previousView.requestFocus();
+            return;
+        }
+        previousView = view;
         view.setVisible(true);
         view.getBtnCancel().addActionListener(evt -> view.dispose());
         view.getLbTitle().setText("Sửa loại món - " + employee.getId());

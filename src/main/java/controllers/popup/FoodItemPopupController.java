@@ -8,6 +8,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import models.FoodCategory;
 import models.FoodItem;
 import utils.ImageManager;
@@ -28,6 +29,7 @@ public class FoodItemPopupController {
     ChooseImageView chooseImageView = new ChooseImageView();
     ImageManager imageManager = new ImageManager();
     String resourcesPath = getClass().getResource("/images/").getPath();
+    JFrame previousView;
 
     private ActionListener eventShowChooseFileDialog(FoodItemPopupView view) {
         return evt -> {
@@ -71,6 +73,11 @@ public class FoodItemPopupController {
     }
 
     public void add(FoodItemPopupView view, SuccessCallback sc, ErrorCallback ec) {
+        if (previousView != null && previousView.isDisplayable()) {
+            previousView.requestFocus();
+            return;
+        }
+        previousView = view;
         view.setVisible(true);
         view.getBtnCancel().addActionListener(evt -> view.dispose());
         initComboBox(view);
@@ -101,6 +108,11 @@ public class FoodItemPopupController {
     }
 
     public void edit(FoodItemPopupView view, FoodItem foodItem, SuccessCallback sc, ErrorCallback ec) {
+        if (previousView != null && previousView.isDisplayable()) {
+            previousView.requestFocus();
+            return;
+        }
+        previousView = view;
         view.setVisible(true);
         view.getBtnCancel().addActionListener(evt -> view.dispose());
         initComboBox(view);

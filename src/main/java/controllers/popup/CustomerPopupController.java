@@ -3,6 +3,7 @@ package controllers.popup;
 import dao.CustomerDao;
 import java.sql.Timestamp;
 import java.util.Date;
+import javax.swing.JFrame;
 import models.Customer;
 import views.popup.CustomerPopupView;
 
@@ -14,8 +15,14 @@ import views.popup.CustomerPopupView;
 public class CustomerPopupController {
 
     CustomerDao customerDao = new CustomerDao();
+    JFrame previousView;
 
     public void add(CustomerPopupView view, SuccessCallback sc, ErrorCallback ec) {
+        if (previousView != null && previousView.isDisplayable()) {
+            previousView.requestFocus();
+            return;
+        }
+        previousView = view;
         view.setVisible(true);
         view.getBtnCancel().addActionListener(evt -> view.dispose());
         view.getBtnOK().addActionListener(evt -> {
@@ -31,6 +38,11 @@ public class CustomerPopupController {
     }
 
     public void edit(CustomerPopupView view, Customer customer, SuccessCallback sc, ErrorCallback ec) {
+        if (previousView != null && previousView.isDisplayable()) {
+            previousView.requestFocus();
+            return;
+        }
+        previousView = view;
         view.setVisible(true);
         view.getBtnCancel().addActionListener(evt -> view.dispose());
         view.getLbTitle().setText("Sửa khách hàng - " + customer.getId());

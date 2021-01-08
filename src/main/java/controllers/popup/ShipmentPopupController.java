@@ -4,6 +4,7 @@ import dao.CustomerDao;
 import dao.ShipmentDao;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import javax.swing.JFrame;
 import models.Shipment;
 import utils.ShipmentStatus;
 import views.popup.SelectCustomerPopupView;
@@ -18,8 +19,14 @@ public class ShipmentPopupController {
 
     ShipmentDao shipmentDao = new ShipmentDao();
     CustomerDao customerDao = new CustomerDao();
+    JFrame previousView;
 
     public void add(ShipmentPopupView view, int idOrder, SuccessCallback sc, ErrorCallback ec) {
+        if (previousView != null && previousView.isDisplayable()) {
+            previousView.requestFocus();
+            return;
+        }
+        previousView = view;
         try {
             Shipment shipment = shipmentDao.get(idOrder);
             if (shipment != null) {
@@ -41,6 +48,11 @@ public class ShipmentPopupController {
     }
 
     public void edit(ShipmentPopupView view, int idOrder, SuccessCallback sc, ErrorCallback ec) {
+        if (previousView != null && previousView.isDisplayable()) {
+            previousView.requestFocus();
+            return;
+        }
+        previousView = view;
         view.setVisible(true);
         view.getBtnCancel().addActionListener(evt -> view.dispose());
         for (ShipmentStatus value : ShipmentStatus.values()) {

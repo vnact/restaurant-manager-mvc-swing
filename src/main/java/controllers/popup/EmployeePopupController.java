@@ -1,6 +1,7 @@
 package controllers.popup;
 
 import dao.EmployeeDao;
+import javax.swing.JFrame;
 import models.Employee;
 import utils.EmployeePermission;
 import views.popup.EmployeePopupView;
@@ -13,8 +14,14 @@ import views.popup.EmployeePopupView;
 public class EmployeePopupController {
 
     EmployeeDao employeeDao = new EmployeeDao();
+    JFrame previousView;
 
     public void add(EmployeePopupView view, SuccessCallback sc, ErrorCallback ec) {
+        if (previousView != null && previousView.isDisplayable()) {
+            previousView.requestFocus();
+            return;
+        }
+        previousView = view;
         view.setVisible(true);
         view.getBtnCancel().addActionListener(evt -> view.dispose());
         for (EmployeePermission permission : EmployeePermission.values()) {
@@ -34,6 +41,11 @@ public class EmployeePopupController {
     }
 
     public void edit(EmployeePopupView view, Employee employee, SuccessCallback sc, ErrorCallback ec) {
+        if (previousView != null && previousView.isDisplayable()) {
+            previousView.requestFocus();
+            return;
+        }
+        previousView = view;
         view.setVisible(true);
         view.getBtnCancel().addActionListener(evt -> view.dispose());
         for (EmployeePermission permission : EmployeePermission.values()) {

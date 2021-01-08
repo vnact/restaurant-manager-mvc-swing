@@ -2,6 +2,7 @@ package controllers.popup;
 
 import dao.CustomerDao;
 import java.sql.SQLException;
+import javax.swing.JFrame;
 import models.Customer;
 import views.popup.SelectCustomerPopupView;
 
@@ -13,6 +14,7 @@ import views.popup.SelectCustomerPopupView;
 public class SelectCustomerPopupController {
 
     CustomerDao customerDao = new CustomerDao();
+    JFrame previousView;
 
     public interface Callback {
 
@@ -20,6 +22,11 @@ public class SelectCustomerPopupController {
     }
 
     public void select(SelectCustomerPopupView view, Callback callback) {
+        if (previousView != null && previousView.isDisplayable()) {
+            previousView.requestFocus();
+            return;
+        }
+        previousView = view;
         view.setVisible(true);
         try {
             view.renderCustomer(customerDao.getAll());

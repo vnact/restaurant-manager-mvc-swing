@@ -2,6 +2,7 @@ package controllers.popup;
 
 import dao.FoodItemDao;
 import java.text.DecimalFormat;
+import javax.swing.JFrame;
 import models.FoodItem;
 import models.OrderItem;
 import views.popup.ToppingPopupView;
@@ -15,6 +16,7 @@ public class ToppingPopupController {
 
     FoodItemDao foodItemDao = new FoodItemDao();
     DecimalFormat formatter = new DecimalFormat("###,###,###");
+    JFrame previousView;
 
     interface Event {
 
@@ -22,6 +24,11 @@ public class ToppingPopupController {
     }
 
     public void add(ToppingPopupView view, FoodItem foodItem, Event event) {
+        if (previousView != null && previousView.isDisplayable()) {
+            previousView.requestFocus();
+            return;
+        }
+        previousView = view;
         view.setVisible(true);
         view.getLbFoodName().setText(foodItem.getName());
         view.getSpnFoodPrice().setValue(foodItem.getUnitPrice());
