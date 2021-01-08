@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import models.Employee;
 import models.Statistical;
@@ -19,6 +20,7 @@ import utils.OrderStatus;
  */
 public class StatisticalDao {
 
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     Connection conn = Database.getInstance().getConnection();
     EmployeeDao employeeDao = new EmployeeDao();
     Statistical statistical = new Statistical();
@@ -51,7 +53,7 @@ public class StatisticalDao {
     }
 
     public int getTotalWorkingMinutes(Timestamp start, Timestamp end) throws SQLException {
-        String query = "SELECT FLOOR(SUM(TIME_TO_SEC(TIMEDIFF(endTime, startTime))) / 60) AS totalWorkingMinutes FROM `session` WHERE DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?)";
+        String query = "SELECT CEIL(SUM(TIME_TO_SEC(TIMEDIFF(endTime, startTime))) / 60) AS totalWorkingMinutes FROM `session` WHERE message = 'logout' AND DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?)";
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setTimestamp(1, start);
         statement.setTimestamp(2, end);
@@ -63,10 +65,27 @@ public class StatisticalDao {
     }
 
     public int getTotalWorkingMinutes(Timestamp start, Timestamp end, int idEmployee) throws SQLException {
-        String query = "SELECT FLOOR(SUM(TIME_TO_SEC(TIMEDIFF(endTime, startTime))) / 60) AS totalWorkingMinutes FROM `session` WHERE DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?) AND idEmployee = ?";
+        System.out.println(dateFormat.format(start) + "-" + dateFormat.format(end));
+        System.out.println(start.getTime() + "-" + end.getTime());
+        String query = "SELECT CEIL(SUM(TIME_TO_SEC(TIMEDIFF(endTime, startTime))) / 60) AS totalWorkingMinutes FROM `session` WHERE message = 'logout' AND DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?) AND idEmployee = ?";
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setTimestamp(1, start);
         statement.setTimestamp(2, end);
+        statement.setInt(3, idEmployee);
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("totalWorkingMinutes");
+        }
+        return 0;
+    }
+
+    public int getTotalWorkingMinutes(Date start, Date end, int idEmployee) throws SQLException {
+        System.out.println(dateFormat.format(start) + "-" + dateFormat.format(end));
+        System.out.println(start.getTime() + "-" + end.getTime());
+        String query = "SELECT CEIL(SUM(TIME_TO_SEC(TIMEDIFF(endTime, startTime))) / 60) AS totalWorkingMinutes FROM `session` WHERE message = 'logout' AND DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?) AND idEmployee = ?";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setDate(1, start);
+        statement.setDate(2, end);
         statement.setInt(3, idEmployee);
         ResultSet rs = statement.executeQuery();
         if (rs.next()) {
@@ -179,49 +198,6 @@ public class StatisticalDao {
         return 0;
     }
 
-    public ArrayList<Date> getWorkingDays(Timestamp start, Timestamp end) throws SQLException {
-        ArrayList<Date> workingDays = new ArrayList<>();
-        String query = "SELECT DATE(startTime) AS startTime, DATE(endTime) AS endTime FROM `session` WHERE DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?) ORDER BY `startTime` ASC";
-        PreparedStatement statement = conn.prepareStatement(query);
-        statement.setTimestamp(1, start);
-        statement.setTimestamp(2, end);
-        ResultSet rs = statement.executeQuery();
-        while (rs.next()) {
-            Date startTime = rs.getDate("startTime");
-            Date endTime = rs.getDate("endTime");
-            Date i = startTime;
-            while (!i.after(endTime)) {
-                if (!workingDays.contains(i)) {
-                    workingDays.add(i);
-                }
-                i = new Date(i.getTime() + 24 * 60 * 60 * 1000);//Check ngày sau
-            }
-        }
-        return workingDays;
-    }
-
-    public ArrayList<Date> getWorkingDays(Timestamp start, Timestamp end, int idEmployee) throws SQLException {
-        ArrayList<Date> workingDays = new ArrayList<>();
-        String query = "SELECT DATE(startTime) AS startTime, DATE(endTime) AS endTime FROM `session` WHERE DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?) AND `idEmployee` = ? ORDER BY `session`.`startTime` ASC";
-        PreparedStatement statement = conn.prepareStatement(query);
-        statement.setTimestamp(1, start);
-        statement.setTimestamp(2, end);
-        statement.setInt(3, idEmployee);
-        ResultSet rs = statement.executeQuery();
-        while (rs.next()) {
-            Date startTime = rs.getDate("startTime");
-            Date endTime = rs.getDate("endTime");
-            Date i = startTime;
-            while (!i.after(endTime)) {
-                if (!workingDays.contains(i)) {
-                    workingDays.add(i);
-                }
-                i = new Date(i.getTime() + 24 * 60 * 60 * 1000);//Check ngày sau
-            }
-        }
-        return workingDays;
-    }
-
     public ArrayList<Statistical.ProductIncome> getQuantityItemByCategory(Timestamp start, Timestamp end, int Catetory) throws SQLException {
         ArrayList<Statistical.ProductIncome> itemProducts = new ArrayList<>();
         String query = "SELECT `name`,SUM(quantity) as sum FROM `order_item`,`food_item`,`order` "
@@ -262,4 +238,26 @@ public class StatisticalDao {
         }
         return itemProducts;
     }
+
+    public Statistical.WorkingDay getWorkingDays(Date start, Date end, int idEmployee) throws SQLException {
+//        ArrayList<Date> workingDays = new ArrayList<>();
+        Statistical.WorkingDay workingDays = statistical.new WorkingDay();
+        String query = "SELECT DATE(startTime) AS startTime, DATE(endTime) AS endTime FROM `session` WHERE DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?) AND `idEmployee` = ? ORDER BY `session`.`startTime` ASC";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setDate(1, start);
+        statement.setDate(2, end);
+        statement.setInt(3, idEmployee);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            Date startTime = rs.getDate("startTime");
+            Date endTime = rs.getDate("endTime");
+            Date i = startTime;
+            while (!i.after(endTime)) {
+                workingDays.addWorkDay(i);
+                i = new Date(i.getTime() + 24 * 60 * 60 * 1000);//Check ngày sau
+            }
+        }
+        return workingDays;
+    }
+
 }

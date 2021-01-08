@@ -1,6 +1,8 @@
 package models;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * createAt Jan 2, 2021
@@ -47,4 +49,48 @@ public class Statistical {
 
     }
 
+    public class WorkingDay {
+
+        private ArrayList<Calendar> dates = new ArrayList<>();
+
+        public void addWorkDay(Date date) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            valid(cal);
+            cal.set(Calendar.MILLISECOND, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            if (!dates.contains(cal)) {
+                dates.add(cal);
+            }
+        }
+
+        public boolean isWorking(Calendar cal) {
+            if (cal == null) {
+                return false;
+            }
+            valid(cal);
+            for (Calendar date : dates) {
+                if (date.getTime().equals(cal.getTime())) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void valid(Calendar cal) {
+            cal.set(Calendar.MILLISECOND, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+        }
+
+        public void print() {
+            for (Calendar date : dates) {
+                System.out.println(date.get(Calendar.DAY_OF_MONTH) + "/" + (date.get(Calendar.MONTH) + 1) + "/" + date.get(Calendar.YEAR));
+            }
+        }
+
+    }
 }
