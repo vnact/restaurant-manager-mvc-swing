@@ -1,10 +1,10 @@
 package views.admin;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Objects;
 import javax.swing.Icon;
 import utils.IconManager;
+import utils.SidebarColor;
 
 /**
  *
@@ -15,21 +15,23 @@ public class MenuItem extends javax.swing.JPanel {
     private ArrayList<MenuItem> subMenu = new ArrayList<>();
     private MenuItem parentMenu = null;
     private String id;
+    private int level;
     public boolean active; // Biến kiểm tra xem có đang chọn không
-    Color inactiveChildColor = Color.decode("#D5DBDB"), inactiveParrentColor = Color.decode("#D5DBDB"), activeParrentColor = Color.decode("#F5CBA7"), activeChildColor = Color.decode("#EAFAF1"); // Màu tương ứng
+    IconManager im = new IconManager();
+//    Color inactiveChildColor = Color.decode("#D5DBDB"), inactiveParrentColor = Color.decode("#D5DBDB"), activeParrentColor = Color.decode("#F5CBA7"), activeChildColor = Color.decode("#EAFAF1"); // Màu tương ứng
 
     public MenuItem(String id, Icon icon, String menuName, MenuItem... subMenu) {
         initComponents();
         this.id = id;
         if (icon == null) {
-            icon = new IconManager().getIcon("next_page_25px.png");
+//            icon = new IconManager().getIcon("next_page_25px.png");
         }
         lbIcon.setIcon(icon);
         lbMenuName.setText(menuName);
-        for (int i = 0; i < subMenu.length; i++) {
-            subMenu[i].setParentMenu(this);
-            this.subMenu.add(subMenu[i]);
-        }
+//        for (int i = 0; i < subMenu.length; i++) {
+//            subMenu[i].setParentMenu(this);
+//            this.subMenu.add(subMenu[i]);
+//        }
     }
 
     public ArrayList<MenuItem> getSubMenu() {
@@ -38,6 +40,7 @@ public class MenuItem extends javax.swing.JPanel {
 
     public void addSubMenu(MenuItem item) {
         item.setParentMenu(this);
+        item.setLevel(this.level + 1);
         this.subMenu.add(item);
     }
 
@@ -53,6 +56,14 @@ public class MenuItem extends javax.swing.JPanel {
         return parentMenu;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public void setParentMenu(MenuItem parentMenu) {
         this.parentMenu = parentMenu;
     }
@@ -63,17 +74,28 @@ public class MenuItem extends javax.swing.JPanel {
 
     public void setActive(boolean active) {
         this.active = active;
-        if (!active) {
-            if (hasSubMenu() || getParentMenu() == null) {
-                setBackground(inactiveParrentColor);
-            } else {
-                setBackground(inactiveChildColor);
+        if (active) {
+            setBackground(SidebarColor.getActiveColor(level));
+            if (hasSubMenu()) {
+                lbOpen.setIcon(im.getIcon("opened_menu_25px.png"));
             }
-        } else if (hasSubMenu() || getParentMenu() == null) {
-            setBackground(activeParrentColor);
         } else {
-            setBackground(activeChildColor);
+            setBackground(SidebarColor.getInactiveColor(level));
+            if (hasSubMenu()) {
+                lbOpen.setIcon(im.getIcon("closed_menu_25px.png"));
+            }
         }
+//        if (!active) {
+//            if (hasSubMenu() || getParentMenu() == null) {
+//                setBackground(inactiveParrentColor);
+//            } else {
+//                setBackground(inactiveChildColor);
+//            }
+//        } else if (hasSubMenu() || getParentMenu() == null) {
+//            setBackground(activeParrentColor);
+//        } else {
+//            setBackground(activeChildColor);
+//        }
     }
 
     //Kiểm tra xem có menu con không
@@ -125,6 +147,8 @@ public class MenuItem extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         lbIcon = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        lbOpen = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lbMenuName = new javax.swing.JLabel();
 
@@ -156,7 +180,30 @@ public class MenuItem extends javax.swing.JPanel {
                 .addGap(10, 10, 10))
         );
 
-        add(jPanel1, java.awt.BorderLayout.LINE_START);
+        add(jPanel1, java.awt.BorderLayout.WEST);
+
+        jPanel3.setMaximumSize(new java.awt.Dimension(45, 45));
+        jPanel3.setMinimumSize(new java.awt.Dimension(45, 45));
+        jPanel3.setOpaque(false);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbOpen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbOpen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
+        );
+
+        add(jPanel3, java.awt.BorderLayout.EAST);
 
         jPanel2.setOpaque(false);
         jPanel2.setPreferredSize(new java.awt.Dimension(155, 45));
@@ -169,9 +216,9 @@ public class MenuItem extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(0, 0, 0)
                 .addComponent(lbMenuName)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +234,9 @@ public class MenuItem extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lbIcon;
     private javax.swing.JLabel lbMenuName;
+    private javax.swing.JLabel lbOpen;
     // End of variables declaration//GEN-END:variables
 }

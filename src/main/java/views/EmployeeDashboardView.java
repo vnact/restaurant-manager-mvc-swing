@@ -145,7 +145,6 @@ public class EmployeeDashboardView extends javax.swing.JFrame {
 
         panelLeft.add(panelHeader, java.awt.BorderLayout.PAGE_START);
 
-        panelSideBar.setBackground(new java.awt.Color(251, 133, 95));
         panelSideBar.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
         panelLeft.add(panelSideBar, java.awt.BorderLayout.CENTER);
 
