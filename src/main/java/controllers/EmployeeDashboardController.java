@@ -73,7 +73,11 @@ public class EmployeeDashboardController {
         MenuItem menuBH = new MenuItem("BH", im.getIcon("shopping_cart_25px.png"), "Tạo hóa đơn");
         MenuItem menuKH = new MenuItem("QLKH", im.getIcon("technical_support_25px.png"), "Quản lý khách hàng");
         MenuItem menuGH = new MenuItem("QLGH", im.getIcon("truck_25px.png"), "Quản lý giao hàng");
-        sideBarController.addMenu(menuBH, menuKH, menuGH, inforE);
+        MenuItem menuTL = new MenuItem("TL", im.getIcon("settings_25px.png"), "Thiết lập");
+        menuTL.addSubMenu(new MenuItem("DMK", im.getIcon("password_25px.png"), "Đổi mật khẩu"));
+        menuTL.addSubMenu(new MenuItem("TLGD", im.getIcon("contrast_25px.png"), "Giao diện"));
+        menuTL.addSubMenu(new MenuItem("TT", im.getIcon("info_25px.png"), "About us"));
+        sideBarController.addMenu(menuBH, menuKH, menuGH, inforE, menuTL);
         sideBarController.addMenuEvent(this::onMenuChange);
     }
 
@@ -113,6 +117,7 @@ public class EmployeeDashboardController {
                 mc = shipmentManagerController;
                 pnl = shipmentManagerView;
                 break;
+
             default:
                 view.setPanel(homePane);
         }
