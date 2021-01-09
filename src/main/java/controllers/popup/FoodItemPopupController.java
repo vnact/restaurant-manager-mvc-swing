@@ -5,8 +5,8 @@ import dao.FoodItemDao;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import models.FoodCategory;
 import models.FoodItem;
@@ -41,7 +41,8 @@ public class FoodItemPopupController {
                         String name = StringToSlug.convert(view.getTxtName().getText());
                         String pth = imageManager.saveImage(bi, name);
                         view.getTxtUrlImage().setText(pth);
-                    } catch (IOException e) {
+                        renderPreviewImage(view);
+                    } catch (Exception e) {
                         view.showError(e);
                     }
                     break;
@@ -51,6 +52,13 @@ public class FoodItemPopupController {
 
             }
         };
+    }
+
+    private void renderPreviewImage(FoodItemPopupView view) throws Exception {
+        String urlImage = view.getTxtUrlImage().getText();
+        ImageIcon icon = urlImage.isEmpty() ? null : imageManager.getImage(urlImage);
+        view.getLbPreviewImage().setIcon(icon);
+        view.pack();
     }
 
     private void initComboBox(FoodItemPopupView view) { //Khởi tạo danh mục loai mon
@@ -116,13 +124,10 @@ public class FoodItemPopupController {
         } else {
             view.getTxtUrlImage().setText("");
         }
-        if (!foodItem.getUrlImage().isEmpty()) {
-            File f = new File(resourcesPath + foodItem.getUrlImage());
-            if (f.exists() && !f.isDirectory()) {
-                view.getTxtUrlImage().setText(foodItem.getUrlImage());
-            } else {
-                view.getTxtUrlImage().setText("");
-            }
+        try {
+            renderPreviewImage(view);
+        } catch (Exception e) {
+            ec.onError(e);
         }
         view.getBtnChooseImage().addActionListener(eventShowChooseFileDialog(view));
         view.getBtnOK().addActionListener(evt -> {
