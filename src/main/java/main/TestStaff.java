@@ -19,7 +19,7 @@ public class TestStaff {
             System.out.println("Khởi tạo look and feel thành công!");
             Employee e = employeeDao.get(2);
             SessionManager.create(e);
-            new EmployeeDashboardController(new EmployeeDashboardView());
+            new EmployeeDashboardController(new EmployeeDashboardView()).getView().requestFocus();
             Runtime.getRuntime().addShutdownHook(new ShutdownHook());
         } catch (Exception e) {
             e.printStackTrace();

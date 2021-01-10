@@ -5,8 +5,11 @@
  */
 package controller.employee;
 
+import controllers.popup.ErrorCallback;
+import controllers.popup.SuccessCallback;
 import dao.EmployeeDao;
-import static main.SessionManager.session;
+import javax.swing.JFrame;
+import main.SessionManager;
 import models.Employee;
 import views.employee.ChangePassView;
 
@@ -16,49 +19,50 @@ import views.employee.ChangePassView;
  */
 public class ChangePassController {
 
-    ChangePassView view;
-    Employee session;
+    EmployeeDao employeeDao = new EmployeeDao();
+    JFrame previousView;
 
     public ChangePassController() {
 
     }
 
-    public void setView(ChangePassView view) {
-        this.view = view;
-    }
-
-    public void setSession(Employee employee) {
-        this.session = employee;
-    }
-
-    public void addEvent() {
+    public void show(ChangePassView view, SuccessCallback sc, ErrorCallback ec) {
+        if (previousView != null && previousView.isDisplayable()) {
+            previousView.requestFocus();
+            return;
+        }
+        previousView = view;
         view.setVisible(true);
         view.setLocationRelativeTo(null);
         view.getBtnCancel().addActionListener(evt -> view.dispose());
         view.getBtnConfirm().addActionListener(evt -> {
             try {
-                String oldPass = view.getTxtOldPass().getText(),
-                        newPass = view.getTxtNewPass().getText(),
-                        confirmPass = view.getTxtConfirmPass().getText();
-                if (oldPass.isEmpty() || newPass.isEmpty() || confirmPass.isEmpty()) {
-                    throw new Exception("Vui lòng điền đầy đủ thông tin");
-                }
-                if (!oldPass.equals(session.getPassword())) {
-                    System.out.println(oldPass);
-                    throw new Exception("Mật khẩu cũ không đúng ");
-                } else if (!newPass.equals(newPass)) {
-                    throw new Exception("Xác nhận mật khẩu sai !");
-                } else {
-                    EmployeeDao employeeDao = new EmployeeDao();
-                    Employee employee = session;
-                    employee.setPassword(newPass);
-                    employeeDao.update(employee);
-                    view.showMessage("Thay đổi thành công !");
-                    view.dispose();
-                }
-            } catch (Exception ee) {
-                view.showError(ee);
+                changePassword(view);
+                sc.onSuccess();
+            } catch (Exception e) {
+                ec.onError(e);
             }
         });
     }
+
+    public void changePassword(ChangePassView view) throws Exception {
+        String oldPass = view.getTxtOldPass().getText(),
+                newPass = view.getTxtNewPass().getText(),
+                confirmPass = view.getTxtConfirmPass().getText();
+        Employee currentLogin = SessionManager.getSession().getEmployee();
+        if (oldPass.isEmpty() || newPass.isEmpty() || confirmPass.isEmpty()) {
+            throw new Exception("Vui lòng điền đầy đủ thông tin");
+        }
+        if (!oldPass.equals(currentLogin.getPassword())) {
+            throw new Exception("Mật khẩu cũ không đúng ");
+        }
+        if (!newPass.equals(confirmPass)) {
+            throw new Exception("Xác nhận mật khẩu sai!");
+        }
+
+        currentLogin.setPassword(newPass);
+        employeeDao.update(currentLogin);
+        view.dispose();
+    }
+
 }
