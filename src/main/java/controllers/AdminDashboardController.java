@@ -1,5 +1,6 @@
 package controllers;
 
+import controller.employee.InformationController;
 import controllers.admin.CustomerManagerController;
 import controllers.admin.EmployeeManagerController;
 import controllers.admin.FoodCategoryManagerController;
@@ -13,7 +14,6 @@ import controllers.admin.TableManagerController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import main.SessionManager;
@@ -35,6 +35,7 @@ import views.admin.StatisticalFoodView;
 import views.admin.StatisticalIncomeView;
 import views.admin.StatisticalView;
 import views.admin.TableManagerView;
+import views.employee.InformationView;
 
 /**
  * createAt Dec 15, 2020
@@ -54,23 +55,25 @@ public class AdminDashboardController {
     StatisticalController statisticalController = new StatisticalController();
     StatisticalFoodController statisticalFoodController = new StatisticalFoodController();
     StatisticalIncomeController statisticalIncomeController = new StatisticalIncomeController();
+    InformationController informationController = new InformationController();
 
     HomeView homePane = new HomeView();
-    ManagerPaneView employeeManagerPane = new EmployeeManagerView(), // View
-            tableManagerPane = new TableManagerView(),
+    ManagerPaneView employeeManagerView = new EmployeeManagerView(), // View
+            tableManagerView = new TableManagerView(),
             foodCategoryManagerView = new FoodCategoryManagerView(),
             foodItemManagerView = new FoodItemManagerView(),
             orderManagerView = new OrderManagerView(),
             shipmentManagerView = new ShipmentManagerView(),
-            customerManagerPane = new CustomerManagerView();
+            customerManagerView = new CustomerManagerView();
     StatisticalView statisticalView = new StatisticalView();
     StatisticalFoodView statisticalFoodView = new StatisticalFoodView();
     StatisticalIncomeView statisticalIncomeView = new StatisticalIncomeView();
     AboutView aboutView = new AboutView();
+    InformationView informationView = new InformationView();
     JPanel[] cards = {
-        homePane, employeeManagerPane, tableManagerPane, customerManagerPane,
+        homePane, employeeManagerView, tableManagerView, customerManagerView,
         foodCategoryManagerView, orderManagerView, foodItemManagerView, shipmentManagerView,
-        statisticalView, statisticalFoodView, statisticalIncomeView, aboutView
+        statisticalView, statisticalFoodView, statisticalIncomeView, aboutView, informationView
     };
 
     SideBarController sideBarController = new SideBarController();
@@ -114,9 +117,9 @@ public class AdminDashboardController {
         menuTK.addSubMenu(new MenuItem("TKNV", im.getIcon("user_25px.png"), "Thống kê nhân viên"));
         menuTK.addSubMenu(new MenuItem("TKHH", null, "Thống kê hàng hóa"));
         menuTK.addSubMenu(new MenuItem("TKDT", null, "Thống kê doanh thu"));
-        menuTL.addSubMenu(new MenuItem("DMK", im.getIcon("password_25px.png"), "Đổi mật khẩu"));
+        menuTL.addSubMenu(new MenuItem("TTCN", im.getIcon("about_25px.png"), "Thông tin cá nhân"));
         menuTL.addSubMenu(new MenuItem("TLGD", im.getIcon("contrast_25px.png"), "Giao diện"));
-        menuTL.addSubMenu(new MenuItem("TT", im.getIcon("info_25px.png"), "About us"));
+        menuTL.addSubMenu(new MenuItem("TT", im.getIcon("help_25px.png"), "About us"));
         sideBarController.addMenu(menuQLNV, menuQLHH, menuQLDH, menuTK, menuTL);
         sideBarController.addMenuEvent(this::onMenuChange);
     }
@@ -142,36 +145,41 @@ public class AdminDashboardController {
     }
 
     private void onMenuChange(MenuItem item) {
-        ManagerPaneView pnl = null; //View Panel
-        ManagerController mc = null; //Controller Panel
         switch (item.getId()) {
             case "QLNV"://Nhân viên
-                pnl = employeeManagerPane;
-                mc = employeeManagerController;
+                view.setPanel(employeeManagerView);
+                employeeManagerController.setView(employeeManagerView);
+                employeeManagerController.updateData();
                 break;
             case "QLDDH"://Đơn đặt hàng
-                pnl = orderManagerView;
-                mc = orderManagerController;
+                view.setPanel(orderManagerView);
+                orderManagerController.setView(orderManagerView);
+                orderManagerController.updateData();
                 break;
             case "QLB"://Quản lý bàn
-                pnl = tableManagerPane;
-                mc = tableManagerController;
+                view.setPanel(tableManagerView);
+                tableManagerController.setView(tableManagerView);
+                tableManagerController.updateData();
                 break;
             case "QLKH"://Quản lý khách hàng
-                pnl = customerManagerPane;
-                mc = customerManagerController;
+                view.setPanel(customerManagerView);
+                customerManagerController.setView(customerManagerView);
+                customerManagerController.updateData();
                 break;
             case "QLLM"://Quản lý loại món
-                pnl = foodCategoryManagerView;
-                mc = foodCategoryManagerController;
+                view.setPanel(foodCategoryManagerView);
+                foodCategoryManagerController.setView(foodCategoryManagerView);
+                foodCategoryManagerController.updateData();
                 break;
             case "QLMA"://Quản lý món ăn
-                pnl = foodItemManagerView;
-                mc = foodItemManagerController;
+                view.setPanel(foodItemManagerView);
+                foodItemManagerController.setView(foodItemManagerView);
+                foodItemManagerController.updateData();
                 break;
             case "QLGH"://Quản lý giao hàng
-                pnl = shipmentManagerView;
-                mc = shipmentManagerController;
+                view.setPanel(shipmentManagerView);
+                shipmentManagerController.setView(shipmentManagerView);
+                shipmentManagerController.updateData();
                 break;
             case "QLHH":
             case "QLDH":
@@ -195,16 +203,13 @@ public class AdminDashboardController {
             case "TT":
                 view.setPanel(aboutView);
                 break;
+            case "TTCN": // Thống tin cá nhân
+                view.setPanel(informationView);
+                informationController.setView(informationView);
+                break;
             default:
                 view.setPanel(homePane);
                 break;
-        }
-        if (pnl != null) {
-            view.setPanel(pnl);
-            if (mc != null) {
-                mc.setView(pnl);
-                mc.updateData();
-            }
         }
     }
 }

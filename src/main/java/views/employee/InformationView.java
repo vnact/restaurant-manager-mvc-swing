@@ -13,12 +13,12 @@ import javax.swing.JPanel;
  *
  * @author Admin
  */
-public class InforView extends javax.swing.JPanel {
+public class InformationView extends javax.swing.JPanel {
 
     /**
      * Creates new form menuView
      */
-    public InforView() {
+    public InformationView() {
         initComponents();
 
         btnChangeInfor.putClientProperty("JButton.buttonType", "roundRect");
@@ -80,7 +80,6 @@ public class InforView extends javax.swing.JPanel {
         jPanel1.setPreferredSize(new java.awt.Dimension(170, 680));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        btnChangePass.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnChangePass.setText("Đổi mật khẩu");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -92,7 +91,6 @@ public class InforView extends javax.swing.JPanel {
         gridBagConstraints.weighty = 0.1;
         jPanel1.add(btnChangePass, gridBagConstraints);
 
-        btnChangeInfor.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnChangeInfor.setText("Thay đổi thông tin");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -103,7 +101,6 @@ public class InforView extends javax.swing.JPanel {
         gridBagConstraints.weighty = 0.1;
         jPanel1.add(btnChangeInfor, gridBagConstraints);
 
-        btnNS.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnNS.setText("Năng suất");
         btnNS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,7 +117,6 @@ public class InforView extends javax.swing.JPanel {
         gridBagConstraints.weighty = 0.1;
         jPanel1.add(btnNS, gridBagConstraints);
 
-        btnHS.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnHS.setText("Hiệu suất");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

@@ -51,9 +51,6 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnChangePass">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="0"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="&#x110;&#x1ed5;i m&#x1ead;t kh&#x1ea9;u"/>
           </Properties>
           <Constraints>
@@ -64,9 +61,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnChangeInfor">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="0"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Thay &#x111;&#x1ed5;i th&#xf4;ng tin"/>
           </Properties>
           <Constraints>
@@ -77,9 +71,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnNS">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="0"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="N&#x103;ng su&#x1ea5;t"/>
           </Properties>
           <Events>
@@ -93,9 +84,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnHS">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="0"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Hi&#x1ec7;u su&#x1ea5;t"/>
           </Properties>
           <Constraints>

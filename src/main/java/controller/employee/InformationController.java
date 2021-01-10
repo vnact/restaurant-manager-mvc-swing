@@ -12,26 +12,26 @@ import main.SessionManager;
 import models.Employee;
 import views.employee.CalendarView;
 import views.employee.ChangePassView;
-import views.employee.InforView;
+import views.employee.InformationView;
 
 /**
  *
  * @author Admin
  */
-public class InforController {
+public class InformationController {
 
     private Employee session;
-    private InforView view;
+    private InformationView view;
 
-    public InforController() {
+    public InformationController() {
         session = SessionManager.getSession().getEmployee();
     }
 
-    public InforView getView() {
+    public InformationView getView() {
         return view;
     }
 
-    public void setView(InforView view) {
+    public void setView(InformationView view) {
         view.getLabName().setText("Chào mừng " + session.getName());
         this.view = view;
         CalendarView calendarView = new CalendarView();

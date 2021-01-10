@@ -7,7 +7,6 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import views.employee.WorkDayInfoView;
 
 /**
@@ -28,13 +27,12 @@ public class WorkDayInfoController {
         }
         previousView = view;
         Timestamp now = new Timestamp(cal.getTimeInMillis() / 1000 * 1000);
-        Date nowD = new Date(cal.getTimeInMillis() / 1000 * 1000);
         int totalOrder = statisticalDao.getTotalOrder(now, now, id);
         int workingMinus = statisticalDao.getTotalWorkingMinutes(now, now, id);
         int totalAmount = statisticalDao.getTotalIncome(now, now, id);
         view.getTxtDate().setText(dateFormat.format(cal.getTime()));
         view.getTxtTotalOrder().setText("" + totalOrder);
-        view.getTxtBonus().setText("0");
+        view.getTxtBonus().setText(totalOrder * 2000 + "");
         view.getTxtTotalTime().setText(minutesToHours(workingMinus));
         view.getTxtTotalAmount().setText(decimalFormat.format(totalAmount));
         view.pack();

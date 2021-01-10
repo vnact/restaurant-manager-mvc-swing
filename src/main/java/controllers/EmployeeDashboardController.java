@@ -5,7 +5,7 @@
  */
 package controllers;
 
-import controller.employee.InforController;
+import controller.employee.InformationController;
 import controllers.admin.CustomerManagerController;
 import controllers.admin.OrderManagerController;
 import controllers.admin.ShipmentManagerController;
@@ -23,7 +23,7 @@ import views.admin.ManagerPaneView;
 import views.admin.MenuItem;
 import views.admin.OrderManagerView;
 import views.admin.ShipmentManagerView;
-import views.employee.InforView;
+import views.employee.InformationView;
 
 /**
  *
@@ -33,8 +33,8 @@ public class EmployeeDashboardController {
 
     private EmployeeDashboardView view;
     HomeView homePane = new HomeView();
-    InforController ic = new InforController();
-    InforView iv = new InforView();
+    InformationController ic = new InformationController();
+    InformationView iv = new InformationView();
     ManagerController orderManagerController = new OrderManagerController(),
             shipmentManagerController = new ShipmentManagerController(),
             customerManagerController = new CustomerManagerController();
