@@ -12,10 +12,11 @@ import utils.EmployeePermission;
 public class Employee extends Model {
 
     protected int id;
-    protected String username, password, name, phoneNumber, permissionName;
-    protected int permissionId;
+    protected String username, password, name, phoneNumber;
+//    protected int permissionId;
     protected EmployeePermission permission;
     protected Date startDate;
+    protected int salary;
 
     public Employee() {
     }
@@ -76,6 +77,14 @@ public class Employee extends Model {
         this.permission = permission;
     }
 
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = Math.max(0, salary);
+    }
+
     @Override
     public String toString() {
         return name;
@@ -94,6 +103,7 @@ public class Employee extends Model {
         e.setPhoneNumber(rs.getNString("phoneNumber"));
         e.setStartDate(rs.getDate("startDate"));
         e.setPermission(EmployeePermission.getById(rs.getNString("permission")));
+        e.setSalary(rs.getInt("salary"));
         return e;
     }
 
@@ -101,7 +111,8 @@ public class Employee extends Model {
     public Object[] toRowTable() {
         return new Object[]{
             id, name, username, password,
-            phoneNumber, startDate, permission.getName()
+            phoneNumber, startDate, permission.getName(),
+            salary
         };
     }
 

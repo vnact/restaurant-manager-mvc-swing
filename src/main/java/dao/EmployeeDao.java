@@ -43,8 +43,8 @@ public class EmployeeDao extends Dao<Employee> {
         if (t == null) {
             throw new SQLException("Employee rỗng");
         }
-        String query = "INSERT INTO `employee` (`username`, `password`, `name`, `phoneNumber`, `startDate`, `permission`)"
-                + " VALUES (?, ?, ?, ?, current_timestamp(), ?)";
+        String query = "INSERT INTO `employee` (`username`, `password`, `name`, `phoneNumber`, `startDate`, `permission`, `salary`)"
+                + " VALUES (?, ?, ?, ?, current_timestamp(), ?, ?)";
 
         PreparedStatement stmt = conn.prepareStatement(query);
 //            stmt.setLong(0, t.getId());
@@ -53,6 +53,7 @@ public class EmployeeDao extends Dao<Employee> {
         stmt.setNString(3, t.getName());
         stmt.setNString(4, t.getPhoneNumber());
         stmt.setNString(5, t.getPermission().getId());
+        stmt.setInt(6, t.getSalary());
         int row = stmt.executeUpdate();
     }
 
@@ -61,14 +62,15 @@ public class EmployeeDao extends Dao<Employee> {
         if (t == null) {
             throw new SQLException("Employee rong");
         }
-        String query = "UPDATE `employee` SET `username` = ?, `password` = ?, `name` = ?, `phoneNumber` = ?, `permission` = ? WHERE `id` = ?";
+        String query = "UPDATE `employee` SET `username` = ?, `password` = ?, `name` = ?, `phoneNumber` = ?, `permission` = ?, `salary` = ? WHERE `id` = ?";
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setNString(1, t.getUsername());
         stmt.setNString(2, t.getPassword());
         stmt.setNString(3, t.getName());
         stmt.setNString(4, t.getPhoneNumber());
         stmt.setNString(5, t.getPermission().getId());
-        stmt.setInt(6, t.getId());
+        stmt.setInt(6, t.getSalary());
+        stmt.setInt(7, t.getId());
         stmt.executeUpdate();
     }
 
