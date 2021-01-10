@@ -57,6 +57,7 @@ public class EmployeePopupController {
         view.getTxtName().setText(employee.getName());
         view.getTxtPhoneNumber().setText(employee.getPhoneNumber());
         view.getCboPermission().setSelectedItem(employee.getPermission().getName());
+        view.getSpnSalary().setValue(employee.getSalary());
         view.getBtnOK().setText("Cập nhật");
         view.getBtnOK().addActionListener(evt -> {
             try {
@@ -76,8 +77,12 @@ public class EmployeePopupController {
                 password = view.getTxtPassword().getText(),
                 phoneNumber = view.getTxtPhoneNumber().getText(),
                 name = view.getTxtName().getText();
+        int salary = (int) view.getSpnSalary().getValue();
         if (username.isEmpty() || password.isEmpty() || phoneNumber.isEmpty()) {
             throw new Exception("Vui lòng điền đầy đủ thông tin");
+        }
+        if (salary < 0) {
+            throw new Exception("Lương không thể âm");
         }
         if (employeeDao.findByUsername(username) != null) {
             throw new Exception("Tài khoản đã tồn tại");
@@ -88,6 +93,7 @@ public class EmployeePopupController {
         e.setName(name);
         e.setPhoneNumber(phoneNumber);
         e.setPermission(EmployeePermission.getByName(view.getCboPermission().getSelectedItem().toString()));
+        e.setSalary(salary);
         employeeDao.save(e);
         return;
     }
@@ -97,8 +103,12 @@ public class EmployeePopupController {
                 password = view.getTxtPassword().getText(),
                 phoneNumber = view.getTxtPhoneNumber().getText(),
                 name = view.getTxtName().getText();
+        int salary = (int) view.getSpnSalary().getValue();
         if (username.isEmpty() || password.isEmpty() || phoneNumber.isEmpty()) {
             throw new Exception("Vui lòng điền đầy đủ thông tin");
+        }
+        if (salary < 0) {
+            throw new Exception("Lương không thể âm");
         }
         Employee temp = employeeDao.findByUsername(username);
         if (temp != null && temp.getId() != e.getId()) {
@@ -109,6 +119,7 @@ public class EmployeePopupController {
         e.setName(name);
         e.setPhoneNumber(phoneNumber);
         e.setPermission(EmployeePermission.getByName(view.getCboPermission().getSelectedItem().toString()));
+        e.setSalary(salary);
         employeeDao.update(e);
         return true;
     }
