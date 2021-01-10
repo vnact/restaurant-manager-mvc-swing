@@ -57,7 +57,7 @@ public class AdminDashboardController {
     StatisticalIncomeController statisticalIncomeController = new StatisticalIncomeController();
     InformationController informationController = new InformationController();
 
-    HomeView homePane = new HomeView();
+    HomeView homeView = new HomeView();
     ManagerPaneView employeeManagerView = new EmployeeManagerView(), // View
             tableManagerView = new TableManagerView(),
             foodCategoryManagerView = new FoodCategoryManagerView(),
@@ -71,7 +71,7 @@ public class AdminDashboardController {
     AboutView aboutView = new AboutView();
     InformationView informationView = new InformationView();
     JPanel[] cards = {
-        homePane, employeeManagerView, tableManagerView, customerManagerView,
+        homeView, employeeManagerView, tableManagerView, customerManagerView,
         foodCategoryManagerView, orderManagerView, foodItemManagerView, shipmentManagerView,
         statisticalView, statisticalFoodView, statisticalIncomeView, aboutView, informationView
     };
@@ -89,7 +89,7 @@ public class AdminDashboardController {
             view.getLbName().setText(session.getName());
         }
         view.setCards(cards);
-        view.setPanel(homePane);
+        view.setPanel(homeView);
     }
 
     public AdminDashboardView getView() {
@@ -208,7 +208,7 @@ public class AdminDashboardController {
                 informationController.setView(informationView);
                 break;
             default:
-                view.setPanel(homePane);
+                view.setPanel(homeView);
                 break;
         }
     }

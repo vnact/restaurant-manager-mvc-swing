@@ -5,7 +5,6 @@
  */
 package controller.employee;
 
-import dao.EmployeeDao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import main.SessionManager;
@@ -32,15 +31,17 @@ public class InformationController {
     }
 
     public void setView(InformationView view) {
-        view.getLabName().setText("Chào mừng " + session.getName());
-        this.view = view;
-        CalendarView calendarView = new CalendarView();
-        CalendarController calendarController = new CalendarController(calendarView);
-        view.getPanelCalendar().add(calendarView);
-        addEvent();
+        if (this.view != view) {
+            view.getLabName().setText("Chào mừng " + session.getName());
+            CalendarView calendarView = new CalendarView();
+            CalendarController calendarController = new CalendarController(calendarView);
+            view.getPanelCalendar().add(calendarView);
+            addEvent(view);
+            this.view = view;
+        }
     }
 
-    public void addEvent() {
+    public void addEvent(InformationView view) {
         view.getBtnChangePass().addActionListener(evt -> {
             ChangePassView changePassView = new ChangePassView();
             ChangePassController changePassController = new ChangePassController();

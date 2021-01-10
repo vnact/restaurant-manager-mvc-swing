@@ -17,6 +17,7 @@ import models.Employee;
 import utils.IconManager;
 import views.EmployeeDashboardView;
 import views.LoginView;
+import views.admin.AboutView;
 import views.admin.CustomerManagerView;
 import views.admin.HomeView;
 import views.admin.ManagerPaneView;
@@ -32,17 +33,20 @@ import views.employee.InformationView;
 public class EmployeeDashboardController {
 
     private EmployeeDashboardView view;
-    HomeView homePane = new HomeView();
-    InformationController ic = new InformationController();
-    InformationView iv = new InformationView();
     ManagerController orderManagerController = new OrderManagerController(),
             shipmentManagerController = new ShipmentManagerController(),
             customerManagerController = new CustomerManagerController();
-    ManagerPaneView orderManagerPaneView = new OrderManagerView(),
+    InformationController informationController = new InformationController();
+    ManagerPaneView orderManagerView = new OrderManagerView(),
             shipmentManagerView = new ShipmentManagerView(),
-            customerManagerPane = new CustomerManagerView();
+            customerManagerView = new CustomerManagerView();
+    HomeView homeView = new HomeView();
+    AboutView aboutView = new AboutView();
+    InformationView informationView = new InformationView();
+
     SideBarController sideBarController = new SideBarController();
-    JPanel[] cards = {homePane, orderManagerPaneView, customerManagerPane, shipmentManagerView, iv};
+    JPanel[] cards = {homeView, orderManagerView, customerManagerView,
+        shipmentManagerView, aboutView, informationView};
 
     public EmployeeDashboardController(EmployeeDashboardView view) {
         this.view = view;
@@ -55,7 +59,7 @@ public class EmployeeDashboardController {
             view.getLbName().setText(session.getName());
         }
         view.setCards(cards);
-        view.setPanel(homePane);
+        view.setPanel(homeView);
     }
 
     public EmployeeDashboardView getView() {
@@ -67,21 +71,20 @@ public class EmployeeDashboardController {
         sideBarController.setPanelSideBar(view.getPanelSideBar());
     }
 
-    public void initMenu() {
+    private void initMenu() {
         IconManager im = new IconManager();
-        MenuItem inforE = new MenuItem("IE", im.getIcon("futures_25px.png"), "Thông tin");
-        MenuItem menuBH = new MenuItem("BH", im.getIcon("shopping_cart_25px.png"), "Tạo hóa đơn");
         MenuItem menuKH = new MenuItem("QLKH", im.getIcon("technical_support_25px.png"), "Quản lý khách hàng");
-        MenuItem menuGH = new MenuItem("QLGH", im.getIcon("truck_25px.png"), "Quản lý giao hàng");
+        MenuItem menuQLDDH = new MenuItem("QLDDH", im.getIcon("purchase_order_25px.png"), "Quản lý đơn đặt hàng");
+        MenuItem menuQLGH = new MenuItem("QLGH", im.getIcon("truck_25px.png"), "Quản lý giao hàng");
         MenuItem menuTL = new MenuItem("TL", im.getIcon("settings_25px.png"), "Thiết lập");
-        menuTL.addSubMenu(new MenuItem("DMK", im.getIcon("password_25px.png"), "Đổi mật khẩu"));
+        menuTL.addSubMenu(new MenuItem("TTCN", im.getIcon("about_25px.png"), "Thông tin cá nhân"));
         menuTL.addSubMenu(new MenuItem("TLGD", im.getIcon("contrast_25px.png"), "Giao diện"));
-        menuTL.addSubMenu(new MenuItem("TT", im.getIcon("info_25px.png"), "About us"));
-        sideBarController.addMenu(menuBH, menuKH, menuGH, inforE, menuTL);
+        menuTL.addSubMenu(new MenuItem("TT", im.getIcon("help_25px.png"), "About us"));
+        sideBarController.addMenu(menuKH, menuQLDDH, menuQLGH, menuTL);
         sideBarController.addMenuEvent(this::onMenuChange);
     }
 
-    public void addEvent() {
+    private void addEvent() {
         view.getBtnLogout().addActionListener(evt -> {
             int confirm = JOptionPane.showConfirmDialog(view, "Bạn thực sự muốn đăng xuất?");
             if (confirm != JOptionPane.YES_OPTION) {
@@ -98,35 +101,31 @@ public class EmployeeDashboardController {
     }
 
     public void onMenuChange(MenuItem item) {
-        ManagerPaneView pnl = null; //View Panel
-        ManagerController mc = null; //Controller Panel
         switch (item.getId()) {
-            case "BH":
-                mc = orderManagerController;
-                pnl = orderManagerPaneView;
+            case "QLDDH"://Đơn đặt hàng
+                view.setPanel(orderManagerView);
+                orderManagerController.setView(orderManagerView);
+                orderManagerController.updateData();
                 break;
-            case "IE":
-                view.setPanel(iv);
-                ic.setView(iv);
+            case "QLKH"://Quản lý khách hàng
+                view.setPanel(customerManagerView);
+                customerManagerController.setView(customerManagerView);
+                customerManagerController.updateData();
                 break;
-            case "QLKH":
-                mc = customerManagerController;
-                pnl = customerManagerPane;
+            case "QLGH"://Quản lý giao hàng
+                view.setPanel(shipmentManagerView);
+                shipmentManagerController.setView(shipmentManagerView);
+                shipmentManagerController.updateData();
                 break;
-            case "QLGH":
-                mc = shipmentManagerController;
-                pnl = shipmentManagerView;
+            case "TT":
+                view.setPanel(aboutView);
                 break;
-
+            case "TTCN": // Thống tin cá nhân
+                view.setPanel(informationView);
+                informationController.setView(informationView);
+                break;
             default:
-                view.setPanel(homePane);
-        }
-        if (pnl != null) {
-            view.setPanel(pnl);
-            if (mc != null) {
-                mc.setView(pnl);
-                mc.updateData();
-            }
+                view.setPanel(homeView);
         }
     }
 }
