@@ -23,15 +23,8 @@ public class MenuItem extends javax.swing.JPanel {
     public MenuItem(String id, Icon icon, String menuName, MenuItem... subMenu) {
         initComponents();
         this.id = id;
-        if (icon == null) {
-//            icon = new IconManager().getIcon("next_page_25px.png");
-        }
         lbIcon.setIcon(icon);
         lbMenuName.setText(menuName);
-//        for (int i = 0; i < subMenu.length; i++) {
-//            subMenu[i].setParentMenu(this);
-//            this.subMenu.add(subMenu[i]);
-//        }
     }
 
     public ArrayList<MenuItem> getSubMenu() {
@@ -84,6 +77,10 @@ public class MenuItem extends javax.swing.JPanel {
             if (hasSubMenu()) {
                 lbOpen.setIcon(im.getIcon("closed_menu_25px.png"));
             }
+        }
+        if (!hasSubMenu()) {
+            lbOpen.setVisible(false);
+            this.updateUI();
         }
 //        if (!active) {
 //            if (hasSubMenu() || getParentMenu() == null) {
