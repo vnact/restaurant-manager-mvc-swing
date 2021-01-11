@@ -58,6 +58,19 @@ public class Statistical {
             return "TotalIncome{" + "employee=" + employee + ", totalIncome=" + totalIncome + ", totalOrder=" + totalOrder + ", date=" + date + '}';
         }
 
+        public boolean equalDate(Date date) {
+            if (date.getYear() != this.date.getYear()) {
+                return false;
+            }
+            if (date.getMonth() != this.date.getMonth()) {
+                return false;
+            }
+            if (date.getDate() != this.date.getDate()) {
+                return false;
+            }
+            return true;
+        }
+
     }
 
     public class WorkingDay {

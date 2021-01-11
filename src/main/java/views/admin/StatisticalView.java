@@ -8,6 +8,7 @@ package views.admin;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import utils.ErrorPopup;
 
 /**
@@ -55,6 +56,10 @@ public class StatisticalView extends javax.swing.JPanel {
 
     public JDateChooser getDateChooserStart() {
         return dateChooserStart;
+    }
+
+    public JPanel getPnlContent() {
+        return pnlContent;
     }
 
     @SuppressWarnings("unchecked")
@@ -358,7 +363,8 @@ public class StatisticalView extends javax.swing.JPanel {
 
         add(jPanel13, java.awt.BorderLayout.PAGE_START);
 
-        pnlContent.setLayout(new java.awt.BorderLayout());
+        pnlContent.setPreferredSize(new java.awt.Dimension(1008, 530));
+        pnlContent.setLayout(new java.awt.CardLayout());
         add(pnlContent, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 

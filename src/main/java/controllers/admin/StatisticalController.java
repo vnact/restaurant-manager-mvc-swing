@@ -1,5 +1,6 @@
 package controllers.admin;
 
+import controllers.chart.IncomeChartController;
 import dao.StatisticalDao;
 import java.beans.PropertyChangeListener;
 import java.sql.SQLException;
@@ -22,6 +23,7 @@ public class StatisticalController {
     StatisticalDao statisticalDao = new StatisticalDao();
     DecimalFormat formatter = new DecimalFormat("###,###,###");
     Debouncer debouncer = new Debouncer();
+    IncomeChartController incomeChartController = new IncomeChartController();
 
     public StatisticalController() {
     }
@@ -74,6 +76,11 @@ public class StatisticalController {
         IntervalIncrease.create(totalIncome, 1500, 25, (i) -> {
             view.getLbTotalIncome().setText(formatter.format(i));
         });
+        renderChart(start, end);
+    }
+
+    public void renderChart(Timestamp start, Timestamp end) throws SQLException {
+        incomeChartController.show(view.getPnlContent(), start, end);
     }
 
 }
