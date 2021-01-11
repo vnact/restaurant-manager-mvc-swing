@@ -8,7 +8,6 @@ package views.admin;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.awt.Font;
-import java.sql.Timestamp;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -26,11 +25,11 @@ public class StatisticalEmployeeView extends javax.swing.JPanel {
     /**
      * Creates new form StatisticalEmployeeView
      */
-    DefaultTableModel SessionModel, EmployeeModel;
+    DefaultTableModel sessionModel, employeeModel;
 
     public StatisticalEmployeeView() {
         initComponents();
-        EmployeeModel = new DefaultTableModel() {
+        employeeModel = new DefaultTableModel() {
             Class[] types = new Class[]{
                 Integer.class, String.class, Integer.class, Integer.class, Integer.class, Integer.class
             };
@@ -40,9 +39,9 @@ public class StatisticalEmployeeView extends javax.swing.JPanel {
                 return types[columnIndex];
             }
         };
-        SessionModel = new DefaultTableModel() {
+        sessionModel = new DefaultTableModel() {
             Class[] types = new Class[]{
-                Integer.class, String.class, Timestamp.class, Timestamp.class
+                Integer.class, String.class, Object.class, Object.class
             };
 
             @Override
@@ -50,18 +49,19 @@ public class StatisticalEmployeeView extends javax.swing.JPanel {
                 return types[columnIndex];
             }
         };
-        tblSession.setModel(SessionModel);
-        tblEmployee.setModel(EmployeeModel);
-        SessionModel.addColumn("ID");
-        SessionModel.addColumn("Tên nhân viên");
-        SessionModel.addColumn("Ngày bắt đầu");
-        SessionModel.addColumn("Ngày kết thúc");
-        EmployeeModel.addColumn("ID");
-        EmployeeModel.addColumn("Tên nhân viên");
-        EmployeeModel.addColumn("Lương cơ bản");
-        EmployeeModel.addColumn("Số hóa đơn");
-        EmployeeModel.addColumn("Lương thưởng");
-        EmployeeModel.addColumn("Tổng lương");
+        tblSession.setModel(sessionModel);
+        tblEmployee.setModel(employeeModel);
+        sessionModel.addColumn("ID");
+        sessionModel.addColumn("Tên nhân viên");
+        sessionModel.addColumn("Ngày bắt đầu");
+        sessionModel.addColumn("Ngày kết thúc");
+
+        employeeModel.addColumn("ID");
+        employeeModel.addColumn("Tên nhân viên");
+        employeeModel.addColumn("Lương cơ bản");
+        employeeModel.addColumn("Số hóa đơn");
+        employeeModel.addColumn("Lương thưởng");
+        employeeModel.addColumn("Tổng lương");
         setupHeader(tblSession);
         setupHeader(tblEmployee);
     }
@@ -87,12 +87,12 @@ public class StatisticalEmployeeView extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, message);
     }
 
-    public DefaultTableModel getEmployeeModel() {
-        return EmployeeModel;
+    public DefaultTableModel getSessionModel() {
+        return sessionModel;
     }
 
-    public DefaultTableModel getSessionModel() {
-        return SessionModel;
+    public DefaultTableModel getEmployeeModel() {
+        return employeeModel;
     }
 
     public JDateChooser getDateChooserEnd() {

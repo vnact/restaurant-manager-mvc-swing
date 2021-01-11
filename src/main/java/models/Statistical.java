@@ -29,6 +29,17 @@ public class Statistical {
 
     }
 
+    public class SalaryEmployee {
+
+        public Employee employee;
+        public int quantily, bonus;
+        public int total;
+
+        public int getTotal() {
+            return employee.getSalary() + bonus;
+        }
+    }
+
     public class ProductIncome {
 
         public FoodItem item;

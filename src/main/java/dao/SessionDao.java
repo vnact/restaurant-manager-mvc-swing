@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import models.Session;
 
@@ -94,6 +95,22 @@ public class SessionDao extends Dao<Session> {
             return session;
         }
         return null;
+    }
+
+    public ArrayList<Session> getAll(Timestamp start, Timestamp end) throws SQLException {
+        ArrayList<Session> sessions = new ArrayList<>();
+        String query = "SELECT * FROM `session` WHERE `message` = ? AND DATE(startTime) >= DATE(?) AND DATE(startTime) <= DATE(?) ORDER BY `session`.`startTime` DESC";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setNString(1, "logout");
+        statement.setTimestamp(2, start);
+        statement.setTimestamp(3, end);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            Session session = Session.getFromResultSet(rs);
+            session.setEmployee(employeeDao.get(session.getIdEmployee()));
+            sessions.add(session);
+        }
+        return sessions;
     }
 
 }

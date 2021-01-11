@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import models.Employee;
 import models.Statistical;
@@ -20,7 +19,6 @@ import utils.OrderStatus;
  */
 public class StatisticalDao {
 
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     Connection conn = Database.getInstance().getConnection();
     EmployeeDao employeeDao = new EmployeeDao();
     Statistical statistical = new Statistical();
@@ -241,6 +239,23 @@ public class StatisticalDao {
             }
         }
         return workingDays;
+    }
+
+    public ArrayList<Statistical.SalaryEmployee> getSalaryEmployee(Timestamp start, Timestamp end) throws SQLException {
+        ArrayList<Statistical.SalaryEmployee> list = new ArrayList<>();
+        String query = "SELECT `idEmployee`, COUNT(id) as quantity, (COUNT(id) * 2000) as bonus FROM `order` GROUP BY `idEmployee` ";
+        PreparedStatement statement = conn.prepareStatement(query);
+//        statement.setTimestamp(2, end);
+//        statement.setTimestamp(1, start);
+        ResultSet rs = statement.executeQuery(query);
+        while (rs.next()) {
+            Statistical.SalaryEmployee salaryEmployee = statistical.new SalaryEmployee();
+            salaryEmployee.employee = employeeDao.get(rs.getInt("idEmployee"));
+            salaryEmployee.quantily = rs.getInt("quantity");
+            salaryEmployee.bonus = rs.getInt("bonus");
+            list.add(salaryEmployee);
+        }
+        return list;
     }
 
 }

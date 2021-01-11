@@ -7,6 +7,7 @@ import controllers.admin.FoodItemManagerController;
 import controllers.admin.OrderManagerController;
 import controllers.admin.ShipmentManagerController;
 import controllers.admin.StatisticalController;
+import controllers.admin.StatisticalEmployeeController;
 import controllers.admin.StatisticalIncomeController;
 import controllers.admin.TableManagerController;
 import controllers.employee.InformationController;
@@ -30,6 +31,7 @@ import views.admin.ManagerPaneView;
 import views.admin.MenuItem;
 import views.admin.OrderManagerView;
 import views.admin.ShipmentManagerView;
+import views.admin.StatisticalEmployeeView;
 import views.admin.StatisticalIncomeView;
 import views.admin.StatisticalView;
 import views.admin.TableManagerView;
@@ -52,6 +54,7 @@ public class AdminDashboardController {
             customerManagerController = new CustomerManagerController();
     StatisticalController statisticalController = new StatisticalController();
     StatisticalIncomeController statisticalIncomeController = new StatisticalIncomeController();
+    StatisticalEmployeeController statisticalEmployeeController = new StatisticalEmployeeController();
     InformationController informationController = new InformationController();
 
     HomeView homeView = new HomeView();
@@ -64,12 +67,14 @@ public class AdminDashboardController {
             customerManagerView = new CustomerManagerView();
     StatisticalView statisticalView = new StatisticalView();
     StatisticalIncomeView statisticalIncomeView = new StatisticalIncomeView();
+    StatisticalEmployeeView statisticalEmployeeView = new StatisticalEmployeeView();
     AboutView aboutView = new AboutView();
     InformationView informationView = new InformationView();
     JPanel[] cards = {
         homeView, employeeManagerView, tableManagerView, customerManagerView,
         foodCategoryManagerView, orderManagerView, foodItemManagerView, shipmentManagerView,
-        statisticalView, statisticalIncomeView, aboutView, informationView
+        statisticalView, statisticalIncomeView, statisticalEmployeeView,
+        aboutView, informationView
     };
 
     SideBarController sideBarController = new SideBarController();
@@ -184,6 +189,11 @@ public class AdminDashboardController {
                 view.setPanel(statisticalView);
                 statisticalController.setView(statisticalView);
                 statisticalController.initData();
+                break;
+            case "TKNV"://Thống kê nhân viên
+                view.setPanel(statisticalEmployeeView);
+                statisticalEmployeeController.setView(statisticalEmployeeView);
+                statisticalEmployeeController.initData();
                 break;
             case "TKDT"://Thống kê doanh thu
                 view.setPanel(statisticalIncomeView);
