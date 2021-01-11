@@ -1,4 +1,4 @@
-package controller.employee;
+package controllers.employee;
 
 import dao.StatisticalDao;
 import java.awt.event.MouseAdapter;

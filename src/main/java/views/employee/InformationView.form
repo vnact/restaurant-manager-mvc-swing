@@ -61,7 +61,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnChangeInfor">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Thay &#x111;&#x1ed5;i th&#xf4;ng tin"/>
+            <Property name="text" type="java.lang.String" value="L&#x1ecb;ch s&#x1eed; &#x111;&#x103;ng nh&#x1ead;p"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -123,7 +123,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="labName" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="panelCalendar" pref="609" max="32767" attributes="0"/>
+                  <Component id="panelCalendar" pref="614" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               </Group>
           </Group>

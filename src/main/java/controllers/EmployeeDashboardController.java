@@ -5,7 +5,7 @@
  */
 package controllers;
 
-import controller.employee.InformationController;
+import controllers.employee.InformationController;
 import controllers.admin.CustomerManagerController;
 import controllers.admin.OrderManagerController;
 import controllers.admin.ShipmentManagerController;

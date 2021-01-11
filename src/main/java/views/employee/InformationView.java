@@ -91,7 +91,7 @@ public class InformationView extends javax.swing.JPanel {
         gridBagConstraints.weighty = 0.1;
         jPanel1.add(btnChangePass, gridBagConstraints);
 
-        btnChangeInfor.setText("Thay đổi thông tin");
+        btnChangeInfor.setText("Lịch sử đăng nhập");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -165,7 +165,7 @@ public class InformationView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(labName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelCalendar, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+                .addComponent(panelCalendar, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
                 .addGap(13, 13, 13))
         );
 

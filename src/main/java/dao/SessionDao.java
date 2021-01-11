@@ -20,7 +20,7 @@ public class SessionDao extends Dao<Session> {
     public ArrayList<Session> getAll() throws SQLException {
         ArrayList<Session> sessions = new ArrayList<>();
         Statement statement = conn.createStatement();
-        String query = "SELECT * FROM `session`";
+        String query = "SELECT * FROM `session`  ORDER BY `session`.`startTime` DESC";
         ResultSet rs = statement.executeQuery(query);
         while (rs.next()) {
             Session session = Session.getFromResultSet(rs);
