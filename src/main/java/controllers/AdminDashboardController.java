@@ -1,6 +1,5 @@
 package controllers;
 
-import controllers.employee.InformationController;
 import controllers.admin.CustomerManagerController;
 import controllers.admin.EmployeeManagerController;
 import controllers.admin.FoodCategoryManagerController;
@@ -8,9 +7,9 @@ import controllers.admin.FoodItemManagerController;
 import controllers.admin.OrderManagerController;
 import controllers.admin.ShipmentManagerController;
 import controllers.admin.StatisticalController;
-import controllers.admin.StatisticalFoodController;
 import controllers.admin.StatisticalIncomeController;
 import controllers.admin.TableManagerController;
+import controllers.employee.InformationController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -31,7 +30,6 @@ import views.admin.ManagerPaneView;
 import views.admin.MenuItem;
 import views.admin.OrderManagerView;
 import views.admin.ShipmentManagerView;
-import views.admin.StatisticalFoodView;
 import views.admin.StatisticalIncomeView;
 import views.admin.StatisticalView;
 import views.admin.TableManagerView;
@@ -53,7 +51,6 @@ public class AdminDashboardController {
             shipmentManagerController = new ShipmentManagerController(),
             customerManagerController = new CustomerManagerController();
     StatisticalController statisticalController = new StatisticalController();
-    StatisticalFoodController statisticalFoodController = new StatisticalFoodController();
     StatisticalIncomeController statisticalIncomeController = new StatisticalIncomeController();
     InformationController informationController = new InformationController();
 
@@ -66,14 +63,13 @@ public class AdminDashboardController {
             shipmentManagerView = new ShipmentManagerView(),
             customerManagerView = new CustomerManagerView();
     StatisticalView statisticalView = new StatisticalView();
-    StatisticalFoodView statisticalFoodView = new StatisticalFoodView();
     StatisticalIncomeView statisticalIncomeView = new StatisticalIncomeView();
     AboutView aboutView = new AboutView();
     InformationView informationView = new InformationView();
     JPanel[] cards = {
         homeView, employeeManagerView, tableManagerView, customerManagerView,
         foodCategoryManagerView, orderManagerView, foodItemManagerView, shipmentManagerView,
-        statisticalView, statisticalFoodView, statisticalIncomeView, aboutView, informationView
+        statisticalView, statisticalIncomeView, aboutView, informationView
     };
 
     SideBarController sideBarController = new SideBarController();
@@ -115,7 +111,6 @@ public class AdminDashboardController {
         menuQLDH.addSubMenu(new MenuItem("QLDDH", im.getIcon("purchase_order_25px.png"), "Quản lý đơn đặt hàng"));
         menuQLDH.addSubMenu(new MenuItem("QLGH", im.getIcon("truck_25px.png"), "Quản lý giao hàng"));
         menuTK.addSubMenu(new MenuItem("TKNV", im.getIcon("user_25px.png"), "Thống kê nhân viên"));
-        menuTK.addSubMenu(new MenuItem("TKHH", null, "Thống kê hàng hóa"));
         menuTK.addSubMenu(new MenuItem("TKDT", null, "Thống kê doanh thu"));
         menuTL.addSubMenu(new MenuItem("TTCN", im.getIcon("about_25px.png"), "Thông tin cá nhân"));
         menuTL.addSubMenu(new MenuItem("TLGD", im.getIcon("contrast_25px.png"), "Giao diện"));
@@ -189,11 +184,6 @@ public class AdminDashboardController {
                 view.setPanel(statisticalView);
                 statisticalController.setView(statisticalView);
                 statisticalController.initData();
-                break;
-            case "TKHH":
-                view.setPanel(statisticalFoodView);
-                statisticalFoodController.setView(statisticalFoodView);
-                statisticalFoodController.init();
                 break;
             case "TKDT"://Thống kê doanh thu
                 view.setPanel(statisticalIncomeView);

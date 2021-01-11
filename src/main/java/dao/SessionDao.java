@@ -48,11 +48,13 @@ public class SessionDao extends Dao<Session> {
         if (t == null) {
             throw new SQLException("Shipment rỗng");
         }
-        String query = "INSERT INTO `session` (`idEmployee`, `startTime`, `message`) VALUES (?, current_timestamp(), ?)";
+        String query = "INSERT INTO `session` (`idEmployee`, `startTime`, `endTime` , `message`) VALUES (?, ?, ?, ?)";
 
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setInt(1, t.getIdEmployee());
-        stmt.setNString(2, t.getMessage());
+        stmt.setTimestamp(2, t.getStartTime());
+        stmt.setTimestamp(3, t.getEndTime());
+        stmt.setNString(4, t.getMessage());
         int row = stmt.executeUpdate();
     }
 
@@ -61,11 +63,13 @@ public class SessionDao extends Dao<Session> {
         if (t == null) {
             throw new SQLException("Shipment rỗng");
         }
-        String query = "UPDATE `session` SET `endTime` = current_timestamp(), `message` = ? WHERE `session`.`id` = ?";
+        String query = "UPDATE `session` SET `startTime` = ?, `endTime` = ?, `message` = ? WHERE `session`.`id` = ?";
 
         PreparedStatement stmt = conn.prepareStatement(query);
-        stmt.setNString(1, t.getMessage());
-        stmt.setInt(2, t.getId());
+        stmt.setTimestamp(1, t.getStartTime());
+        stmt.setTimestamp(2, t.getEndTime());
+        stmt.setNString(3, t.getMessage());
+        stmt.setInt(4, t.getId());
         int row = stmt.executeUpdate();
     }
 

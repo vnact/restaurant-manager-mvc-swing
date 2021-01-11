@@ -5,6 +5,7 @@
  */
 package controllers.employee;
 
+import controllers.TimeCouterController;
 import javax.swing.JOptionPane;
 import main.SessionManager;
 import models.Employee;
@@ -18,22 +19,24 @@ import views.employee.InformationView;
  * @author Admin
  */
 public class InformationController {
-
+    
     private Employee session;
     private InformationView view;
     ChangePassController changePassController = new ChangePassController();
-
+    
     public InformationController() {
         session = SessionManager.getSession().getEmployee();
     }
-
+    
     public InformationView getView() {
         return view;
     }
-
+    
     public void setView(InformationView view) {
         if (this.view != view) {
-            view.getLabName().setText("Chào mừng " + session.getName());
+            TimeCouterController.start((second) -> {
+                view.getLbTimeWorking().setText(secondToHours(second));
+            });
             CalendarView calendarView = new CalendarView();
             CalendarController calendarController = new CalendarController(calendarView);
             view.getPanelCalendar().add(calendarView);
@@ -41,10 +44,18 @@ public class InformationController {
             this.view = view;
         }
     }
-
+    
     public void addEvent(InformationView view) {
         view.getBtnChangePass().addActionListener(evt -> {
             changePassController.show(new ChangePassView(), () -> JOptionPane.showMessageDialog(view, "Đổi pass thành công"), ErrorPopup::show);
         });
+    }
+    
+    private String secondToHours(int totalSecs) {
+        int hours, minutes, seconds;
+        hours = totalSecs / 3600;
+        minutes = (totalSecs % 3600) / 60;
+        seconds = totalSecs % 60;
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
 }

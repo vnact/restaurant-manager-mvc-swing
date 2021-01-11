@@ -1,5 +1,7 @@
 package main;
 
+import controllers.TimeCouterController;
+
 /**
  * createAt Dec 26, 2020
  *
@@ -12,6 +14,7 @@ public class ShutdownHook extends Thread {
         //Khi đóng đột ngột
         System.out.println("Chuong trinh dung dot ngot!");
         try {
+            TimeCouterController.stop();
             if (SessionManager.getSession() != null) {
                 System.out.println("Ket thuc phien lam viec!");
                 SessionManager.update();// Kết thúc phiên làm việc
