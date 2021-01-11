@@ -40,6 +40,7 @@ public class CalendarController {
 //        RenderCalendar(LocalDate.now().getMonthValue(), LocalDate.now().getYear());
         RenderCalendar(view, Calendar.getInstance());
         RenderStatistical(LocalDate.now().getMonthValue(), LocalDate.now().getYear());
+        RenderStatistical(view, Calendar.getInstance());
         addEvent();
     }
 
@@ -166,10 +167,15 @@ public class CalendarController {
                 cal.set(Calendar.YEAR, year);
                 RenderCalendar(view, cal);
                 RenderStatistical(month, year);
+                RenderStatistical(view, cal);
                 //System.out.println("ok");
 
             }
         });
+    }
+
+    private void RenderStatistical(CalendarView view, Calendar instance) {
+
     }
 
 }

@@ -12,6 +12,7 @@ import models.Employee;
 import utils.ErrorPopup;
 import views.employee.CalendarView;
 import views.employee.ChangePassView;
+import views.employee.HistoryLoginView;
 import views.employee.InformationView;
 
 /**
@@ -23,6 +24,7 @@ public class InformationController {
     private Employee session;
     private InformationView view;
     ChangePassController changePassController = new ChangePassController();
+    HistoryLoginController historyLoginController = new HistoryLoginController();
     
     public InformationController() {
         session = SessionManager.getSession().getEmployee();
@@ -48,6 +50,9 @@ public class InformationController {
     public void addEvent(InformationView view) {
         view.getBtnChangePass().addActionListener(evt -> {
             changePassController.show(new ChangePassView(), () -> JOptionPane.showMessageDialog(view, "Đổi pass thành công"), ErrorPopup::show);
+        });
+        view.getBtnHistoryLogin().addActionListener(evt -> {
+            historyLoginController.show(new HistoryLoginView());
         });
     }
     

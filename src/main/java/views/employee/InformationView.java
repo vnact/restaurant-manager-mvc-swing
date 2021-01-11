@@ -21,7 +21,7 @@ public class InformationView extends javax.swing.JPanel {
     public InformationView() {
         initComponents();
 
-        btnChangeInfor.putClientProperty("JButton.buttonType", "roundRect");
+        btnHistoryLogin.putClientProperty("JButton.buttonType", "roundRect");
         btnChangePass.putClientProperty("JButton.buttonType", "roundRect");
 
     }
@@ -30,8 +30,8 @@ public class InformationView extends javax.swing.JPanel {
         return panelCalendar;
     }
 
-    public JButton getBtnChangeInfor() {
-        return btnChangeInfor;
+    public JButton getBtnHistoryLogin() {
+        return btnHistoryLogin;
     }
 
     public JButton getBtnChangePass() {
@@ -54,7 +54,7 @@ public class InformationView extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         btnChangePass = new javax.swing.JButton();
-        btnChangeInfor = new javax.swing.JButton();
+        btnHistoryLogin = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         panelCalendar = new javax.swing.JPanel();
@@ -81,7 +81,7 @@ public class InformationView extends javax.swing.JPanel {
         gridBagConstraints.weighty = 0.1;
         jPanel1.add(btnChangePass, gridBagConstraints);
 
-        btnChangeInfor.setText("Lịch sử đăng nhập");
+        btnHistoryLogin.setText("Lịch sử đăng nhập");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -89,7 +89,7 @@ public class InformationView extends javax.swing.JPanel {
         gridBagConstraints.ipady = 11;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
-        jPanel1.add(btnChangeInfor, gridBagConstraints);
+        jPanel1.add(btnHistoryLogin, gridBagConstraints);
 
         add(jPanel1, java.awt.BorderLayout.EAST);
 
@@ -104,11 +104,11 @@ public class InformationView extends javax.swing.JPanel {
         panelCalendar.setLayout(panelCalendarLayout);
         panelCalendarLayout.setHorizontalGroup(
             panelCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
+            .addGap(0, 726, Short.MAX_VALUE)
         );
         panelCalendarLayout.setVerticalGroup(
             panelCalendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 623, Short.MAX_VALUE)
+            .addGap(0, 555, Short.MAX_VALUE)
         );
 
         lbTimeWorking.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -122,12 +122,12 @@ public class InformationView extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(lbTimeWorking))
-                    .addComponent(panelCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(62, Short.MAX_VALUE))
+                        .addComponent(lbTimeWorking)))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,16 +137,16 @@ public class InformationView extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(lbTimeWorking))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelCalendar, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
-                .addGap(13, 13, 13))
+                .addComponent(panelCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         add(jPanel2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnChangeInfor;
     private javax.swing.JButton btnChangePass;
+    private javax.swing.JButton btnHistoryLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
