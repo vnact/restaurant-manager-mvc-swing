@@ -133,6 +133,7 @@ public class ChangePassView extends javax.swing.JFrame {
 
         btnConfirm.setBackground(new java.awt.Color(99, 209, 154));
         btnConfirm.setText("Xác nhận");
+        btnConfirm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirm.setSelected(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -143,6 +144,7 @@ public class ChangePassView extends javax.swing.JFrame {
         jPanel3.add(btnConfirm, gridBagConstraints);
 
         btnCancel.setText("Hủy");
+        btnCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancel.setSelected(true);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

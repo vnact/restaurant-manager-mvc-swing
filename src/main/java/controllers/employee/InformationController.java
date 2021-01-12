@@ -20,20 +20,20 @@ import views.employee.InformationView;
  * @author Admin
  */
 public class InformationController {
-    
+
     private Employee session;
     private InformationView view;
     ChangePassController changePassController = new ChangePassController();
     HistoryLoginController historyLoginController = new HistoryLoginController();
-    
+
     public InformationController() {
         session = SessionManager.getSession().getEmployee();
     }
-    
+
     public InformationView getView() {
         return view;
     }
-    
+
     public void setView(InformationView view) {
         if (this.view != view) {
             TimeCouterController.start((second) -> {
@@ -46,7 +46,7 @@ public class InformationController {
             this.view = view;
         }
     }
-    
+
     public void addEvent(InformationView view) {
         view.getBtnChangePass().addActionListener(evt -> {
             changePassController.show(new ChangePassView(), () -> JOptionPane.showMessageDialog(view, "Đổi pass thành công"), ErrorPopup::show);
@@ -55,7 +55,7 @@ public class InformationController {
             historyLoginController.show(new HistoryLoginView());
         });
     }
-    
+
     private String secondToHours(int totalSecs) {
         int hours, minutes, seconds;
         hours = totalSecs / 3600;

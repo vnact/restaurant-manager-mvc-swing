@@ -114,6 +114,7 @@ public class WorkDayInfoView extends javax.swing.JFrame {
         lbExit.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lbExit.setForeground(new java.awt.Color(215, 116, 78));
         lbExit.setText("X");
+        lbExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;

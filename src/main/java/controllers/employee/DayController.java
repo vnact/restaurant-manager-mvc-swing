@@ -7,6 +7,7 @@ package controllers.employee;
 
 import dao.WorkDayDao;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -22,20 +23,20 @@ import views.employee.WorkDayInfoView;
  * @author Admin
  */
 public class DayController {
-    
+
     private DayView view;
     private String date;
     int id;
     WorkDayInfoController workDayInfoController = new WorkDayInfoController();
-    
+
     public DayController() {
     }
-    
+
     public DayController(DayView view) {
         this.view = view;
         this.view.setVisible(true);
     }
-    
+
     public DayController(DayView view, String date, int dayNumber, boolean setDay, int id) {
         this.view = view;
         this.id = id;
@@ -47,19 +48,21 @@ public class DayController {
         } else {
             this.view.setVisible(true);
         }
-        
+
     }
-    
+
     public void addDay(DayView view, int id, Calendar cal, boolean isWorking) {
         view.getLabelNumber().setText("" + cal.get(Calendar.DAY_OF_MONTH));
         if (isWorking) {
             view.setBackground(Color.red);
+            Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
+            view.setCursor(cursor);
         } else {
             view.setBackground(new Color(240, 240, 200));
         }
         addEvent(view, cal, id);
     }
-    
+
     public void addEvent(DayView view, Calendar cal, int id) {
         view.getLabelNumber().setBackground(Color.red);
         view.addMouseListener(new MouseAdapter() {
@@ -74,14 +77,14 @@ public class DayController {
             }
         });
     }
-    
+
     public void addEvent() {
         view.getLabelNumber().setBackground(Color.red);
         view.getLabelNumber().addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 System.out.println("press");
-                
+
                 try {
                     WorkDayInfoView popupInfor = new WorkDayInfoView();
                     String Date = date + " 10:00:00.000";

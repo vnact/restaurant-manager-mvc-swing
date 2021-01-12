@@ -44,6 +44,19 @@ public class SessionDao extends Dao<Session> {
         return null;
     }
 
+    public ArrayList<Session> getSession(int id) throws SQLException {
+        ArrayList<Session> sessions = new ArrayList<>();
+        Statement statement = conn.createStatement();
+        String query = "SELECT * FROM `session` WHERE `idEmployee` = " + id + " ORDER BY `session`.`startTime` DESC";
+        ResultSet rs = statement.executeQuery(query);
+        while (rs.next()) {
+            Session session = Session.getFromResultSet(rs);
+            session.setEmployee(employeeDao.get(session.getIdEmployee()));
+            sessions.add(session);
+        }
+        return sessions;
+    }
+
     @Override
     public void save(Session t) throws SQLException {
         if (t == null) {

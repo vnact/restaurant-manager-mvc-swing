@@ -133,6 +133,9 @@ public class CalendarView extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
 
         jPanel2.setBackground(new java.awt.Color(209, 242, 235));
+        jPanel2.setMaximumSize(new java.awt.Dimension(470, 32));
+        jPanel2.setMinimumSize(new java.awt.Dimension(470, 32));
+        jPanel2.setPreferredSize(new java.awt.Dimension(470, 32));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -149,7 +152,7 @@ public class CalendarView extends javax.swing.JPanel {
         jPanel4.setAlignmentX(0.0F);
         jPanel4.setAlignmentY(0.0F);
         jPanel4.setMinimumSize(new java.awt.Dimension(255, 500));
-        jPanel4.setPreferredSize(new java.awt.Dimension(255, 500));
+        jPanel4.setPreferredSize(new java.awt.Dimension(250, 500));
         jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         jPanel5.setPreferredSize(new java.awt.Dimension(245, 100));
@@ -437,25 +440,27 @@ public class CalendarView extends javax.swing.JPanel {
 
         panelCalendar.setBackground(new java.awt.Color(204, 209, 209));
         panelCalendar.setAlignmentX(0.0F);
+        panelCalendar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panelCalendar.setPreferredSize(new java.awt.Dimension(372, 434));
-        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEADING);
-        flowLayout1.setAlignOnBaseline(true);
-        panelCalendar.setLayout(flowLayout1);
         jPanel28.add(panelCalendar, java.awt.BorderLayout.CENTER);
         panelCalendar.getAccessibleContext().setAccessibleDescription("");
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         btnEnter.setText("Enter");
+        btnEnter.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        txtYear.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         cbxMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        cbxMonth.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(244, Short.MAX_VALUE)
+                .addContainerGap(253, Short.MAX_VALUE)
                 .addComponent(cbxMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)

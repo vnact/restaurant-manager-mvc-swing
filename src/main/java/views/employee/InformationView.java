@@ -71,6 +71,7 @@ public class InformationView extends javax.swing.JPanel {
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         btnChangePass.setText("Đổi mật khẩu");
+        btnChangePass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -82,6 +83,7 @@ public class InformationView extends javax.swing.JPanel {
         jPanel1.add(btnChangePass, gridBagConstraints);
 
         btnHistoryLogin.setText("Lịch sử đăng nhập");
+        btnHistoryLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;

@@ -115,6 +115,9 @@
               <Color blue="9a" green="d1" red="63" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="X&#xe1;c nh&#x1ead;n"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
             <Property name="selected" type="boolean" value="true"/>
           </Properties>
           <Constraints>
@@ -126,6 +129,9 @@
         <Component class="javax.swing.JButton" name="btnCancel">
           <Properties>
             <Property name="text" type="java.lang.String" value="H&#x1ee7;y"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
             <Property name="selected" type="boolean" value="true"/>
           </Properties>
           <Events>

@@ -23,7 +23,7 @@ import org.jfree.data.category.CategoryDataset;
  * @author Đỗ Tuấn Anh <daclip26@gmail.com>
  */
 public class LineChart {
-    
+
     private static JFreeChart createChart(CategoryDataset dataset) {
         JFreeChart chart = ChartFactory.createLineChart(null, "Ngày", "Thu nhập(100K)", dataset, PlotOrientation.VERTICAL, false, true, false);
         chart.addSubtitle((Title) new TextTitle("Thu nhập cửa hàng"));
@@ -45,7 +45,7 @@ public class LineChart {
         renderer.setSeriesShape(0, new Ellipse2D.Double(-5.0D, -5.0D, 10.0D, 10.0D));
         return chart;
     }
-    
+
     public static JPanel createChartPanel(CategoryDataset dataset) {
         JFreeChart chart = createChart(dataset);
         chart.getPlot().setBackgroundPaint(new Color(242, 242, 242));
