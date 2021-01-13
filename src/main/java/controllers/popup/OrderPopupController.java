@@ -34,7 +34,7 @@ import views.popup.ToppingPopupView;
  * Popup controller mẫu
  */
 public class OrderPopupController {
-    
+
     OrderDao orderDao = new OrderDao();
     EmployeeDao employeeDao = new EmployeeDao();
     ShipmentDao shipmentDao = new ShipmentDao();
@@ -47,7 +47,7 @@ public class OrderPopupController {
     PrintOrderController printOrderController = new PrintOrderController();
     DecimalFormat formatter = new DecimalFormat("###,###,###");
     JFrame previousView;
-    
+
     public void updateAmount(EditOrderPopupView view, Order order) {
         order.setTotalAmount(orderItemController.getTotalAmount());
         view.getLbDiscount().setText(order.getDiscount() + "");
@@ -55,7 +55,7 @@ public class OrderPopupController {
         view.getLbFinalAmount().setText(formatter.format(order.getFinalAmount()));
         view.getLbTotalAmount().setText(formatter.format(order.getTotalAmount()));
     }
-    
+
     public boolean addOrder(AddOrderPopupView view) throws Exception {
         Order e = new Order();
         Table table = (Table) view.getTbComboBoxModel().getSelectedItem();
@@ -77,7 +77,7 @@ public class OrderPopupController {
             }
             table.setStatus(TableStatus.SERVING);
         }
-        
+
         Order order = new Order();
         order.setEmployee(employee);
         order.setTable(table);
@@ -88,7 +88,7 @@ public class OrderPopupController {
         tableDao.update(table);
         return true;
     }
-    
+
     public boolean editOrder(EditOrderPopupView view, Order order) throws Exception {
         if (order.getTable() == null) {
             throw new Exception("Hết bàn");
@@ -131,7 +131,7 @@ public class OrderPopupController {
         }
         return true;
     }
-    
+
     public void add(AddOrderPopupView view, SuccessCallback sc, ErrorCallback ec) {
         if (previousView != null && previousView.isDisplayable()) {
             previousView.requestFocus();
@@ -164,9 +164,9 @@ public class OrderPopupController {
                 ec.onError(ex);
             }
         });
-        
+
     }
-    
+
     public void edit(EditOrderPopupView view, Order order, SuccessCallback sc, ErrorCallback ec) {
         if (previousView != null && previousView.isDisplayable()) {
             previousView.requestFocus();
@@ -191,7 +191,7 @@ public class OrderPopupController {
         });
         foodItemController.setPanelFoodCategory(view.getPnlFoodCategory());
         foodItemController.setPanelFoodItem(view.getPnlFoodItem());
-        
+
         if (order.getEmployee() != null) {
             view.getLbEmployeeName().setText(order.getEmployee().getName());
         }
@@ -216,7 +216,7 @@ public class OrderPopupController {
             view.getSpnDiscount().setValue(order.getDiscount());
             view.getCboType().setSelectedItem(order.getType().getName());
             view.getLbDiscount().setText(order.getDiscount() + "");
-            
+
         } catch (Exception e) {
             view.dispose();
             ec.onError(e);
@@ -257,7 +257,7 @@ public class OrderPopupController {
                 ec.onError(ex);
             }
         });
-        
+
         view.getBtnPaid().addActionListener(evt -> {
             try {
                 String rawInput = JOptionPane.showInputDialog(null, "Nhập số tiền thanh toán!", order.getPaidAmount());
@@ -294,14 +294,17 @@ public class OrderPopupController {
             try {
                 order.setStatus(OrderStatus.CANCEL);
                 Shipment shipment = shipmentDao.get(order.getId());
-                shipment.setStatus(ShipmentStatus.CANCELLED);
-                shipmentDao.update(shipment); // Hủy đơn ship
+                if (shipment != null) {
+                    shipment.setStatus(ShipmentStatus.CANCELLED);
+                    shipmentDao.update(shipment); // Hủy đơn ship
+                }
                 order.getTable().setStatus(TableStatus.FREE);
                 tableDao.update(order.getTable());
+                view.dispose();
             } catch (Exception e) {
                 view.showError(e);
             }
         });
-        
+
     }
 }

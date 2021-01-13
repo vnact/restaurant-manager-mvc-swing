@@ -38,7 +38,7 @@ public class FoodCategoryPopupController {
 
     }
 
-    public void edit(FoodCategoryPopupView view, FoodCategory employee, SuccessCallback sc, ErrorCallback ec) {
+    public void edit(FoodCategoryPopupView view, FoodCategory foodCategory, SuccessCallback sc, ErrorCallback ec) {
         if (previousView != null && previousView.isDisplayable()) {
             previousView.requestFocus();
             return;
@@ -46,13 +46,14 @@ public class FoodCategoryPopupController {
         previousView = view;
         view.setVisible(true);
         view.getBtnCancel().addActionListener(evt -> view.dispose());
-        view.getLbTitle().setText("Sửa loại món - " + employee.getId());
+        view.getLbTitle().setText("Sửa loại món - " + foodCategory.getId());
+        view.getTxtName().setText(foodCategory.getName());
         view.getBtnOK().setText("Cập nhật");
         view.getBtnOK().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 try {
-                    editFoodCategory(view, employee);
+                    editFoodCategory(view, foodCategory);
                     view.dispose();
                     view.showMessage("Sửa loại món thành công!");
                     sc.onSuccess();

@@ -101,7 +101,7 @@ public class ShipmentDao extends Dao<Shipment> {
     public ArrayList<Shipment> searchByKey(String key, String word) throws SQLException {
         ArrayList<Shipment> shipments = new ArrayList<>();
         Statement statement = conn.createStatement();
-        String query = "SELECT * FROM `shipment` WHERE " + key + " LIKE '%" + word + "%';";
+        String query = "SELECT * FROM `shipment` WHERE " + key + " LIKE '%" + word + "%'";
         ResultSet rs = statement.executeQuery(query);
         while (rs.next()) {
             Shipment shipment = Shipment.getFromResultSet(rs);
