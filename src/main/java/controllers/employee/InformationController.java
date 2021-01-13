@@ -25,6 +25,7 @@ public class InformationController {
     private InformationView view;
     ChangePassController changePassController = new ChangePassController();
     HistoryLoginController historyLoginController = new HistoryLoginController();
+    CalendarController calendarController = new CalendarController();
 
     public InformationController() {
         session = SessionManager.getSession().getEmployee();
@@ -39,9 +40,7 @@ public class InformationController {
             TimeCouterController.start((second) -> {
                 view.getLbTimeWorking().setText(secondToHours(second));
             });
-            CalendarView calendarView = new CalendarView();
-            CalendarController calendarController = new CalendarController(calendarView);
-            view.getPanelCalendar().add(calendarView);
+            calendarController.show(view.getPanelCalendar(), new CalendarView());
             addEvent(view);
             this.view = view;
         }

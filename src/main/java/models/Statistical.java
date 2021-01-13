@@ -116,5 +116,9 @@ public class Statistical {
             }
         }
 
+        public int count() {
+            return dates.size();
+        }
+
     }
 }

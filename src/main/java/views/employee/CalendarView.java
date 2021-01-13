@@ -8,8 +8,10 @@ package views.employee;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import utils.ErrorPopup;
 
 /**
  *
@@ -65,6 +67,18 @@ public class CalendarView extends javax.swing.JPanel {
 
     public JTextField getTxtYear() {
         return txtYear;
+    }
+
+    public void showError(String message) {
+        ErrorPopup.show(new Exception(message));
+    }
+
+    public void showError(Exception e) {
+        ErrorPopup.show(e);
+    }
+
+    public void showMessage(String message) {
+        JOptionPane.showMessageDialog(this, message);
     }
 
     @SuppressWarnings("unchecked")

@@ -34,7 +34,6 @@ public class HistoryLoginController {
 
     public void render() {
         view.getPanelContent1().removeAll();
-        System.out.println("ok1");
         try {
             ArrayList<Session> sessions = sessionDao.getSession(id);
             for (Session session : sessions) {
@@ -44,7 +43,6 @@ public class HistoryLoginController {
                 ctr.render(session);
                 this.view.getPanelContent1().add(view);
                 this.view.getPanelContent1().updateUI();
-                System.out.println("ok");
             }
         } catch (Exception e) {
             e.printStackTrace();

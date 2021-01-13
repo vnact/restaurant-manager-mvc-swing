@@ -242,6 +242,27 @@ public class StatisticalDao {
         return workingDays;
     }
 
+    public Statistical.WorkingDay getWorkingDays(Timestamp start, Timestamp end, int idEmployee) throws SQLException {
+//        ArrayList<Date> workingDays = new ArrayList<>();
+        Statistical.WorkingDay workingDays = statistical.new WorkingDay();
+        String query = "SELECT DATE(startTime) AS startTime, DATE(endTime) AS endTime FROM `session` WHERE DATE(startTime) >= DATE(?) AND DATE(endTime) <= DATE(?) AND `idEmployee` = ? ORDER BY `session`.`startTime` ASC";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setTimestamp(1, start);
+        statement.setTimestamp(2, end);
+        statement.setInt(3, idEmployee);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            Date startTime = rs.getDate("startTime");
+            Date endTime = rs.getDate("endTime");
+            Date i = startTime;
+            while (!i.after(endTime)) {
+                workingDays.addWorkDay(i);
+                i = new Date(i.getTime() + 24 * 60 * 60 * 1000);//Check ngày sau
+            }
+        }
+        return workingDays;
+    }
+
     public ArrayList<Statistical.SalaryEmployee> getSalaryEmployee(Timestamp start, Timestamp end) throws SQLException {
         ArrayList<Statistical.SalaryEmployee> list = new ArrayList<>();
         String query = "SELECT `idEmployee`, COUNT(id) as quantity, (COUNT(id) * 2000) as bonus FROM `order` GROUP BY `idEmployee` ";

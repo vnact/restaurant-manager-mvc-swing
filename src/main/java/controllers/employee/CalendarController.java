@@ -10,9 +10,12 @@ import dao.WorkDayDao;
 import java.awt.Color;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.JPanel;
 import main.SessionManager;
 import models.Statistical;
 import views.employee.CalendarView;
@@ -26,12 +29,16 @@ public class CalendarController {
 
     CalendarView view;
     //ArrayList<Integer> list;
-    int month;//= LocalDate.now().getMonthValue();
-    int year;// = LocalDate.now().getYear();
+//    int month;//= LocalDate.now().getMonthValue();
+//    int year;// = LocalDate.now().getYear();
     int id = SessionManager.getSession().getIdEmployee();
     StatisticalDao statisticalDao = new StatisticalDao();
     Statistical.WorkingDay workingDay;
     DayController dayController = new DayController();
+    DecimalFormat decimalFormat = new DecimalFormat("###,###,### VND");
+
+    public CalendarController() {
+    }
 
     public CalendarController(CalendarView view) {
         this.view = view;
@@ -39,15 +46,24 @@ public class CalendarController {
         this.view.getTxtYear().setText(String.valueOf(LocalDate.now().getYear()));
 //        RenderCalendar(LocalDate.now().getMonthValue(), LocalDate.now().getYear());
         RenderCalendar(view, Calendar.getInstance());
-        RenderStatistical(LocalDate.now().getMonthValue(), LocalDate.now().getYear());
+//        RenderStatistical(LocalDate.now().getMonthValue(), LocalDate.now().getYear());
         RenderStatistical(view, Calendar.getInstance());
-        addEvent();
+        addEvent(view);
+    }
+
+    public void show(JPanel panelRoot, CalendarView view) {
+        panelRoot.add(view);
+        Calendar cal = Calendar.getInstance();
+        view.getCbxMonth().setSelectedIndex(cal.get(Calendar.MONTH));
+        view.getTxtYear().setText(cal.get(Calendar.YEAR) + "");
+        RenderCalendar(view, Calendar.getInstance());
+        RenderStatistical(view, Calendar.getInstance());
+        addEvent(view);
     }
 
     public void RenderCalendar(CalendarView view, Calendar cal) {
         view.getPanelCalendar().removeAll();
         cal.set(Calendar.DAY_OF_MONTH, 1);
-        int month = cal.get(Calendar.MONTH) + 1;
         int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
         int maxDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
         Calendar start = (Calendar) cal.clone(), end = (Calendar) cal.clone();
@@ -56,7 +72,6 @@ public class CalendarController {
         try {
             workingDay = statisticalDao.getWorkingDays(new Date(start.getTimeInMillis()), new Date(end.getTimeInMillis()), id);
         } catch (SQLException ex) {
-            ex.printStackTrace();
             workingDay = (new Statistical()).new WorkingDay();
         }
         int i;
@@ -153,29 +168,45 @@ public class CalendarController {
             view.getLbTotalIncome().setText(workDayDao.getTotalIncome(year, month, id) + "đ");
             view.getLbTotalBonus().setText(workDayDao.getBonus(id, month, year) + "đ");
         } catch (Exception e) {
+
         }
 
     }
 
-    public void addEvent() {
-        view.getBtnEnter().addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                month = Integer.valueOf((String) view.getCbxMonth().getSelectedItem());
-                year = Integer.parseInt(view.getTxtYear().getText());
-                Calendar cal = Calendar.getInstance();
-                cal.set(Calendar.MONTH, month - 1);
-                cal.set(Calendar.YEAR, year);
-                RenderCalendar(view, cal);
-                RenderStatistical(month, year);
-                RenderStatistical(view, cal);
-                //System.out.println("ok");
+    private void RenderStatistical(CalendarView view, Calendar cal) {
+        int maxDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        Calendar start = (Calendar) cal.clone(), end = (Calendar) cal.clone();
+        start.set(Calendar.DAY_OF_MONTH, 1);
+        end.set(Calendar.DAY_OF_MONTH, maxDay);
+        Timestamp startTime = new Timestamp(start.getTimeInMillis()), endTime = new Timestamp(end.getTimeInMillis());
+        try {
 
-            }
-        });
+            Statistical.WorkingDay workingDays = statisticalDao.getWorkingDays(startTime, endTime, id);
+            int totalOrder = statisticalDao.getTotalOrder(startTime, endTime, id);
+            int totalAmount = statisticalDao.getTotalIncome(startTime, endTime, id);
+            int totalTime = statisticalDao.getTotalWorkingMinutes(startTime, endTime, id);
+            view.getLbTotalDay().setText(workingDays.count() + " / " + maxDay);
+            view.getLbTotalOrder().setText(totalOrder + " đơn");
+            view.getLbTotalBonus().setText(decimalFormat.format(totalOrder * 2000));
+            view.getLbTotalIncome().setText(decimalFormat.format(totalAmount));
+            view.getLbTotalTime().setText(totalTime + " phút");
+        } catch (Exception e) {
+            view.showError(e);
+        }
+
     }
 
-    private void RenderStatistical(CalendarView view, Calendar instance) {
-
+    public void addEvent(CalendarView view) {
+        view.getBtnEnter().addActionListener(evt -> {
+            int month = Integer.valueOf((String) view.getCbxMonth().getSelectedItem());
+            int year = Integer.parseInt(view.getTxtYear().getText());
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.MONTH, month - 1);
+            cal.set(Calendar.YEAR, year);
+            RenderCalendar(view, cal);
+//                RenderStatistical(month, year);
+            RenderStatistical(view, cal);
+        });
     }
 
 }
