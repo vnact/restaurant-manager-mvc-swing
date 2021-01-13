@@ -18,7 +18,7 @@ public class WorkDayInfoController {
 
     WorkDayInfoView previousView = null;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-    DecimalFormat decimalFormat = new DecimalFormat("###,###,###VND");
+    DecimalFormat decimalFormat = new DecimalFormat("###,###,### VND");
     StatisticalDao statisticalDao = new StatisticalDao();
 
     public void show(WorkDayInfoView view, Calendar cal, int id) throws Exception {
@@ -26,13 +26,19 @@ public class WorkDayInfoController {
             previousView.dispose();
         }
         previousView = view;
-        Timestamp now = new Timestamp(cal.getTimeInMillis() / 1000 * 1000);
-        int totalOrder = statisticalDao.getTotalOrder(now, now, id);
-        int workingMinus = statisticalDao.getTotalWorkingMinutes(now, now, id);
-        int totalAmount = statisticalDao.getTotalIncome(now, now, id);
+        Calendar start = (Calendar) cal.clone(), end = (Calendar) cal.clone();
+        start.set(Calendar.HOUR_OF_DAY, 0);
+        start.set(Calendar.MINUTE, 0);
+        end.set(Calendar.HOUR_OF_DAY, 24);
+        end.set(Calendar.MINUTE, 0);
+        Timestamp startTime = new Timestamp(start.getTimeInMillis());
+        Timestamp endTime = new Timestamp(end.getTimeInMillis());
+        int totalOrder = statisticalDao.getTotalOrder(startTime, endTime, id);
+        int workingMinus = statisticalDao.getTotalWorkingMinutes(startTime, endTime, id);
+        int totalAmount = statisticalDao.getTotalIncome(startTime, endTime, id);
         view.getTxtDate().setText(dateFormat.format(cal.getTime()));
         view.getTxtTotalOrder().setText("" + totalOrder);
-        view.getTxtBonus().setText(totalOrder * 2000 + "");
+        view.getTxtBonus().setText(decimalFormat.format(totalOrder * 2000));
         view.getTxtTotalTime().setText(minutesToHours(workingMinus));
         view.getTxtTotalAmount().setText(decimalFormat.format(totalAmount));
         view.pack();
@@ -41,7 +47,6 @@ public class WorkDayInfoController {
             @Override
             public void mousePressed(MouseEvent e) {
                 view.dispose();
-                previousView = null;
             }
         });
     }
