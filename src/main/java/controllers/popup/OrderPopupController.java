@@ -50,6 +50,7 @@ public class OrderPopupController {
 
     public void updateAmount(EditOrderPopupView view, Order order) {
         order.setTotalAmount(orderItemController.getTotalAmount());
+        view.getLbStatus().setText(order.getStatus().getName());
         view.getLbDiscount().setText(order.getDiscount() + "");
         view.getLbPaidAmount().setText(formatter.format(order.getPaidAmount()));
         view.getLbFinalAmount().setText(formatter.format(order.getFinalAmount()));
@@ -252,6 +253,7 @@ public class OrderPopupController {
                 editOrder(view, order);
 //                view.dispose();
                 view.showMessage("Sửa hóa đơn thành công!");
+                updateAmount(view, order);
                 sc.onSuccess();
             } catch (Exception ex) {
                 ec.onError(ex);
@@ -292,6 +294,10 @@ public class OrderPopupController {
         });
         view.getBtnCancelOrder().addActionListener(evt -> {
             try {
+                int value = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn hủy hóa đơn?");
+                if (value != JOptionPane.YES_OPTION) {
+                    return;
+                }
                 order.setStatus(OrderStatus.CANCEL);
                 Shipment shipment = shipmentDao.get(order.getId());
                 if (shipment != null) {
@@ -299,8 +305,10 @@ public class OrderPopupController {
                     shipmentDao.update(shipment); // Hủy đơn ship
                 }
                 order.getTable().setStatus(TableStatus.FREE);
+                orderDao.update(order);
                 tableDao.update(order.getTable());
                 view.dispose();
+                sc.onSuccess();
             } catch (Exception e) {
                 view.showError(e);
             }
