@@ -40,6 +40,7 @@ public class OrderPopupController {
     FoodItemController foodItemController = new FoodItemController();
     OrderItemController orderItemController = new OrderItemController();
     ToppingPopupController toppingPopupController = new ToppingPopupController();
+    ShipmentPopupController shipmentPopupController = new ShipmentPopupController();
     DecimalFormat formatter = new DecimalFormat("###,###,###");
     JFrame previousView;
 
@@ -276,7 +277,7 @@ public class OrderPopupController {
                 view.showError("Bạn chỉ có thể ship đơn online");
                 return;
             }
-            new ShipmentPopupController().add(new ShipmentPopupView(), order.getId(), () -> view.showMessage("Tạo / sửa đơn ship thành công!"), view::showError);
+            shipmentPopupController.add(new ShipmentPopupView(), order.getId(), () -> view.showMessage("Tạo / sửa đơn ship thành công!"), view::showError);
         });
 
     }

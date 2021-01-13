@@ -26,7 +26,7 @@ public class ShipmentPopupController {
             previousView.requestFocus();
             return;
         }
-        previousView = view;
+//        previousView = view;
         try {
             Shipment shipment = shipmentDao.get(idOrder);
             if (shipment != null) {
@@ -50,7 +50,9 @@ public class ShipmentPopupController {
     public void edit(ShipmentPopupView view, int idOrder, SuccessCallback sc, ErrorCallback ec) {
         if (previousView != null && previousView.isDisplayable()) {
             previousView.requestFocus();
-            return;
+            if (view != previousView) {
+
+            }
         }
         previousView = view;
         view.setVisible(true);
