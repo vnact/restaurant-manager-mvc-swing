@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.YES_OPTION;
 import models.Employee;
+import utils.EmployeePermission;
 import views.popup.EmployeePopupView;
 
 /**
@@ -36,14 +37,20 @@ public class EmployeeManagerController extends ManagerController {
             int selectedId = view.getSelectedId();
             if (selectedId < 0) {
                 throw new Exception("Chọn nhân viên cần edit");
-            } else {
-                Employee e = employeeDao.get(selectedId);
-                if (e == null) {
-                    throw new Exception("Nhân viên bạn chọn không hợp lệ");
-                }
-//                popupController.edit(this, new EmployeePopupView(), e);
-                popupController.edit(new EmployeePopupView(), e, this::updateData, view::showError);
             }
+            Employee e = employeeDao.get(selectedId);
+            if (e == null) {
+                throw new Exception("Nhân viên bạn chọn không hợp lệ");
+            }
+            if (e.getPermission() == EmployeePermission.MANAGER) {
+                int value = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn chỉnh sửa admin?");
+                if (value != YES_OPTION) {
+                    return;
+                }
+            }
+//                popupController.edit(this, new EmployeePopupView(), e);
+            popupController.edit(new EmployeePopupView(), e, this::updateData, view::showError);
+
         } catch (Exception e) {
             view.showError(e);
         }
