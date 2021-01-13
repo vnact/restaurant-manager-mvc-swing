@@ -10,7 +10,7 @@ import models.Employee;
  */
 public class EmployeeManagerView extends ManagerPaneView<Employee> {
 
-    String[] list = {"ID", "Name", "phoneNumber", "permissionName"};
+    String[] list = {"ID", "Name", "phoneNumber"};
 
     public EmployeeManagerView() {
         super();
