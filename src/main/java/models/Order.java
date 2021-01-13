@@ -151,7 +151,7 @@ public class Order extends Model {
         return new Object[]{
             this.getId(), this.getEmployee().getName(), this.getTable().getName(),
             this.getType().getName(), this.getStatus().getName(), this.getOrderDate(), this.getPayDate(),
-            String.format("%d/%d", this.getPaidAmount(), this.getTotalAmount())
+            String.format("%d/%d", this.getPaidAmount(), this.getFinalAmount())
         };
     }
 

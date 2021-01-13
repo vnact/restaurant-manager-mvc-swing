@@ -202,12 +202,13 @@ public class StatisticalDao {
     public ArrayList<Statistical.ProductIncome> getQuantityItem(Timestamp start, Timestamp end) throws SQLException {
         ArrayList<Statistical.ProductIncome> itemProducts = new ArrayList<>();
         String query = "SELECT `idFoodItem`, `name`, SUM(quantity) as sum, (foodPrice*SUM(quantity)) as amount FROM `order_item`,`food_item`,`order` "
-                + "WHERE `idFoodItem`=food_item.id AND `idOrder`= order.id AND DATE(orderDate)>= DATE(?) AND DATE(orderDate)<= DATE(?) "
+                + "WHERE `idFoodItem`=food_item.id AND `idOrder`= order.id AND DATE(orderDate)>= DATE(?) AND DATE(orderDate)<= DATE(?) AND order.status = ?"
                 + "GROUP BY idFoodItem ORDER by sum DESC";
 
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setTimestamp(1, start);
         statement.setTimestamp(2, end);
+        statement.setNString(3, OrderStatus.PAID.getId());
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
             Statistical.ProductIncome itemProduct = statistical.new ProductIncome();
