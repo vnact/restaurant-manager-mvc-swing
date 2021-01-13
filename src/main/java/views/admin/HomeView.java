@@ -51,7 +51,7 @@ public class HomeView extends javax.swing.JPanel {
         labLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/KCSA.png"))); // NOI18N
         labLogo.setPreferredSize(new java.awt.Dimension(400, 400));
         add(labLogo);
-        labLogo.setBounds(400, 240, 200, 190);
+        labLogo.setBounds(810, 480, 200, 190);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-background.png"))); // NOI18N
