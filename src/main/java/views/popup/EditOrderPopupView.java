@@ -56,6 +56,7 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         btnShipManager = new javax.swing.JButton();
         btnPaid = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        btnPrintOrder = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -69,6 +70,8 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         jLabel10 = new javax.swing.JLabel();
         lbPaidAmount = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        lbStatus = new javax.swing.JLabel();
         pnlRight = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -215,9 +218,8 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
 
         btnCancelOrder.setText("Hủy Hóa Đơn");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 0.1;
@@ -253,6 +255,16 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel4.add(btnCancel, gridBagConstraints);
 
+        btnPrintOrder.setText("In Hóa Đơn");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel4.add(btnPrintOrder, gridBagConstraints);
+
         pnlLeft.add(jPanel4, java.awt.BorderLayout.PAGE_END);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin hóa đơn"));
@@ -260,6 +272,7 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
 
         jLabel7.setText("Tổng:");
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(jLabel7, gridBagConstraints);
@@ -267,7 +280,7 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         jLabel8.setText("Đã Thanh Toán:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(jLabel8, gridBagConstraints);
@@ -275,7 +288,7 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         jLabel9.setText("Giảm Giá:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(jLabel9, gridBagConstraints);
@@ -285,7 +298,8 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         lbTotalAmount.setText("1000,000,000");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(lbTotalAmount, gridBagConstraints);
 
@@ -294,7 +308,7 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         lbFinalAmount.setText("1020,000,000");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(lbFinalAmount, gridBagConstraints);
@@ -304,7 +318,7 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         lbDiscount.setText("0");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(lbDiscount, gridBagConstraints);
@@ -313,7 +327,7 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         jLabel13.setText("VND");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(jLabel13, gridBagConstraints);
@@ -322,7 +336,7 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         jLabel14.setText("VND");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(jLabel14, gridBagConstraints);
@@ -331,7 +345,7 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         jLabel15.setText("%");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(jLabel15, gridBagConstraints);
@@ -339,7 +353,7 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         jLabel10.setText("Phải Trả");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(jLabel10, gridBagConstraints);
@@ -349,7 +363,7 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         lbPaidAmount.setText("1020,000,000");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(lbPaidAmount, gridBagConstraints);
@@ -358,10 +372,27 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         jLabel16.setText("VND");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel5.add(jLabel16, gridBagConstraints);
+
+        jLabel18.setText("Trạng thái:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel5.add(jLabel18, gridBagConstraints);
+
+        lbStatus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbStatus.setForeground(new java.awt.Color(255, 0, 0));
+        lbStatus.setText("Chưa thanh toán");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        jPanel5.add(lbStatus, gridBagConstraints);
 
         pnlLeft.add(jPanel5, java.awt.BorderLayout.CENTER);
 
@@ -562,6 +593,10 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         return btnCancelOrder;
     }
 
+    public JButton getBtnPrintOrder() {
+        return btnPrintOrder;
+    }
+
     public JButton getBtnOK() {
         return btnOK;
     }
@@ -631,11 +666,16 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
         return lbEmployeeName;
     }
 
+    public JLabel getLbStatus() {
+        return lbStatus;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnCancelOrder;
     private javax.swing.JButton btnOK;
     private javax.swing.JButton btnPaid;
+    private javax.swing.JButton btnPrintOrder;
     private javax.swing.JButton btnShipManager;
     private javax.swing.JComboBox<Table> cboTable;
     private javax.swing.JComboBox<String> cboType;
@@ -647,6 +687,7 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -672,6 +713,7 @@ public class EditOrderPopupView extends javax.swing.JFrame implements PopupView 
     private javax.swing.JLabel lbFinalAmount;
     private javax.swing.JLabel lbIdOrder;
     private javax.swing.JLabel lbPaidAmount;
+    private javax.swing.JLabel lbStatus;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JLabel lbTotalAmount;
     private javax.swing.JPanel pnlCenter;

@@ -5,7 +5,6 @@
  */
 package views.popup;
 
-import dao.CustomerDao;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -149,32 +148,6 @@ public class SelectCustomerPopupView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-
-        try {
-            javax.swing.UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
-        } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(SelectCustomerPopupView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SelectCustomerPopupView view = new SelectCustomerPopupView();
-                view.setVisible(true);
-                try {
-                    CustomerDao customerDao = new CustomerDao();
-                    view.renderCustomer(customerDao.getAll());
-                    view.renderCustomer(customerDao.getAll());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
