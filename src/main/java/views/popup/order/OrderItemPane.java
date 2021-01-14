@@ -30,10 +30,12 @@ public class OrderItemPane extends javax.swing.JPanel {
         FoodItem food = orderItem.getFoodItem(), topping = orderItem.getToppingItem();
         spnQuantity.setValue(orderItem.getQuantity());
         lbFoodName.setText(food.getName());
-        if (topping != null) {
-            lbToppingName.setText(topping.getName());
-        } else {
+        if (food.getIdCategory() != 2) {
             lbToppingName.setText("");
+        } else if (topping == null) {
+            lbToppingName.setText("");
+        } else {
+            lbToppingName.setText(topping.getName());
         }
         lbPrice.setText(orderItem.getFoodPrice() + orderItem.getToppingPrice() + "");
         String urlImage = orderItem.getFoodItem().getUrlImage();

@@ -243,7 +243,6 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
         jPanel2.setPreferredSize(new java.awt.Dimension(1008, 40));
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        txtSearch.setBackground(new java.awt.Color(118, 215, 196));
         txtSearch.setForeground(new java.awt.Color(153, 153, 153));
         txtSearch.setText("Search");
         txtSearch.setAlignmentX(0.0F);
