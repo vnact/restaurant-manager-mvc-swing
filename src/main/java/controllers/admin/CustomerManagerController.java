@@ -42,7 +42,7 @@ public class CustomerManagerController extends ManagerController {
             }
             for (int i = 0; i < selectedIds.length; i++) {
                 int id = selectedIds[i];
-                shipmentDao.deleteByIdEmployee(id);
+                shipmentDao.deleteByIdCustomer(id);
                 customerDao.deleteById(id);
                 updateData();
             }

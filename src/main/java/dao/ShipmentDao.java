@@ -98,8 +98,8 @@ public class ShipmentDao extends Dao<Shipment> {
         stmt.executeUpdate();
     }
 
-    public void deleteByIdEmployee(int id) throws SQLException {
-        PreparedStatement stmt = conn.prepareStatement("DELETE FROM `shipment` WHERE `shipment`.`idEmployee` = ?");
+    public void deleteByIdCustomer(int id) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM `shipment` WHERE `shipment`.`idCustomer` = ?");
         stmt.setInt(1, id);
         stmt.executeUpdate();
     }
