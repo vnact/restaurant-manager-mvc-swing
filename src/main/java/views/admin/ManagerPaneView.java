@@ -187,7 +187,7 @@ public abstract class ManagerPaneView<T extends Model> extends JPanel {
             }
         ));
         tblData.setFocusable(false);
-        tblData.setRowHeight(25);
+        tblData.setRowHeight(30);
         tblData.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblData);
 

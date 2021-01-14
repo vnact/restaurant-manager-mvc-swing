@@ -169,6 +169,7 @@ public class StatisticalIncomeView extends javax.swing.JPanel {
                 "Mã nhân viên", "Tên nhân viên", "Doanh thu"
             }
         ));
+        tblEmployee.setRowHeight(30);
         jScrollPane1.setViewportView(tblEmployee);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -209,6 +210,7 @@ public class StatisticalIncomeView extends javax.swing.JPanel {
                 "Mã nhân viên", "Tên nhân viên", "Doanh thu"
             }
         ));
+        tblProduct.setRowHeight(30);
         jScrollPane2.setViewportView(tblProduct);
 
         gridBagConstraints = new java.awt.GridBagConstraints();

@@ -29,6 +29,7 @@ public class StatisticalEmployeeView extends javax.swing.JPanel {
 
     public StatisticalEmployeeView() {
         initComponents();
+
         employeeModel = new DefaultTableModel() {
             Class[] types = new Class[]{
                 Integer.class, String.class, Integer.class, Integer.class, Integer.class, Integer.class
@@ -64,6 +65,15 @@ public class StatisticalEmployeeView extends javax.swing.JPanel {
         employeeModel.addColumn("Tổng lương");
         setupHeader(tblSession);
         setupHeader(tblEmployee);
+
+//        TableRowSorter tableRowSorter = new TableRowSorter(sessionModel);
+//        tableRowSorter.setComparator(1, new Comparator<Integer>() {
+//            @Override
+//            public int compare(Integer o1, Integer o2) {
+//                return o1 - o2;
+//            }
+//        });
+//        tblSession.setRowSorter(tableRowSorter);
     }
 
     private void setupHeader(JTable t) {
@@ -199,6 +209,7 @@ public class StatisticalEmployeeView extends javax.swing.JPanel {
                 "Mã nhân viên", "Tên nhân viên", "Doanh thu"
             }
         ));
+        tblSession.setRowHeight(30);
         jScrollPane1.setViewportView(tblSession);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -239,6 +250,7 @@ public class StatisticalEmployeeView extends javax.swing.JPanel {
                 "Mã nhân viên", "Tên nhân viên", "Doanh thu"
             }
         ));
+        tblEmployee.setRowHeight(30);
         jScrollPane2.setViewportView(tblEmployee);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
