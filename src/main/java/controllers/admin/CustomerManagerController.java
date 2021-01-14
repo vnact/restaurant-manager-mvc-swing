@@ -3,6 +3,7 @@ package controllers.admin;
 import controllers.ManagerController;
 import controllers.popup.CustomerPopupController;
 import dao.CustomerDao;
+import dao.ShipmentDao;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -18,6 +19,7 @@ import views.popup.CustomerPopupView;
 public class CustomerManagerController extends ManagerController {
 
     CustomerDao customerDao = new CustomerDao();
+    ShipmentDao shipmentDao = new ShipmentDao();
     CustomerPopupController popupController = new CustomerPopupController();
     CustomerPopupController customerPopupController = new CustomerPopupController();
 
@@ -39,7 +41,9 @@ public class CustomerManagerController extends ManagerController {
                 return;
             }
             for (int i = 0; i < selectedIds.length; i++) {
-                customerDao.deleteById(selectedIds[i]);
+                int id = selectedIds[i];
+                shipmentDao.deleteByIdEmployee(id);
+                customerDao.deleteById(id);
                 updateData();
             }
         } catch (Exception e) {

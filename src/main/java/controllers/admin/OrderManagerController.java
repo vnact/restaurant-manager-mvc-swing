@@ -3,6 +3,7 @@ package controllers.admin;
 import controllers.ManagerController;
 import controllers.popup.OrderPopupController;
 import dao.OrderDao;
+import dao.ShipmentDao;
 import dao.TableDao;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -28,6 +29,7 @@ public class OrderManagerController extends ManagerController {
 
     OrderDao orderDao = new OrderDao();
     TableDao tableDao = new TableDao();
+    ShipmentDao shipmentDao = new ShipmentDao();
     OrderPopupController popupController = new OrderPopupController();
     Employee session = SessionManager.getSession().getEmployee();
 
@@ -76,6 +78,7 @@ public class OrderManagerController extends ManagerController {
                 Order o = orderDao.get(id);
                 Table t = o.getTable();
                 t.setStatus(TableStatus.FREE);
+                shipmentDao.deleteById(id);
                 orderDao.deleteItems(id); // Xóa item trong order 
                 tableDao.update(t); // Trả bàn
                 orderDao.deleteById(id); // Xóa order

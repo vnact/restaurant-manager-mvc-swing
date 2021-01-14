@@ -98,6 +98,12 @@ public class ShipmentDao extends Dao<Shipment> {
         stmt.executeUpdate();
     }
 
+    public void deleteByIdEmployee(int id) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM `shipment` WHERE `shipment`.`idEmployee` = ?");
+        stmt.setInt(1, id);
+        stmt.executeUpdate();
+    }
+
     public ArrayList<Shipment> searchByKey(String key, String word) throws SQLException {
         ArrayList<Shipment> shipments = new ArrayList<>();
         Statement statement = conn.createStatement();
