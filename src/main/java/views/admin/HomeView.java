@@ -56,6 +56,7 @@ public class HomeView extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-background.png"))); // NOI18N
         jLabel1.setToolTipText("");
+        jLabel1.setMaximumSize(new java.awt.Dimension(10080000, 68000000));
         add(jLabel1);
         jLabel1.setBounds(0, 0, 1008, 680);
     }// </editor-fold>//GEN-END:initComponents
